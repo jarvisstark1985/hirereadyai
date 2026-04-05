@@ -115,6 +115,13 @@
             transition: width 0.3s ease;
         }
         .nav-link:hover::after { width: 100%; }
+        @keyframes modalFadeIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        .animate-modal-fade {
+            animation: modalFadeIn 0.3s ease-out;
+        }
     </style>
 </head>
 <body class="bg-darkBg text-slate-200 font-sans antialiased">
@@ -139,7 +146,7 @@
                     <a href="#faq" class="nav-link text-sm text-slate-300 hover:text-white transition-colors font-medium">FAQ</a>
                 </nav>
                 <div class="flex items-center gap-3">
-                    <a href="#pricing" class="hidden sm:inline-block text-sm font-medium text-slate-300 hover:text-white transition-colors">Log in</a>
+                    <button onclick="openLoginModal()" class="hidden sm:inline-block text-sm font-medium text-slate-300 hover:text-white transition-colors cursor-pointer bg-none border-none p-0">Log in</button>
                     <a href="https://buy.stripe.com/6oUbJ0fvAaQj8ca7nWfbq00" class="btn-primary px-5 py-2.5 rounded-xl text-sm font-semibold text-white inline-block">Get Started</a>
                 </div>
             </div>
@@ -680,6 +687,102 @@
                 }
             });
         });
+    
+        // Login Modal Functions
+        function openLoginModal() {
+            document.getElementById('loginModal').classList.remove('hidden');
+            document.getElementById('loginModal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLoginModal() {
+            document.getElementById('loginModal').classList.add('hidden');
+            document.getElementById('loginModal').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            document.getElementById('loginForm').reset();
+        }
+
+        function handleLogin(event) {
+            event.preventDefault();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            // Simple validation - ensure both fields are not empty
+            if (!email || !password) {
+                alert('Please fill in all fields');
+                return;
+            }
+
+            // Redirect to dashboard on successful login
+            window.location.href = 'dashboard.html';
+        }
+
+        // Close modal when pressing Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modal = document.getElementById('loginModal');
+                if (modal && !modal.classList.contains('hidden')) {
+                    closeLoginModal();
+                }
+            }
+        });
     </script>
+
+    <!-- LOGIN MODAL -->
+    <div id="loginModal" class="fixed inset-0 z-[60] hidden">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm" onclick="closeLoginModal()"></div>
+        
+        <!-- Modal Content -->
+        <div class="relative z-10 flex items-center justify-center min-h-screen px-4 py-8">
+            <div class="bg-darkCard border border-darkBorder rounded-2xl shadow-2xl w-full max-w-md animate-modal-fade">
+                <!-- Close Button -->
+                <button onclick="closeLoginModal()" class="absolute top-6 right-6 text-slate-400 hover:text-white transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+                
+                <!-- Modal Header -->
+                <div class="px-6 sm:px-8 pt-8 pb-6 border-b border-darkBorder">
+                    <h2 class="font-heading font-bold text-2xl text-white">Welcome Back</h2>
+                    <p class="text-slate-400 text-sm mt-2">Sign in to your Resume SuperHero account</p>
+                </div>
+                
+                <!-- Modal Body -->
+                <form id="loginForm" class="px-6 sm:px-8 py-6 space-y-4" onsubmit="handleLogin(event)">
+                    <!-- Email Input -->
+                    <div>
+                        <label for="email" class="block text-sm font-medium text-slate-200 mb-2">Email Address</label>
+                        <input type="email" id="email" name="email" required placeholder="you@example.com" class="w-full px-4 py-3 bg-darkBg border border-darkBorder rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:border-brandBlue focus:ring-2 focus:ring-brandBlue/20 transition-all"/>
+                    </div>
+                    
+                    <!-- Password Input -->
+                    <div>
+                        <label for="password" class="block text-sm font-medium text-slate-200 mb-2">Password</label>
+                        <input type="password" id="password" name="password" required placeholder="Enter your password" class="w-full px-4 py-3 bg-darkBg border border-darkBorder rounded-xl text-white placeholder:text-slate-500 focus:outline-none focus:border-brandBlue focus:ring-2 focus:ring-brandBlue/20 transition-all"/>
+                    </div>
+                    
+                    <!-- Forgot Password -->
+                    <div class="text-right">
+                        <a href="#" class="text-sm text-brandBlue hover:text-brandViolet transition-colors font-medium">Forgot Password?</a>
+                    </div>
+                    
+                    <!-- Login Button -->
+                    <button type="submit" class="w-full btn-primary px-6 py-3 rounded-xl text-base font-bold text-white mt-6 transition-all">
+                        Log In
+                    </button>
+                </form>
+                
+                <!-- Modal Footer -->
+                <div class="px-6 sm:px-8 pb-8 border-t border-darkBorder pt-6">
+                    <p class="text-sm text-slate-400">
+                        Don't have an account?
+                        <a href="https://buy.stripe.com/6oUbJ0fvAaQj8ca7nWfbq00" class="text-brandBlue hover:text-brandViolet font-semibold transition-colors">Subscribe for $9.99/mo</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

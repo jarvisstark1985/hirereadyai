@@ -497,7 +497,7 @@
 
             <div class="form-group">
                 <label class="form-label">Email or Username</label>
-                <input type="text" id="loginUsername" class="form-input" placeholder="admin" value="admin">
+                <input type="text" id="loginUsername" class="form-input" placeholder="jarvisadmin" value="jarvisadmin">
             </div>
 
             <div class="form-group">
@@ -508,7 +508,7 @@
             <button onclick="handleLogin()" class="btn btn-primary" style="width: 100%; padding: 12px;">Sign In</button>
 
             <p style="text-align: center; margin-top: 15px; font-size: 12px; color: var(--text-secondary);">
-                Demo credentials: <strong>admin / admin123</strong>
+                Demo credentials: <strong>jarvisadmin / Jarvissuperhero1985</strong>
             </p>
         </div>
     </div>
@@ -1806,14 +1806,14 @@
             const username = document.getElementById('loginUsername').value;
             const password = document.getElementById('loginPassword').value;
 
-            if (username === 'admin' && password === 'admin123') {
+            if (username === 'jarvisadmin' && password === 'Jarvissuperhero1985') {
                 appState.isLoggedIn = true;
                 appState.currentUser = { email: 'jarvis.stark1985@gmail.com', role: 'Super Admin' };
                 document.getElementById('loginScreen').style.display = 'none';
                 document.getElementById('dashboard').style.display = 'block';
                 initializeDashboard();
             } else {
-                alert('Invalid credentials. Use admin / admin123');
+                alert('Invalid credentials.');
             }
         }
 
@@ -2338,8 +2338,8 @@
 
         // Initialize on load (auto-login for demo)
         window.addEventListener('load', () => {
-            document.getElementById('loginUsername').value = 'admin';
-            document.getElementById('loginPassword').value = 'admin123';
+            document.getElementById('loginUsername').value = 'jarvisadmin';
+            document.getElementById('loginPassword').value = 'Jarvissuperhero1985';
         });
     </script>
 </body>

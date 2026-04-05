@@ -817,7 +817,7 @@ function addExperience(){ document.getElementById('experienceList').insertAdjace
 function addEducation(){ document.getElementById('educationList').insertAdjacentHTML('beforeend',`<div class="card p-4 education-entry"><div class="grid grid-cols-1 md:grid-cols-2 gap-3"><input class="input edu-degree" placeholder="Degree"><input class="input edu-school" placeholder="School"><input class="input edu-year" placeholder="Year"><input class="input edu-gpa" placeholder="GPA"></div><button class="btn-secondary btn-sm mt-2" onclick="this.closest('.education-entry').remove()">Remove</button></div>`); }
 function addSkill(){ const i=document.getElementById('skillInput'),s=i.value.trim(); if(!s)return; appState.resume.skills.push(s); document.getElementById('skillsList').insertAdjacentHTML('beforeend',`<span class="badge bg-brand-indigo/20 text-brand-indigo">${s} <span onclick="removeSkillTag(this)" style="cursor:pointer;margin-left:.3rem">&times;</span></span>`); i.value=''; i.focus(); saveDB(); }
 function removeSkillTag(el){ const s=el.parentElement.textContent.replace('\u00d7','').trim(); appState.resume.skills=appState.resume.skills.filter(x=>x!==s); el.parentElement.remove(); saveDB(); }
-function selectTheme(theme){ document.querySelectorAll('.template-card').forEach(c=>c.classList.remove('selected')); appState.resume.selectedTheme=theme; event.target.closest('.template-card').classList.add('selected'); saveDB(); }
+function selectTheme(theme){ document.querySelectorAll('.template-card').forEach(c=>c.classList.remove('selected')); appState.resume.selectedTheme=theme; const el=(typeof event!=='undefined'&&event)?event.target:null; if(el){const c=el.closest('.template-card');if(c)c.classList.add('selected');}else{const c=document.querySelector('[data-theme="'+theme+'"]');if(c)c.classList.add('selected');} saveDB(); }
 function generateResume(){
     appState.resume.name=document.getElementById('rName').value||'John Doe';
     appState.resume.email=document.getElementById('rEmail').value||'john@example.com';
@@ -848,11 +848,11 @@ const flashCardsData={
     phone:[{q:"Why this specific role?",a:"Align with company mission, growth opportunity, technologies, team, and career goals."},{q:"Remote work experience?",a:"Communication tools, time management, self-motivation, asynchronous collaboration."},{q:"Salary expectations?",a:"Research range for role/location. Frame as range, mention openness to discussion."},{q:"When can you start?",a:"Be specific. Consider notice period and any pending commitments."},{q:"Biggest professional regret?",a:"Share a learning experience, not lack of capability. Demonstrate growth."},{q:"Learning new technologies?",a:"Documentation, tutorials, hands-on projects, community resources, mentorship."},{q:"Questions for us?",a:"Ask about team structure, challenges, culture, success metrics for the role."},{q:"Handle disagreements with managers?",a:"Respectful discussion, data-driven reasoning, understanding their perspective."},{q:"Agile experience?",a:"Sprints, standups, retros, user stories. Comfortable adapting to team's approach."},{q:"How do you stay current?",a:"Industry publications, conferences, thought leaders, online courses."}]
 };
 let interviewType='behavioral', isRecording=false, currentQIdx=0, interviewTimer=null, interviewStart=0, interviewResponses=[];
-function selectInterviewType(type){
+function selectInterviewType(type,el){
     interviewType=type; appState.interviews.currentType=type;
     document.querySelectorAll('#sec-interview .card.border-2').forEach(c=>{c.classList.remove('border-brand-blue','bg-brand-blue/10');c.classList.add('border-dark-600');});
-    event.target.closest('.card').classList.remove('border-dark-600');
-    event.target.closest('.card').classList.add('border-brand-blue','bg-brand-blue/10');
+    const card=(el||((typeof event!=='undefined'&&event)?event.target:null));
+    if(card){const c=card.closest('.card');if(c){c.classList.remove('border-dark-600');c.classList.add('border-brand-blue','bg-brand-blue/10');}}
     initFlashCards(); saveDB();
 }
 function startVoiceInterview(){

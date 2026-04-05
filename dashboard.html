@@ -709,7 +709,7 @@ let appState = {
     motivationIdx: 0
 };
 const DB_KEY = 'rsh_data';
-function loadDB() { const s=localStorage.getItem(DB_KEY); if(s) try{appState=Object.assign({},appState,JSON.parse(s))}catch(e){} updateDashboardStats(); updateSidebar(); }
+function loadDB() { const s=localStorage.getItem(DB_KEY); if(s) try{ const d=JSON.parse(s); const def=JSON.parse(JSON.stringify(appState)); Object.keys(d).forEach(k=>{if(typeof d[k]==='object'&&d[k]!==null&&!Array.isArray(d[k])&&def[k]){def[k]=Object.assign({},def[k],d[k]);}else{def[k]=d[k];}}); if(!def.jobs.kanban)def.jobs.kanban={saved:[],applied:[],interviewing:[],offered:[]}; appState=def; }catch(e){} updateDashboardStats(); updateSidebar(); }
 function saveDB() { try{localStorage.setItem(DB_KEY,JSON.stringify(appState))}catch(e){} }
 
 // ============ LOGIN ============
@@ -1002,6 +1002,7 @@ function autoSubmit(id,platform){
     setTimeout(()=>{appState.jobs.applied++;document.getElementById('appliedCount').textContent=appState.jobs.applied;saveDB();updateDashboardStats();showToast(`Applied via ${platform}!`,'success');},1500);
 }
 function updateKanban(){
+    if(!appState.jobs.kanban)appState.jobs.kanban={saved:[],applied:[],interviewing:[],offered:[]};
     ['saved','applied','interviewing','offered'].forEach(col=>{
         const el=document.getElementById('kanban-'+col);if(!el)return;
         const items=appState.jobs.kanban[col]||[];

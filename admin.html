@@ -497,7 +497,7 @@
 
             <div class="form-group">
                 <label class="form-label">Email or Username</label>
-                <input type="text" id="loginUsername" class="form-input" placeholder="jarvisadmin" value="jarvisadmin">
+                <input type="text" id="loginUsername" class="form-input" placeholder="Username" autocomplete="off">
             </div>
 
             <div class="form-group">
@@ -507,9 +507,6 @@
 
             <button onclick="handleLogin()" class="btn btn-primary" style="width: 100%; padding: 12px;">Sign In</button>
 
-            <p style="text-align: center; margin-top: 15px; font-size: 12px; color: var(--text-secondary);">
-                Demo credentials: <strong>jarvisadmin / Jarvissuperhero1985</strong>
-            </p>
         </div>
     </div>
 
@@ -2338,8 +2335,8 @@
 
         // Initialize on load (auto-login for demo)
         window.addEventListener('load', () => {
-            document.getElementById('loginUsername').value = 'jarvisadmin';
-            document.getElementById('loginPassword').value = 'Jarvissuperhero1985';
+            document.getElementById('loginUsername').value = '';
+            document.getElementById('loginPassword').value = '';
         });
     </script>
 </body>

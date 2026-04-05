@@ -147,7 +147,23 @@
                 </nav>
                 <div class="flex items-center gap-3">
                     <button onclick="openLoginModal()" class="hidden sm:inline-block text-sm font-medium text-slate-300 hover:text-white transition-colors cursor-pointer bg-none border-none p-0">Log in</button>
-                    <a href="https://buy.stripe.com/6oUbJ0fvAaQj8ca7nWfbq00" class="btn-primary px-5 py-2.5 rounded-xl text-sm font-semibold text-white inline-block">Get Started</a>
+                    <a href="https://buy.stripe.com/6oUbJ0fvAaQj8ca7nWfbq00" class="btn-primary px-5 py-2.5 rounded-xl text-sm font-semibold text-white inline-block hidden sm:inline-block">Get Started</a>
+                    <!-- Mobile hamburger -->
+                    <button onclick="document.getElementById('mobileMenu').classList.toggle('hidden')" class="md:hidden text-white p-2" aria-label="Menu">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </button>
+                </div>
+            </div>
+            <!-- Mobile menu dropdown -->
+            <div id="mobileMenu" class="hidden md:hidden border-t border-darkBorder bg-darkBg/95 backdrop-blur-md px-4 py-4 space-y-3">
+                <a href="#features" class="block text-sm text-slate-300 hover:text-white py-2">Features</a>
+                <a href="#how-it-works" class="block text-sm text-slate-300 hover:text-white py-2">How It Works</a>
+                <a href="#testimonials" class="block text-sm text-slate-300 hover:text-white py-2">Testimonials</a>
+                <a href="#pricing" class="block text-sm text-slate-300 hover:text-white py-2">Pricing</a>
+                <a href="#faq" class="block text-sm text-slate-300 hover:text-white py-2">FAQ</a>
+                <div class="border-t border-darkBorder pt-3 flex flex-col gap-2">
+                    <button onclick="openLoginModal();document.getElementById('mobileMenu').classList.add('hidden')" class="w-full text-center text-sm font-medium text-white border border-brandIndigo rounded-xl py-2.5 hover:bg-brandIndigo/20 transition-colors cursor-pointer bg-transparent">Log In</button>
+                    <a href="https://buy.stripe.com/6oUbJ0fvAaQj8ca7nWfbq00" class="w-full text-center btn-primary px-5 py-2.5 rounded-xl text-sm font-semibold text-white block">Get Started</a>
                 </div>
             </div>
         </div>

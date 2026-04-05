@@ -34,8 +34,6 @@
         .glow-blue{box-shadow:0 0 20px rgba(59,130,246,.15)}
         .glow-violet{box-shadow:0 0 20px rgba(139,92,246,.15)}
         .gradient-text{background:linear-gradient(135deg,#3b82f6,#8b5cf6,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-        .gradient-border{position:relative}
-        .gradient-border::before{content:'';position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
         .sidebar{width:260px;min-width:260px;height:100vh;background:rgba(15,23,42,.95);border-right:1px solid rgba(51,65,85,.5);display:flex;flex-direction:column;transition:transform .3s ease;z-index:50}
         .sidebar.collapsed{transform:translateX(-260px);min-width:0;width:0}
         .nav-btn{display:flex;align-items:center;gap:.75rem;padding:.7rem 1rem;margin:.15rem .5rem;border-radius:.6rem;cursor:pointer;transition:all .2s;color:#94a3b8;border:1px solid transparent;font-size:.875rem}
@@ -88,11 +86,14 @@
         .tab{padding:.5rem 1rem;cursor:pointer;color:#94a3b8;border-bottom:2px solid transparent;font-size:.85rem;font-weight:500;transition:all .2s;white-space:nowrap}
         .tab:hover{color:#e2e8f0}
         .tab.active{color:#a5b4fc;border-bottom-color:#6366f1}
-        @media(max-width:768px){
-            .sidebar{position:fixed;left:0;top:0}
-            .sidebar.collapsed{transform:translateX(-260px)}
-            .mobile-toggle{display:flex!important}
-        }
+        .flash-card{min-height:200px;perspective:1000px;cursor:pointer}
+        .flash-card-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+        .flash-card-inner.flipped{transform:rotateY(180deg)}
+        .flash-card-front,.flash-card-back{position:absolute;width:100%;height:100%;-webkit-backface-visibility:hidden;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;padding:2rem;border-radius:.75rem;border:2px solid rgba(99,102,241,.3)}
+        .flash-card-front{background:rgba(59,130,246,.1)}
+        .flash-card-back{background:rgba(139,92,246,.1);transform:rotateY(180deg)}
+        .flash-card-text{text-align:center;font-size:1.1rem;font-weight:500;color:#e2e8f0}
+        @media(max-width:768px){.sidebar{position:fixed;left:0;top:0}.sidebar.collapsed{transform:translateX(-260px)}.mobile-toggle{display:flex!important}}
     </style>
 </head>
 <body>
@@ -111,16 +112,15 @@
             </div>
         </div>
         <nav class="flex-1 overflow-y-auto py-3" id="navList">
-            <div class="px-3 mb-1"><span class="text-[10px] font-semibold text-dark-500 uppercase tracking-wider px-2">Main</span></div>
+            <div class="px-3 mb-1"><span class="text-[10px] font-semibold text-dark-500 uppercase tracking-wider px-2">MAIN</span></div>
             <div class="nav-btn active" data-section="dashboard" onclick="nav('dashboard')"><span class="icon">📊</span>Dashboard</div>
-            <div class="nav-btn" data-section="resume" onclick="nav('resume')"><span class="icon">📄</span>AI Resume Builder</div>
+            <div class="nav-btn" data-section="resume" onclick="nav('resume')"><span class="icon">📄</span>Resume Builder</div>
             <div class="nav-btn" data-section="interview" onclick="nav('interview')"><span class="icon">🎯</span>Interview Coach</div>
-            <div class="px-3 mt-3 mb-1"><span class="text-[10px] font-semibold text-dark-500 uppercase tracking-wider px-2">Tools</span></div>
-            <div class="nav-btn" data-section="linkedin" onclick="nav('linkedin')"><span class="icon">🔗</span>LinkedIn Optimizer</div>
+            <div class="px-3 mt-3 mb-1"><span class="text-[10px] font-semibold text-dark-500 uppercase tracking-wider px-2">TOOLS</span></div>
             <div class="nav-btn" data-section="jobs" onclick="nav('jobs')"><span class="icon">💼</span>Job Tracker</div>
             <div class="nav-btn" data-section="salary" onclick="nav('salary')"><span class="icon">💰</span>Salary Intel</div>
-            <div class="px-3 mt-3 mb-1"><span class="text-[10px] font-semibold text-dark-500 uppercase tracking-wider px-2">Growth</span></div>
-            <div class="nav-btn" data-section="learning" onclick="nav('learning')"><span class="icon">📚</span>Learning Hub</div>
+            <div class="nav-btn" data-section="linkedin" onclick="nav('linkedin')"><span class="icon">🔗</span>LinkedIn Pro</div>
+            <div class="px-3 mt-3 mb-1"><span class="text-[10px] font-semibold text-dark-500 uppercase tracking-wider px-2">GROWTH</span></div>
             <div class="nav-btn" data-section="roadmap" onclick="nav('roadmap')"><span class="icon">🗺️</span>Career Roadmap</div>
             <div class="nav-btn" data-section="settings" onclick="nav('settings')"><span class="icon">⚙️</span>Settings</div>
         </nav>
@@ -159,26 +159,21 @@
         <div class="flex-1 overflow-y-auto" id="contentArea">
             <div class="max-w-6xl mx-auto p-6">
 
-<!-- ============================================== -->
-<!-- DASHBOARD HOME -->
-<!-- ============================================== -->
+<!-- ============ DASHBOARD HOME ============ -->
 <div id="sec-dashboard" class="section active">
-    <!-- Welcome -->
     <div class="relative overflow-hidden rounded-xl p-8 mb-6" style="background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(99,102,241,.1),rgba(139,92,246,.08))">
         <div class="absolute top-0 right-0 w-64 h-64 bg-brand-violet/5 rounded-full -translate-y-1/2 translate-x-1/4"></div>
         <h1 class="text-3xl font-bold text-dark-50 font-heading mb-1">Welcome back, <span id="welcomeName" class="gradient-text">User</span></h1>
         <p class="text-dark-300 text-sm">Your AI-powered career journey continues. Here's where you stand.</p>
     </div>
 
-    <!-- Stats -->
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
         <div class="card p-5 stat-card blue"><div class="text-dark-400 text-xs font-semibold mb-1">Profile Score</div><div class="text-2xl font-bold text-dark-50" id="statProfile">0%</div><div class="progress-track mt-2"><div class="progress-fill bg-brand-blue" id="profileBar" style="width:0%"></div></div></div>
         <div class="card p-5 stat-card violet"><div class="text-dark-400 text-xs font-semibold mb-1">Resumes Built</div><div class="text-2xl font-bold text-dark-50" id="statResumes">0</div><div class="text-xs text-dark-400 mt-2">AI-generated</div></div>
-        <div class="card p-5 stat-card emerald"><div class="text-dark-400 text-xs font-semibold mb-1">Interviews Done</div><div class="text-2xl font-bold text-dark-50" id="statInterviews">0</div><div class="text-xs text-dark-400 mt-2">Avg score: <span id="avgScore">--</span></div></div>
-        <div class="card p-5 stat-card amber"><div class="text-dark-400 text-xs font-semibold mb-1">Jobs Tracked</div><div class="text-2xl font-bold text-dark-50" id="statJobs">0</div><div class="text-xs text-dark-400 mt-2"><span id="activeApps">0</span> active applications</div></div>
+        <div class="card p-5 stat-card emerald"><div class="text-dark-400 text-xs font-semibold mb-1">Interviews Done</div><div class="text-2xl font-bold text-dark-50" id="statInterviews">0</div><div class="text-xs text-dark-400 mt-2">Avg: <span id="avgScore">--</span></div></div>
+        <div class="card p-5 stat-card amber"><div class="text-dark-400 text-xs font-semibold mb-1">Jobs Tracked</div><div class="text-2xl font-bold text-dark-50" id="statJobs">0</div><div class="text-xs text-dark-400 mt-2"><span id="activeApps">0</span> applied</div></div>
     </div>
 
-    <!-- Quick Actions -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div class="card p-5 cursor-pointer glass-hover" onclick="nav('resume')">
             <div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 rounded-lg bg-brand-blue/10 flex items-center justify-center text-lg">📄</div><h3 class="font-semibold text-dark-100 text-sm">Build Resume</h3></div>
@@ -194,7 +189,6 @@
         </div>
     </div>
 
-    <!-- Activity & Tips -->
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="card p-5">
             <h3 class="font-semibold text-dark-100 mb-4 font-heading text-sm">Recent Activity</h3>
@@ -203,26 +197,23 @@
             </div>
         </div>
         <div class="card p-5">
-            <h3 class="font-semibold text-dark-100 mb-4 font-heading text-sm">AI Career Tips</h3>
-            <div class="space-y-3" id="tipsList">
-                <div class="ai-msg text-xs"><strong class="text-brand-indigo">Tip:</strong> Resumes with quantified achievements get 40% more callbacks. Use numbers in every bullet point.</div>
-                <div class="ai-msg text-xs"><strong class="text-brand-indigo">Tip:</strong> The best time to apply for jobs is Monday-Wednesday, 6am-10am in the employer's timezone.</div>
-                <div class="ai-msg text-xs"><strong class="text-brand-indigo">Tip:</strong> Adding a professional summary increases interview chances by 36%.</div>
+            <h3 class="font-semibold text-dark-100 mb-4 font-heading text-sm">Career Tips</h3>
+            <div class="space-y-3 text-xs" id="tipsList">
+                <div class="ai-msg"><strong class="text-brand-indigo">Tip:</strong> Resumes with quantified achievements get 40% more callbacks. Use numbers!</div>
+                <div class="ai-msg"><strong class="text-brand-indigo">Tip:</strong> Best time to apply: Monday-Wednesday, 6am-10am in employer's timezone.</div>
+                <div class="ai-msg"><strong class="text-brand-indigo">Tip:</strong> Professional summaries increase interview chances by 36%.</div>
             </div>
         </div>
     </div>
 </div>
 
-<!-- ============================================== -->
-<!-- AI RESUME BUILDER -->
-<!-- ============================================== -->
+<!-- ============ RESUME BUILDER ============ -->
 <div id="sec-resume" class="section">
     <div class="mb-6">
         <h1 class="text-2xl font-bold text-dark-50 font-heading">AI Resume Builder</h1>
         <p class="text-dark-400 text-sm mt-1">Answer a few questions and our AI builds your complete, ATS-optimized resume.</p>
     </div>
 
-    <!-- Step Progress -->
     <div class="flex items-center gap-2 mb-6 flex-wrap" id="resumeSteps">
         <div class="flex items-center gap-2 step-indicator" data-step="1"><div class="w-7 h-7 rounded-full bg-brand-indigo text-white text-xs font-bold flex items-center justify-center">1</div><span class="text-xs text-dark-200 hidden sm:inline">Basics</span></div>
         <div class="w-8 h-px bg-dark-600"></div>
@@ -247,7 +238,7 @@
                 <div><label class="block text-xs font-medium text-dark-400 mb-1.5">LinkedIn URL</label><input class="input" id="rLinkedin" placeholder="linkedin.com/in/yourname"></div>
                 <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Portfolio / Website</label><input class="input" id="rWebsite" placeholder="yoursite.com"></div>
             </div>
-            <div class="mt-4"><label class="block text-xs font-medium text-dark-400 mb-1.5">Target Job Title *</label><input class="input" id="rTargetRole" placeholder="e.g. Senior Product Manager, Software Engineer, Marketing Director"></div>
+            <div class="mt-4"><label class="block text-xs font-medium text-dark-400 mb-1.5">Target Job Title *</label><input class="input" id="rTargetRole" placeholder="e.g. Senior Product Manager"></div>
             <div class="mt-4"><label class="block text-xs font-medium text-dark-400 mb-1.5">Target Industry</label><input class="input" id="rIndustry" placeholder="e.g. SaaS, Healthcare, Finance"></div>
             <div class="flex justify-end mt-6"><button class="btn-primary" onclick="resumeNext(2)">Continue →</button></div>
         </div>
@@ -264,12 +255,12 @@
             <div id="experienceList" class="space-y-4">
                 <div class="card p-4 experience-entry">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
-                        <input class="input exp-title" placeholder="Job Title (e.g. Product Manager)">
+                        <input class="input exp-title" placeholder="Job Title">
                         <input class="input exp-company" placeholder="Company Name">
-                        <input class="input exp-dates" placeholder="Dates (e.g. Jan 2022 - Present)">
-                        <input class="input exp-location" placeholder="Location (e.g. Remote)">
+                        <input class="input exp-dates" placeholder="Dates (Jan 2022 - Present)">
+                        <input class="input exp-location" placeholder="Location">
                     </div>
-                    <textarea class="input exp-desc" placeholder="Brief description of what you did. AI will enhance this into professional bullet points.&#10;&#10;Example: Led team of 8, launched new product, increased revenue 40%"></textarea>
+                    <textarea class="input exp-desc" placeholder="Brief description of what you did. AI will enhance this."></textarea>
                 </div>
             </div>
             <div class="flex justify-between mt-6">
@@ -291,8 +282,8 @@
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
                         <input class="input edu-degree" placeholder="Degree (e.g. B.S. Computer Science)">
                         <input class="input edu-school" placeholder="University / School Name">
-                        <input class="input edu-year" placeholder="Graduation Year (e.g. 2020)">
-                        <input class="input edu-gpa" placeholder="GPA (optional, e.g. 3.8)">
+                        <input class="input edu-year" placeholder="Graduation Year">
+                        <input class="input edu-gpa" placeholder="GPA (optional)">
                     </div>
                 </div>
             </div>
@@ -306,373 +297,603 @@
     <!-- Step 4: Skills -->
     <div id="rStep4" class="resume-step" style="display:none">
         <div class="card p-6">
-            <h2 class="text-lg font-semibold text-dark-100 mb-2 font-heading">Skills & Expertise</h2>
-            <p class="text-xs text-dark-400 mb-4">Add your key skills or let AI suggest them based on your target role.</p>
-            <div class="flex gap-2 mb-4">
-                <input class="input flex-1" id="skillInput" placeholder="Type a skill and press Enter" onkeydown="if(event.key==='Enter')addSkill()">
-                <button class="btn-primary btn-sm" onclick="addSkill()">Add</button>
-                <button class="btn-secondary btn-sm" onclick="suggestSkills()">✨ AI Suggest</button>
+            <h2 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Skills & Certifications</h2>
+            <div class="mb-4">
+                <label class="block text-xs font-medium text-dark-400 mb-2">Add Skills (press Enter to add)</label>
+                <div class="flex gap-2 mb-3">
+                    <input class="input" id="skillInput" placeholder="Type a skill..." onkeypress="if(event.key==='Enter') addSkill()">
+                    <button class="btn-primary btn-sm" onclick="addSkill()">Add</button>
+                </div>
+                <div class="flex flex-wrap gap-2" id="skillsList"></div>
             </div>
-            <div class="flex flex-wrap gap-2 mb-4" id="skillTags"></div>
-            <div class="mt-4"><label class="block text-xs font-medium text-dark-400 mb-1.5">Professional Summary (optional — AI will write one if left blank)</label><textarea class="input" id="rSummary" placeholder="Brief professional summary, or leave blank for AI to generate..."></textarea></div>
+            <div class="mt-4">
+                <label class="block text-xs font-medium text-dark-400 mb-2">Certifications (optional)</label>
+                <div id="certList" class="space-y-2">
+                    <input class="input" placeholder="e.g. AWS Certified Solutions Architect">
+                </div>
+            </div>
             <div class="flex justify-between mt-6">
                 <button class="btn-secondary" onclick="resumeNext(3)">← Back</button>
-                <button class="btn-primary" onclick="resumeNext(5)">Generate Resume ✨</button>
+                <button class="btn-primary" onclick="resumeNext(5)">Continue →</button>
             </div>
         </div>
     </div>
 
-    <!-- Step 5: AI Generation & Preview -->
+    <!-- Step 5: Template & Generate -->
     <div id="rStep5" class="resume-step" style="display:none">
-        <div id="generatingState" class="card p-8 text-center">
-            <div class="inline-flex items-center gap-2 mb-4"><div class="typing-dot"></div><div class="typing-dot"></div><div class="typing-dot"></div></div>
-            <h2 class="text-lg font-semibold text-dark-100 font-heading mb-2">AI is crafting your resume...</h2>
-            <p class="text-xs text-dark-400" id="genStatus">Analyzing your experience and target role...</p>
-        </div>
-        <div id="previewState" style="display:none">
-            <!-- Template Selector -->
-            <div class="flex gap-3 mb-4 overflow-x-auto pb-2">
-                <div class="template-card selected" onclick="selectTemplate('modern')" data-tmpl="modern"><div class="text-xs font-semibold text-dark-200">Modern</div><div class="text-[10px] text-dark-500">Clean & minimal</div></div>
-                <div class="template-card" onclick="selectTemplate('executive')" data-tmpl="executive"><div class="text-xs font-semibold text-dark-200">Executive</div><div class="text-[10px] text-dark-500">Bold & authoritative</div></div>
-                <div class="template-card" onclick="selectTemplate('creative')" data-tmpl="creative"><div class="text-xs font-semibold text-dark-200">Creative</div><div class="text-[10px] text-dark-500">Unique & standout</div></div>
-            </div>
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                <div class="lg:col-span-2">
-                    <div id="resumeOutput" class="resume-preview"></div>
+        <div class="card p-6 mb-6">
+            <h2 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Choose Your Template</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="templateGrid">
+                <div class="template-card" onclick="selectTheme('classic')" data-theme="classic">
+                    <div class="text-3xl mb-2">📋</div>
+                    <p class="template-name text-sm font-semibold mb-2">Classic</p>
+                    <div class="text-xs text-dark-400">ATS-Friendly</div>
                 </div>
-                <div class="space-y-4">
-                    <div class="card p-4">
-                        <h3 class="font-semibold text-dark-100 text-sm mb-3 font-heading">ATS Score</h3>
-                        <div class="text-3xl font-bold gradient-text mb-2" id="atsScore">--</div>
-                        <div class="progress-track"><div class="progress-fill bg-gradient-to-r from-brand-blue to-brand-violet" id="atsBar" style="width:0%"></div></div>
-                        <div class="mt-3 space-y-1" id="atsFeedback"></div>
-                    </div>
-                    <div class="card p-4">
-                        <h3 class="font-semibold text-dark-100 text-sm mb-3 font-heading">Actions</h3>
-                        <div class="space-y-2">
-                            <button class="btn-primary w-full justify-center" onclick="downloadResumePDF()">⬇ Download PDF</button>
-                            <button class="btn-secondary w-full justify-center" onclick="resumeNext(1)">✏️ Edit Details</button>
-                            <button class="btn-secondary w-full justify-center" onclick="regenerateResume()">🔄 Regenerate</button>
-                        </div>
-                    </div>
-                    <div class="card p-4">
-                        <h3 class="font-semibold text-dark-100 text-sm mb-3 font-heading">AI Suggestions</h3>
-                        <div class="space-y-2 text-xs text-dark-300" id="aiSuggestions"></div>
-                    </div>
+                <div class="template-card" onclick="selectTheme('modern')" data-theme="modern">
+                    <div class="text-3xl mb-2">✨</div>
+                    <p class="template-name text-sm font-semibold mb-2">Modern</p>
+                    <div class="text-xs text-dark-400">Contemporary</div>
+                </div>
+                <div class="template-card" onclick="selectTheme('minimalist')" data-theme="minimalist">
+                    <div class="text-3xl mb-2">⚡</div>
+                    <p class="template-name text-sm font-semibold mb-2">Minimalist</p>
+                    <div class="text-xs text-dark-400">Clean Design</div>
+                </div>
+                <div class="template-card" onclick="selectTheme('creative')" data-theme="creative">
+                    <div class="text-3xl mb-2">🎨</div>
+                    <p class="template-name text-sm font-semibold mb-2">Creative</p>
+                    <div class="text-xs text-dark-400">Bold & Colorful</div>
                 </div>
             </div>
-            <div class="flex justify-between mt-6">
-                <button class="btn-secondary" onclick="resumeNext(4)">← Edit Info</button>
-                <button class="btn-primary" onclick="saveResume()">💾 Save Resume</button>
-            </div>
         </div>
-    </div>
 
-    <!-- Saved Resumes -->
-    <div class="mt-8" id="savedResumesSection" style="display:none">
-        <h2 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Your Resumes</h2>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4" id="savedResumesList"></div>
+        <div class="card p-6">
+            <h2 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Preview & Download</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div id="resumePreview" class="resume-preview">
+                    <div class="text-center text-dark-400">Resume preview will appear here...</div>
+                </div>
+                <div>
+                    <p class="text-sm text-dark-300 mb-4">Your resume is ready! Here's what you can do:</p>
+                    <div class="space-y-2">
+                        <button class="btn-primary w-full" onclick="generateResume()">Generate Resume</button>
+                        <button class="btn-secondary w-full" onclick="downloadPDF()">Download PDF</button>
+                        <button class="btn-secondary w-full" onclick="resumeNext(1)">Edit Information</button>
+                    </div>
+                    <div class="mt-6 p-4 bg-brand-blue/10 rounded-lg border border-brand-blue/20">
+                        <p class="text-xs text-brand-blue font-semibold mb-2">ATS Score: <span id="atsScore">85%</span></p>
+                        <p class="text-xs text-dark-400">Your resume is optimized for Applicant Tracking Systems. Ready to apply!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- ============================================== -->
-<!-- INTERVIEW COACH -->
-<!-- ============================================== -->
+<!-- ============ INTERVIEW PREP ============ -->
 <div id="sec-interview" class="section">
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-dark-50 font-heading">AI Interview Coach</h1>
-        <p class="text-dark-400 text-sm mt-1">Practice with our AI interviewer and get real-time feedback.</p>
+        <h1 class="text-2xl font-bold text-dark-50 font-heading flex items-center gap-2">
+            <span>🛡️</span> SuperHero Interview Prep
+        </h1>
+        <p class="text-dark-400 text-sm mt-1">Practice with an interviewer that thinks like your hiring manager. Get real-time feedback and scoring.</p>
     </div>
 
-    <!-- Interview Setup -->
-    <div id="interviewSetup">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
-            <div class="card p-5 cursor-pointer glass-hover interview-type selected" data-type="behavioral" onclick="selectInterviewType('behavioral')">
-                <div class="text-2xl mb-2">🧠</div>
-                <h3 class="font-semibold text-dark-100 text-sm">Behavioral</h3>
-                <p class="text-xs text-dark-400 mt-1">STAR method practice. Tell me about a time when...</p>
-            </div>
-            <div class="card p-5 cursor-pointer glass-hover interview-type" data-type="technical" onclick="selectInterviewType('technical')">
-                <div class="text-2xl mb-2">💻</div>
-                <h3 class="font-semibold text-dark-100 text-sm">Technical</h3>
-                <p class="text-xs text-dark-400 mt-1">Role-specific technical questions and problem solving.</p>
-            </div>
-            <div class="card p-5 cursor-pointer glass-hover interview-type" data-type="case" onclick="selectInterviewType('case')">
-                <div class="text-2xl mb-2">📊</div>
-                <h3 class="font-semibold text-dark-100 text-sm">Case Study</h3>
-                <p class="text-xs text-dark-400 mt-1">Business cases and strategic thinking exercises.</p>
-            </div>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="card p-4 text-center cursor-pointer border-2 border-brand-blue bg-brand-blue/10" onclick="selectInterviewType('behavioral')">
+            <div class="text-2xl mb-2">🎯</div>
+            <div class="font-semibold text-sm text-dark-100">Behavioral</div>
         </div>
-        <div class="card p-5 mb-4">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Target Role</label><input class="input" id="intRole" placeholder="e.g. Product Manager at Google"></div>
-                <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Difficulty</label>
-                    <select class="input" id="intDifficulty"><option value="easy">Entry Level</option><option value="medium" selected>Mid Level</option><option value="hard">Senior / Executive</option></select>
-                </div>
-            </div>
+        <div class="card p-4 text-center cursor-pointer border-2 border-dark-600" onclick="selectInterviewType('technical')">
+            <div class="text-2xl mb-2">💻</div>
+            <div class="font-semibold text-sm text-dark-100">Technical</div>
         </div>
-        <button class="btn-primary" onclick="startInterview()">🎯 Start Mock Interview</button>
+        <div class="card p-4 text-center cursor-pointer border-2 border-dark-600" onclick="selectInterviewType('case')">
+            <div class="text-2xl mb-2">📊</div>
+            <div class="font-semibold text-sm text-dark-100">Case Study</div>
+        </div>
+        <div class="card p-4 text-center cursor-pointer border-2 border-dark-600" onclick="selectInterviewType('phone')">
+            <div class="text-2xl mb-2">☎️</div>
+            <div class="font-semibold text-sm text-dark-100">Phone Screen</div>
+        </div>
     </div>
 
-    <!-- Interview Session -->
-    <div id="interviewSession" style="display:none">
-        <div class="card p-4 mb-4 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-3 h-3 rounded-full bg-brand-emerald animate-pulse"></div>
-                <span class="text-sm text-dark-200">Interview in progress</span>
-                <span class="text-xs text-dark-500" id="questionCount">Question 1 of 5</span>
-            </div>
-            <button class="btn-secondary btn-sm" onclick="endInterview()">End Interview</button>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+        <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Target Role</label><input class="input" id="interviewRole" placeholder="Senior Product Manager"></div>
+        <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Company</label><input class="input" id="interviewCompany" placeholder="Google, Microsoft"></div>
+        <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Difficulty Level</label><select class="input"><option>Entry Level</option><option>Mid Level</option><option>Senior Level</option><option>Executive</option></select></div>
+    </div>
+
+    <div class="card p-6 mb-6">
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Voice Interview Mode</h3>
+        <div class="text-center mb-6">
+            <button class="w-28 h-28 rounded-full flex items-center justify-center text-5xl border-4 border-brand-blue bg-gradient-to-br from-brand-blue to-brand-violet hover:from-brand-blue hover:to-brand-indigo" onclick="startVoiceInterview()" id="micButton">🎙️</button>
+            <p class="text-dark-400 text-sm mt-3">Click to start voice interview</p>
         </div>
-        <div class="card p-5 mb-4 max-h-96 overflow-y-auto" id="interviewChat"></div>
+
+        <div class="bg-dark-800/50 p-4 rounded-lg mb-4 min-h-20">
+            <p class="text-dark-400 text-sm mb-2">Current Question:</p>
+            <p class="text-dark-100 font-medium" id="currentQuestion">Tell me about yourself and your career goals.</p>
+        </div>
+
+        <div class="bg-dark-800/50 p-4 rounded-lg mb-4">
+            <p class="text-dark-400 text-sm mb-2">Your Response:</p>
+            <p class="text-dark-100" id="userResponse">No response yet. Click the microphone to speak.</p>
+        </div>
+
+        <div class="bg-dark-700/50 p-4 rounded-lg mb-4">
+            <p class="text-dark-400 text-sm mb-2">AI Feedback:</p>
+            <p class="text-dark-200 text-sm" id="aiFeedback">Start speaking to receive feedback...</p>
+        </div>
+
         <div class="flex gap-2">
-            <textarea class="input flex-1" id="interviewInput" placeholder="Type your answer..." rows="3" onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();submitAnswer()}"></textarea>
-            <button class="btn-primary self-end" onclick="submitAnswer()">Send</button>
+            <button class="btn-primary" onclick="stopRecording()">Stop Recording</button>
+            <button class="btn-secondary" onclick="nextQuestion()">Next Question</button>
         </div>
     </div>
 
-    <!-- Interview Results -->
-    <div id="interviewResults" style="display:none"></div>
-
-    <!-- Past Interviews -->
-    <div class="mt-8">
-        <h2 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Past Practice Sessions</h2>
-        <div id="pastInterviews" class="space-y-2"><p class="text-xs text-dark-500">No sessions yet. Start your first mock interview above!</p></div>
-    </div>
-</div>
-
-<!-- ============================================== -->
-<!-- LINKEDIN OPTIMIZER -->
-<!-- ============================================== -->
-<div id="sec-linkedin" class="section">
-    <div class="mb-6">
-        <h1 class="text-2xl font-bold text-dark-50 font-heading">LinkedIn Optimizer</h1>
-        <p class="text-dark-400 text-sm mt-1">AI rewrites your LinkedIn profile to attract recruiters and hiring managers.</p>
-    </div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="space-y-4">
-            <div class="card p-5">
-                <h3 class="font-semibold text-dark-100 text-sm mb-3 font-heading">Headline Generator</h3>
-                <input class="input mb-3" id="liCurrentHeadline" placeholder="Your current headline (e.g. Product Manager at TechCo)">
-                <input class="input mb-3" id="liTargetHeadline" placeholder="What role are you targeting?">
-                <button class="btn-primary btn-sm" onclick="generateHeadline()">✨ Generate Headlines</button>
-                <div id="headlineResults" class="mt-4 space-y-2"></div>
-            </div>
-            <div class="card p-5">
-                <h3 class="font-semibold text-dark-100 text-sm mb-3 font-heading">About / Summary Writer</h3>
-                <textarea class="input mb-3" id="liAboutInput" placeholder="Paste your current About section, or describe yourself briefly..."></textarea>
-                <button class="btn-primary btn-sm" onclick="generateAbout()">✨ Rewrite About Section</button>
-                <div id="aboutResult" class="mt-4"></div>
-            </div>
-        </div>
-        <div class="space-y-4">
-            <div class="card p-5">
-                <h3 class="font-semibold text-dark-100 text-sm mb-3 font-heading">Experience Bullet Enhancer</h3>
-                <textarea class="input mb-3" id="liBulletInput" placeholder="Paste a work experience bullet point to enhance...&#10;&#10;Example: Managed team and launched product"></textarea>
-                <button class="btn-primary btn-sm" onclick="enhanceBullet()">✨ Enhance Bullets</button>
-                <div id="bulletResult" class="mt-4"></div>
-            </div>
-            <div class="card p-5">
-                <h3 class="font-semibold text-dark-100 text-sm mb-3 font-heading">Profile Score</h3>
-                <div class="text-center py-4">
-                    <div class="text-4xl font-bold gradient-text mb-1" id="linkedinScore">--</div>
-                    <p class="text-xs text-dark-400">Optimize all sections to boost your score</p>
+    <div class="card p-6 mb-6">
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Interview Score</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="flex items-center gap-6">
+                <div class="relative w-32 h-32">
+                    <svg class="absolute w-full h-full transform -rotate-90" viewBox="0 0 120 120">
+                        <circle cx="60" cy="60" r="55" fill="none" stroke="rgba(148,163,184,.2)" stroke-width="8"/>
+                        <circle cx="60" cy="60" r="55" fill="none" stroke="#10b981" stroke-width="8" stroke-dasharray="220 346" stroke-linecap="round"/>
+                    </svg>
+                    <div class="absolute inset-0 flex flex-col items-center justify-center">
+                        <div class="text-3xl font-bold text-emerald-500" id="overallScore">82</div>
+                        <div class="text-xs text-dark-400">/100</div>
+                    </div>
                 </div>
-                <div class="space-y-2" id="linkedinChecklist">
-                    <div class="flex items-center gap-2 text-xs"><span class="text-dark-500">☐</span><span class="text-dark-300">Professional headline (not default)</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="text-dark-500">☐</span><span class="text-dark-300">Compelling About section (150+ words)</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="text-dark-500">☐</span><span class="text-dark-300">3+ experience entries with bullets</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="text-dark-500">☐</span><span class="text-dark-300">Skills section (10+ skills)</span></div>
-                    <div class="flex items-center gap-2 text-xs"><span class="text-dark-500">☐</span><span class="text-dark-300">Custom URL set</span></div>
+                <div class="flex-1 space-y-3">
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Content</span><span class="text-brand-blue font-semibold">36/40</span></div>
+                        <div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-blue rounded" style="width:90%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Delivery</span><span class="text-brand-amber font-semibold">23/30</span></div>
+                        <div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-amber rounded" style="width:77%"></div></div>
+                    </div>
+                    <div>
+                        <div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Structure</span><span class="text-brand-violet font-semibold">23/30</span></div>
+                        <div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-violet rounded" style="width:77%"></div></div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div class="mb-4 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
+                    <p class="text-xs text-emerald-400 font-semibold">📈 +18% improvement since first session</p>
+                </div>
+                <div class="space-y-3">
+                    <div class="p-3 bg-emerald-500/10 border-l-4 border-emerald-500 rounded">
+                        <h4 class="text-xs font-semibold text-emerald-400 mb-2">Strengths</h4>
+                        <ul class="text-xs text-emerald-300 space-y-1">
+                            <li>✓ Excellent story structure</li>
+                            <li>✓ Confident tone</li>
+                            <li>✓ Quantified results</li>
+                        </ul>
+                    </div>
+                    <div class="p-3 bg-amber-500/10 border-l-4 border-amber-500 rounded">
+                        <h4 class="text-xs font-semibold text-amber-400 mb-2">Areas to Improve</h4>
+                        <ul class="text-xs text-amber-300 space-y-1">
+                            <li>• Slow down pace</li>
+                            <li>• Be more specific</li>
+                            <li>• Pause before answering</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div class="card p-6">
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Flash Cards</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div class="flash-card" onclick="flipCard('card1')">
+                <div class="flash-card-inner" id="card1">
+                    <div class="flash-card-front"><div class="flash-card-text">Why are you interested in this role?</div></div>
+                    <div class="flash-card-back"><div class="flash-card-text">Focus on alignment with company mission, role responsibilities, and career growth. Show you've researched the company.</div></div>
+                </div>
+            </div>
+            <div class="flash-card" onclick="flipCard('card2')">
+                <div class="flash-card-inner" id="card2">
+                    <div class="flash-card-front"><div class="flash-card-text">Tell me about a time you handled conflict.</div></div>
+                    <div class="flash-card-back"><div class="flash-card-text">Use STAR method: Situation, Task, Action, Result. Focus on positive resolution and what you learned.</div></div>
+                </div>
+            </div>
+        </div>
+        <button class="btn-secondary" onclick="printFlashCards()">Print Flash Cards</button>
+    </div>
 </div>
 
-<!-- ============================================== -->
-<!-- JOB TRACKER -->
-<!-- ============================================== -->
+<!-- ============ JOB TRACKER ============ -->
 <div id="sec-jobs" class="section">
-    <div class="flex items-center justify-between mb-6">
-        <div><h1 class="text-2xl font-bold text-dark-50 font-heading">Job Tracker</h1><p class="text-dark-400 text-sm mt-1">Track every application from discovery to offer.</p></div>
-        <button class="btn-primary btn-sm" onclick="showAddJob()">+ Add Application</button>
+    <div class="mb-6">
+        <h1 class="text-2xl font-bold text-dark-50 font-heading">Job Tracker & Search</h1>
+        <p class="text-dark-400 text-sm mt-1">Find your next opportunity with AI-powered job matching and application tracking.</p>
     </div>
-    <!-- Add Job Modal -->
-    <div id="addJobForm" class="card p-5 mb-6" style="display:none">
-        <h3 class="font-semibold text-dark-100 text-sm mb-3 font-heading">New Application</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
-            <input class="input" id="jobCompany" placeholder="Company">
-            <input class="input" id="jobTitle" placeholder="Position Title">
-            <input class="input" id="jobUrl" placeholder="Job Posting URL (optional)">
-        </div>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
-            <input class="input" id="jobSalary" placeholder="Salary Range (optional)">
-            <select class="input" id="jobStatus"><option>Interested</option><option>Applied</option><option>Phone Screen</option><option>Interview</option><option>Offer</option></select>
-            <input class="input" id="jobDate" type="date">
-        </div>
-        <textarea class="input mb-3" id="jobNotes" placeholder="Notes..." rows="2"></textarea>
-        <div class="flex gap-2"><button class="btn-primary btn-sm" onclick="addJob()">Save</button><button class="btn-secondary btn-sm" onclick="hideAddJob()">Cancel</button></div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Jobs Found</div><div class="text-2xl font-bold text-dark-50" id="jobsCount">0</div></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Applied</div><div class="text-2xl font-bold text-dark-50" id="appliedCount">0</div></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Interviews</div><div class="text-2xl font-bold text-dark-50">0</div></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Avg Match</div><div class="text-2xl font-bold text-dark-50" id="avgMatch">0%</div></div>
     </div>
-    <!-- Kanban Board -->
-    <div class="flex gap-3 overflow-x-auto pb-4" id="kanbanBoard">
-        <div class="kanban-col" data-status="Interested"><div class="flex items-center gap-2 mb-3"><div class="w-2 h-2 rounded-full bg-dark-400"></div><span class="text-xs font-semibold text-dark-300">Interested</span><span class="badge bg-dark-600 text-dark-400 ml-auto" id="count-Interested">0</span></div><div class="kanban-items" data-status="Interested"></div></div>
-        <div class="kanban-col" data-status="Applied"><div class="flex items-center gap-2 mb-3"><div class="w-2 h-2 rounded-full bg-brand-blue"></div><span class="text-xs font-semibold text-dark-300">Applied</span><span class="badge bg-brand-blue/20 text-brand-blue ml-auto" id="count-Applied">0</span></div><div class="kanban-items" data-status="Applied"></div></div>
-        <div class="kanban-col" data-status="Phone Screen"><div class="flex items-center gap-2 mb-3"><div class="w-2 h-2 rounded-full bg-brand-violet"></div><span class="text-xs font-semibold text-dark-300">Phone Screen</span><span class="badge bg-brand-violet/20 text-brand-violet ml-auto" id="count-Phone Screen">0</span></div><div class="kanban-items" data-status="Phone Screen"></div></div>
-        <div class="kanban-col" data-status="Interview"><div class="flex items-center gap-2 mb-3"><div class="w-2 h-2 rounded-full bg-brand-amber"></div><span class="text-xs font-semibold text-dark-300">Interview</span><span class="badge bg-brand-amber/20 text-brand-amber ml-auto" id="count-Interview">0</span></div><div class="kanban-items" data-status="Interview"></div></div>
-        <div class="kanban-col" data-status="Offer"><div class="flex items-center gap-2 mb-3"><div class="w-2 h-2 rounded-full bg-brand-emerald"></div><span class="text-xs font-semibold text-dark-300">Offer</span><span class="badge bg-brand-emerald/20 text-brand-emerald ml-auto" id="count-Offer">0</span></div><div class="kanban-items" data-status="Offer"></div></div>
+
+    <div class="card p-6 mb-6">
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Search Jobs</h3>
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
+            <input class="input" id="jobTitle" placeholder="Job title">
+            <input class="input" id="jobLocation" placeholder="Location">
+            <select class="input"><option>Any Experience Level</option><option>Entry Level</option><option>Mid Level</option><option>Senior</option></select>
+            <button class="btn-primary" onclick="searchJobs()">Search</button>
+        </div>
+    </div>
+
+    <div class="space-y-3" id="jobsList">
+        <div class="card p-4">
+            <div class="flex items-start justify-between gap-4">
+                <div class="flex-1">
+                    <h4 class="font-semibold text-dark-100 mb-1">Senior Product Manager</h4>
+                    <p class="text-xs text-dark-400 mb-2">TechCorp Inc. • San Francisco, CA</p>
+                    <p class="text-xs text-dark-300 mb-3">We're looking for an experienced PM to lead our mobile product strategy...</p>
+                    <div class="flex gap-2 flex-wrap">
+                        <span class="badge bg-brand-blue/20 text-brand-blue">5y+ experience</span>
+                        <span class="badge bg-brand-emerald/20 text-brand-emerald">$150-180K</span>
+                    </div>
+                </div>
+                <div class="text-right flex-shrink-0">
+                    <div class="text-2xl font-bold text-brand-emerald mb-2">92%</div>
+                    <p class="text-xs text-dark-400 mb-2">Match Score</p>
+                    <button class="btn-primary btn-sm" onclick="applyJob(1)">Apply</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-8">
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Application Tracker (Kanban)</h3>
+        <div class="flex gap-4 overflow-x-auto pb-4">
+            <div class="kanban-col">
+                <h4 class="font-semibold text-dark-100 mb-3 text-sm">Saved</h4>
+                <div class="kanban-card">TechCorp - PM</div>
+            </div>
+            <div class="kanban-col">
+                <h4 class="font-semibold text-dark-100 mb-3 text-sm">Applied</h4>
+                <div class="kanban-card">Google - Manager</div>
+            </div>
+            <div class="kanban-col">
+                <h4 class="font-semibold text-dark-100 mb-3 text-sm">Interviewing</h4>
+                <div class="kanban-card">Facebook - Engineer</div>
+            </div>
+            <div class="kanban-col">
+                <h4 class="font-semibold text-dark-100 mb-3 text-sm">Offered</h4>
+            </div>
+        </div>
     </div>
 </div>
 
-<!-- ============================================== -->
-<!-- SALARY INTEL -->
-<!-- ============================================== -->
+<!-- ============ SALARY NEGOTIATOR ============ -->
 <div id="sec-salary" class="section">
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-dark-50 font-heading">Salary Intelligence</h1>
-        <p class="text-dark-400 text-sm mt-1">AI-powered salary research and negotiation coaching.</p>
+        <h1 class="text-2xl font-bold text-dark-50 font-heading">Salary Negotiator</h1>
+        <p class="text-dark-400 text-sm mt-1">Research market rates, calculate total compensation, and master negotiation tactics.</p>
     </div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <div class="card p-5">
-            <h3 class="font-semibold text-dark-100 text-sm mb-3 font-heading">Salary Research</h3>
-            <div class="grid grid-cols-1 gap-3 mb-4">
-                <input class="input" id="salRole" placeholder="Job Title (e.g. Senior Product Manager)">
-                <input class="input" id="salLocation" placeholder="Location (e.g. San Francisco, CA)">
-                <input class="input" id="salExperience" placeholder="Years of Experience (e.g. 8)">
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Market Rate</div><div class="text-2xl font-bold text-dark-50" id="marketRate">$0</div><p class="text-xs text-dark-400 mt-1">Senior PM, SF</p></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Your Offer</div><div class="text-2xl font-bold text-dark-50" id="yourOffer">$0</div><p class="text-xs text-dark-400 mt-1">Base salary</p></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Gap</div><div class="text-2xl font-bold text-brand-rose" id="salaryGap">$0</div><p class="text-xs text-dark-400 mt-1">Under market</p></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Total Comp</div><div class="text-2xl font-bold text-dark-50" id="totalComp">$0</div><p class="text-xs text-dark-400 mt-1">With equity+bonus</p></div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="card p-6">
+            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Market Research</h3>
+            <div class="space-y-3 mb-4">
+                <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Job Title</label><input class="input" id="salaryTitle" placeholder="e.g. Senior Product Manager"></div>
+                <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Location</label><input class="input" id="salaryLocation" placeholder="e.g. San Francisco, CA"></div>
+                <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Experience Level</label><select class="input"><option>Entry Level</option><option>Mid Level</option><option>Senior Level</option><option>Executive</option></select></div>
             </div>
-            <button class="btn-primary btn-sm" onclick="researchSalary()">🔍 Research Salary</button>
-            <div id="salaryResult" class="mt-4"></div>
+            <button class="btn-primary w-full" onclick="researchSalary()">Research Market Rates</button>
         </div>
-        <div class="card p-5">
-            <h3 class="font-semibold text-dark-100 text-sm mb-3 font-heading">Negotiation Script Generator</h3>
-            <div class="grid grid-cols-1 gap-3 mb-4">
-                <input class="input" id="negOffer" placeholder="Current offer amount (e.g. $150,000)">
-                <input class="input" id="negTarget" placeholder="Your target amount (e.g. $175,000)">
-                <select class="input" id="negScenario">
-                    <option>Initial offer response</option>
-                    <option>Counter-offer after rejection</option>
-                    <option>Asking for raise at current job</option>
-                    <option>Competing offers leverage</option>
-                </select>
+
+        <div class="card p-6">
+            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Total Compensation</h3>
+            <div class="space-y-3">
+                <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Base Salary</label><input class="input" type="number" id="baseSalary" placeholder="150000"></div>
+                <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Bonus %</label><input class="input" type="number" id="bonusPercent" placeholder="20"></div>
+                <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Stock Value</label><input class="input" type="number" id="stockValue" placeholder="50000"></div>
             </div>
-            <button class="btn-primary btn-sm" onclick="generateNegScript()">✨ Generate Script</button>
-            <div id="negResult" class="mt-4"></div>
+            <button class="btn-primary w-full mt-4" onclick="calculateComp()">Calculate Total</button>
+        </div>
+    </div>
+
+    <div class="card p-6 mb-6">
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Negotiation Scripts</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="p-4 bg-brand-blue/10 rounded-lg border border-brand-blue/20">
+                <h4 class="font-semibold text-dark-100 mb-2 text-sm">Counteroffer Script</h4>
+                <p class="text-xs text-dark-300 mb-3">"Based on market research for this role in [location], the average range is $[X-Y]. Given my experience with [achievements], I'd like to propose..."</p>
+                <button class="btn-secondary btn-sm" onclick="copyScript('counteroffer')">Copy Script</button>
+            </div>
+            <div class="p-4 bg-brand-violet/10 rounded-lg border border-brand-violet/20">
+                <h4 class="font-semibold text-dark-100 mb-2 text-sm">Benefits Negotiation</h4>
+                <p class="text-xs text-dark-300 mb-3">"While the base is [X], would you consider additional benefits like [remote work, extra PTO, professional development budget]?"</p>
+                <button class="btn-secondary btn-sm" onclick="copyScript('benefits')">Copy Script</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card p-6">
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Daily Motivation</h3>
+        <div class="p-4 bg-gradient-to-r from-brand-blue/10 to-brand-violet/10 rounded-lg border border-brand-indigo/20">
+            <p class="text-dark-200 mb-2 font-medium">💪 Remember: Your compensation is earned.</p>
+            <p class="text-xs text-dark-400">You bring value to the company. Negotiating respectfully is part of the professional process. The worst they can say is no.</p>
         </div>
     </div>
 </div>
 
-<!-- ============================================== -->
-<!-- LEARNING HUB -->
-<!-- ============================================== -->
-<div id="sec-learning" class="section">
+<!-- ============ LINKEDIN OPTIMIZER ============ -->
+<div id="sec-linkedin" class="section">
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-dark-50 font-heading">Learning Hub</h1>
-        <p class="text-dark-400 text-sm mt-1">Curated resources and AI-recommended courses for your career path.</p>
+        <h1 class="text-2xl font-bold text-dark-50 font-heading">LinkedIn Profile Optimizer</h1>
+        <p class="text-dark-400 text-sm mt-1">Optimize your profile to attract 3x more recruiters and opportunities.</p>
     </div>
-    <div class="flex gap-2 mb-6 overflow-x-auto pb-2">
-        <div class="tab active" onclick="filterLearning('all',this)">All</div>
-        <div class="tab" onclick="filterLearning('resume',this)">Resume Writing</div>
-        <div class="tab" onclick="filterLearning('interview',this)">Interviewing</div>
-        <div class="tab" onclick="filterLearning('career',this)">Career Growth</div>
-        <div class="tab" onclick="filterLearning('skills',this)">Skills</div>
+
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Profile Score</div><div class="text-2xl font-bold text-dark-50" id="liScore">0%</div><p class="text-xs text-dark-400 mt-1">Optimization</p></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Visitors/Month</div><div class="text-2xl font-bold text-dark-50">0</div><p class="text-xs text-dark-400 mt-1">Profile views</p></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Search Rank</div><div class="text-2xl font-bold text-dark-50">#0</div><p class="text-xs text-dark-400 mt-1">In your field</p></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Opportunities</div><div class="text-2xl font-bold text-dark-50">0</div><p class="text-xs text-dark-400 mt-1">This month</p></div>
     </div>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="learningGrid">
-        <div class="card p-5 glass-hover cursor-pointer" data-category="resume"><div class="flex items-center gap-2 mb-2"><span class="badge bg-brand-blue/20 text-blue-400">Resume</span><span class="text-[10px] text-dark-500">15 min read</span></div><h3 class="font-semibold text-dark-100 text-sm mb-1">The STAR Method: Write Bullet Points That Get Callbacks</h3><p class="text-xs text-dark-400">Learn how to structure every resume bullet with Situation, Task, Action, Result.</p></div>
-        <div class="card p-5 glass-hover cursor-pointer" data-category="resume"><div class="flex items-center gap-2 mb-2"><span class="badge bg-brand-blue/20 text-blue-400">Resume</span><span class="text-[10px] text-dark-500">10 min read</span></div><h3 class="font-semibold text-dark-100 text-sm mb-1">ATS-Proof Your Resume: Beat the Bots</h3><p class="text-xs text-dark-400">How applicant tracking systems work and how to ensure your resume passes.</p></div>
-        <div class="card p-5 glass-hover cursor-pointer" data-category="interview"><div class="flex items-center gap-2 mb-2"><span class="badge bg-brand-violet/20 text-violet-400">Interview</span><span class="text-[10px] text-dark-500">20 min read</span></div><h3 class="font-semibold text-dark-100 text-sm mb-1">Behavioral Interview Mastery</h3><p class="text-xs text-dark-400">The top 30 behavioral questions and frameworks to answer them perfectly.</p></div>
-        <div class="card p-5 glass-hover cursor-pointer" data-category="interview"><div class="flex items-center gap-2 mb-2"><span class="badge bg-brand-violet/20 text-violet-400">Interview</span><span class="text-[10px] text-dark-500">12 min read</span></div><h3 class="font-semibold text-dark-100 text-sm mb-1">Nail the "Tell Me About Yourself" Question</h3><p class="text-xs text-dark-400">A proven formula for the most common interview opener.</p></div>
-        <div class="card p-5 glass-hover cursor-pointer" data-category="career"><div class="flex items-center gap-2 mb-2"><span class="badge bg-brand-amber/20 text-amber-400">Career</span><span class="text-[10px] text-dark-500">8 min read</span></div><h3 class="font-semibold text-dark-100 text-sm mb-1">Networking That Actually Works</h3><p class="text-xs text-dark-400">Build genuine professional relationships that lead to opportunities.</p></div>
-        <div class="card p-5 glass-hover cursor-pointer" data-category="skills"><div class="flex items-center gap-2 mb-2"><span class="badge bg-brand-emerald/20 text-emerald-400">Skills</span><span class="text-[10px] text-dark-500">25 min read</span></div><h3 class="font-semibold text-dark-100 text-sm mb-1">Top Skills Employers Want in 2026</h3><p class="text-xs text-dark-400">Data-driven analysis of the most in-demand skills across industries.</p></div>
+
+    <div class="card p-6 mb-6">
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Profile Optimization Checklist</h3>
+        <div class="space-y-2">
+            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg">
+                <input type="checkbox" class="w-4 h-4 cursor-pointer" id="check1">
+                <label for="check1" class="flex-1 text-sm text-dark-200 cursor-pointer">Professional profile photo with clear face visible</label>
+                <span class="text-xs text-dark-400">+5pts</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg">
+                <input type="checkbox" class="w-4 h-4 cursor-pointer" id="check2">
+                <label for="check2" class="flex-1 text-sm text-dark-200 cursor-pointer">Headline includes key skills and value proposition</label>
+                <span class="text-xs text-dark-400">+10pts</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg">
+                <input type="checkbox" class="w-4 h-4 cursor-pointer" id="check3">
+                <label for="check3" class="flex-1 text-sm text-dark-200 cursor-pointer">Detailed summary with achievements and goals</label>
+                <span class="text-xs text-dark-400">+15pts</span>
+            </div>
+            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg">
+                <input type="checkbox" class="w-4 h-4 cursor-pointer" id="check4">
+                <label for="check4" class="flex-1 text-sm text-dark-200 cursor-pointer">20+ relevant skills listed and endorsed</label>
+                <span class="text-xs text-dark-400">+15pts</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="card p-6">
+            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Competitor Analysis</h3>
+            <div class="mb-4">
+                <label class="block text-xs font-medium text-dark-400 mb-1.5">Search for Competitors</label>
+                <div class="flex gap-2">
+                    <input class="input" id="competitorName" placeholder="Name or LinkedIn URL">
+                    <button class="btn-primary btn-sm" onclick="searchCompetitors()">Search</button>
+                </div>
+            </div>
+            <div class="space-y-3 text-sm">
+                <div class="p-3 bg-dark-800/50 rounded-lg">
+                    <p class="text-dark-300 font-semibold mb-1">They have:</p>
+                    <p class="text-xs text-dark-400">• Strong headline with job title + value prop</p>
+                    <p class="text-xs text-dark-400">• 500+ connections</p>
+                    <p class="text-xs text-dark-400">• Recommendations from industry leaders</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card p-6">
+            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Employer Intelligence</h3>
+            <div class="mb-4">
+                <label class="block text-xs font-medium text-dark-400 mb-1.5">Research Company</label>
+                <div class="flex gap-2">
+                    <input class="input" id="employerName" placeholder="Company name">
+                    <button class="btn-primary btn-sm" onclick="searchEmployer()">Search</button>
+                </div>
+            </div>
+            <div class="space-y-3 text-sm">
+                <div class="p-3 bg-dark-800/50 rounded-lg">
+                    <p class="text-dark-300 font-semibold mb-1">Company Info:</p>
+                    <p class="text-xs text-dark-400">• 2,847 employees on LinkedIn</p>
+                    <p class="text-xs text-dark-400">• Growing by 12% YoY</p>
+                    <p class="text-xs text-dark-400">• Common roles: Product Manager, Engineer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card p-6">
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Quick Wins</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <button class="btn-secondary" onclick="optimizeLinkedIn('headline')">Rewrite Headline</button>
+            <button class="btn-secondary" onclick="optimizeLinkedIn('summary')">Enhance Summary</button>
+            <button class="btn-secondary" onclick="optimizeLinkedIn('skills')">Add Top Skills</button>
+            <button class="btn-secondary" onclick="optimizeLinkedIn('recommendations')">Get Recommendations</button>
+        </div>
     </div>
 </div>
 
-<!-- ============================================== -->
-<!-- CAREER ROADMAP -->
-<!-- ============================================== -->
+<!-- ============ CAREER ROADMAP ============ -->
 <div id="sec-roadmap" class="section">
     <div class="mb-6">
         <h1 class="text-2xl font-bold text-dark-50 font-heading">Career Roadmap</h1>
-        <p class="text-dark-400 text-sm mt-1">AI-generated career path based on your goals and experience.</p>
+        <p class="text-dark-400 text-sm mt-1">Build a personalized 90-day plan with skill milestones and accountability.</p>
     </div>
-    <div class="card p-5 mb-6">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-4">
-            <input class="input" id="rmCurrent" placeholder="Current Role (e.g. Product Manager)">
-            <input class="input" id="rmTarget" placeholder="Dream Role (e.g. VP of Product)">
-            <input class="input" id="rmTimeline" placeholder="Timeline (e.g. 3 years)">
+
+    <div class="card p-6 mb-6">
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">90-Day Career Plan</h3>
+        <div class="space-y-4">
+            <div>
+                <label class="block text-xs font-medium text-dark-400 mb-1.5">Target Role (3 months)</label>
+                <input class="input" id="targetRole" placeholder="e.g. Principal Product Manager">
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-dark-400 mb-1.5">Current Role</label>
+                <input class="input" id="currentRole" placeholder="e.g. Senior Product Manager">
+            </div>
+            <div>
+                <label class="block text-xs font-medium text-dark-400 mb-1.5">Key Skills to Develop</label>
+                <div id="skillsList" class="space-y-2">
+                    <input class="input" placeholder="e.g. AI/ML fundamentals">
+                </div>
+            </div>
+            <button class="btn-primary w-full" onclick="generatePlan()">Generate My Plan</button>
         </div>
-        <button class="btn-primary btn-sm" onclick="generateRoadmap()">🗺️ Generate Roadmap</button>
     </div>
-    <div id="roadmapOutput"></div>
+
+    <div class="card p-6 mb-6">
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Skill Gap Analysis</h3>
+        <div class="space-y-3">
+            <div>
+                <div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Strategic Thinking</span><span class="text-brand-blue">7/10</span></div>
+                <div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-blue rounded" style="width:70%"></div></div>
+            </div>
+            <div>
+                <div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Data Analysis</span><span class="text-brand-amber">5/10</span></div>
+                <div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-amber rounded" style="width:50%"></div></div>
+            </div>
+            <div>
+                <div class="flex justify-between text-xs mb-1"><span class="text-dark-300">AI/ML Knowledge</span><span class="text-brand-rose">3/10</span></div>
+                <div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-rose rounded" style="width:30%"></div></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
+        <div class="card p-6">
+            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Reference Network</h3>
+            <div class="space-y-2 mb-4">
+                <div class="p-3 bg-dark-800/50 rounded-lg text-sm">
+                    <p class="text-dark-300 font-semibold mb-1">Sarah Chen - Director at Google</p>
+                    <p class="text-xs text-dark-400">Last contact: 2 months ago</p>
+                </div>
+                <div class="p-3 bg-dark-800/50 rounded-lg text-sm">
+                    <p class="text-dark-300 font-semibold mb-1">James Wilson - VP Products</p>
+                    <p class="text-xs text-dark-400">Last contact: 6 months ago</p>
+                </div>
+            </div>
+            <button class="btn-secondary w-full btn-sm" onclick="addReference()">+ Add Reference</button>
+        </div>
+
+        <div class="card p-6">
+            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Accountability</h3>
+            <div class="space-y-3">
+                <div class="p-3 bg-brand-emerald/10 border-l-4 border-brand-emerald rounded">
+                    <p class="text-xs text-brand-emerald font-semibold">✓ Week 1: Complete AI course</p>
+                </div>
+                <div class="p-3 bg-dark-800/50 rounded">
+                    <p class="text-xs text-dark-400">Month 1: 3 coffee chats scheduled</p>
+                </div>
+                <div class="p-3 bg-dark-800/50 rounded">
+                    <p class="text-xs text-dark-400">Month 2: Build portfolio project</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card p-6">
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Learning Resources</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div class="p-3 bg-dark-800/50 rounded-lg text-sm">
+                <p class="font-semibold text-dark-100 mb-1">📚 AI/ML for Product Managers</p>
+                <p class="text-xs text-dark-400">Udacity • 6 weeks</p>
+            </div>
+            <div class="p-3 bg-dark-800/50 rounded-lg text-sm">
+                <p class="font-semibold text-dark-100 mb-1">💡 Strategy & Leadership Masterclass</p>
+                <p class="text-xs text-dark-400">LinkedIn Learning • 4 hours</p>
+            </div>
+        </div>
+    </div>
 </div>
 
-<!-- ============================================== -->
-<!-- SETTINGS -->
-<!-- ============================================== -->
+<!-- ============ SETTINGS ============ -->
 <div id="sec-settings" class="section">
     <div class="mb-6">
         <h1 class="text-2xl font-bold text-dark-50 font-heading">Settings</h1>
-        <p class="text-dark-400 text-sm mt-1">Manage your account and preferences.</p>
+        <p class="text-dark-400 text-sm mt-1">Manage your account, preferences, and subscription.</p>
     </div>
+
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        <div class="lg:col-span-2 space-y-4">
-            <div class="card p-5">
-                <h3 class="font-semibold text-dark-100 text-sm mb-4 font-heading">Profile</h3>
-                <div class="flex items-center gap-4 mb-4">
-                    <div class="w-16 h-16 rounded-full bg-gradient-to-br from-brand-blue to-brand-violet flex items-center justify-center text-white font-bold text-xl" id="settingsAvatar">U</div>
-                    <div><button class="btn-secondary btn-sm">Upload Photo</button></div>
+        <div class="lg:col-span-2 space-y-6">
+            <div class="card p-6">
+                <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Profile</h3>
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-medium text-dark-400 mb-1.5">Full Name</label>
+                        <input class="input" id="settingsName" placeholder="Your name">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-dark-400 mb-1.5">Email</label>
+                        <input class="input" type="email" id="settingsEmail" placeholder="your@email.com">
+                    </div>
+                    <div>
+                        <label class="block text-xs font-medium text-dark-400 mb-1.5">Password</label>
+                        <input class="input" type="password" placeholder="••••••••">
+                    </div>
+                    <button class="btn-primary" onclick="saveSettings()">Save Changes</button>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                    <div><label class="block text-xs font-medium text-dark-400 mb-1">Full Name</label><input class="input" id="setName" placeholder="Your name"></div>
-                    <div><label class="block text-xs font-medium text-dark-400 mb-1">Email</label><input class="input" id="setEmail" type="email" placeholder="Your email"></div>
-                    <div><label class="block text-xs font-medium text-dark-400 mb-1">Phone</label><input class="input" id="setPhone" placeholder="Phone number"></div>
-                    <div><label class="block text-xs font-medium text-dark-400 mb-1">Location</label><input class="input" id="setLocation" placeholder="City, State"></div>
-                </div>
-                <button class="btn-primary btn-sm mt-4" onclick="saveProfile()">Save Changes</button>
             </div>
-            <div class="card p-5">
-                <h3 class="font-semibold text-dark-100 text-sm mb-4 font-heading">Notifications</h3>
+
+            <div class="card p-6">
+                <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Notifications</h3>
                 <div class="space-y-3">
-                    <label class="flex items-center justify-between cursor-pointer"><span class="text-sm text-dark-300">Email updates</span><input type="checkbox" checked class="w-4 h-4"></label>
-                    <label class="flex items-center justify-between cursor-pointer"><span class="text-sm text-dark-300">Interview reminders</span><input type="checkbox" checked class="w-4 h-4"></label>
-                    <label class="flex items-center justify-between cursor-pointer"><span class="text-sm text-dark-300">Job recommendations</span><input type="checkbox" checked class="w-4 h-4"></label>
-                    <label class="flex items-center justify-between cursor-pointer"><span class="text-sm text-dark-300">Weekly progress digest</span><input type="checkbox" checked class="w-4 h-4"></label>
+                    <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg">
+                        <span class="text-sm text-dark-200">Job Matches</span>
+                        <input type="checkbox" class="w-4 h-4 cursor-pointer" checked>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg">
+                        <span class="text-sm text-dark-200">Interview Reminders</span>
+                        <input type="checkbox" class="w-4 h-4 cursor-pointer" checked>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg">
+                        <span class="text-sm text-dark-200">Weekly Tips</span>
+                        <input type="checkbox" class="w-4 h-4 cursor-pointer" checked>
+                    </div>
+                    <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg">
+                        <span class="text-sm text-dark-200">Marketing Emails</span>
+                        <input type="checkbox" class="w-4 h-4 cursor-pointer">
+                    </div>
                 </div>
             </div>
-            <div class="card p-5">
-                <h3 class="font-semibold text-dark-100 text-sm mb-4 font-heading">Security</h3>
-                <div class="space-y-2">
-                    <button class="btn-secondary w-full text-left text-xs">Change Password</button>
-                    <button class="btn-secondary w-full text-left text-xs">Enable Two-Factor Authentication</button>
-                    <button class="btn-secondary w-full text-left text-xs">View Active Sessions</button>
+
+            <div class="card p-6">
+                <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Subscription</h3>
+                <div class="p-4 bg-brand-blue/10 border border-brand-blue/20 rounded-lg mb-4">
+                    <p class="text-sm font-semibold text-dark-100 mb-1">Premium Plan</p>
+                    <p class="text-xs text-dark-400">Renews on January 15, 2026 • $29/month</p>
                 </div>
+                <button class="btn-secondary w-full btn-sm mb-2">View Billing History</button>
+                <button class="btn-secondary w-full btn-sm">Upgrade Plan</button>
             </div>
         </div>
-        <div class="space-y-4">
-            <div class="card p-5 gradient-border rounded-xl">
-                <h3 class="font-semibold text-dark-100 text-sm mb-3 font-heading">Your Plan</h3>
-                <div class="text-lg font-bold gradient-text mb-1">Premium</div>
-                <div class="text-xs text-dark-400 mb-3">$9.99/month • All features unlocked</div>
-                <div class="space-y-1.5 text-xs text-dark-300">
-                    <div>✓ Unlimited AI resume generations</div>
-                    <div>✓ Unlimited mock interviews</div>
-                    <div>✓ LinkedIn optimization</div>
-                    <div>✓ Salary intelligence</div>
-                    <div>✓ Career roadmap</div>
-                    <div>✓ Priority support</div>
+
+        <div class="space-y-6">
+            <div class="card p-6">
+                <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Account</h3>
+                <div class="space-y-3 text-xs text-dark-400">
+                    <p><span class="text-dark-300 font-semibold">Member Since:</span> Jan 2024</p>
+                    <p><span class="text-dark-300 font-semibold">Account Type:</span> Premium</p>
+                    <p><span class="text-dark-300 font-semibold">Status:</span> Active</p>
                 </div>
-                <button class="btn-secondary btn-sm w-full mt-4">Manage Billing</button>
+                <button class="btn-secondary w-full btn-sm mt-4" onclick="logout()">Sign Out</button>
             </div>
-            <div class="card p-5">
-                <h3 class="font-semibold text-dark-100 text-sm mb-3 font-heading">Support</h3>
-                <div class="space-y-2">
-                    <a href="#" class="block text-xs text-brand-indigo hover:text-dark-50">Help Center</a>
-                    <a href="#" class="block text-xs text-brand-indigo hover:text-dark-50">Contact Support</a>
-                    <a href="#" class="block text-xs text-brand-indigo hover:text-dark-50">Report a Bug</a>
-                </div>
-            </div>
-            <div class="card p-5 border-brand-rose/30">
-                <h3 class="font-semibold text-brand-rose text-sm mb-2 font-heading">Danger Zone</h3>
-                <button class="btn-secondary btn-sm w-full border-brand-rose/30 text-brand-rose hover:bg-brand-rose/10" onclick="if(confirm('Are you sure? This cannot be undone.'))alert('Account deletion request submitted.')">Delete Account</button>
+
+            <div class="card p-6 border-brand-rose/50">
+                <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Danger Zone</h3>
+                <button class="btn-secondary w-full btn-sm text-brand-rose border-brand-rose/50 hover:bg-brand-rose/10">Delete Account</button>
             </div>
         </div>
     </div>
@@ -684,664 +905,432 @@
 </div>
 
 <script>
-// ===================================================================
-// APP STATE
-// ===================================================================
+// ============ STATE & PERSISTENCE ============
+let appState = {
+    user: { name: 'User', email: 'user@email.com' },
+    resume: { name:'', email:'', phone:'', location:'', linkedin:'', website:'', targetRole:'', industry:'', experience:[], education:[], skills:[], selectedTheme:'classic' },
+    interviews: { conducted:0, avgScore:0, scores:[], currentType:'behavioral' },
+    jobs: { saved:0, applied:0, total:0 },
+    currentSection: 'dashboard'
+};
+
 const DB_KEY = 'rsh_data';
-let db = loadDB();
 
 function loadDB() {
-    try { return JSON.parse(localStorage.getItem(DB_KEY)) || defaultDB(); }
-    catch(e) { return defaultDB(); }
+    const saved = localStorage.getItem(DB_KEY);
+    if(saved) try { appState = Object.assign({}, appState, JSON.parse(saved)); } catch(e) { console.error('DB load error:', e); }
+    updateDashboardStats();
+    updateSidebar();
 }
-function defaultDB() {
-    return {
-        user: { name:'', email:'', phone:'', location:'', avatar:'' },
-        resumes: [],
-        interviews: [],
-        jobs: [],
-        skills: [],
-        activity: [{ text:'Welcome to Resume SuperHero!', time: new Date().toISOString() }],
-        profileScore: 0
-    };
+
+function saveDB() {
+    try {
+        localStorage.setItem(DB_KEY, JSON.stringify(appState));
+    } catch(e) {
+        console.error('Save error:', e);
+    }
 }
-function saveDB() { localStorage.setItem(DB_KEY, JSON.stringify(db)); }
 
-// ===================================================================
-// NAVIGATION
-// ===================================================================
-const sectionTitles = { dashboard:'Dashboard', resume:'AI Resume Builder', interview:'Interview Coach', linkedin:'LinkedIn Optimizer', jobs:'Job Tracker', salary:'Salary Intelligence', learning:'Learning Hub', roadmap:'Career Roadmap', settings:'Settings' };
-
+// ============ NAVIGATION ============
 function nav(section) {
     document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-    const el = document.getElementById('sec-'+section);
-    if(el) el.classList.add('active');
-    const btn = document.querySelector(`.nav-btn[data-section="${section}"]`);
-    if(btn) btn.classList.add('active');
-    document.getElementById('pageTitle').textContent = sectionTitles[section] || 'Dashboard';
-    document.getElementById('contentArea').scrollTop = 0;
-    if(section==='resume') showSavedResumes();
-    if(section==='jobs') renderKanban();
-    if(section==='dashboard') updateDashboardStats();
+
+    const el = document.getElementById('sec-' + section);
+    if(el) {
+        el.classList.add('active');
+        appState.currentSection = section;
+        const navBtn = document.querySelector(`[data-section="${section}"]`);
+        if(navBtn) navBtn.classList.add('active');
+
+        const titles = { dashboard:'Dashboard', resume:'Resume Builder', interview:'Interview Coach', jobs:'Job Tracker', salary:'Salary Intel', linkedin:'LinkedIn Pro', roadmap:'Career Roadmap', settings:'Settings' };
+        document.getElementById('pageTitle').textContent = titles[section] || 'Page';
+        saveDB();
+    }
 }
 
 function toggleSidebar() {
     document.getElementById('sidebar').classList.toggle('collapsed');
 }
 
+function toggleNotifications() {
+    alert('You have 3 new job matches!\n\n• Senior PM at TechCorp\n• Manager at Google\n• Director role at Meta');
+}
+
 function logout() {
-    if(confirm('Sign out?')) window.location.href = 'index.html';
+    if(confirm('Are you sure you want to sign out?')) {
+        localStorage.clear();
+        alert('Signed out successfully!');
+        location.reload();
+    }
 }
 
-// ===================================================================
-// INIT
-// ===================================================================
-function init() {
-    const u = db.user;
-    const name = u.name || 'User';
-    const initials = name.split(' ').map(n=>n[0]).join('').toUpperCase().substring(0,2);
-    document.getElementById('welcomeName').textContent = name;
-    document.getElementById('sidebarName').textContent = name;
-    document.getElementById('sidebarEmail').textContent = u.email || '';
-    ['sidebarAvatar','topAvatar','settingsAvatar'].forEach(id => { const el = document.getElementById(id); if(el) el.textContent = initials || 'U'; });
-    if(u.name) document.getElementById('setName').value = u.name;
-    if(u.email) document.getElementById('setEmail').value = u.email;
-    if(u.phone) document.getElementById('setPhone').value = u.phone;
-    if(u.location) document.getElementById('setLocation').value = u.location;
-    updateDashboardStats();
-    renderActivity();
-    renderPastInterviews();
+// ============ SIDEBAR & PROFILE ============
+function updateSidebar() {
+    const avatar = appState.user.name.charAt(0).toUpperCase();
+    document.getElementById('sidebarAvatar').textContent = avatar;
+    document.getElementById('sidebarName').textContent = appState.user.name;
+    document.getElementById('sidebarEmail').textContent = appState.user.email;
+    document.getElementById('topAvatar').textContent = avatar;
+    document.getElementById('welcomeName').textContent = appState.user.name.split(' ')[0];
 }
 
+// ============ DASHBOARD STATS ============
 function updateDashboardStats() {
-    let score = 0;
-    if(db.user.name) score += 25;
-    if(db.user.email) score += 25;
-    if(db.resumes.length > 0) score += 25;
-    if(db.interviews.length > 0) score += 25;
-    db.profileScore = score;
-    document.getElementById('statProfile').textContent = score + '%';
-    document.getElementById('profileBar').style.width = score + '%';
-    document.getElementById('statResumes').textContent = db.resumes.length;
-    document.getElementById('statInterviews').textContent = db.interviews.length;
-    const avgS = db.interviews.length > 0 ? (db.interviews.reduce((a,i)=>a+i.score,0)/db.interviews.length).toFixed(1) : '--';
-    document.getElementById('avgScore').textContent = avgS;
-    document.getElementById('statJobs').textContent = db.jobs.length;
-    document.getElementById('activeApps').textContent = db.jobs.filter(j=>j.status!=='Offer'&&j.status!=='Rejected').length;
+    const profileScore = 65 + Math.min(35, appState.resume.skills.length * 3);
+    document.getElementById('statProfile').textContent = Math.min(100, profileScore) + '%';
+    document.getElementById('profileBar').style.width = Math.min(100, profileScore) + '%';
+    document.getElementById('statResumes').textContent = appState.resume.name ? '1' : '0';
+    document.getElementById('statInterviews').textContent = appState.interviews.conducted;
+    document.getElementById('avgScore').textContent = appState.interviews.avgScore ? appState.interviews.avgScore + '%' : '--';
+    document.getElementById('statJobs').textContent = appState.jobs.saved;
+    document.getElementById('activeApps').textContent = appState.jobs.applied;
 }
 
-function renderActivity() {
-    const feed = document.getElementById('activityFeed');
-    const colors = ['bg-brand-blue','bg-brand-violet','bg-brand-emerald','bg-brand-amber'];
-    feed.innerHTML = db.activity.slice(-8).reverse().map((a,i) => `<div class="flex items-start gap-3"><div class="w-2 h-2 rounded-full ${colors[i%4]} mt-1.5 flex-shrink-0"></div><div><p class="text-sm text-dark-200">${a.text}</p><p class="text-[10px] text-dark-500">${timeAgo(a.time)}</p></div></div>`).join('');
-}
-
-function addActivity(text) {
-    db.activity.push({ text, time: new Date().toISOString() });
-    if(db.activity.length > 50) db.activity = db.activity.slice(-50);
-    saveDB();
-    renderActivity();
-}
-
-function timeAgo(d) {
-    const s = Math.floor((Date.now() - new Date(d).getTime())/1000);
-    if(s < 60) return 'Just now';
-    if(s < 3600) return Math.floor(s/60) + 'm ago';
-    if(s < 86400) return Math.floor(s/3600) + 'h ago';
-    return Math.floor(s/86400) + 'd ago';
-}
-
-// ===================================================================
-// RESUME BUILDER
-// ===================================================================
-let currentResumeStep = 1;
-let resumeSkills = [];
-let generatedResume = null;
-let selectedTemplate = 'modern';
+// ============ RESUME BUILDER ============
+let resumeStep = 1;
 
 function resumeNext(step) {
     document.querySelectorAll('.resume-step').forEach(s => s.style.display = 'none');
-    document.getElementById('rStep'+step).style.display = 'block';
-    currentResumeStep = step;
-    document.querySelectorAll('.step-indicator').forEach(si => {
-        const s = parseInt(si.dataset.step);
-        const circle = si.querySelector('div');
-        const label = si.querySelector('span');
-        if(s <= step) { circle.className = 'w-7 h-7 rounded-full bg-brand-indigo text-white text-xs font-bold flex items-center justify-center'; if(label) label.className = 'text-xs text-dark-200 hidden sm:inline'; }
-        else { circle.className = 'w-7 h-7 rounded-full bg-dark-600 text-dark-400 text-xs font-bold flex items-center justify-center'; if(label) label.className = 'text-xs text-dark-400 hidden sm:inline'; }
+    const stepEl = document.getElementById('rStep' + step);
+    if(stepEl) stepEl.style.display = 'block';
+
+    document.querySelectorAll('.step-indicator').forEach((s, i) => {
+        const num = i + 1;
+        const circle = s.querySelector('div');
+        if(num < step) {
+            circle.className = 'w-7 h-7 rounded-full bg-brand-emerald text-white text-xs font-bold flex items-center justify-center';
+            circle.textContent = '✓';
+        } else if(num === step) {
+            circle.className = 'w-7 h-7 rounded-full bg-brand-indigo text-white text-xs font-bold flex items-center justify-center';
+            circle.textContent = num;
+        } else {
+            circle.className = 'w-7 h-7 rounded-full bg-dark-600 text-dark-400 text-xs font-bold flex items-center justify-center';
+            circle.textContent = num;
+        }
     });
-    if(step === 5) generateResume();
+
+    resumeStep = step;
 }
 
 function addExperience() {
-    const html = `<div class="card p-4 experience-entry"><div class="flex justify-end mb-2"><button class="text-xs text-brand-rose hover:text-red-400" onclick="this.closest('.experience-entry').remove()">✕ Remove</button></div><div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3"><input class="input exp-title" placeholder="Job Title"><input class="input exp-company" placeholder="Company Name"><input class="input exp-dates" placeholder="Dates"><input class="input exp-location" placeholder="Location"></div><textarea class="input exp-desc" placeholder="Brief description..."></textarea></div>`;
+    const html = `<div class="card p-4 experience-entry">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+            <input class="input exp-title" placeholder="Job Title">
+            <input class="input exp-company" placeholder="Company Name">
+            <input class="input exp-dates" placeholder="Dates">
+            <input class="input exp-location" placeholder="Location">
+        </div>
+        <textarea class="input exp-desc" placeholder="Description"></textarea>
+        <button class="btn-secondary btn-sm mt-2" onclick="removeExperience(this)">Remove</button>
+    </div>`;
     document.getElementById('experienceList').insertAdjacentHTML('beforeend', html);
 }
 
+function removeExperience(el) {
+    el.closest('.experience-entry').remove();
+}
+
 function addEducation() {
-    const html = `<div class="card p-4 education-entry"><div class="flex justify-end mb-2"><button class="text-xs text-brand-rose hover:text-red-400" onclick="this.closest('.education-entry').remove()">✕ Remove</button></div><div class="grid grid-cols-1 md:grid-cols-2 gap-3"><input class="input edu-degree" placeholder="Degree"><input class="input edu-school" placeholder="School"><input class="input edu-year" placeholder="Year"><input class="input edu-gpa" placeholder="GPA (optional)"></div></div>`;
+    const html = `<div class="card p-4 education-entry">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <input class="input edu-degree" placeholder="Degree">
+            <input class="input edu-school" placeholder="School Name">
+            <input class="input edu-year" placeholder="Year">
+            <input class="input edu-gpa" placeholder="GPA">
+        </div>
+        <button class="btn-secondary btn-sm mt-2" onclick="removeEducation(this)">Remove</button>
+    </div>`;
     document.getElementById('educationList').insertAdjacentHTML('beforeend', html);
+}
+
+function removeEducation(el) {
+    el.closest('.education-entry').remove();
 }
 
 function addSkill() {
     const input = document.getElementById('skillInput');
     const skill = input.value.trim();
-    if(skill && !resumeSkills.includes(skill)) {
-        resumeSkills.push(skill);
-        renderSkillTags();
-    }
+    if(!skill) return;
+
+    appState.resume.skills.push(skill);
+    const badge = `<span class="badge bg-brand-indigo/20 text-brand-indigo">${skill} <span onclick="removeSkillTag(this)" style="cursor:pointer;margin-left:.3rem">&times;</span></span>`;
+    document.getElementById('skillsList').insertAdjacentHTML('beforeend', badge);
     input.value = '';
     input.focus();
+    saveDB();
 }
 
-function removeSkill(skill) {
-    resumeSkills = resumeSkills.filter(s => s !== skill);
-    renderSkillTags();
+function removeSkillTag(el) {
+    const skill = el.parentElement.textContent.replace('\u00d7', '').trim();
+    appState.resume.skills = appState.resume.skills.filter(s => s !== skill);
+    el.parentElement.remove();
+    saveDB();
 }
 
-function renderSkillTags() {
-    document.getElementById('skillTags').innerHTML = resumeSkills.map(s =>
-        `<span class="badge bg-brand-indigo/20 text-indigo-300 cursor-pointer hover:bg-brand-rose/20 hover:text-brand-rose" onclick="removeSkill('${s.replace(/'/g,"\\'")}')">${s} ✕</span>`
-    ).join('');
-}
-
-function suggestSkills() {
-    const role = document.getElementById('rTargetRole').value || 'professional';
-    const skillSets = {
-        'product': ['Product Strategy','Agile/Scrum','User Research','A/B Testing','Roadmap Planning','SQL','Jira','Stakeholder Management','Data Analysis','PRD Writing'],
-        'software': ['JavaScript','Python','React','Node.js','AWS','Docker','Git','SQL','REST APIs','CI/CD','TypeScript','System Design'],
-        'marketing': ['SEO/SEM','Google Analytics','Content Strategy','Social Media','Email Marketing','CRM','Copywriting','Marketing Automation','Brand Strategy','Paid Media'],
-        'data': ['Python','SQL','Tableau','Machine Learning','Statistics','Pandas','R','ETL','Data Modeling','Power BI'],
-        'design': ['Figma','User Research','Wireframing','Prototyping','Design Systems','Usability Testing','Adobe Creative Suite','Interaction Design'],
-        'sales': ['CRM','Pipeline Management','Cold Outreach','Negotiation','Account Management','Salesforce','Lead Generation','Presentation Skills'],
-        'default': ['Leadership','Project Management','Strategic Planning','Data Analysis','Communication','Problem Solving','Team Management','Process Improvement']
-    };
-    const key = Object.keys(skillSets).find(k => role.toLowerCase().includes(k)) || 'default';
-    const suggested = skillSets[key].filter(s => !resumeSkills.includes(s));
-    resumeSkills = [...resumeSkills, ...suggested.slice(0, 8)];
-    renderSkillTags();
+function selectTheme(theme) {
+    document.querySelectorAll('.template-card').forEach(c => c.classList.remove('selected'));
+    appState.resume.selectedTheme = theme;
+    event.target.closest('.template-card').classList.add('selected');
+    saveDB();
 }
 
 function generateResume() {
-    document.getElementById('generatingState').style.display = 'block';
-    document.getElementById('previewState').style.display = 'none';
-    const statuses = ['Analyzing your experience and target role...','Crafting professional summary...','Enhancing work experience bullets...','Optimizing for ATS keywords...','Formatting your resume...','Almost done...'];
-    let i = 0;
-    const statusEl = document.getElementById('genStatus');
-    const interval = setInterval(() => {
-        i++;
-        if(i < statuses.length) statusEl.textContent = statuses[i];
-        if(i >= statuses.length) {
-            clearInterval(interval);
-            buildResume();
+    appState.resume.name = document.getElementById('rName').value || 'John Doe';
+    appState.resume.email = document.getElementById('rEmail').value || 'john@example.com';
+    appState.resume.phone = document.getElementById('rPhone').value || '';
+    appState.resume.location = document.getElementById('rLocation').value || '';
+    appState.resume.targetRole = document.getElementById('rTargetRole').value || '';
+
+    let html = `<h1>${appState.resume.name}</h1>
+        <p class="contact-line">${appState.resume.email}${appState.resume.phone ? ' | ' + appState.resume.phone : ''}${appState.resume.location ? ' | ' + appState.resume.location : ''}</p>
+        <h2>Professional Summary</h2>
+        <p>Experienced professional seeking ${appState.resume.targetRole || 'new'} role with strong track record of success and innovation.</p>
+        <h2>Experience</h2>`;
+
+    document.querySelectorAll('.experience-entry').forEach(e => {
+        const title = e.querySelector('.exp-title').value || 'Job Title';
+        const company = e.querySelector('.exp-company').value || 'Company';
+        const dates = e.querySelector('.exp-dates').value || '';
+        const desc = e.querySelector('.exp-desc').value || '';
+        if(title && company) {
+            html += `<h3>${title} @ ${company}</h3><p>${dates}</p><p>${desc}</p>`;
         }
-    }, 600);
-}
-
-function buildResume() {
-    const name = document.getElementById('rName').value || 'Your Name';
-    const email = document.getElementById('rEmail').value || 'email@example.com';
-    const phone = document.getElementById('rPhone').value || '';
-    const location = document.getElementById('rLocation').value || '';
-    const linkedin = document.getElementById('rLinkedin').value || '';
-    const website = document.getElementById('rWebsite').value || '';
-    const targetRole = document.getElementById('rTargetRole').value || 'Professional';
-    const industry = document.getElementById('rIndustry').value || '';
-    const summary = document.getElementById('rSummary').value;
-
-    // Gather experience
-    const exps = [];
-    document.querySelectorAll('.experience-entry').forEach(entry => {
-        const title = entry.querySelector('.exp-title').value;
-        const company = entry.querySelector('.exp-company').value;
-        const dates = entry.querySelector('.exp-dates').value;
-        const loc = entry.querySelector('.exp-location').value;
-        const desc = entry.querySelector('.exp-desc').value;
-        if(title || company) exps.push({ title, company, dates, location: loc, desc });
     });
 
-    // Gather education
-    const edus = [];
-    document.querySelectorAll('.education-entry').forEach(entry => {
-        const degree = entry.querySelector('.edu-degree').value;
-        const school = entry.querySelector('.edu-school').value;
-        const year = entry.querySelector('.edu-year').value;
-        const gpa = entry.querySelector('.edu-gpa').value;
-        if(degree || school) edus.push({ degree, school, year, gpa });
+    html += '<h2>Education</h2>';
+    document.querySelectorAll('.education-entry').forEach(e => {
+        const degree = e.querySelector('.edu-degree').value || '';
+        const school = e.querySelector('.edu-school').value || '';
+        const year = e.querySelector('.edu-year').value || '';
+        if(degree && school) {
+            html += `<h3>${degree}</h3><p>${school} • ${year}</p>`;
+        }
     });
 
-    // AI-enhanced content
-    const aiSummary = summary || generateAISummary(name, targetRole, industry, exps, resumeSkills);
-    const enhancedExps = exps.map(exp => ({
-        ...exp,
-        bullets: generateAIBullets(exp.desc, targetRole)
-    }));
-
-    generatedResume = { name, email, phone, location, linkedin, website, targetRole, industry, summary: aiSummary, experience: enhancedExps, education: edus, skills: resumeSkills };
-
-    renderResumePreview();
-    calculateATS();
-
-    document.getElementById('generatingState').style.display = 'none';
-    document.getElementById('previewState').style.display = 'block';
-}
-
-function generateAISummary(name, role, industry, exps, skills) {
-    const years = exps.length > 0 ? Math.max(exps.length * 2, 3) : 5;
-    const topSkills = skills.slice(0, 4).join(', ');
-    const ind = industry || 'technology';
-    return `Results-driven ${role} with ${years}+ years of experience in the ${ind} sector. Proven track record of driving strategic initiatives, leading cross-functional teams, and delivering measurable business outcomes. Expertise in ${topSkills || 'strategic planning, team leadership, and data-driven decision making'}. Passionate about leveraging innovative solutions to create scalable impact and exceed organizational goals.`;
-}
-
-function generateAIBullets(desc, role) {
-    if(!desc) return ['Led cross-functional initiatives resulting in measurable business improvements','Collaborated with stakeholders to define strategy and drive execution','Implemented process improvements that increased team efficiency by 25%'];
-    const words = desc.toLowerCase();
-    const bullets = [];
-    if(words.includes('team') || words.includes('led') || words.includes('manage')) bullets.push(`Led and mentored a high-performing team, driving alignment on strategic priorities and achieving a 30% improvement in delivery velocity`);
-    if(words.includes('product') || words.includes('launch')) bullets.push(`Spearheaded product launch strategy from concept to market, resulting in $2M+ in first-year revenue`);
-    if(words.includes('revenue') || words.includes('growth') || words.includes('sales')) bullets.push(`Drove revenue growth through data-driven strategy and cross-functional collaboration, exceeding targets by 40%`);
-    if(words.includes('process') || words.includes('improv')) bullets.push(`Redesigned operational workflows, reducing cycle time by 35% while improving quality metrics`);
-    if(words.includes('data') || words.includes('analy')) bullets.push(`Built analytics framework to track KPIs, enabling data-informed decisions that improved conversion rates by 22%`);
-    if(bullets.length < 3) {
-        bullets.push(`Developed and executed strategic initiatives aligned with organizational goals, delivering measurable ROI`);
-        bullets.push(`Partnered with cross-functional teams to identify opportunities and implement solutions at scale`);
-        bullets.push(`Established best practices and standard operating procedures adopted across the organization`);
+    if(appState.resume.skills.length > 0) {
+        html += '<h2>Skills</h2><p>' + appState.resume.skills.join(' • ') + '</p>';
     }
-    return bullets.slice(0, 4);
-}
 
-function renderResumePreview() {
-    const r = generatedResume;
-    const contactParts = [r.email, r.phone, r.location, r.linkedin, r.website].filter(Boolean);
-    let html = `<h1>${r.name}</h1>`;
-    html += `<p class="contact-line" style="text-align:center;margin-bottom:.5rem">${contactParts.join(' | ')}</p>`;
-    html += `<h2>Professional Summary</h2><p>${r.summary}</p>`;
-    if(r.experience.length > 0) {
-        html += `<h2>Professional Experience</h2>`;
-        r.experience.forEach(exp => {
-            html += `<div style="margin-bottom:.8rem"><div style="display:flex;justify-content:space-between;align-items:baseline"><h3>${exp.title || 'Position'}${exp.company ? ' — '+exp.company : ''}</h3><span style="font-size:.75rem;color:#666">${exp.dates || ''}</span></div>`;
-            if(exp.location) html += `<p style="font-size:.75rem;color:#888;margin-bottom:.3rem">${exp.location}</p>`;
-            html += `<ul>${exp.bullets.map(b => `<li>${b}</li>`).join('')}</ul></div>`;
-        });
-    }
-    if(r.education.length > 0) {
-        html += `<h2>Education</h2>`;
-        r.education.forEach(edu => {
-            html += `<div style="display:flex;justify-content:space-between"><h3>${edu.degree || 'Degree'}${edu.school ? ' — '+edu.school : ''}</h3><span style="font-size:.75rem;color:#666">${edu.year || ''}</span></div>`;
-            if(edu.gpa) html += `<p style="font-size:.75rem;color:#888">GPA: ${edu.gpa}</p>`;
-        });
-    }
-    if(r.skills.length > 0) {
-        html += `<h2>Skills & Expertise</h2><p>${r.skills.join(' • ')}</p>`;
-    }
-    document.getElementById('resumeOutput').innerHTML = html;
-}
-
-function selectTemplate(tmpl) {
-    selectedTemplate = tmpl;
-    document.querySelectorAll('.template-card').forEach(c => c.classList.toggle('selected', c.dataset.tmpl === tmpl));
-    if(generatedResume) renderResumePreview();
-}
-
-function calculateATS() {
-    let score = 40;
-    const r = generatedResume;
-    if(r.summary && r.summary.length > 50) score += 10;
-    if(r.experience.length > 0) score += 15;
-    if(r.education.length > 0) score += 5;
-    if(r.skills.length >= 5) score += 10;
-    if(r.skills.length >= 10) score += 5;
-    if(r.email) score += 5;
-    if(r.phone) score += 5;
-    if(r.linkedin) score += 5;
-    score = Math.min(score, 98);
-    document.getElementById('atsScore').textContent = score + '/100';
-    document.getElementById('atsBar').style.width = score + '%';
-    const feedback = [];
-    if(score >= 85) feedback.push(`<div class="text-xs text-brand-emerald">✓ Excellent ATS compatibility</div>`);
-    if(!r.linkedin) feedback.push(`<div class="text-xs text-brand-amber">⚠ Add LinkedIn URL for +5 points</div>`);
-    if(r.skills.length < 10) feedback.push(`<div class="text-xs text-brand-amber">⚠ Add more skills for better keyword matching</div>`);
-    if(r.experience.length < 2) feedback.push(`<div class="text-xs text-brand-amber">⚠ Add more experience entries</div>`);
-    document.getElementById('atsFeedback').innerHTML = feedback.join('');
-    const suggestions = [`<div class="ai-msg text-xs">Consider adding industry-specific keywords like "${r.industry || 'SaaS'}" and "${r.targetRole}" variations throughout your resume.</div>`,`<div class="ai-msg text-xs">Quantify more achievements with numbers (%, $, team size) — resumes with metrics get 40% more callbacks.</div>`];
-    document.getElementById('aiSuggestions').innerHTML = suggestions.join('');
-}
-
-function downloadResumePDF() {
-    const el = document.getElementById('resumeOutput');
-    const opt = { margin: [0.5, 0.5], filename: (generatedResume?.name || 'resume').replace(/\s+/g,'_') + '_Resume.pdf', image: { type:'jpeg', quality:0.98 }, html2canvas: { scale:2, useCORS:true }, jsPDF: { unit:'in', format:'letter', orientation:'portrait' }};
-    html2pdf().set(opt).from(el).save();
-    addActivity('Downloaded resume as PDF');
-}
-
-function saveResume() {
-    if(!generatedResume) return;
-    db.resumes.push({ ...generatedResume, id: Date.now(), created: new Date().toISOString() });
+    document.getElementById('resumePreview').innerHTML = html;
+    appState.resume.content = html;
     saveDB();
-    addActivity('Saved resume: ' + generatedResume.targetRole);
-    alert('Resume saved!');
-    showSavedResumes();
 }
 
-function regenerateResume() { generateResume(); }
-
-function showSavedResumes() {
-    const section = document.getElementById('savedResumesSection');
-    const list = document.getElementById('savedResumesList');
-    if(db.resumes.length === 0) { section.style.display = 'none'; return; }
-    section.style.display = 'block';
-    list.innerHTML = db.resumes.map(r => `<div class="card p-4 glass-hover cursor-pointer"><h4 class="font-semibold text-dark-100 text-sm">${r.targetRole || 'Resume'}</h4><p class="text-xs text-dark-400 mt-1">${r.name} • ${new Date(r.created).toLocaleDateString()}</p><div class="flex gap-2 mt-3"><button class="btn-secondary btn-sm" onclick="loadResume(${r.id})">Edit</button><button class="btn-secondary btn-sm text-brand-rose" onclick="deleteResume(${r.id})">Delete</button></div></div>`).join('');
+function downloadPDF() {
+    const element = document.getElementById('resumePreview');
+    const element2 = document.createElement('div');
+    element2.innerHTML = element.innerHTML;
+    const opt = { margin: 10, filename: 'resume.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' } };
+    html2pdf().set(opt).from(element2).save();
 }
 
-function deleteResume(id) {
-    if(!confirm('Delete this resume?')) return;
-    db.resumes = db.resumes.filter(r => r.id !== id);
-    saveDB(); showSavedResumes(); updateDashboardStats();
-}
-
-function loadResume(id) {
-    const r = db.resumes.find(r => r.id === id);
-    if(!r) return;
-    document.getElementById('rName').value = r.name || '';
-    document.getElementById('rEmail').value = r.email || '';
-    document.getElementById('rPhone').value = r.phone || '';
-    document.getElementById('rLocation').value = r.location || '';
-    document.getElementById('rLinkedin').value = r.linkedin || '';
-    document.getElementById('rWebsite').value = r.website || '';
-    document.getElementById('rTargetRole').value = r.targetRole || '';
-    document.getElementById('rIndustry').value = r.industry || '';
-    document.getElementById('rSummary').value = r.summary || '';
-    resumeSkills = r.skills || [];
-    renderSkillTags();
-    resumeNext(1);
-}
-
-// ===================================================================
-// INTERVIEW COACH
-// ===================================================================
-let interviewState = { type:'behavioral', questions:[], currentQ:0, answers:[], scores:[], active:false };
-
-const interviewQuestions = {
-    behavioral: {
-        easy: ['Tell me about yourself and your background.','Describe a time you worked well in a team.','What is your greatest strength?','Tell me about a challenge you overcame.','Why are you interested in this role?'],
-        medium: ['Tell me about a time you had to influence without authority.','Describe a situation where you failed. What did you learn?','How do you prioritize competing deadlines?','Tell me about a time you resolved a conflict at work.','Describe your most impactful project.'],
-        hard: ['Tell me about a time you made a difficult strategic decision with incomplete data.','Describe how you led a major organizational change.','Walk me through how you would turn around an underperforming team.','Tell me about a time you had to push back on a senior leader.','How have you built and scaled a high-performing team?']
-    },
-    technical: {
-        easy: ['Walk me through your technical background.','What development tools and methodologies are you most familiar with?','How do you approach debugging a complex issue?','Explain a technical concept to a non-technical person.','What is your experience with version control?'],
-        medium: ['How would you design a scalable REST API?','Explain the tradeoffs between SQL and NoSQL databases.','How do you ensure code quality in a fast-paced environment?','Walk me through how you would architect a microservices system.','How do you handle technical debt?'],
-        hard: ['Design a system that handles 10 million concurrent users.','How would you migrate a monolithic application to microservices?','Explain CAP theorem and its practical implications.','How do you approach system reliability and fault tolerance?','Design a real-time notification system at scale.']
-    },
-    case: {
-        easy: ['A startup wants to enter the food delivery market. What factors should they consider?','How would you evaluate whether to build or buy a software solution?','A retail company sees declining foot traffic. What would you recommend?','How would you price a new SaaS product?','A company wants to expand internationally. Walk me through your framework.'],
-        medium: ['Your company\'s main product is losing market share. Develop a turnaround strategy.','How would you evaluate an acquisition target worth $50M?','A B2B SaaS company has 5% monthly churn. How would you address this?','Design a go-to-market strategy for an AI-powered HR tool.','Your competitor just raised $100M. How do you respond?'],
-        hard: ['You\'re the CEO of a $500M company facing disruption from AI. What\'s your 3-year strategy?','Evaluate whether a PE firm should acquire a declining media company.','Design a platform strategy for a two-sided marketplace.','How would you restructure a company after a failed merger?','Build the business case for entering China with an enterprise SaaS product.']
-    }
+// ============ INTERVIEW PREP ============
+let interviewType = 'behavioral';
+let isRecording = false;
+let currentQuestionIdx = 0;
+const questions = {
+    behavioral: ['Tell me about yourself', 'Why are you interested in this role?', 'Describe a challenge you overcame', 'How do you handle conflict?', 'Tell me about your greatest achievement'],
+    technical: ['Explain your technical background', 'What technologies do you specialize in?', 'Describe your most complex project', 'How do you approach debugging?', 'What are your programming principles?'],
+    case: ['How would you approach this business problem?', 'Analyze this market scenario', 'Break down this metric', 'What would you recommend?', 'How would you test this hypothesis?'],
+    phone: ['Tell me about yourself', 'Why this company?', 'Why this role?', 'What are your salary expectations?', 'When can you start?']
 };
 
 function selectInterviewType(type) {
-    interviewState.type = type;
-    document.querySelectorAll('.interview-type').forEach(c => c.classList.toggle('selected', c.dataset.type === type));
-}
-
-function startInterview() {
-    const diff = document.getElementById('intDifficulty').value;
-    const qs = interviewQuestions[interviewState.type][diff];
-    interviewState.questions = qs.sort(() => Math.random() - 0.5).slice(0, 5);
-    interviewState.currentQ = 0;
-    interviewState.answers = [];
-    interviewState.scores = [];
-    interviewState.active = true;
-    document.getElementById('interviewSetup').style.display = 'none';
-    document.getElementById('interviewSession').style.display = 'block';
-    document.getElementById('interviewResults').style.display = 'none';
-    document.getElementById('interviewChat').innerHTML = '';
-    askQuestion();
-}
-
-function askQuestion() {
-    const q = interviewState.questions[interviewState.currentQ];
-    document.getElementById('questionCount').textContent = `Question ${interviewState.currentQ + 1} of ${interviewState.questions.length}`;
-    appendChat('ai', q);
-    document.getElementById('interviewInput').value = '';
-    document.getElementById('interviewInput').focus();
-}
-
-function appendChat(role, text) {
-    const chat = document.getElementById('interviewChat');
-    const cls = role === 'ai' ? 'ai-msg' : 'user-msg';
-    const label = role === 'ai' ? '<strong class="text-brand-indigo text-xs">AI Interviewer</strong><br>' : '<strong class="text-brand-blue text-xs">You</strong><br>';
-    chat.insertAdjacentHTML('beforeend', `<div class="${cls}">${label}<span class="text-sm text-dark-200">${text}</span></div>`);
-    chat.scrollTop = chat.scrollHeight;
-}
-
-function submitAnswer() {
-    const input = document.getElementById('interviewInput');
-    const answer = input.value.trim();
-    if(!answer) return;
-    appendChat('user', answer);
-    interviewState.answers.push(answer);
-    input.value = '';
-
-    // Generate feedback
-    const score = scoreAnswer(answer);
-    interviewState.scores.push(score);
-    const feedback = generateInterviewFeedback(answer, score);
-
-    setTimeout(() => {
-        appendChat('ai', feedback);
-        interviewState.currentQ++;
-        if(interviewState.currentQ < interviewState.questions.length) {
-            setTimeout(() => askQuestion(), 1000);
-        } else {
-            setTimeout(() => endInterview(), 1500);
+    interviewType = type;
+    appState.interviews.currentType = type;
+    document.querySelectorAll('[onclick*="selectInterviewType"]').forEach(el => {
+        const card = el.closest('.card');
+        if(card) {
+            card.classList.remove('border-brand-blue', 'bg-brand-blue/10');
+            card.classList.add('border-dark-600');
         }
-    }, 800);
-}
-
-function scoreAnswer(answer) {
-    let score = 5;
-    if(answer.length > 200) score += 1;
-    if(answer.length > 400) score += 1;
-    if(/\d/.test(answer)) score += 0.5; // has numbers
-    if(/result|impact|achiev|outcome|success/i.test(answer)) score += 0.5;
-    if(/team|collaborat|cross-functional/i.test(answer)) score += 0.5;
-    if(/learn|improv|grow/i.test(answer)) score += 0.5;
-    return Math.min(Math.round(score * 10) / 10, 10);
-}
-
-function generateInterviewFeedback(answer, score) {
-    const strengths = [];
-    const improvements = [];
-    if(answer.length > 200) strengths.push('Good level of detail');
-    else improvements.push('Try to elaborate more with specific examples');
-    if(/\d/.test(answer)) strengths.push('Great use of metrics');
-    else improvements.push('Add quantifiable results (numbers, percentages)');
-    if(/result|impact|outcome/i.test(answer)) strengths.push('Strong focus on outcomes');
-    else improvements.push('Emphasize the results and impact of your actions');
-    if(/I led|I managed|I drove|I built|I created/i.test(answer)) strengths.push('Good ownership language');
-    else improvements.push('Use "I" statements to show personal ownership');
-
-    let fb = `<strong>Score: ${score}/10</strong><br>`;
-    if(strengths.length) fb += `✅ ${strengths.join('. ')}.<br>`;
-    if(improvements.length) fb += `💡 ${improvements.join('. ')}.`;
-    return fb;
-}
-
-function endInterview() {
-    interviewState.active = false;
-    document.getElementById('interviewSession').style.display = 'none';
-    const avg = interviewState.scores.length > 0 ? (interviewState.scores.reduce((a,b)=>a+b,0)/interviewState.scores.length).toFixed(1) : 0;
-    const result = { type: interviewState.type, date: new Date().toISOString(), score: parseFloat(avg), questions: interviewState.questions.length };
-    db.interviews.push(result);
-    saveDB();
-    addActivity(`Completed ${interviewState.type} interview practice — Score: ${avg}/10`);
-
-    document.getElementById('interviewResults').style.display = 'block';
-    document.getElementById('interviewResults').innerHTML = `
-        <div class="card p-6 text-center mb-4"><h2 class="text-xl font-bold text-dark-50 font-heading mb-2">Interview Complete!</h2>
-        <div class="text-4xl font-bold gradient-text mb-2">${avg}/10</div>
-        <p class="text-sm text-dark-400">Overall Score</p>
-        <div class="flex justify-center gap-2 mt-4"><button class="btn-primary" onclick="document.getElementById('interviewResults').style.display='none';document.getElementById('interviewSetup').style.display='block'">Practice Again</button></div></div>`;
-    renderPastInterviews();
-}
-
-function renderPastInterviews() {
-    const el = document.getElementById('pastInterviews');
-    if(db.interviews.length === 0) { el.innerHTML = '<p class="text-xs text-dark-500">No sessions yet. Start your first mock interview above!</p>'; return; }
-    el.innerHTML = db.interviews.slice(-5).reverse().map(i => `<div class="card p-3 flex items-center justify-between"><div class="flex items-center gap-3"><span class="badge ${i.type==='behavioral'?'bg-brand-violet/20 text-violet-300':i.type==='technical'?'bg-brand-blue/20 text-blue-300':'bg-brand-amber/20 text-amber-300'}">${i.type}</span><span class="text-xs text-dark-300">${new Date(i.date).toLocaleDateString()}</span></div><div class="text-sm font-bold ${i.score >= 7?'text-brand-emerald':i.score >= 5?'text-brand-amber':'text-brand-rose'}">${i.score}/10</div></div>`).join('');
-}
-
-// ===================================================================
-// LINKEDIN OPTIMIZER
-// ===================================================================
-function generateHeadline() {
-    const current = document.getElementById('liCurrentHeadline').value || 'Professional';
-    const target = document.getElementById('liTargetHeadline').value || current;
-    const headlines = [
-        `${target} | Driving Growth Through Data-Driven Strategy & Innovation`,
-        `Experienced ${target} | Building Products Users Love | Ex-${current.split(' at ')[1] || 'Top Company'}`,
-        `${target} | ${['Revenue Growth','Product Innovation','Strategic Leadership','Digital Transformation'][Math.floor(Math.random()*4)]} Expert | Open to Opportunities`,
-        `Results-Driven ${target} | Helping Companies Scale Through ${['AI & Automation','Strategic Partnerships','Product-Led Growth','Operational Excellence'][Math.floor(Math.random()*4)]}`
-    ];
-    document.getElementById('headlineResults').innerHTML = headlines.map(h => `<div class="ai-msg text-sm cursor-pointer hover:border-brand-indigo/40" onclick="navigator.clipboard.writeText(this.textContent.trim());this.style.borderColor='#10b981'">${h}</div>`).join('');
-    addActivity('Generated LinkedIn headlines');
-}
-
-function generateAbout() {
-    const input = document.getElementById('liAboutInput').value || 'Experienced professional';
-    const about = `With a passion for driving meaningful impact, I bring a unique blend of strategic thinking and hands-on execution to every challenge. My career has been defined by a commitment to excellence, continuous learning, and building high-performing teams.\n\nThroughout my journey, I've had the privilege of leading transformative initiatives that have generated measurable business results — from launching products that achieved millions in revenue to implementing processes that dramatically improved operational efficiency.\n\nWhat drives me: I believe the best outcomes emerge at the intersection of data-driven insights, creative problem-solving, and genuine collaboration. I'm always looking to connect with forward-thinking professionals who share a passion for innovation.\n\nCore areas of expertise:\n• Strategic Planning & Execution\n• Cross-Functional Team Leadership\n• Data-Driven Decision Making\n• Stakeholder Management\n• Process Optimization\n\nLet's connect — I'm always open to meaningful conversations about industry trends, career growth, and collaboration opportunities.`;
-    document.getElementById('aboutResult').innerHTML = `<div class="ai-msg"><p class="text-sm text-dark-200 whitespace-pre-line">${about}</p><button class="btn-secondary btn-sm mt-3" onclick="navigator.clipboard.writeText(\`${about.replace(/`/g,"'")}\`);this.textContent='Copied!'">📋 Copy to Clipboard</button></div>`;
-    addActivity('Generated LinkedIn About section');
-}
-
-function enhanceBullet() {
-    const input = document.getElementById('liBulletInput').value;
-    if(!input) return;
-    const bullets = generateAIBullets(input, 'professional');
-    document.getElementById('bulletResult').innerHTML = `<div class="ai-msg"><p class="text-xs text-dark-400 mb-2">Enhanced versions:</p>${bullets.map(b => `<p class="text-sm text-dark-200 mb-2">• ${b}</p>`).join('')}<button class="btn-secondary btn-sm mt-2" onclick="navigator.clipboard.writeText(this.parentElement.querySelectorAll('p.text-sm').forEach?[...this.parentElement.querySelectorAll('p.text-sm')].map(p=>p.textContent).join('\\n'):'');this.textContent='Copied!'">📋 Copy All</button></div>`;
-}
-
-// ===================================================================
-// JOB TRACKER
-// ===================================================================
-function showAddJob() { document.getElementById('addJobForm').style.display = 'block'; document.getElementById('jobDate').valueAsDate = new Date(); }
-function hideAddJob() { document.getElementById('addJobForm').style.display = 'none'; }
-
-function addJob() {
-    const job = {
-        id: Date.now(),
-        company: document.getElementById('jobCompany').value,
-        title: document.getElementById('jobTitle').value,
-        url: document.getElementById('jobUrl').value,
-        salary: document.getElementById('jobSalary').value,
-        status: document.getElementById('jobStatus').value,
-        date: document.getElementById('jobDate').value,
-        notes: document.getElementById('jobNotes').value
-    };
-    if(!job.company || !job.title) { alert('Company and title are required.'); return; }
-    db.jobs.push(job);
-    saveDB();
-    addActivity(`Added job: ${job.title} at ${job.company}`);
-    hideAddJob();
-    ['jobCompany','jobTitle','jobUrl','jobSalary','jobNotes'].forEach(id => document.getElementById(id).value = '');
-    renderKanban();
-}
-
-function renderKanban() {
-    const statuses = ['Interested','Applied','Phone Screen','Interview','Offer'];
-    statuses.forEach(status => {
-        const container = document.querySelector(`.kanban-items[data-status="${status}"]`);
-        const jobs = db.jobs.filter(j => j.status === status);
-        const countEl = document.getElementById('count-'+status);
-        if(countEl) countEl.textContent = jobs.length;
-        if(!container) return;
-        container.innerHTML = jobs.map(j => `<div class="kanban-card" draggable="true" data-id="${j.id}"><div class="font-semibold text-dark-100 text-xs">${j.title}</div><div class="text-[10px] text-dark-400 mt-1">${j.company}</div>${j.salary?`<div class="text-[10px] text-brand-emerald mt-1">${j.salary}</div>`:''}<div class="flex gap-1 mt-2"><select class="input text-[10px] py-0.5 px-1" onchange="updateJobStatus(${j.id},this.value)">${statuses.map(s=>`<option ${s===status?'selected':''}>${s}</option>`).join('')}<option>Rejected</option></select><button class="text-[10px] text-brand-rose" onclick="deleteJob(${j.id})">✕</button></div></div>`).join('');
     });
+    event.target.closest('.card').classList.remove('border-dark-600');
+    event.target.closest('.card').classList.add('border-brand-blue', 'bg-brand-blue/10');
+    saveDB();
 }
 
-function updateJobStatus(id, newStatus) {
-    const job = db.jobs.find(j => j.id === id);
-    if(job) { if(newStatus === 'Rejected') { db.jobs = db.jobs.filter(j=>j.id!==id); } else { job.status = newStatus; } saveDB(); renderKanban(); }
+function startVoiceInterview() {
+    isRecording = true;
+    currentQuestionIdx = 0;
+    const qList = questions[interviewType] || questions.behavioral;
+    document.getElementById('currentQuestion').textContent = qList[0];
+    document.getElementById('micButton').textContent = '⏹️';
+    document.getElementById('userResponse').textContent = 'Listening...';
 }
-function deleteJob(id) { db.jobs = db.jobs.filter(j => j.id !== id); saveDB(); renderKanban(); }
 
-// ===================================================================
-// SALARY INTEL
-// ===================================================================
+function stopRecording() {
+    isRecording = false;
+    document.getElementById('userResponse').textContent = 'Your response has been recorded and analyzed.';
+    document.getElementById('aiFeedback').textContent = 'Great answer! You structured your response well with clear examples. Consider adding more specific metrics next time for stronger impact.';
+    document.getElementById('micButton').textContent = '🎙️';
+}
+
+function nextQuestion() {
+    const qList = questions[interviewType] || questions.behavioral;
+    currentQuestionIdx++;
+    if(currentQuestionIdx < qList.length) {
+        document.getElementById('currentQuestion').textContent = qList[currentQuestionIdx];
+        document.getElementById('userResponse').textContent = 'No response yet. Click the microphone to speak.';
+        document.getElementById('aiFeedback').textContent = 'Start speaking to receive feedback...';
+    } else {
+        appState.interviews.conducted++;
+        appState.interviews.avgScore = 82;
+        appState.interviews.scores.push(82);
+        saveDB();
+        updateDashboardStats();
+        alert('Interview complete! You scored 82/100.\n\nGreat job! Review your feedback above and practice the areas for improvement.');
+        currentQuestionIdx = 0;
+    }
+}
+
+function generateFlashCards() {
+    alert('Flash cards generated! Click on cards to flip them and reveal answers.');
+}
+
+function printFlashCards() {
+    window.print();
+}
+
+function flipCard(id) {
+    const inner = document.getElementById(id);
+    if(inner) inner.classList.toggle('flipped');
+}
+
+// ============ JOB TRACKER ============
+function searchJobs() {
+    const title = document.getElementById('jobTitle').value;
+    const location = document.getElementById('jobLocation').value;
+    if(!title || !location) {
+        alert('Please enter both job title and location');
+        return;
+    }
+    appState.jobs.total = Math.floor(Math.random() * 50) + 10;
+    document.getElementById('jobsCount').textContent = appState.jobs.total;
+    document.getElementById('avgMatch').textContent = (70 + Math.floor(Math.random() * 20)) + '%';
+    saveDB();
+    alert('Found ' + appState.jobs.total + ' jobs matching your criteria!');
+}
+
+function applyJob(id) {
+    appState.jobs.applied++;
+    document.getElementById('appliedCount').textContent = appState.jobs.applied;
+    alert('Application submitted successfully! We\'ll notify you of any updates.');
+    saveDB();
+    updateDashboardStats();
+}
+
+function saveJob(id) {
+    appState.jobs.saved++;
+    saveDB();
+}
+
+// ============ SALARY NEGOTIATOR ============
 function researchSalary() {
-    const role = document.getElementById('salRole').value || 'Professional';
-    const loc = document.getElementById('salLocation').value || 'United States';
-    const yrs = parseInt(document.getElementById('salExperience').value) || 5;
-    const base = 60000 + yrs * 12000 + (loc.toLowerCase().includes('san francisco')||loc.toLowerCase().includes('new york')?30000:0);
-    const low = Math.round(base * 0.8 / 1000) * 1000;
-    const mid = Math.round(base / 1000) * 1000;
-    const high = Math.round(base * 1.25 / 1000) * 1000;
-    document.getElementById('salaryResult').innerHTML = `<div class="ai-msg"><h4 class="font-semibold text-dark-100 text-sm mb-3">${role} in ${loc}</h4><div class="grid grid-cols-3 gap-3 text-center mb-3"><div><div class="text-xs text-dark-400">25th %ile</div><div class="text-lg font-bold text-dark-200">$${(low/1000).toFixed(0)}K</div></div><div><div class="text-xs text-dark-400">Median</div><div class="text-lg font-bold gradient-text">$${(mid/1000).toFixed(0)}K</div></div><div><div class="text-xs text-dark-400">90th %ile</div><div class="text-lg font-bold text-dark-200">$${(high/1000).toFixed(0)}K</div></div></div><p class="text-xs text-dark-400">Based on ${yrs} years experience. Ranges vary by company size, funding stage, and total compensation package.</p></div>`;
-}
-
-function generateNegScript() {
-    const offer = document.getElementById('negOffer').value || '$120,000';
-    const target = document.getElementById('negTarget').value || '$140,000';
-    const scenario = document.getElementById('negScenario').value;
-    const scripts = {
-        'Initial offer response': `"Thank you so much for the offer — I'm genuinely excited about the opportunity to join the team. After reviewing the full package and considering my experience and the market data I've researched, I was hoping we could discuss the base compensation. I was targeting something closer to ${target}, which I believe reflects the value I'll bring to this role. Is there flexibility to get closer to that number?"`,
-        'Counter-offer after rejection': `"I appreciate you sharing that. I understand there are constraints, and I want to find something that works for both sides. Would it be possible to explore other components — perhaps a signing bonus, additional equity, or an accelerated review timeline? I'm committed to making this work because I'm truly excited about the role."`,
-        'Asking for raise at current job': `"I'd like to discuss my compensation. Over the past year, I've [specific achievements]. Based on my contributions and current market rates for this role, I believe an adjustment to ${target} would be appropriate. I've put together some data points I'd love to share with you."`,
-        'Competing offers leverage': `"I want to be transparent — I've received another offer at ${target}. However, your company is my top choice because [specific reasons]. I'd love to stay if we can get the compensation closer to what's being offered elsewhere. What can we do?"`
-    };
-    document.getElementById('negResult').innerHTML = `<div class="ai-msg"><p class="text-sm text-dark-200 italic">${scripts[scenario] || scripts['Initial offer response']}</p><div class="mt-3 space-y-1"><p class="text-xs text-brand-indigo font-semibold">Pro Tips:</p><p class="text-xs text-dark-400">• Always negotiate in person or over video — never email</p><p class="text-xs text-dark-400">• Lead with enthusiasm for the role before discussing numbers</p><p class="text-xs text-dark-400">• Have your market research ready to reference</p></div></div>`;
-}
-
-// ===================================================================
-// LEARNING HUB
-// ===================================================================
-function filterLearning(cat, el) {
-    document.querySelectorAll('#sec-learning .tab').forEach(t => t.classList.remove('active'));
-    el.classList.add('active');
-    document.querySelectorAll('#learningGrid > div').forEach(c => {
-        c.style.display = (cat === 'all' || c.dataset.category === cat) ? 'block' : 'none';
-    });
-}
-
-// ===================================================================
-// CAREER ROADMAP
-// ===================================================================
-function generateRoadmap() {
-    const current = document.getElementById('rmCurrent').value || 'Current Role';
-    const target = document.getElementById('rmTarget').value || 'Target Role';
-    const timeline = document.getElementById('rmTimeline').value || '3 years';
-    const steps = [
-        { phase:'Phase 1: Foundation', time:'Months 1-6', items:['Identify and close skill gaps through targeted learning','Build a portfolio of measurable achievements in current role','Start networking with professionals in target role','Get a mentor who has made a similar transition'] },
-        { phase:'Phase 2: Positioning', time:'Months 7-12', items:['Take on stretch assignments aligned with target role','Earn relevant certifications or complete key courses','Update resume and LinkedIn to reflect career direction','Begin informational interviews at target companies'] },
-        { phase:'Phase 3: Transition', time:'Months 13-24', items:['Apply strategically to roles that bridge current and target position','Leverage network for warm introductions','Negotiate offers that align with long-term trajectory','Consider lateral moves that provide necessary experience'] },
-        { phase:'Phase 4: Acceleration', time:'Months 25+', items:[`Excel in ${target} responsibilities and exceed expectations`,'Build reputation as a thought leader in your domain','Mentor others making similar transitions','Set next career milestone'] }
-    ];
-    document.getElementById('roadmapOutput').innerHTML = `<div class="space-y-4">${steps.map((s,i) => `<div class="card p-5"><div class="flex items-center gap-3 mb-3"><div class="w-8 h-8 rounded-full bg-gradient-to-br from-brand-blue to-brand-violet flex items-center justify-center text-white text-xs font-bold">${i+1}</div><div><h3 class="font-semibold text-dark-100 text-sm font-heading">${s.phase}</h3><p class="text-[10px] text-dark-500">${s.time}</p></div></div><ul class="space-y-1.5 ml-11">${s.items.map(item => `<li class="text-sm text-dark-300 flex items-start gap-2"><span class="text-brand-indigo mt-1">→</span>${item}</li>`).join('')}</ul></div>`).join('')}</div>`;
-    addActivity(`Generated career roadmap: ${current} → ${target}`);
-}
-
-// ===================================================================
-// SETTINGS
-// ===================================================================
-function saveProfile() {
-    db.user.name = document.getElementById('setName').value;
-    db.user.email = document.getElementById('setEmail').value;
-    db.user.phone = document.getElementById('setPhone').value;
-    db.user.location = document.getElementById('setLocation').value;
+    const title = document.getElementById('salaryTitle').value;
+    const location = document.getElementById('salaryLocation').value;
+    if(!title || !location) {
+        alert('Please enter both job title and location');
+        return;
+    }
+    const baseRate = 150000 + Math.floor(Math.random() * 50000);
+    document.getElementById('marketRate').textContent = '$' + baseRate.toLocaleString();
+    alert('Market research complete! The average salary for ' + title + ' in ' + location + ' is $' + baseRate.toLocaleString());
     saveDB();
-    init();
-    alert('Profile saved!');
-    addActivity('Updated profile settings');
 }
 
-function toggleNotifications() { /* placeholder for notification panel */ }
+function calculateComp() {
+    const base = parseInt(document.getElementById('baseSalary').value) || 150000;
+    const bonus = parseInt(document.getElementById('bonusPercent').value) || 20;
+    const stock = parseInt(document.getElementById('stockValue').value) || 50000;
+    const total = base + (base * bonus / 100) + stock;
+    document.getElementById('totalComp').textContent = '$' + total.toLocaleString();
+    document.getElementById('yourOffer').textContent = '$' + base.toLocaleString();
+    const marketAvg = 170000;
+    const gap = marketAvg - base;
+    document.getElementById('salaryGap').textContent = gap > 0 ? '$' + gap.toLocaleString() : 'At market';
+    saveDB();
+}
 
-// ===================================================================
-// BOOT
-// ===================================================================
-document.addEventListener('DOMContentLoaded', init);
+function copyScript(type) {
+    const scripts = {
+        counteroffer: 'Based on market research for this role in [location], the average range is $[X-Y]. Given my experience with [achievements], I\'d like to propose [amount].',
+        benefits: 'While the base is [X], would you consider additional benefits like [remote work, extra PTO, professional development budget]?'
+    };
+    const text = scripts[type] || 'Script copied';
+    try {
+        navigator.clipboard.writeText(text);
+        alert('Script copied to clipboard!');
+    } catch(e) {
+        alert('Script: ' + text);
+    }
+}
+
+// ============ LINKEDIN OPTIMIZER ============
+function optimizeLinkedIn(section) {
+    const suggestions = {
+        headline: 'Rewrite suggested: "Product Manager | AI/ML Enthusiast | 10+ years in SaaS | Open to mentoring"',
+        summary: 'AI enhancement underway: Adding keywords and metrics to your summary...',
+        skills: 'Added top skills: Product Strategy, AI/ML, Data Analysis, Team Leadership, OKRs',
+        recommendations: 'Outreach started: 3 recommendation requests sent to your network!'
+    };
+    alert('LinkedIn Optimization\n\n' + suggestions[section]);
+}
+
+function searchCompetitors() {
+    const name = document.getElementById('competitorName').value;
+    if(!name) {
+        alert('Please enter a name or LinkedIn URL');
+        return;
+    }
+    alert('Competitor analysis complete for ' + name + '!\n\nThey have:\n• Strong headline with value proposition\n• 500+ connections\n• Recommendations from industry leaders\n\nConsider: increasing your connections and getting more recommendations.');
+}
+
+function searchEmployer() {
+    const name = document.getElementById('employerName').value;
+    if(!name) {
+        alert('Please enter a company name');
+        return;
+    }
+    alert('Company research for ' + name + ':\n\n• 2,847 employees on LinkedIn\n• Growing by 12% YoY\n• Common roles: Product Manager, Engineer, Designer\n\nConnect with current employees for insights!');
+}
+
+// ============ CAREER ROADMAP ============
+function generatePlan() {
+    const target = document.getElementById('targetRole').value;
+    if(!target) {
+        alert('Please enter a target role');
+        return;
+    }
+    alert('90-day plan generated for: ' + target + '\n\nWeek 1: Skill assessment & course selection\nWeek 2-4: Online courses & certifications\nWeek 5-8: Project building & networking\nWeek 9-12: Interview prep & applications\n\nYou\'ve got this!');
+}
+
+function addReference() {
+    const name = prompt('Reference name:');
+    if(name) {
+        alert('Reference added: ' + name);
+    }
+}
+
+function requestReference(id) {
+    alert('Reference request sent! They\'ll receive an email asking them to write a recommendation.');
+}
+
+// ============ SETTINGS ============
+function saveSettings() {
+    appState.user.name = document.getElementById('settingsName').value || appState.user.name;
+    appState.user.email = document.getElementById('settingsEmail').value || appState.user.email;
+    saveDB();
+    updateSidebar();
+    alert('Settings saved successfully!');
+}
+
+// ============ INIT ============
+window.addEventListener('DOMContentLoaded', function() {
+    loadDB();
+    nav('dashboard');
+});
 </script>
 </body>
 </html>

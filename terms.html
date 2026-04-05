@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | Resume SuperHero</title>
+    <meta name="description" content="Terms of Service for Resume SuperHero - Read our service terms and conditions.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Fonts: Inter for body, Space Grotesk for headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBlue: '#2563eb',
+                        brandViolet: '#7c3aed',
+                        brandAmber: '#fbbf24',
+                        darkBg: '#0f172a',
+                        darkCard: '#1e293b',
+                        darkBorder: '#334155'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.6);
+        }
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .legal-section {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.5), rgba(30, 27, 75, 0.5));
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        .toc-link {
+            border-left: 2px solid rgba(124, 58, 237, 0.3);
+            transition: all 0.3s ease;
+        }
+        .toc-link:hover {
+            border-left-color: #7c3aed;
+            padding-left: 12px;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-slate-200 font-sans antialiased">
+
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-darkBg/80 backdrop-blur-md border-b border-darkBorder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                    <div class="w-9 h-9 rounded-xl btn-primary flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <span class="font-heading font-bold text-xl text-white">Resume<span class="gradient-text">SuperHero</span></span>
+                </a>
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="privacy.html" class="nav-link text-sm text-slate-300 hover:text-white transition-colors font-medium">Privacy</a>
+                    <a href="terms.html" class="nav-link text-sm text-slate-300 hover:text-white transition-colors font-medium">Terms</a>
+                    <a href="cookies.html" class="nav-link text-sm text-slate-300 hover:text-white transition-colors font-medium">Cookies</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="min-h-screen pt-24 pb-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- PAGE HEADER -->
+            <div class="mb-12">
+                <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-4">Terms of Service</h1>
+                <p class="text-slate-400 text-lg">Effective Date: April 5, 2026</p>
+            </div>
+
+            <!-- TABLE OF CONTENTS -->
+            <div class="legal-section rounded-2xl p-8 mb-12">
+                <h2 class="font-heading text-xl font-bold text-white mb-6">Table of Contents</h2>
+                <nav class="space-y-3">
+                    <a href="#agreement" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">1. Acceptance of Terms</a>
+                    <a href="#service-description" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">2. Service Description</a>
+                    <a href="#account" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">3. Account Registration</a>
+                    <a href="#billing" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">4. Subscription & Billing</a>
+                    <a href="#cancellation" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">5. Cancellation Policy</a>
+                    <a href="#acceptable-use" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">6. Acceptable Use Policy</a>
+                    <a href="#intellectual-property" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">7. Intellectual Property</a>
+                    <a href="#disclaimers" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">8. Disclaimers</a>
+                    <a href="#liability" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">9. Limitation of Liability</a>
+                    <a href="#indemnification" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">10. Indemnification</a>
+                    <a href="#governing-law" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">11. Governing Law</a>
+                    <a href="#changes" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">12. Changes to Terms</a>
+                    <a href="#contact-legal" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">13. Contact Information</a>
+                </nav>
+            </div>
+
+            <!-- CONTENT SECTIONS -->
+            <div class="space-y-8">
+
+                <!-- Section 1 -->
+                <section id="agreement" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-4">1. Acceptance of Terms</h2>
+                    <p class="text-slate-300 mb-4">By accessing, browsing, or using Resume SuperHero ("Service"), including our website and platform, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree to these terms, you may not use our Service.</p>
+                    <p class="text-slate-300">Your continued use of the Service following any changes to these Terms constitutes your acceptance of the revised Terms.</p>
+                </section>
+
+                <!-- Section 2 -->
+                <section id="service-description" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">2. Service Description</h2>
+                    <p class="text-slate-300 mb-4">Resume SuperHero is an AI-powered career coaching platform that provides:</p>
+                    <ul class="space-y-3 text-slate-300">
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>AI-powered resume generation and optimization</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Interview preparation and coaching through simulated practice</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Personalized career roadmaps and job recommendations</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Interview performance analysis and feedback</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Application tracking and job matching capabilities</span></li>
+                    </ul>
+                    <p class="text-slate-300 mt-4">The Service is provided on an "as-is" basis and may be updated or modified at any time. We are not responsible for job placement success or career outcomes.</p>
+                </section>
+
+                <!-- Section 3 -->
+                <section id="account" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">3. Account Registration and Responsibilities</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Account Creation</h3>
+                            <p class="text-slate-300">To use our Service, you must create an account by providing accurate, complete, and current information. You must be at least 13 years old (18 in some jurisdictions) to use this Service.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Your Responsibilities</h3>
+                            <p class="text-slate-300 mb-2">You are responsible for:</p>
+                            <ul class="space-y-2 text-slate-300 ml-4">
+                                <li class="flex gap-3"><span class="text-brandViolet">•</span> <span>Maintaining the confidentiality of your password and account</span></li>
+                                <li class="flex gap-3"><span class="text-brandViolet">•</span> <span>All activities that occur under your account</span></li>
+                                <li class="flex gap-3"><span class="text-brandViolet">•</span> <span>Notifying us immediately of unauthorized access</span></li>
+                                <li class="flex gap-3"><span class="text-brandViolet">•</span> <span>Keeping your contact information current</span></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Account Termination</h3>
+                            <p class="text-slate-300">We reserve the right to terminate or suspend your account at any time for violation of these Terms or for any other reason at our sole discretion.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 4 -->
+                <section id="billing" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">4. Subscription & Billing</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Pricing and Plans</h3>
+                            <p class="text-slate-300">Resume SuperHero offers the following subscription options:</p>
+                            <ul class="space-y-2 text-slate-300 ml-4 mt-3">
+                                <li class="flex gap-3"><span class="text-brandAmber">•</span> <span><strong>Monthly Plan:</strong> $9.99 per month (billed monthly)</span></li>
+                                <li class="flex gap-3"><span class="text-brandAmber">•</span> <span><strong>Annual Plan:</strong> $99 per year (billed once annually)</span></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Billing and Payment</h3>
+                            <p class="text-slate-300 mb-2">You authorize Resume SuperHero to charge your provided payment method on a recurring basis. Billing occurs on the date you subscribe and continues monthly or annually depending on your plan. Payment processing is handled securely through Stripe.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Failed Payments</h3>
+                            <p class="text-slate-300">If your payment fails, we will attempt to charge your account again. If payment continues to fail, we may suspend or terminate your access to the Service until payment is resolved.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Price Changes</h3>
+                            <p class="text-slate-300">We may change our prices at any time. We will provide at least 30 days' notice of price increases. Your continued subscription after the effective date of a price increase constitutes acceptance of the new price.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Taxes</h3>
+                            <p class="text-slate-300">You are responsible for any applicable taxes related to your subscription. We may collect and remit sales tax where applicable.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 5 -->
+                <section id="cancellation" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">5. Cancellation Policy</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">How to Cancel</h3>
+                            <p class="text-slate-300">You can cancel your subscription at any time through your account settings or by emailing us at jarvis.stark1985@gmail.com. Cancellation is effective immediately.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Refund Policy</h3>
+                            <p class="text-slate-300 font-semibold text-red-400 mb-2">NO REFUNDS. Resume SuperHero does not offer refunds for any portion of your subscription, whether paid monthly or annually.</p>
+                            <p class="text-slate-300">Once you are charged for a subscription period, you cannot receive a refund if you cancel partway through that period. However, you can cancel anytime to stop future charges.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">After Cancellation</h3>
+                            <p class="text-slate-300 mb-2">Upon cancellation:</p>
+                            <ul class="space-y-2 text-slate-300 ml-4">
+                                <li class="flex gap-3"><span class="text-brandViolet">•</span> <span>Your access to premium features will end at the conclusion of your current billing period</span></li>
+                                <li class="flex gap-3"><span class="text-brandViolet">•</span> <span>You may download your data within 30 days of cancellation</span></li>
+                                <li class="flex gap-3"><span class="text-brandViolet">•</span> <span>Your account and associated data will be deleted after 30 days (see Privacy Policy for details)</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 6 -->
+                <section id="acceptable-use" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">6. Acceptable Use Policy</h2>
+                    <p class="text-slate-300 mb-4">You agree not to use Resume SuperHero for any unlawful or prohibited purposes, including:</p>
+
+                    <ul class="space-y-3 text-slate-300">
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Violating any applicable laws, regulations, or third-party rights</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Harassing, threatening, defaming, or abusing others</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Uploading malware, viruses, or malicious code</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Hacking, unauthorized access, or disrupting the Service</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Impersonating others or misrepresenting your identity</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Scraping, crawling, or automated access to the Service</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Reverse engineering or decompiling our technology</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Submitting false or fraudulent information</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Using the Service for competitive intelligence or benchmarking</span></li>
+                    </ul>
+
+                    <p class="text-slate-300 mt-6">Violation of this policy may result in immediate termination of your account without refund.</p>
+                </section>
+
+                <!-- Section 7 -->
+                <section id="intellectual-property" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">7. Intellectual Property</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Resume SuperHero Content</h3>
+                            <p class="text-slate-300">All content on Resume SuperHero, including text, graphics, logos, code, and designs, is owned by or licensed to Resume SuperHero and is protected by copyright and other intellectual property laws. You may not reproduce, modify, distribute, or transmit this content without our express written permission.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Your Content</h3>
+                            <p class="text-slate-300 mb-2">You retain all rights to content you submit (resumes, career information, recordings). By submitting content, you grant Resume SuperHero a non-exclusive, royalty-free license to:</p>
+                            <ul class="space-y-2 text-slate-300 ml-4">
+                                <li class="flex gap-3"><span class="text-brandViolet">•</span> <span>Process and analyze your content to provide the Service</span></li>
+                                <li class="flex gap-3"><span class="text-brandViolet">•</span> <span>Train and improve our AI models (in pseudonymized form)</span></li>
+                                <li class="flex gap-3"><span class="text-brandViolet">•</span> <span>Display your content within the Service for your benefit</span></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">AI-Generated Content</h3>
+                            <p class="text-slate-300 mb-2">You own all AI-generated content created through Resume SuperHero (resume suggestions, interview feedback, career recommendations). However:</p>
+                            <ul class="space-y-2 text-slate-300 ml-4">
+                                <li class="flex gap-3"><span class="text-brandViolet">•</span> <span>AI content is generated as-is without warranty</span></li>
+                                <li class="flex gap-3"><span class="text-brandViolet">•</span> <span>You are responsible for reviewing and verifying all AI output</span></li>
+                                <li class="flex gap-3"><span class="text-brandViolet">•</span> <span>You should not rely solely on AI suggestions without human review</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 8 -->
+                <section id="disclaimers" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">8. Disclaimers</h2>
+
+                    <div class="space-y-6">
+                        <div class="bg-red-950/20 border border-red-900/30 rounded-lg p-4">
+                            <h3 class="font-heading text-lg font-semibold text-red-400 mb-3">No Job Guarantee</h3>
+                            <p class="text-slate-300">Resume SuperHero does NOT guarantee job placement, interviews, or career advancement. The Service provides tools and coaching to improve your job search, but employment outcomes depend on many factors beyond our control, including employer decisions, market conditions, and your individual qualifications.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">AI-Generated Content May Need Review</h3>
+                            <p class="text-slate-300">AI-generated resumes, interview suggestions, and career recommendations are created automatically and may contain errors, inaccuracies, or inappropriate content. You must review all AI output carefully before using it with employers or in formal applications.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">As-Is Service</h3>
+                            <p class="text-slate-300">The Service is provided on an "AS IS" and "AS AVAILABLE" basis without warranties of any kind, express or implied. We do not warrant that the Service will be uninterrupted, error-free, secure, or meet your expectations.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">No Professional Advice</h3>
+                            <p class="text-slate-300">Resume SuperHero is not a substitute for professional career coaching, legal advice, or tax advice. For important career decisions, consult with qualified professionals in your jurisdiction.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Third-Party Links</h3>
+                            <p class="text-slate-300">We are not responsible for the content, accuracy, or practices of external websites linked from our Service. Use of third-party services is at your own risk.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 9 -->
+                <section id="liability" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">9. Limitation of Liability</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Limitation</h3>
+                            <p class="text-slate-300">To the maximum extent permitted by law, Resume SuperHero is not liable for any indirect, incidental, special, consequential, or punitive damages, including lost profits, data loss, or business interruption, even if advised of the possibility of such damages.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Cap on Liability</h3>
+                            <p class="text-slate-300">Our total liability to you shall not exceed the amount you paid us in the 12 months preceding the claim, or $100, whichever is less.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Exceptions</h3>
+                            <p class="text-slate-300">These limitations do not apply to liability for gross negligence, fraud, or death or personal injury caused by our negligence.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 10 -->
+                <section id="indemnification" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">10. Indemnification</h2>
+                    <p class="text-slate-300">You agree to indemnify, defend, and hold harmless Resume SuperHero, its officers, directors, employees, and agents from any claims, damages, losses, costs, or expenses (including attorney fees) arising from:</p>
+                    <ul class="space-y-3 text-slate-300 mt-4">
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Your use of the Service in violation of these Terms</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Content you submit or AI output you use inappropriately</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Your violation of any applicable laws or third-party rights</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Claims by employers or others based on misrepresentations in materials created with our Service</span></li>
+                    </ul>
+                </section>
+
+                <!-- Section 11 -->
+                <section id="governing-law" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">11. Governing Law</h2>
+                    <p class="text-slate-300 mb-4">These Terms shall be governed by and construed in accordance with the laws of the United States and the State of Delaware, without regard to its conflict of laws principles.</p>
+                    <p class="text-slate-300">You agree to submit to the exclusive jurisdiction of the courts located in Delaware for resolution of any disputes arising from these Terms or your use of the Service.</p>
+                </section>
+
+                <!-- Section 12 -->
+                <section id="changes" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">12. Changes to Terms</h2>
+                    <p class="text-slate-300 mb-4">We may modify these Terms at any time. Material changes will be communicated via email or a prominent notice on our website. Your continued use of the Service 30 days after such notice constitutes acceptance of the revised Terms.</p>
+                    <p class="text-slate-300">If you do not agree to the revised Terms, you may cancel your subscription at any time.</p>
+                </section>
+
+                <!-- Section 13 -->
+                <section id="contact-legal" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">13. Contact Information</h2>
+                    <p class="text-slate-300 mb-6">For questions about these Terms of Service, please contact us:</p>
+
+                    <div class="bg-darkBg/50 border border-darkBorder rounded-xl p-6 space-y-3">
+                        <p class="text-slate-300"><span class="text-slate-400">Email:</span> <a href="mailto:jarvis.stark1985@gmail.com" class="text-blue-400 hover:text-blue-300">jarvis.stark1985@gmail.com</a></p>
+                        <p class="text-slate-300"><span class="text-slate-400">Company:</span> Resume SuperHero</p>
+                        <p class="text-slate-300"><span class="text-slate-400">Website:</span> <a href="https://www.resumesuperhero.com" class="text-blue-400 hover:text-blue-300">www.resumesuperhero.com</a></p>
+                    </div>
+                </section>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-darkBorder bg-darkBg/50 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="font-heading font-bold text-white mb-4">Resume<span class="gradient-text">SuperHero</span></h3>
+                    <p class="text-slate-400 text-sm">AI-powered career coaching platform</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="privacy.html" class="text-slate-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="text-slate-400 hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="cookies.html" class="text-slate-400 hover:text-white transition-colors">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html#features" class="text-slate-400 hover:text-white transition-colors">Features</a></li>
+                        <li><a href="index.html#pricing" class="text-slate-400 hover:text-white transition-colors">Pricing</a></li>
+                        <li><a href="index.html#faq" class="text-slate-400 hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Contact</h4>
+                    <a href="mailto:jarvis.stark1985@gmail.com" class="text-slate-400 hover:text-white transition-colors text-sm">jarvis.stark1985@gmail.com</a>
+                </div>
+            </div>
+            <div class="border-t border-darkBorder pt-8">
+                <p class="text-slate-400 text-sm text-center">© 2026 Resume SuperHero. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

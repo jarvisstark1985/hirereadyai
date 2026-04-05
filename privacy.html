@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Resume SuperHero</title>
+    <meta name="description" content="Privacy Policy for Resume SuperHero - Learn how we collect, use, and protect your data.">
+    <meta name="robots" content="index, follow">
+
+    <!-- Fonts: Inter for body, Space Grotesk for headings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brandBlue: '#2563eb',
+                        brandViolet: '#7c3aed',
+                        brandAmber: '#fbbf24',
+                        darkBg: '#0f172a',
+                        darkCard: '#1e293b',
+                        darkBorder: '#334155'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Space Grotesk', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #fbbf24 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.6);
+        }
+        .nav-link { position: relative; }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: -2px; left: 0;
+            width: 0; height: 2px;
+            background: linear-gradient(90deg, #2563eb, #7c3aed);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover::after { width: 100%; }
+        .legal-section {
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.5), rgba(30, 27, 75, 0.5));
+            border: 1px solid rgba(124, 58, 237, 0.2);
+            backdrop-filter: blur(10px);
+        }
+        .toc-link {
+            border-left: 2px solid rgba(124, 58, 237, 0.3);
+            transition: all 0.3s ease;
+        }
+        .toc-link:hover {
+            border-left-color: #7c3aed;
+            padding-left: 12px;
+        }
+    </style>
+</head>
+<body class="bg-darkBg text-slate-200 font-sans antialiased">
+
+    <!-- HEADER -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-darkBg/80 backdrop-blur-md border-b border-darkBorder">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                    <div class="w-9 h-9 rounded-xl btn-primary flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+                        </svg>
+                    </div>
+                    <span class="font-heading font-bold text-xl text-white">Resume<span class="gradient-text">SuperHero</span></span>
+                </a>
+                <nav class="hidden md:flex items-center gap-8">
+                    <a href="privacy.html" class="nav-link text-sm text-slate-300 hover:text-white transition-colors font-medium">Privacy</a>
+                    <a href="terms.html" class="nav-link text-sm text-slate-300 hover:text-white transition-colors font-medium">Terms</a>
+                    <a href="cookies.html" class="nav-link text-sm text-slate-300 hover:text-white transition-colors font-medium">Cookies</a>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="min-h-screen pt-24 pb-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+
+            <!-- PAGE HEADER -->
+            <div class="mb-12">
+                <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-4">Privacy Policy</h1>
+                <p class="text-slate-400 text-lg">Last updated: April 5, 2026</p>
+            </div>
+
+            <!-- TABLE OF CONTENTS -->
+            <div class="legal-section rounded-2xl p-8 mb-12">
+                <h2 class="font-heading text-xl font-bold text-white mb-6">Table of Contents</h2>
+                <nav class="space-y-3">
+                    <a href="#overview" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">1. Overview</a>
+                    <a href="#data-collection" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">2. Information We Collect</a>
+                    <a href="#data-usage" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">3. How We Use Your Information</a>
+                    <a href="#third-party" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">4. Third-Party Services</a>
+                    <a href="#data-retention" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">5. Data Retention</a>
+                    <a href="#user-rights" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">6. Your Rights</a>
+                    <a href="#ccpa" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">7. CCPA Compliance</a>
+                    <a href="#gdpr" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">8. GDPR Compliance</a>
+                    <a href="#children" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">9. Children's Privacy</a>
+                    <a href="#contact" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">10. Contact Information</a>
+                </nav>
+            </div>
+
+            <!-- CONTENT SECTIONS -->
+            <div class="space-y-8">
+
+                <!-- Section 1 -->
+                <section id="overview" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-4">1. Overview</h2>
+                    <p class="text-slate-300 mb-4">Resume SuperHero ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website and use our career coaching platform, including all associated features and services.</p>
+                    <p class="text-slate-300">Please read this Privacy Policy carefully. If you do not agree with our policies and practices, please do not use our Service. Your continued use of our Service following the posting of revised Privacy Policy means that you accept and agree to the changes.</p>
+                </section>
+
+                <!-- Section 2 -->
+                <section id="data-collection" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">2. Information We Collect</h2>
+
+                    <div class="space-y-6">
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Personal Information You Provide</h3>
+                            <ul class="space-y-2 text-slate-300">
+                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Account Registration:</strong> Name, email address, phone number, password, and profile information</span></li>
+                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Resume Data:</strong> Your resume content, work history, education, skills, and certifications</span></li>
+                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Career Information:</strong> Career goals, preferred industries, job titles, salary expectations, and location preferences</span></li>
+                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Job Applications:</strong> Records of jobs you've applied to, application dates, and employer responses</span></li>
+                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>LinkedIn Data:</strong> If you connect your LinkedIn profile, we collect your profile information with your permission</span></li>
+                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Interview Recordings:</strong> Audio and video recordings of practice interviews you conduct with our platform</span></li>
+                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Payment Information:</strong> Billing address, payment method details (processed securely by Stripe)</span></li>
+                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Communication Data:</strong> Messages, feedback, and support requests you send us</span></li>
+                            </ul>
+                        </div>
+
+                        <div>
+                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Information Automatically Collected</h3>
+                            <ul class="space-y-2 text-slate-300">
+                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Device Information:</strong> Device type, operating system, browser type, IP address</span></li>
+                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Usage Data:</strong> Pages visited, features used, time spent on platform, click patterns, search queries</span></li>
+                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Cookies & Tracking:</strong> Persistent identifiers, session cookies, analytics tracking</span></li>
+                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Location Data:</strong> Approximate location based on IP address (not precise geolocation)</span></li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Section 3 -->
+                <section id="data-usage" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">3. How We Use Your Information</h2>
+                    <p class="text-slate-300 mb-4">We use your information for the following purposes:</p>
+                    <ul class="space-y-3 text-slate-300">
+                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>Service Delivery:</strong> Providing, maintaining, and improving our AI-powered resume building, interview coaching, and career roadmap features</span></li>
+                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>AI Processing:</strong> Training and operating our machine learning models to generate personalized resume suggestions, job matches, and interview feedback</span></li>
+                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>Personalization:</strong> Customizing your experience based on your career goals and preferences</span></li>
+                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>Billing & Payment:</strong> Processing subscriptions, invoicing, and payment transactions</span></li>
+                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>Communication:</strong> Sending service updates, feature announcements, and customer support responses</span></li>
+                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>Analytics:</strong> Understanding user behavior to improve platform functionality and user experience</span></li>
+                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>Security:</strong> Detecting, preventing, and addressing fraud, abuse, and security incidents</span></li>
+                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>Legal Compliance:</strong> Fulfilling legal obligations and enforcing our Terms of Service</span></li>
+                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>Marketing:</strong> Sending promotional content (with your opt-in consent) about new features and special offers</span></li>
+                    </ul>
+                </section>
+
+                <!-- Section 4 -->
+                <section id="third-party" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">4. Third-Party Services</h2>
+                    <p class="text-slate-300 mb-4">We may share your information with trusted third-party service providers who assist us in operating our website and conducting our business:</p>
+
+                    <div class="space-y-4 text-slate-300">
+                        <div>
+                            <h3 class="font-semibold text-slate-200 mb-2">Stripe (Payment Processing)</h3>
+                            <p>We share payment information with Stripe to process your subscription payments. Stripe is PCI DSS compliant and encrypts your payment data. See <a href="https://stripe.com/privacy" class="text-blue-400 hover:text-blue-300 underline">Stripe's privacy policy</a>.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-200 mb-2">Google Analytics</h3>
+                            <p>We use Google Analytics to track website traffic and user behavior. Google collects data through cookies and may share limited information with third parties. See <a href="https://policies.google.com/privacy" class="text-blue-400 hover:text-blue-300 underline">Google's privacy policy</a>.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-200 mb-2">Content Delivery Network (CDN)</h3>
+                            <p>We use CDN providers to deliver website assets and improve performance. These providers may log your IP address and browser information.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-200 mb-2">OpenAI / AI Service Providers</h3>
+                            <p>To provide AI-powered features, we may process your resume and career data through third-party AI services. Your data is pseudonymized and used only to improve your experience.</p>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-300 mt-4">We do not sell, rent, or lease your personal information to third parties for their marketing purposes. We only share information necessary to provide our Service.</p>
+                </section>
+
+                <!-- Section 5 -->
+                <section id="data-retention" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">5. Data Retention</h2>
+                    <p class="text-slate-300 mb-4">We retain your information as follows:</p>
+                    <ul class="space-y-3 text-slate-300">
+                        <li class="flex gap-3"><span class="text-brandAmber">•</span> <span><strong>Active Accounts:</strong> While your account is active, we retain all your information to provide the Service</span></li>
+                        <li class="flex gap-3"><span class="text-brandAmber">•</span> <span><strong>After Cancellation:</strong> After you cancel your subscription, we retain your data for 30 days. You may request immediate deletion during this period</span></li>
+                        <li class="flex gap-3"><span class="text-brandAmber">•</span> <span><strong>Legal Requirements:</strong> We may retain data longer if required by law, regulation, or legitimate business purposes (e.g., tax records for 7 years)</span></li>
+                        <li class="flex gap-3"><span class="text-brandAmber">•</span> <span><strong>Aggregated Data:</strong> We indefinitely retain anonymized and aggregated data that cannot identify you</span></li>
+                    </ul>
+                    <p class="text-slate-300 mt-4">You may request deletion of your account and associated data at any time by contacting us at jarvis.stark1985@gmail.com.</p>
+                </section>
+
+                <!-- Section 6 -->
+                <section id="user-rights" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">6. Your Rights</h2>
+                    <p class="text-slate-300 mb-4">You have the following rights regarding your personal information:</p>
+
+                    <div class="space-y-4 text-slate-300">
+                        <div>
+                            <h3 class="font-semibold text-slate-200 mb-2">Right to Access</h3>
+                            <p>You can request a copy of all personal information we hold about you.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-200 mb-2">Right to Correction</h3>
+                            <p>You can update, correct, or modify your account information through your account dashboard or by contacting us.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-200 mb-2">Right to Deletion</h3>
+                            <p>You can request permanent deletion of your account and all associated data, subject to legal retention requirements.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-200 mb-2">Right to Data Portability</h3>
+                            <p>You can request your data in a portable, machine-readable format to transfer to another service.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-200 mb-2">Right to Opt-Out of Marketing</h3>
+                            <p>You can unsubscribe from promotional emails at any time by clicking the unsubscribe link in our emails.</p>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-slate-200 mb-2">Right to Withdraw Consent</h3>
+                            <p>If you've given consent for specific data processing (e.g., LinkedIn integration), you can withdraw it anytime.</p>
+                        </div>
+                    </div>
+
+                    <p class="text-slate-300 mt-4">To exercise any of these rights, email us at jarvis.stark1985@gmail.com with "Data Request" in the subject line.</p>
+                </section>
+
+                <!-- Section 7 -->
+                <section id="ccpa" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">7. CCPA Compliance (California Residents)</h2>
+                    <p class="text-slate-300 mb-4">If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA):</p>
+
+                    <ul class="space-y-3 text-slate-300">
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Right to Know:</strong> You can request what personal information we collect, use, and share</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Right to Delete:</strong> You can request deletion of personal information (with limited exceptions)</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Right to Opt-Out:</strong> You can opt-out of the "sale" or "sharing" of your personal information</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Right to Correct:</strong> You can request correction of inaccurate information</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Non-Discrimination:</strong> We will not discriminate against you for exercising your CCPA rights</span></li>
+                    </ul>
+
+                    <p class="text-slate-300 mt-4">To submit a CCPA request, email jarvis.stark1985@gmail.com with "CCPA Request" in the subject line. We will respond within 45 days.</p>
+                </section>
+
+                <!-- Section 8 -->
+                <section id="gdpr" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">8. GDPR Compliance (EU Residents)</h2>
+                    <p class="text-slate-300 mb-4">If you are located in the European Union, you have rights under the General Data Protection Regulation (GDPR):</p>
+
+                    <ul class="space-y-3 text-slate-300">
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Legal Basis:</strong> We process your data based on your consent, contract performance, and legitimate business interests</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Right to Access:</strong> You can request access to your personal data</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Right to Rectification:</strong> You can request correction of inaccurate data</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Right to Erasure:</strong> You can request deletion under certain circumstances</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Right to Restrict Processing:</strong> You can request limitation of how we process your data</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Right to Data Portability:</strong> You can export your data in a portable format</span></li>
+                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Right to Object:</strong> You can object to certain processing activities</span></li>
+                    </ul>
+
+                    <p class="text-slate-300 mt-4">To exercise GDPR rights, email jarvis.stark1985@gmail.com with "GDPR Request" in the subject line. We will respond within 30 days.</p>
+                </section>
+
+                <!-- Section 9 -->
+                <section id="children" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">9. Children's Privacy</h2>
+                    <p class="text-slate-300">Resume SuperHero is not intended for children under 13 years old. We do not knowingly collect personal information from children under 13. If we learn that a child under 13 has provided us with personal information, we will promptly delete such information and terminate the child's account.</p>
+                    <p class="text-slate-300 mt-4">For users ages 13-18, we provide the same privacy protections as for adults. If you are under 18, please ask your parent or guardian before using our Service.</p>
+                </section>
+
+                <!-- Section 10 -->
+                <section id="contact" class="legal-section rounded-2xl p-8">
+                    <h2 class="font-heading text-2xl font-bold text-white mb-6">10. Contact Information</h2>
+                    <p class="text-slate-300 mb-6">If you have questions about this Privacy Policy, your rights, or our privacy practices, please contact us:</p>
+
+                    <div class="bg-darkBg/50 border border-darkBorder rounded-xl p-6 space-y-3">
+                        <p class="text-slate-300"><span class="text-slate-400">Email:</span> <a href="mailto:jarvis.stark1985@gmail.com" class="text-blue-400 hover:text-blue-300">jarvis.stark1985@gmail.com</a></p>
+                        <p class="text-slate-300"><span class="text-slate-400">Company:</span> Resume SuperHero</p>
+                        <p class="text-slate-300"><span class="text-slate-400">Website:</span> <a href="https://www.resumesuperhero.com" class="text-blue-400 hover:text-blue-300">www.resumesuperhero.com</a></p>
+                    </div>
+
+                    <p class="text-slate-400 text-sm mt-6">We aim to resolve any privacy concerns within 30 days of your request.</p>
+                </section>
+
+            </div>
+
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="border-t border-darkBorder bg-darkBg/50 backdrop-blur-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+            <div class="grid md:grid-cols-4 gap-8 mb-8">
+                <div>
+                    <h3 class="font-heading font-bold text-white mb-4">Resume<span class="gradient-text">SuperHero</span></h3>
+                    <p class="text-slate-400 text-sm">AI-powered career coaching platform</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Legal</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="privacy.html" class="text-slate-400 hover:text-white transition-colors">Privacy Policy</a></li>
+                        <li><a href="terms.html" class="text-slate-400 hover:text-white transition-colors">Terms of Service</a></li>
+                        <li><a href="cookies.html" class="text-slate-400 hover:text-white transition-colors">Cookie Policy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Product</h4>
+                    <ul class="space-y-2 text-sm">
+                        <li><a href="index.html#features" class="text-slate-400 hover:text-white transition-colors">Features</a></li>
+                        <li><a href="index.html#pricing" class="text-slate-400 hover:text-white transition-colors">Pricing</a></li>
+                        <li><a href="index.html#faq" class="text-slate-400 hover:text-white transition-colors">FAQ</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Contact</h4>
+                    <a href="mailto:jarvis.stark1985@gmail.com" class="text-slate-400 hover:text-white transition-colors text-sm">jarvis.stark1985@gmail.com</a>
+                </div>
+            </div>
+            <div class="border-t border-darkBorder pt-8">
+                <p class="text-slate-400 text-sm text-center">© 2026 Resume SuperHero. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

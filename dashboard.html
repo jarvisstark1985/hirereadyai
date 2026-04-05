@@ -25,14 +25,10 @@
         *{margin:0;padding:0;box-sizing:border-box}
         body{font-family:'Inter',sans-serif;background:#0a0e1a;color:#e2e8f0;overflow:hidden;height:100vh}
         h1,h2,h3,h4,h5,h6{font-family:'Space Grotesk',sans-serif}
-        ::-webkit-scrollbar{width:6px}
-        ::-webkit-scrollbar-track{background:#0f172a}
-        ::-webkit-scrollbar-thumb{background:#334155;border-radius:3px}
-        ::-webkit-scrollbar-thumb:hover{background:#475569}
+        ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#0f172a}::-webkit-scrollbar-thumb{background:#334155;border-radius:3px}::-webkit-scrollbar-thumb:hover{background:#475569}
         .glass{background:rgba(30,41,59,.6);backdrop-filter:blur(20px);border:1px solid rgba(51,65,85,.5)}
         .glass-hover:hover{background:rgba(30,41,59,.8);border-color:rgba(99,102,241,.4);transform:translateY(-1px);box-shadow:0 8px 25px rgba(99,102,241,.15)}
         .glow-blue{box-shadow:0 0 20px rgba(59,130,246,.15)}
-        .glow-violet{box-shadow:0 0 20px rgba(139,92,246,.15)}
         .gradient-text{background:linear-gradient(135deg,#3b82f6,#8b5cf6,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
         .sidebar{width:260px;min-width:260px;height:100vh;background:rgba(15,23,42,.95);border-right:1px solid rgba(51,65,85,.5);display:flex;flex-direction:column;transition:transform .3s ease;z-index:50}
         .sidebar.collapsed{transform:translateX(-260px);min-width:0;width:0}
@@ -40,64 +36,81 @@
         .nav-btn:hover{background:rgba(99,102,241,.08);color:#e2e8f0}
         .nav-btn.active{background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(139,92,246,.1));color:#a5b4fc;border-color:rgba(99,102,241,.25)}
         .nav-btn .icon{width:20px;text-align:center;font-size:1.1rem}
-        .section{display:none;animation:fadeSlide .35s ease}
-        .section.active{display:block}
+        .section{display:none;animation:fadeSlide .35s ease}.section.active{display:block}
         @keyframes fadeSlide{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-        .card{background:rgba(30,41,59,.5);border:1px solid rgba(51,65,85,.5);border-radius:.75rem;transition:all .25s}
-        .card:hover{border-color:rgba(51,65,85,.8)}
+        .card{background:rgba(30,41,59,.5);border:1px solid rgba(51,65,85,.5);border-radius:.75rem;transition:all .25s}.card:hover{border-color:rgba(51,65,85,.8)}
         .input{width:100%;background:rgba(15,23,42,.6);border:1px solid rgba(51,65,85,.6);color:#e2e8f0;padding:.65rem .85rem;border-radius:.5rem;font-size:.9rem;transition:all .2s;outline:none}
-        .input:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.1)}
-        .input::placeholder{color:#475569}
+        .input:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.1)}.input::placeholder{color:#475569}
         textarea.input{resize:vertical;min-height:80px}
         .btn-primary{background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;padding:.6rem 1.25rem;border-radius:.5rem;font-weight:600;font-size:.875rem;border:none;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem}
         .btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(99,102,241,.3)}
-        .btn-primary:disabled{opacity:.5;cursor:not-allowed;transform:none;box-shadow:none}
         .btn-secondary{background:rgba(30,41,59,.6);color:#e2e8f0;padding:.6rem 1.25rem;border-radius:.5rem;font-weight:500;font-size:.875rem;border:1px solid rgba(51,65,85,.6);cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.5rem}
         .btn-secondary:hover{background:rgba(99,102,241,.1);border-color:rgba(99,102,241,.3)}
         .btn-sm{padding:.4rem .85rem;font-size:.8rem}
         .badge{display:inline-flex;align-items:center;padding:.2rem .65rem;border-radius:1rem;font-size:.7rem;font-weight:600;letter-spacing:.03em}
         .progress-track{height:6px;background:rgba(51,65,85,.4);border-radius:3px;overflow:hidden}
         .progress-fill{height:100%;border-radius:3px;transition:width .6s ease}
-        .typing-dot{width:6px;height:6px;border-radius:50%;background:#94a3b8;animation:bounce .6s infinite alternate}
-        .typing-dot:nth-child(2){animation-delay:.2s}
-        .typing-dot:nth-child(3){animation-delay:.4s}
-        @keyframes bounce{to{transform:translateY(-6px);opacity:1}from{opacity:.4}}
         .ai-msg{background:linear-gradient(135deg,rgba(99,102,241,.08),rgba(139,92,246,.05));border:1px solid rgba(99,102,241,.15);border-radius:.75rem;padding:1rem;margin:.5rem 0}
-        .user-msg{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.15);border-radius:.75rem;padding:1rem;margin:.5rem 0;margin-left:2rem}
         .resume-preview{background:#fff;color:#1a1a1a;border-radius:.5rem;padding:2.5rem;font-family:'Inter',sans-serif;line-height:1.6;max-height:70vh;overflow-y:auto}
         .resume-preview h1{color:#1a1a1a;font-size:1.5rem;font-weight:700;margin-bottom:.25rem}
         .resume-preview h2{color:#3b82f6;font-size:.95rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;border-bottom:2px solid #3b82f6;padding-bottom:.3rem;margin:1.2rem 0 .6rem}
         .resume-preview h3{color:#1a1a1a;font-size:.9rem;font-weight:600;margin-bottom:.15rem}
         .resume-preview p,.resume-preview li{font-size:.82rem;color:#333;line-height:1.5}
-        .resume-preview ul{padding-left:1.2rem;margin:.3rem 0}
         .resume-preview .contact-line{font-size:.8rem;color:#555;margin-bottom:.1rem}
-        .template-card{border:2px solid rgba(51,65,85,.5);border-radius:.75rem;padding:1rem;cursor:pointer;transition:all .2s;text-align:center}
+        .template-card{border:2px solid rgba(51,65,85,.5);border-radius:.75rem;padding:.75rem;cursor:pointer;transition:all .2s;text-align:center}
         .template-card:hover,.template-card.selected{border-color:#6366f1;background:rgba(99,102,241,.05)}
         .template-card.selected{box-shadow:0 0 15px rgba(99,102,241,.2)}
-        .kanban-col{flex:1;min-width:200px;background:rgba(15,23,42,.4);border-radius:.75rem;padding:.75rem}
-        .kanban-card{background:rgba(30,41,59,.7);border:1px solid rgba(51,65,85,.5);border-radius:.5rem;padding:.75rem;margin-bottom:.5rem;cursor:grab;transition:all .2s;font-size:.85rem}
+        .kanban-col{flex:1;min-width:180px;background:rgba(15,23,42,.4);border-radius:.75rem;padding:.75rem}
+        .kanban-card{background:rgba(30,41,59,.7);border:1px solid rgba(51,65,85,.5);border-radius:.5rem;padding:.75rem;margin-bottom:.5rem;cursor:pointer;transition:all .2s;font-size:.85rem}
         .kanban-card:hover{border-color:rgba(99,102,241,.3);transform:translateY(-1px)}
         .stat-card{position:relative;overflow:hidden}
         .stat-card::after{content:'';position:absolute;top:-50%;right:-30%;width:120px;height:120px;border-radius:50%;opacity:.05}
-        .stat-card.blue::after{background:#3b82f6}
-        .stat-card.violet::after{background:#8b5cf6}
-        .stat-card.amber::after{background:#f59e0b}
-        .stat-card.emerald::after{background:#10b981}
-        .tab{padding:.5rem 1rem;cursor:pointer;color:#94a3b8;border-bottom:2px solid transparent;font-size:.85rem;font-weight:500;transition:all .2s;white-space:nowrap}
-        .tab:hover{color:#e2e8f0}
-        .tab.active{color:#a5b4fc;border-bottom-color:#6366f1}
-        .flash-card{min-height:200px;perspective:1000px;cursor:pointer}
-        .flash-card-inner{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+        .stat-card.blue::after{background:#3b82f6}.stat-card.violet::after{background:#8b5cf6}.stat-card.amber::after{background:#f59e0b}.stat-card.emerald::after{background:#10b981}
+        .flash-card{min-height:180px;perspective:1000px;cursor:pointer}
+        .flash-card-inner{position:relative;width:100%;height:100%;min-height:180px;transition:transform .6s;transform-style:preserve-3d}
         .flash-card-inner.flipped{transform:rotateY(180deg)}
-        .flash-card-front,.flash-card-back{position:absolute;width:100%;height:100%;-webkit-backface-visibility:hidden;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;padding:2rem;border-radius:.75rem;border:2px solid rgba(99,102,241,.3)}
-        .flash-card-front{background:rgba(59,130,246,.1)}
-        .flash-card-back{background:rgba(139,92,246,.1);transform:rotateY(180deg)}
-        .flash-card-text{text-align:center;font-size:1.1rem;font-weight:500;color:#e2e8f0}
-        @media(max-width:768px){.sidebar{position:fixed;left:0;top:0}.sidebar.collapsed{transform:translateX(-260px)}.mobile-toggle{display:flex!important}}
+        .flash-card-front,.flash-card-back{position:absolute;width:100%;height:100%;-webkit-backface-visibility:hidden;backface-visibility:hidden;display:flex;align-items:center;justify-content:center;padding:1.5rem;border-radius:.75rem;border:2px solid rgba(99,102,241,.3)}
+        .flash-card-front{background:rgba(59,130,246,.1)}.flash-card-back{background:rgba(139,92,246,.1);transform:rotateY(180deg)}
+        .flash-card-text{text-align:center;font-size:.95rem;font-weight:500;color:#e2e8f0}
+        .star{color:#f59e0b}.star-empty{color:#334155}
+        .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)}
+        .modal{background:#0f172a;border:1px solid rgba(51,65,85,.6);border-radius:1rem;padding:2rem;max-width:500px;width:90%;max-height:80vh;overflow-y:auto}
+        .login-overlay{position:fixed;inset:0;background:#0a0e1a;z-index:200;display:flex;align-items:center;justify-content:center}
+        .login-box{background:rgba(30,41,59,.5);border:1px solid rgba(51,65,85,.5);border-radius:1rem;padding:2.5rem;max-width:400px;width:90%}
+        @media(max-width:768px){
+            .sidebar{position:fixed;left:0;top:0}.sidebar.collapsed{transform:translateX(-260px)}
+            .mobile-toggle{display:flex!important}
+            .template-card{padding:.5rem}.template-card .text-2xl{font-size:1.2rem}
+        }
     </style>
 </head>
 <body>
-<div class="flex h-screen">
+
+<!-- LOGIN SCREEN -->
+<div class="login-overlay" id="loginOverlay">
+    <div class="login-box">
+        <div class="text-center mb-6">
+            <div class="w-16 h-16 rounded-2xl bg-gradient-to-br from-brand-blue to-brand-violet flex items-center justify-center mx-auto mb-4">
+                <svg width="32" height="32" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+            </div>
+            <h1 class="text-2xl font-bold text-dark-50 font-heading">Resume SuperHero</h1>
+            <p class="text-dark-400 text-sm mt-1">Sign in to your AI career platform</p>
+        </div>
+        <div class="space-y-4">
+            <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Email</label><input class="input" id="loginEmail" type="email" placeholder="you@example.com"></div>
+            <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Password</label><input class="input" id="loginPassword" type="password" placeholder="Enter password" onkeypress="if(event.key==='Enter')doLogin()"></div>
+            <button class="btn-primary w-full justify-center" onclick="doLogin()">Sign In</button>
+            <div class="text-center">
+                <button class="text-xs text-brand-blue hover:text-brand-violet" onclick="showSignup()">Create an account</button>
+                <span class="text-dark-600 mx-2">|</span>
+                <button class="text-xs text-dark-400 hover:text-dark-200" onclick="forgotPassword()">Forgot password?</button>
+            </div>
+        </div>
+        <div id="loginMsg" class="mt-3 text-center text-xs"></div>
+    </div>
+</div>
+
+<div class="flex h-screen" id="appContainer" style="display:none">
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="p-5 border-b border-dark-600/50">
@@ -113,13 +126,13 @@
         </div>
         <nav class="flex-1 overflow-y-auto py-3" id="navList">
             <div class="px-3 mb-1"><span class="text-[10px] font-semibold text-dark-500 uppercase tracking-wider px-2">MAIN</span></div>
-            <div class="nav-btn active" data-section="dashboard" onclick="nav('dashboard')"><span class="icon">📊</span>Dashboard</div>
-            <div class="nav-btn" data-section="resume" onclick="nav('resume')"><span class="icon">📄</span>Resume Builder</div>
-            <div class="nav-btn" data-section="interview" onclick="nav('interview')"><span class="icon">🎯</span>Interview Coach</div>
+            <div class="nav-btn active" data-section="dashboard" onclick="nav('dashboard')"><span class="icon">🏠</span>Dashboard</div>
+            <div class="nav-btn" data-section="resume" onclick="nav('resume')"><span class="icon">🦸</span>SuperHero Resume Creator</div>
+            <div class="nav-btn" data-section="interview" onclick="nav('interview')"><span class="icon">🛡️</span>SuperHero Interview Prep</div>
             <div class="px-3 mt-3 mb-1"><span class="text-[10px] font-semibold text-dark-500 uppercase tracking-wider px-2">TOOLS</span></div>
-            <div class="nav-btn" data-section="jobs" onclick="nav('jobs')"><span class="icon">💼</span>Job Tracker</div>
-            <div class="nav-btn" data-section="salary" onclick="nav('salary')"><span class="icon">💰</span>Salary Intel</div>
-            <div class="nav-btn" data-section="linkedin" onclick="nav('linkedin')"><span class="icon">🔗</span>LinkedIn Pro</div>
+            <div class="nav-btn" data-section="jobs" onclick="nav('jobs')"><span class="icon">⚡</span>Job Tracker & Auto-Apply</div>
+            <div class="nav-btn" data-section="salary" onclick="nav('salary')"><span class="icon">💎</span>Salary Intel</div>
+            <div class="nav-btn" data-section="linkedin" onclick="nav('linkedin')"><span class="icon">🔱</span>LinkedIn Pro</div>
             <div class="px-3 mt-3 mb-1"><span class="text-[10px] font-semibold text-dark-500 uppercase tracking-wider px-2">GROWTH</span></div>
             <div class="nav-btn" data-section="roadmap" onclick="nav('roadmap')"><span class="icon">🗺️</span>Career Roadmap</div>
             <div class="nav-btn" data-section="settings" onclick="nav('settings')"><span class="icon">⚙️</span>Settings</div>
@@ -132,17 +145,13 @@
                     <div class="text-[10px] text-dark-400 truncate" id="sidebarEmail">user@email.com</div>
                 </div>
             </div>
-            <button onclick="logout()" class="btn-secondary btn-sm w-full justify-center text-dark-300 hover:text-brand-rose">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>
-                Sign Out
-            </button>
+            <button onclick="doLogout()" class="btn-secondary btn-sm w-full justify-center text-dark-300 hover:text-brand-rose">Sign Out</button>
         </div>
     </aside>
 
     <!-- MAIN -->
     <main class="flex-1 flex flex-col overflow-hidden">
-        <!-- TOP BAR -->
-        <header class="h-14 flex items-center justify-between px-6 border-b border-dark-600/50 bg-dark-800/80 backdrop-blur-md flex-shrink-0">
+        <header class="h-14 flex items-center justify-between px-6 border-b border-dark-600/50 bg-dark-800/80 backdrop-filter backdrop-blur-md flex-shrink-0">
             <div class="flex items-center gap-3">
                 <button onclick="toggleSidebar()" class="hidden mobile-toggle w-8 h-8 rounded-lg glass items-center justify-center text-dark-300 hover:text-dark-50 cursor-pointer">☰</button>
                 <h2 class="text-base font-semibold text-dark-100 font-heading" id="pageTitle">Dashboard</h2>
@@ -155,7 +164,6 @@
             </div>
         </header>
 
-        <!-- CONTENT SCROLL AREA -->
         <div class="flex-1 overflow-y-auto" id="contentArea">
             <div class="max-w-6xl mx-auto p-6">
 
@@ -163,44 +171,41 @@
 <div id="sec-dashboard" class="section active">
     <div class="relative overflow-hidden rounded-xl p-8 mb-6" style="background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(99,102,241,.1),rgba(139,92,246,.08))">
         <div class="absolute top-0 right-0 w-64 h-64 bg-brand-violet/5 rounded-full -translate-y-1/2 translate-x-1/4"></div>
-        <h1 class="text-3xl font-bold text-dark-50 font-heading mb-1">Welcome back, <span id="welcomeName" class="gradient-text">User</span></h1>
-        <p class="text-dark-300 text-sm">Your AI-powered career journey continues. Here's where you stand.</p>
+        <h1 class="text-3xl font-bold text-dark-50 font-heading mb-1">🦸 Welcome back, <span id="welcomeName" class="gradient-text">Hero</span></h1>
+        <p class="text-dark-300 text-sm">Your AI-powered career journey continues. Here's your mission status.</p>
     </div>
-
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
-        <div class="card p-5 stat-card blue"><div class="text-dark-400 text-xs font-semibold mb-1">Profile Score</div><div class="text-2xl font-bold text-dark-50" id="statProfile">0%</div><div class="progress-track mt-2"><div class="progress-fill bg-brand-blue" id="profileBar" style="width:0%"></div></div></div>
-        <div class="card p-5 stat-card violet"><div class="text-dark-400 text-xs font-semibold mb-1">Resumes Built</div><div class="text-2xl font-bold text-dark-50" id="statResumes">0</div><div class="text-xs text-dark-400 mt-2">AI-generated</div></div>
-        <div class="card p-5 stat-card emerald"><div class="text-dark-400 text-xs font-semibold mb-1">Interviews Done</div><div class="text-2xl font-bold text-dark-50" id="statInterviews">0</div><div class="text-xs text-dark-400 mt-2">Avg: <span id="avgScore">--</span></div></div>
-        <div class="card p-5 stat-card amber"><div class="text-dark-400 text-xs font-semibold mb-1">Jobs Tracked</div><div class="text-2xl font-bold text-dark-50" id="statJobs">0</div><div class="text-xs text-dark-400 mt-2"><span id="activeApps">0</span> applied</div></div>
+        <div class="card p-5 stat-card blue"><div class="text-dark-400 text-xs font-semibold mb-1">🛡️ Profile Score</div><div class="text-2xl font-bold text-dark-50" id="statProfile">0%</div><div class="progress-track mt-2"><div class="progress-fill bg-brand-blue" id="profileBar" style="width:0%"></div></div></div>
+        <div class="card p-5 stat-card violet"><div class="text-dark-400 text-xs font-semibold mb-1">🦸 Resumes Built</div><div class="text-2xl font-bold text-dark-50" id="statResumes">0</div><div class="text-xs text-dark-400 mt-2">AI-generated</div></div>
+        <div class="card p-5 stat-card emerald"><div class="text-dark-400 text-xs font-semibold mb-1">⚡ Interviews Done</div><div class="text-2xl font-bold text-dark-50" id="statInterviews">0</div><div class="text-xs text-dark-400 mt-2">Avg: <span id="avgScore">--</span></div></div>
+        <div class="card p-5 stat-card amber"><div class="text-dark-400 text-xs font-semibold mb-1">💎 Jobs Tracked</div><div class="text-2xl font-bold text-dark-50" id="statJobs">0</div><div class="text-xs text-dark-400 mt-2"><span id="activeApps">0</span> applied</div></div>
     </div>
-
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div class="card p-5 cursor-pointer glass-hover" onclick="nav('resume')">
-            <div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 rounded-lg bg-brand-blue/10 flex items-center justify-center text-lg">📄</div><h3 class="font-semibold text-dark-100 text-sm">Build Resume</h3></div>
-            <p class="text-xs text-dark-400">AI writes your resume in minutes. Just answer a few questions.</p>
+            <div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 rounded-lg bg-brand-blue/10 flex items-center justify-center text-lg">🦸</div><h3 class="font-semibold text-dark-100 text-sm">SuperHero Resume Creator</h3></div>
+            <p class="text-xs text-dark-400">50 stunning templates. AI writes your resume in minutes.</p>
         </div>
         <div class="card p-5 cursor-pointer glass-hover" onclick="nav('interview')">
-            <div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 rounded-lg bg-brand-violet/10 flex items-center justify-center text-lg">🎯</div><h3 class="font-semibold text-dark-100 text-sm">Mock Interview</h3></div>
-            <p class="text-xs text-dark-400">Practice with AI interviewer. Get instant feedback and scoring.</p>
+            <div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 rounded-lg bg-brand-violet/10 flex items-center justify-center text-lg">🛡️</div><h3 class="font-semibold text-dark-100 text-sm">SuperHero Interview Prep</h3></div>
+            <p class="text-xs text-dark-400">Voice AI interviewer with 100-point scoring system.</p>
         </div>
-        <div class="card p-5 cursor-pointer glass-hover" onclick="nav('linkedin')">
-            <div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 rounded-lg bg-brand-emerald/10 flex items-center justify-center text-lg">🔗</div><h3 class="font-semibold text-dark-100 text-sm">Optimize LinkedIn</h3></div>
-            <p class="text-xs text-dark-400">AI rewrites your profile to attract 3x more recruiters.</p>
+        <div class="card p-5 cursor-pointer glass-hover" onclick="nav('jobs')">
+            <div class="flex items-center gap-3 mb-2"><div class="w-10 h-10 rounded-lg bg-brand-emerald/10 flex items-center justify-center text-lg">⚡</div><h3 class="font-semibold text-dark-100 text-sm">1-Click Auto Apply</h3></div>
+            <p class="text-xs text-dark-400">Auto-submit to Indeed, Monster & ZipRecruiter instantly.</p>
         </div>
     </div>
-
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
         <div class="card p-5">
-            <h3 class="font-semibold text-dark-100 mb-4 font-heading text-sm">Recent Activity</h3>
+            <h3 class="font-semibold text-dark-100 mb-4 font-heading text-sm">📊 Recent Activity</h3>
             <div class="space-y-3" id="activityFeed">
                 <div class="flex items-start gap-3"><div class="w-2 h-2 rounded-full bg-brand-blue mt-1.5 flex-shrink-0"></div><div><p class="text-sm text-dark-200">Welcome to Resume SuperHero!</p><p class="text-[10px] text-dark-500">Just now</p></div></div>
             </div>
         </div>
         <div class="card p-5">
-            <h3 class="font-semibold text-dark-100 mb-4 font-heading text-sm">Career Tips</h3>
+            <h3 class="font-semibold text-dark-100 mb-4 font-heading text-sm">💡 Career Tips</h3>
             <div class="space-y-3 text-xs" id="tipsList">
-                <div class="ai-msg"><strong class="text-brand-indigo">Tip:</strong> Resumes with quantified achievements get 40% more callbacks. Use numbers!</div>
-                <div class="ai-msg"><strong class="text-brand-indigo">Tip:</strong> Best time to apply: Monday-Wednesday, 6am-10am in employer's timezone.</div>
+                <div class="ai-msg"><strong class="text-brand-indigo">Tip:</strong> Resumes with quantified achievements get 40% more callbacks.</div>
+                <div class="ai-msg"><strong class="text-brand-indigo">Tip:</strong> Best time to apply: Monday-Wednesday, 6am-10am employer timezone.</div>
                 <div class="ai-msg"><strong class="text-brand-indigo">Tip:</strong> Professional summaries increase interview chances by 36%.</div>
             </div>
         </div>
@@ -210,10 +215,9 @@
 <!-- ============ RESUME BUILDER ============ -->
 <div id="sec-resume" class="section">
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-dark-50 font-heading">AI Resume Builder</h1>
-        <p class="text-dark-400 text-sm mt-1">Answer a few questions and our AI builds your complete, ATS-optimized resume.</p>
+        <h1 class="text-2xl font-bold text-dark-50 font-heading">🦸 SuperHero Resume Creator</h1>
+        <p class="text-dark-400 text-sm mt-1">50 stunning templates. AI writes your complete, ATS-optimized resume.</p>
     </div>
-
     <div class="flex items-center gap-2 mb-6 flex-wrap" id="resumeSteps">
         <div class="flex items-center gap-2 step-indicator" data-step="1"><div class="w-7 h-7 rounded-full bg-brand-indigo text-white text-xs font-bold flex items-center justify-center">1</div><span class="text-xs text-dark-200 hidden sm:inline">Basics</span></div>
         <div class="w-8 h-px bg-dark-600"></div>
@@ -223,9 +227,8 @@
         <div class="w-8 h-px bg-dark-600"></div>
         <div class="flex items-center gap-2 step-indicator" data-step="4"><div class="w-7 h-7 rounded-full bg-dark-600 text-dark-400 text-xs font-bold flex items-center justify-center">4</div><span class="text-xs text-dark-400 hidden sm:inline">Skills</span></div>
         <div class="w-8 h-px bg-dark-600"></div>
-        <div class="flex items-center gap-2 step-indicator" data-step="5"><div class="w-7 h-7 rounded-full bg-dark-600 text-dark-400 text-xs font-bold flex items-center justify-center">5</div><span class="text-xs text-dark-400 hidden sm:inline">Generate</span></div>
+        <div class="flex items-center gap-2 step-indicator" data-step="5"><div class="w-7 h-7 rounded-full bg-dark-600 text-dark-400 text-xs font-bold flex items-center justify-center">5</div><span class="text-xs text-dark-400 hidden sm:inline">Template</span></div>
     </div>
-
     <!-- Step 1: Basics -->
     <div id="rStep1" class="resume-step">
         <div class="card p-6">
@@ -243,126 +246,121 @@
             <div class="flex justify-end mt-6"><button class="btn-primary" onclick="resumeNext(2)">Continue →</button></div>
         </div>
     </div>
-
     <!-- Step 2: Experience -->
     <div id="rStep2" class="resume-step" style="display:none">
         <div class="card p-6">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-lg font-semibold text-dark-100 font-heading">Work Experience</h2>
-                <button class="btn-secondary btn-sm" onclick="addExperience()">+ Add Position</button>
-            </div>
-            <p class="text-xs text-dark-400 mb-4">Write brief descriptions — AI will expand them into powerful, quantified bullet points.</p>
+            <div class="flex items-center justify-between mb-4"><h2 class="text-lg font-semibold text-dark-100 font-heading">Work Experience</h2><button class="btn-secondary btn-sm" onclick="addExperience()">+ Add Position</button></div>
+            <p class="text-xs text-dark-400 mb-4">Write brief descriptions — AI will expand them into powerful bullet points.</p>
             <div id="experienceList" class="space-y-4">
                 <div class="card p-4 experience-entry">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
-                        <input class="input exp-title" placeholder="Job Title">
-                        <input class="input exp-company" placeholder="Company Name">
-                        <input class="input exp-dates" placeholder="Dates (Jan 2022 - Present)">
-                        <input class="input exp-location" placeholder="Location">
+                        <input class="input exp-title" placeholder="Job Title"><input class="input exp-company" placeholder="Company Name">
+                        <input class="input exp-dates" placeholder="Dates (Jan 2022 - Present)"><input class="input exp-location" placeholder="Location">
                     </div>
                     <textarea class="input exp-desc" placeholder="Brief description of what you did. AI will enhance this."></textarea>
                 </div>
             </div>
-            <div class="flex justify-between mt-6">
-                <button class="btn-secondary" onclick="resumeNext(1)">← Back</button>
-                <button class="btn-primary" onclick="resumeNext(3)">Continue →</button>
-            </div>
+            <div class="flex justify-between mt-6"><button class="btn-secondary" onclick="resumeNext(1)">← Back</button><button class="btn-primary" onclick="resumeNext(3)">Continue →</button></div>
         </div>
     </div>
-
     <!-- Step 3: Education -->
     <div id="rStep3" class="resume-step" style="display:none">
         <div class="card p-6">
-            <div class="flex items-center justify-between mb-4">
-                <h2 class="text-lg font-semibold text-dark-100 font-heading">Education</h2>
-                <button class="btn-secondary btn-sm" onclick="addEducation()">+ Add School</button>
-            </div>
+            <div class="flex items-center justify-between mb-4"><h2 class="text-lg font-semibold text-dark-100 font-heading">Education</h2><button class="btn-secondary btn-sm" onclick="addEducation()">+ Add School</button></div>
             <div id="educationList" class="space-y-4">
                 <div class="card p-4 education-entry">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-                        <input class="input edu-degree" placeholder="Degree (e.g. B.S. Computer Science)">
-                        <input class="input edu-school" placeholder="University / School Name">
-                        <input class="input edu-year" placeholder="Graduation Year">
-                        <input class="input edu-gpa" placeholder="GPA (optional)">
+                        <input class="input edu-degree" placeholder="Degree (e.g. B.S. Computer Science)"><input class="input edu-school" placeholder="University / School Name">
+                        <input class="input edu-year" placeholder="Graduation Year"><input class="input edu-gpa" placeholder="GPA (optional)">
                     </div>
                 </div>
             </div>
-            <div class="flex justify-between mt-6">
-                <button class="btn-secondary" onclick="resumeNext(2)">← Back</button>
-                <button class="btn-primary" onclick="resumeNext(4)">Continue →</button>
-            </div>
+            <div class="flex justify-between mt-6"><button class="btn-secondary" onclick="resumeNext(2)">← Back</button><button class="btn-primary" onclick="resumeNext(4)">Continue →</button></div>
         </div>
     </div>
-
     <!-- Step 4: Skills -->
     <div id="rStep4" class="resume-step" style="display:none">
         <div class="card p-6">
             <h2 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Skills & Certifications</h2>
             <div class="mb-4">
-                <label class="block text-xs font-medium text-dark-400 mb-2">Add Skills (press Enter to add)</label>
-                <div class="flex gap-2 mb-3">
-                    <input class="input" id="skillInput" placeholder="Type a skill..." onkeypress="if(event.key==='Enter') addSkill()">
-                    <button class="btn-primary btn-sm" onclick="addSkill()">Add</button>
-                </div>
+                <label class="block text-xs font-medium text-dark-400 mb-2">Add Skills (press Enter)</label>
+                <div class="flex gap-2 mb-3"><input class="input" id="skillInput" placeholder="Type a skill..." onkeypress="if(event.key==='Enter')addSkill()"><button class="btn-primary btn-sm" onclick="addSkill()">Add</button></div>
                 <div class="flex flex-wrap gap-2" id="skillsList"></div>
             </div>
-            <div class="mt-4">
-                <label class="block text-xs font-medium text-dark-400 mb-2">Certifications (optional)</label>
-                <div id="certList" class="space-y-2">
-                    <input class="input" placeholder="e.g. AWS Certified Solutions Architect">
-                </div>
-            </div>
-            <div class="flex justify-between mt-6">
-                <button class="btn-secondary" onclick="resumeNext(3)">← Back</button>
-                <button class="btn-primary" onclick="resumeNext(5)">Continue →</button>
-            </div>
+            <div class="flex justify-between mt-6"><button class="btn-secondary" onclick="resumeNext(3)">← Back</button><button class="btn-primary" onclick="resumeNext(5)">Continue →</button></div>
         </div>
     </div>
-
-    <!-- Step 5: Template & Generate -->
+    <!-- Step 5: Template & Generate (50 themes) -->
     <div id="rStep5" class="resume-step" style="display:none">
         <div class="card p-6 mb-6">
-            <h2 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Choose Your Template</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="templateGrid">
-                <div class="template-card" onclick="selectTheme('classic')" data-theme="classic">
-                    <div class="text-3xl mb-2">📋</div>
-                    <p class="template-name text-sm font-semibold mb-2">Classic</p>
-                    <div class="text-xs text-dark-400">ATS-Friendly</div>
-                </div>
-                <div class="template-card" onclick="selectTheme('modern')" data-theme="modern">
-                    <div class="text-3xl mb-2">✨</div>
-                    <p class="template-name text-sm font-semibold mb-2">Modern</p>
-                    <div class="text-xs text-dark-400">Contemporary</div>
-                </div>
-                <div class="template-card" onclick="selectTheme('minimalist')" data-theme="minimalist">
-                    <div class="text-3xl mb-2">⚡</div>
-                    <p class="template-name text-sm font-semibold mb-2">Minimalist</p>
-                    <div class="text-xs text-dark-400">Clean Design</div>
-                </div>
-                <div class="template-card" onclick="selectTheme('creative')" data-theme="creative">
-                    <div class="text-3xl mb-2">🎨</div>
-                    <p class="template-name text-sm font-semibold mb-2">Creative</p>
-                    <div class="text-xs text-dark-400">Bold & Colorful</div>
-                </div>
+            <h2 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Choose Your Template (50 Options)</h2>
+            <div class="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-3" id="templateGrid">
+                <div class="template-card selected" onclick="selectTheme('classic')" data-theme="classic"><div class="text-2xl mb-1">📄</div><p class="text-xs font-semibold mb-1">Classic</p><div class="text-[10px] text-dark-400">Professional</div></div>
+                <div class="template-card" onclick="selectTheme('corporate')" data-theme="corporate"><div class="text-2xl mb-1">🏢</div><p class="text-xs font-semibold mb-1">Corporate</p><div class="text-[10px] text-dark-400">Enterprise</div></div>
+                <div class="template-card" onclick="selectTheme('executive')" data-theme="executive"><div class="text-2xl mb-1">👔</div><p class="text-xs font-semibold mb-1">Executive</p><div class="text-[10px] text-dark-400">Leadership</div></div>
+                <div class="template-card" onclick="selectTheme('traditional')" data-theme="traditional"><div class="text-2xl mb-1">📋</div><p class="text-xs font-semibold mb-1">Traditional</p><div class="text-[10px] text-dark-400">Timeless</div></div>
+                <div class="template-card" onclick="selectTheme('formal')" data-theme="formal"><div class="text-2xl mb-1">🎩</div><p class="text-xs font-semibold mb-1">Formal</p><div class="text-[10px] text-dark-400">Elegant</div></div>
+                <div class="template-card" onclick="selectTheme('academic')" data-theme="academic"><div class="text-2xl mb-1">🎓</div><p class="text-xs font-semibold mb-1">Academic</p><div class="text-[10px] text-dark-400">Scholar</div></div>
+                <div class="template-card" onclick="selectTheme('clean')" data-theme="clean"><div class="text-2xl mb-1">✨</div><p class="text-xs font-semibold mb-1">Clean</p><div class="text-[10px] text-dark-400">Modern</div></div>
+                <div class="template-card" onclick="selectTheme('sleek')" data-theme="sleek"><div class="text-2xl mb-1">⚡</div><p class="text-xs font-semibold mb-1">Sleek</p><div class="text-[10px] text-dark-400">Contemporary</div></div>
+                <div class="template-card" onclick="selectTheme('tech')" data-theme="tech"><div class="text-2xl mb-1">💻</div><p class="text-xs font-semibold mb-1">Tech</p><div class="text-[10px] text-dark-400">Digital</div></div>
+                <div class="template-card" onclick="selectTheme('startup')" data-theme="startup"><div class="text-2xl mb-1">🚀</div><p class="text-xs font-semibold mb-1">Startup</p><div class="text-[10px] text-dark-400">Innovation</div></div>
+                <div class="template-card" onclick="selectTheme('minimal')" data-theme="minimal"><div class="text-2xl mb-1">▪️</div><p class="text-xs font-semibold mb-1">Minimal</p><div class="text-[10px] text-dark-400">Simplistic</div></div>
+                <div class="template-card" onclick="selectTheme('geometric')" data-theme="geometric"><div class="text-2xl mb-1">🔶</div><p class="text-xs font-semibold mb-1">Geometric</p><div class="text-[10px] text-dark-400">Abstract</div></div>
+                <div class="template-card" onclick="selectTheme('artistic')" data-theme="artistic"><div class="text-2xl mb-1">🎨</div><p class="text-xs font-semibold mb-1">Artistic</p><div class="text-[10px] text-dark-400">Creative</div></div>
+                <div class="template-card" onclick="selectTheme('bold')" data-theme="bold"><div class="text-2xl mb-1">💥</div><p class="text-xs font-semibold mb-1">Bold</p><div class="text-[10px] text-dark-400">Striking</div></div>
+                <div class="template-card" onclick="selectTheme('colorful')" data-theme="colorful"><div class="text-2xl mb-1">🌈</div><p class="text-xs font-semibold mb-1">Colorful</p><div class="text-[10px] text-dark-400">Vibrant</div></div>
+                <div class="template-card" onclick="selectTheme('designer')" data-theme="designer"><div class="text-2xl mb-1">✏️</div><p class="text-xs font-semibold mb-1">Designer</p><div class="text-[10px] text-dark-400">Portfolio</div></div>
+                <div class="template-card" onclick="selectTheme('portfolio')" data-theme="portfolio"><div class="text-2xl mb-1">🖼️</div><p class="text-xs font-semibold mb-1">Portfolio</p><div class="text-[10px] text-dark-400">Showcase</div></div>
+                <div class="template-card" onclick="selectTheme('modern-art')" data-theme="modern-art"><div class="text-2xl mb-1">🎭</div><p class="text-xs font-semibold mb-1">Modern Art</p><div class="text-[10px] text-dark-400">Expressive</div></div>
+                <div class="template-card" onclick="selectTheme('engineer')" data-theme="engineer"><div class="text-2xl mb-1">⚙️</div><p class="text-xs font-semibold mb-1">Engineer</p><div class="text-[10px] text-dark-400">Technical</div></div>
+                <div class="template-card" onclick="selectTheme('software')" data-theme="software"><div class="text-2xl mb-1">💾</div><p class="text-xs font-semibold mb-1">Software</p><div class="text-[10px] text-dark-400">Developer</div></div>
+                <div class="template-card" onclick="selectTheme('devops')" data-theme="devops"><div class="text-2xl mb-1">🔧</div><p class="text-xs font-semibold mb-1">DevOps</p><div class="text-[10px] text-dark-400">Infrastructure</div></div>
+                <div class="template-card" onclick="selectTheme('data-science')" data-theme="data-science"><div class="text-2xl mb-1">📊</div><p class="text-xs font-semibold mb-1">Data Science</p><div class="text-[10px] text-dark-400">Analytics</div></div>
+                <div class="template-card" onclick="selectTheme('finance')" data-theme="finance"><div class="text-2xl mb-1">💰</div><p class="text-xs font-semibold mb-1">Finance</p><div class="text-[10px] text-dark-400">Accounting</div></div>
+                <div class="template-card" onclick="selectTheme('banking')" data-theme="banking"><div class="text-2xl mb-1">🏦</div><p class="text-xs font-semibold mb-1">Banking</p><div class="text-[10px] text-dark-400">Financial</div></div>
+                <div class="template-card" onclick="selectTheme('consulting')" data-theme="consulting"><div class="text-2xl mb-1">🎯</div><p class="text-xs font-semibold mb-1">Consulting</p><div class="text-[10px] text-dark-400">Strategy</div></div>
+                <div class="template-card" onclick="selectTheme('marketing')" data-theme="marketing"><div class="text-2xl mb-1">📢</div><p class="text-xs font-semibold mb-1">Marketing</p><div class="text-[10px] text-dark-400">Growth</div></div>
+                <div class="template-card" onclick="selectTheme('sales')" data-theme="sales"><div class="text-2xl mb-1">💼</div><p class="text-xs font-semibold mb-1">Sales</p><div class="text-[10px] text-dark-400">Revenue</div></div>
+                <div class="template-card" onclick="selectTheme('healthcare')" data-theme="healthcare"><div class="text-2xl mb-1">⚕️</div><p class="text-xs font-semibold mb-1">Healthcare</p><div class="text-[10px] text-dark-400">Medical</div></div>
+                <div class="template-card" onclick="selectTheme('nursing')" data-theme="nursing"><div class="text-2xl mb-1">💉</div><p class="text-xs font-semibold mb-1">Nursing</p><div class="text-[10px] text-dark-400">Care</div></div>
+                <div class="template-card" onclick="selectTheme('education')" data-theme="education"><div class="text-2xl mb-1">📚</div><p class="text-xs font-semibold mb-1">Education</p><div class="text-[10px] text-dark-400">Teaching</div></div>
+                <div class="template-card" onclick="selectTheme('legal')" data-theme="legal"><div class="text-2xl mb-1">⚖️</div><p class="text-xs font-semibold mb-1">Legal</p><div class="text-[10px] text-dark-400">Law</div></div>
+                <div class="template-card" onclick="selectTheme('hr')" data-theme="hr"><div class="text-2xl mb-1">👥</div><p class="text-xs font-semibold mb-1">HR</p><div class="text-[10px] text-dark-400">People</div></div>
+                <div class="template-card" onclick="selectTheme('pm')" data-theme="pm"><div class="text-2xl mb-1">📈</div><p class="text-xs font-semibold mb-1">Product Mgr</p><div class="text-[10px] text-dark-400">Management</div></div>
+                <div class="template-card" onclick="selectTheme('supply-chain')" data-theme="supply-chain"><div class="text-2xl mb-1">🚚</div><p class="text-xs font-semibold mb-1">Supply Chain</p><div class="text-[10px] text-dark-400">Logistics</div></div>
+                <div class="template-card" onclick="selectTheme('operations')" data-theme="operations"><div class="text-2xl mb-1">🔄</div><p class="text-xs font-semibold mb-1">Operations</p><div class="text-[10px] text-dark-400">Efficiency</div></div>
+                <div class="template-card" onclick="selectTheme('brand')" data-theme="brand"><div class="text-2xl mb-1">🎪</div><p class="text-xs font-semibold mb-1">Brand</p><div class="text-[10px] text-dark-400">Identity</div></div>
+                <div class="template-card" onclick="selectTheme('ats-basic')" data-theme="ats-basic"><div class="text-2xl mb-1">🤖</div><p class="text-xs font-semibold mb-1">ATS Basic</p><div class="text-[10px] text-dark-400">ATS-Friendly</div></div>
+                <div class="template-card" onclick="selectTheme('ats-pro')" data-theme="ats-pro"><div class="text-2xl mb-1">🔍</div><p class="text-xs font-semibold mb-1">ATS Pro</p><div class="text-[10px] text-dark-400">Optimized</div></div>
+                <div class="template-card" onclick="selectTheme('ats-clean')" data-theme="ats-clean"><div class="text-2xl mb-1">📝</div><p class="text-xs font-semibold mb-1">ATS Clean</p><div class="text-[10px] text-dark-400">Parser Safe</div></div>
+                <div class="template-card" onclick="selectTheme('min-white')" data-theme="min-white"><div class="text-2xl mb-1">⚪</div><p class="text-xs font-semibold mb-1">White Min</p><div class="text-[10px] text-dark-400">Minimal</div></div>
+                <div class="template-card" onclick="selectTheme('min-grey')" data-theme="min-grey"><div class="text-2xl mb-1">⬜</div><p class="text-xs font-semibold mb-1">Grey Min</p><div class="text-[10px] text-dark-400">Neutral</div></div>
+                <div class="template-card" onclick="selectTheme('min-blue')" data-theme="min-blue"><div class="text-2xl mb-1">🔵</div><p class="text-xs font-semibold mb-1">Blue Min</p><div class="text-[10px] text-dark-400">Accent</div></div>
+                <div class="template-card" onclick="selectTheme('creative-tech')" data-theme="creative-tech"><div class="text-2xl mb-1">🌐</div><p class="text-xs font-semibold mb-1">Creative Tech</p><div class="text-[10px] text-dark-400">Web Design</div></div>
+                <div class="template-card" onclick="selectTheme('infographic')" data-theme="infographic"><div class="text-2xl mb-1">📉</div><p class="text-xs font-semibold mb-1">Infographic</p><div class="text-[10px] text-dark-400">Visual</div></div>
+                <div class="template-card" onclick="selectTheme('two-column')" data-theme="two-column"><div class="text-2xl mb-1">📰</div><p class="text-xs font-semibold mb-1">Two Column</p><div class="text-[10px] text-dark-400">Layout</div></div>
+                <div class="template-card" onclick="selectTheme('dark-mode')" data-theme="dark-mode"><div class="text-2xl mb-1">🌙</div><p class="text-xs font-semibold mb-1">Dark Mode</p><div class="text-[10px] text-dark-400">Standout</div></div>
+                <div class="template-card" onclick="selectTheme('gradient')" data-theme="gradient"><div class="text-2xl mb-1">🌅</div><p class="text-xs font-semibold mb-1">Gradient</p><div class="text-[10px] text-dark-400">Modern</div></div>
+                <div class="template-card" onclick="selectTheme('hero')" data-theme="hero"><div class="text-2xl mb-1">🦸</div><p class="text-xs font-semibold mb-1">SuperHero</p><div class="text-[10px] text-dark-400">Signature</div></div>
+                <div class="template-card" onclick="selectTheme('hybrid')" data-theme="hybrid"><div class="text-2xl mb-1">🔀</div><p class="text-xs font-semibold mb-1">Hybrid</p><div class="text-[10px] text-dark-400">Versatile</div></div>
+                <div class="template-card" onclick="selectTheme('federal')" data-theme="federal"><div class="text-2xl mb-1">🏛️</div><p class="text-xs font-semibold mb-1">Federal</p><div class="text-[10px] text-dark-400">Government</div></div>
             </div>
         </div>
-
         <div class="card p-6">
             <h2 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Preview & Download</h2>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                <div id="resumePreview" class="resume-preview">
-                    <div class="text-center text-dark-400">Resume preview will appear here...</div>
-                </div>
+                <div id="resumePreview" class="resume-preview"><div class="text-center text-dark-400">Resume preview will appear here...</div></div>
                 <div>
                     <p class="text-sm text-dark-300 mb-4">Your resume is ready! Here's what you can do:</p>
                     <div class="space-y-2">
-                        <button class="btn-primary w-full" onclick="generateResume()">Generate Resume</button>
-                        <button class="btn-secondary w-full" onclick="downloadPDF()">Download PDF</button>
-                        <button class="btn-secondary w-full" onclick="resumeNext(1)">Edit Information</button>
+                        <button class="btn-primary w-full" onclick="generateResume()">🦸 Generate Resume</button>
+                        <button class="btn-secondary w-full" onclick="downloadPDF()">📥 Download PDF</button>
+                        <button class="btn-secondary w-full" onclick="resumeNext(1)">✏️ Edit Information</button>
                     </div>
                     <div class="mt-6 p-4 bg-brand-blue/10 rounded-lg border border-brand-blue/20">
-                        <p class="text-xs text-brand-blue font-semibold mb-2">ATS Score: <span id="atsScore">85%</span></p>
-                        <p class="text-xs text-dark-400">Your resume is optimized for Applicant Tracking Systems. Ready to apply!</p>
+                        <p class="text-xs text-brand-blue font-semibold mb-2">🤖 ATS Score: <span id="atsScore">85%</span></p>
+                        <p class="text-xs text-dark-400">Optimized for Applicant Tracking Systems. Ready to apply!</p>
                     </div>
                 </div>
             </div>
@@ -373,203 +371,126 @@
 <!-- ============ INTERVIEW PREP ============ -->
 <div id="sec-interview" class="section">
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-dark-50 font-heading flex items-center gap-2">
-            <span>🛡️</span> SuperHero Interview Prep
-        </h1>
-        <p class="text-dark-400 text-sm mt-1">Practice with an interviewer that thinks like your hiring manager. Get real-time feedback and scoring.</p>
+        <h1 class="text-2xl font-bold text-dark-50 font-heading flex items-center gap-2"><span>🛡️</span> SuperHero Interview Prep</h1>
+        <p class="text-dark-400 text-sm mt-1">100-point scoring system with % improvement tracking. Voice AI interviewer.</p>
     </div>
-
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div class="card p-4 text-center cursor-pointer border-2 border-brand-blue bg-brand-blue/10" onclick="selectInterviewType('behavioral')">
-            <div class="text-2xl mb-2">🎯</div>
-            <div class="font-semibold text-sm text-dark-100">Behavioral</div>
-        </div>
-        <div class="card p-4 text-center cursor-pointer border-2 border-dark-600" onclick="selectInterviewType('technical')">
-            <div class="text-2xl mb-2">💻</div>
-            <div class="font-semibold text-sm text-dark-100">Technical</div>
-        </div>
-        <div class="card p-4 text-center cursor-pointer border-2 border-dark-600" onclick="selectInterviewType('case')">
-            <div class="text-2xl mb-2">📊</div>
-            <div class="font-semibold text-sm text-dark-100">Case Study</div>
-        </div>
-        <div class="card p-4 text-center cursor-pointer border-2 border-dark-600" onclick="selectInterviewType('phone')">
-            <div class="text-2xl mb-2">☎️</div>
-            <div class="font-semibold text-sm text-dark-100">Phone Screen</div>
-        </div>
+        <div class="card p-4 text-center cursor-pointer border-2 border-brand-blue bg-brand-blue/10" onclick="selectInterviewType('behavioral')"><div class="text-2xl mb-2">🎯</div><div class="font-semibold text-sm text-dark-100">Behavioral</div></div>
+        <div class="card p-4 text-center cursor-pointer border-2 border-dark-600" onclick="selectInterviewType('technical')"><div class="text-2xl mb-2">💻</div><div class="font-semibold text-sm text-dark-100">Technical</div></div>
+        <div class="card p-4 text-center cursor-pointer border-2 border-dark-600" onclick="selectInterviewType('case')"><div class="text-2xl mb-2">📊</div><div class="font-semibold text-sm text-dark-100">Case Study</div></div>
+        <div class="card p-4 text-center cursor-pointer border-2 border-dark-600" onclick="selectInterviewType('phone')"><div class="text-2xl mb-2">☎️</div><div class="font-semibold text-sm text-dark-100">Phone Screen</div></div>
     </div>
-
     <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
         <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Target Role</label><input class="input" id="interviewRole" placeholder="Senior Product Manager"></div>
         <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Company</label><input class="input" id="interviewCompany" placeholder="Google, Microsoft"></div>
-        <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Difficulty Level</label><select class="input"><option>Entry Level</option><option>Mid Level</option><option>Senior Level</option><option>Executive</option></select></div>
+        <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Difficulty</label><select class="input" id="interviewDiff"><option>Entry Level</option><option>Mid Level</option><option selected>Senior Level</option><option>Executive</option></select></div>
     </div>
-
+    <!-- Voice Interview -->
     <div class="card p-6 mb-6">
-        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Voice Interview Mode</h3>
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">🎙️ Voice Interview Mode</h3>
         <div class="text-center mb-6">
             <button class="w-28 h-28 rounded-full flex items-center justify-center text-5xl border-4 border-brand-blue bg-gradient-to-br from-brand-blue to-brand-violet hover:from-brand-blue hover:to-brand-indigo" onclick="startVoiceInterview()" id="micButton">🎙️</button>
             <p class="text-dark-400 text-sm mt-3">Click to start voice interview</p>
+            <p class="text-dark-500 text-xs mt-1" id="interviewTimer"></p>
         </div>
-
         <div class="bg-dark-800/50 p-4 rounded-lg mb-4 min-h-20">
             <p class="text-dark-400 text-sm mb-2">Current Question:</p>
             <p class="text-dark-100 font-medium" id="currentQuestion">Tell me about yourself and your career goals.</p>
         </div>
-
         <div class="bg-dark-800/50 p-4 rounded-lg mb-4">
             <p class="text-dark-400 text-sm mb-2">Your Response:</p>
             <p class="text-dark-100" id="userResponse">No response yet. Click the microphone to speak.</p>
         </div>
-
         <div class="bg-dark-700/50 p-4 rounded-lg mb-4">
             <p class="text-dark-400 text-sm mb-2">AI Feedback:</p>
             <p class="text-dark-200 text-sm" id="aiFeedback">Start speaking to receive feedback...</p>
         </div>
-
-        <div class="flex gap-2">
-            <button class="btn-primary" onclick="stopRecording()">Stop Recording</button>
-            <button class="btn-secondary" onclick="nextQuestion()">Next Question</button>
+        <div class="flex gap-2 flex-wrap">
+            <button class="btn-primary" onclick="stopRecording()">⏹️ Stop Recording</button>
+            <button class="btn-secondary" onclick="nextQuestion()">Next Question →</button>
+            <button class="btn-secondary" onclick="readQuestionAloud()">🔊 Read Question</button>
         </div>
     </div>
-
+    <!-- 100-Point Score -->
     <div class="card p-6 mb-6">
-        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Interview Score</h3>
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">📊 Interview Score (100-Point System)</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div class="flex items-center gap-6">
                 <div class="relative w-32 h-32">
                     <svg class="absolute w-full h-full transform -rotate-90" viewBox="0 0 120 120">
                         <circle cx="60" cy="60" r="55" fill="none" stroke="rgba(148,163,184,.2)" stroke-width="8"/>
-                        <circle cx="60" cy="60" r="55" fill="none" stroke="#10b981" stroke-width="8" stroke-dasharray="220 346" stroke-linecap="round"/>
+                        <circle cx="60" cy="60" r="55" fill="none" stroke="#10b981" stroke-width="8" stroke-dasharray="0 346" stroke-linecap="round" id="scoreCirclePath"/>
                     </svg>
                     <div class="absolute inset-0 flex flex-col items-center justify-center">
-                        <div class="text-3xl font-bold text-emerald-500" id="overallScore">82</div>
+                        <div class="text-3xl font-bold text-emerald-500" id="overallScore">0</div>
                         <div class="text-xs text-dark-400">/100</div>
                     </div>
                 </div>
                 <div class="flex-1 space-y-3">
-                    <div>
-                        <div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Content</span><span class="text-brand-blue font-semibold">36/40</span></div>
-                        <div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-blue rounded" style="width:90%"></div></div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Delivery</span><span class="text-brand-amber font-semibold">23/30</span></div>
-                        <div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-amber rounded" style="width:77%"></div></div>
-                    </div>
-                    <div>
-                        <div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Structure</span><span class="text-brand-violet font-semibold">23/30</span></div>
-                        <div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-violet rounded" style="width:77%"></div></div>
-                    </div>
+                    <div><div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Content</span><span class="text-brand-blue font-semibold" id="contentScore">0/40</span></div><div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-blue rounded" style="width:0%" id="contentBar"></div></div></div>
+                    <div><div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Delivery</span><span class="text-brand-amber font-semibold" id="deliveryScore">0/30</span></div><div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-amber rounded" style="width:0%" id="deliveryBar"></div></div></div>
+                    <div><div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Structure</span><span class="text-brand-violet font-semibold" id="structureScore">0/30</span></div><div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-violet rounded" style="width:0%" id="structureBar"></div></div></div>
                 </div>
             </div>
             <div>
                 <div class="mb-4 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-lg">
-                    <p class="text-xs text-emerald-400 font-semibold">📈 +18% improvement since first session</p>
+                    <p class="text-xs text-emerald-400 font-semibold" id="improvementBadge">📈 Complete an interview to start tracking!</p>
                 </div>
                 <div class="space-y-3">
-                    <div class="p-3 bg-emerald-500/10 border-l-4 border-emerald-500 rounded">
+                    <div class="p-3 bg-emerald-500/10 border-l-4 border-emerald-500 rounded" id="strengthsList">
                         <h4 class="text-xs font-semibold text-emerald-400 mb-2">Strengths</h4>
-                        <ul class="text-xs text-emerald-300 space-y-1">
-                            <li>✓ Excellent story structure</li>
-                            <li>✓ Confident tone</li>
-                            <li>✓ Quantified results</li>
-                        </ul>
+                        <p class="text-xs text-emerald-300">Complete an interview to see your strengths</p>
                     </div>
-                    <div class="p-3 bg-amber-500/10 border-l-4 border-amber-500 rounded">
+                    <div class="p-3 bg-amber-500/10 border-l-4 border-amber-500 rounded" id="improvementList">
                         <h4 class="text-xs font-semibold text-amber-400 mb-2">Areas to Improve</h4>
-                        <ul class="text-xs text-amber-300 space-y-1">
-                            <li>• Slow down pace</li>
-                            <li>• Be more specific</li>
-                            <li>• Pause before answering</li>
-                        </ul>
+                        <p class="text-xs text-amber-300">Complete an interview to see areas for growth</p>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <!-- Flash Cards -->
     <div class="card p-6">
-        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Flash Cards</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-            <div class="flash-card" onclick="flipCard('card1')">
-                <div class="flash-card-inner" id="card1">
-                    <div class="flash-card-front"><div class="flash-card-text">Why are you interested in this role?</div></div>
-                    <div class="flash-card-back"><div class="flash-card-text">Focus on alignment with company mission, role responsibilities, and career growth. Show you've researched the company.</div></div>
-                </div>
-            </div>
-            <div class="flash-card" onclick="flipCard('card2')">
-                <div class="flash-card-inner" id="card2">
-                    <div class="flash-card-front"><div class="flash-card-text">Tell me about a time you handled conflict.</div></div>
-                    <div class="flash-card-back"><div class="flash-card-text">Use STAR method: Situation, Task, Action, Result. Focus on positive resolution and what you learned.</div></div>
-                </div>
+        <div class="flex items-center justify-between mb-4">
+            <h3 class="text-lg font-semibold text-dark-100 font-heading">🃏 Flash Cards</h3>
+            <div class="flex gap-2">
+                <button class="btn-secondary btn-sm" onclick="generateMoreCards()">Generate More</button>
+                <button class="btn-secondary btn-sm" onclick="printFlashCardsPDF()">📄 Print PDF</button>
             </div>
         </div>
-        <button class="btn-secondary" onclick="printFlashCards()">Print Flash Cards</button>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4" id="flashCardGrid"></div>
+        <p class="text-xs text-dark-500 text-center" id="flashCardProgress">Click cards to flip. Study all cards to master your interviews.</p>
     </div>
 </div>
 
 <!-- ============ JOB TRACKER ============ -->
 <div id="sec-jobs" class="section">
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-dark-50 font-heading">Job Tracker & Search</h1>
-        <p class="text-dark-400 text-sm mt-1">Find your next opportunity with AI-powered job matching and application tracking.</p>
+        <h1 class="text-2xl font-bold text-dark-50 font-heading">⚡ Job Tracker & Auto-Apply</h1>
+        <p class="text-dark-400 text-sm mt-1">1-click auto-submit to Indeed, Monster & ZipRecruiter. AI-powered job matching.</p>
     </div>
-
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
         <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Jobs Found</div><div class="text-2xl font-bold text-dark-50" id="jobsCount">0</div></div>
         <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Applied</div><div class="text-2xl font-bold text-dark-50" id="appliedCount">0</div></div>
-        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Interviews</div><div class="text-2xl font-bold text-dark-50">0</div></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Interviews</div><div class="text-2xl font-bold text-dark-50" id="interviewCount">0</div></div>
         <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Avg Match</div><div class="text-2xl font-bold text-dark-50" id="avgMatch">0%</div></div>
     </div>
-
     <div class="card p-6 mb-6">
-        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Search Jobs</h3>
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">🔍 Search Jobs</h3>
         <div class="grid grid-cols-1 md:grid-cols-4 gap-3 mb-4">
-            <input class="input" id="jobTitle" placeholder="Job title">
-            <input class="input" id="jobLocation" placeholder="Location">
-            <select class="input"><option>Any Experience Level</option><option>Entry Level</option><option>Mid Level</option><option>Senior</option></select>
-            <button class="btn-primary" onclick="searchJobs()">Search</button>
+            <input class="input" id="jobTitle" placeholder="Job title"><input class="input" id="jobLocation" placeholder="Location">
+            <select class="input" id="jobLevel"><option>Any Level</option><option>Entry</option><option>Mid</option><option>Senior</option><option>Executive</option></select>
+            <button class="btn-primary" onclick="searchJobs()">⚡ Search</button>
         </div>
     </div>
-
-    <div class="space-y-3" id="jobsList">
-        <div class="card p-4">
-            <div class="flex items-start justify-between gap-4">
-                <div class="flex-1">
-                    <h4 class="font-semibold text-dark-100 mb-1">Senior Product Manager</h4>
-                    <p class="text-xs text-dark-400 mb-2">TechCorp Inc. • San Francisco, CA</p>
-                    <p class="text-xs text-dark-300 mb-3">We're looking for an experienced PM to lead our mobile product strategy...</p>
-                    <div class="flex gap-2 flex-wrap">
-                        <span class="badge bg-brand-blue/20 text-brand-blue">5y+ experience</span>
-                        <span class="badge bg-brand-emerald/20 text-brand-emerald">$150-180K</span>
-                    </div>
-                </div>
-                <div class="text-right flex-shrink-0">
-                    <div class="text-2xl font-bold text-brand-emerald mb-2">92%</div>
-                    <p class="text-xs text-dark-400 mb-2">Match Score</p>
-                    <button class="btn-primary btn-sm" onclick="applyJob(1)">Apply</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="mt-8">
-        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Application Tracker (Kanban)</h3>
-        <div class="flex gap-4 overflow-x-auto pb-4">
-            <div class="kanban-col">
-                <h4 class="font-semibold text-dark-100 mb-3 text-sm">Saved</h4>
-                <div class="kanban-card">TechCorp - PM</div>
-            </div>
-            <div class="kanban-col">
-                <h4 class="font-semibold text-dark-100 mb-3 text-sm">Applied</h4>
-                <div class="kanban-card">Google - Manager</div>
-            </div>
-            <div class="kanban-col">
-                <h4 class="font-semibold text-dark-100 mb-3 text-sm">Interviewing</h4>
-                <div class="kanban-card">Facebook - Engineer</div>
-            </div>
-            <div class="kanban-col">
-                <h4 class="font-semibold text-dark-100 mb-3 text-sm">Offered</h4>
-            </div>
+    <div class="space-y-3 mb-6" id="jobsList"></div>
+    <div class="mt-6">
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">📋 Application Tracker</h3>
+        <div class="flex gap-4 overflow-x-auto pb-4" id="kanbanBoard">
+            <div class="kanban-col"><h4 class="font-semibold text-dark-100 mb-3 text-sm">💾 Saved</h4><div id="kanban-saved"></div></div>
+            <div class="kanban-col"><h4 class="font-semibold text-dark-100 mb-3 text-sm">📨 Applied</h4><div id="kanban-applied"></div></div>
+            <div class="kanban-col"><h4 class="font-semibold text-dark-100 mb-3 text-sm">🎤 Interviewing</h4><div id="kanban-interviewing"></div></div>
+            <div class="kanban-col"><h4 class="font-semibold text-dark-100 mb-3 text-sm">🏆 Offered</h4><div id="kanban-offered"></div></div>
         </div>
     </div>
 </div>
@@ -577,30 +498,27 @@
 <!-- ============ SALARY NEGOTIATOR ============ -->
 <div id="sec-salary" class="section">
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-dark-50 font-heading">Salary Negotiator</h1>
-        <p class="text-dark-400 text-sm mt-1">Research market rates, calculate total compensation, and master negotiation tactics.</p>
+        <h1 class="text-2xl font-bold text-dark-50 font-heading">💎 Salary Negotiator</h1>
+        <p class="text-dark-400 text-sm mt-1">Research market rates, calculate compensation, and master negotiation.</p>
     </div>
-
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Market Rate</div><div class="text-2xl font-bold text-dark-50" id="marketRate">$0</div><p class="text-xs text-dark-400 mt-1">Senior PM, SF</p></div>
-        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Your Offer</div><div class="text-2xl font-bold text-dark-50" id="yourOffer">$0</div><p class="text-xs text-dark-400 mt-1">Base salary</p></div>
-        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Gap</div><div class="text-2xl font-bold text-brand-rose" id="salaryGap">$0</div><p class="text-xs text-dark-400 mt-1">Under market</p></div>
-        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Total Comp</div><div class="text-2xl font-bold text-dark-50" id="totalComp">$0</div><p class="text-xs text-dark-400 mt-1">With equity+bonus</p></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Market Rate</div><div class="text-2xl font-bold text-dark-50" id="marketRate">$0</div></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Your Offer</div><div class="text-2xl font-bold text-dark-50" id="yourOffer">$0</div></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Gap</div><div class="text-2xl font-bold text-brand-rose" id="salaryGap">$0</div></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Total Comp</div><div class="text-2xl font-bold text-dark-50" id="totalComp">$0</div></div>
     </div>
-
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <div class="card p-6">
-            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Market Research</h3>
+            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">📊 Market Research</h3>
             <div class="space-y-3 mb-4">
                 <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Job Title</label><input class="input" id="salaryTitle" placeholder="e.g. Senior Product Manager"></div>
                 <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Location</label><input class="input" id="salaryLocation" placeholder="e.g. San Francisco, CA"></div>
-                <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Experience Level</label><select class="input"><option>Entry Level</option><option>Mid Level</option><option>Senior Level</option><option>Executive</option></select></div>
             </div>
             <button class="btn-primary w-full" onclick="researchSalary()">Research Market Rates</button>
+            <div id="salaryResults" class="mt-4"></div>
         </div>
-
         <div class="card p-6">
-            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Total Compensation</h3>
+            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">💰 Total Compensation</h3>
             <div class="space-y-3">
                 <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Base Salary</label><input class="input" type="number" id="baseSalary" placeholder="150000"></div>
                 <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Bonus %</label><input class="input" type="number" id="bonusPercent" placeholder="20"></div>
@@ -609,292 +527,163 @@
             <button class="btn-primary w-full mt-4" onclick="calculateComp()">Calculate Total</button>
         </div>
     </div>
-
     <div class="card p-6 mb-6">
-        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Negotiation Scripts</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="p-4 bg-brand-blue/10 rounded-lg border border-brand-blue/20">
-                <h4 class="font-semibold text-dark-100 mb-2 text-sm">Counteroffer Script</h4>
-                <p class="text-xs text-dark-300 mb-3">"Based on market research for this role in [location], the average range is $[X-Y]. Given my experience with [achievements], I'd like to propose..."</p>
-                <button class="btn-secondary btn-sm" onclick="copyScript('counteroffer')">Copy Script</button>
-            </div>
-            <div class="p-4 bg-brand-violet/10 rounded-lg border border-brand-violet/20">
-                <h4 class="font-semibold text-dark-100 mb-2 text-sm">Benefits Negotiation</h4>
-                <p class="text-xs text-dark-300 mb-3">"While the base is [X], would you consider additional benefits like [remote work, extra PTO, professional development budget]?"</p>
-                <button class="btn-secondary btn-sm" onclick="copyScript('benefits')">Copy Script</button>
-            </div>
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">📝 Negotiation Scripts</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            <div class="p-4 bg-brand-blue/10 rounded-lg border border-brand-blue/20"><h4 class="font-semibold text-dark-100 mb-2 text-sm">Counteroffer</h4><p class="text-xs text-dark-300 mb-3">"Based on market research for this role, the range is $X-Y. Given my experience with [achievements], I propose..."</p><button class="btn-secondary btn-sm" onclick="copyScript('counteroffer')">Copy</button></div>
+            <div class="p-4 bg-brand-violet/10 rounded-lg border border-brand-violet/20"><h4 class="font-semibold text-dark-100 mb-2 text-sm">Benefits</h4><p class="text-xs text-dark-300 mb-3">"While the base is X, would you consider remote work, extra PTO, or professional development budget?"</p><button class="btn-secondary btn-sm" onclick="copyScript('benefits')">Copy</button></div>
+            <div class="p-4 bg-brand-emerald/10 rounded-lg border border-brand-emerald/20"><h4 class="font-semibold text-dark-100 mb-2 text-sm">Signing Bonus</h4><p class="text-xs text-dark-300 mb-3">"I understand the base is firm. Would a signing bonus of $X be possible to bridge the gap?"</p><button class="btn-secondary btn-sm" onclick="copyScript('signing')">Copy</button></div>
+            <div class="p-4 bg-brand-amber/10 rounded-lg border border-brand-amber/20"><h4 class="font-semibold text-dark-100 mb-2 text-sm">Equity Ask</h4><p class="text-xs text-dark-300 mb-3">"I'm excited about the company's growth. Could we explore additional equity as part of the package?"</p><button class="btn-secondary btn-sm" onclick="copyScript('equity')">Copy</button></div>
+            <div class="p-4 bg-brand-rose/10 rounded-lg border border-brand-rose/20"><h4 class="font-semibold text-dark-100 mb-2 text-sm">Remote Work</h4><p class="text-xs text-dark-300 mb-3">"Flexibility is important to my productivity. Would a hybrid or remote arrangement be possible?"</p><button class="btn-secondary btn-sm" onclick="copyScript('remote')">Copy</button></div>
         </div>
     </div>
-
     <div class="card p-6">
-        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Daily Motivation</h3>
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">💪 Daily Motivation</h3>
         <div class="p-4 bg-gradient-to-r from-brand-blue/10 to-brand-violet/10 rounded-lg border border-brand-indigo/20">
-            <p class="text-dark-200 mb-2 font-medium">💪 Remember: Your compensation is earned.</p>
-            <p class="text-xs text-dark-400">You bring value to the company. Negotiating respectfully is part of the professional process. The worst they can say is no.</p>
+            <p class="text-dark-200 mb-2 font-medium" id="motivationQuote">💪 Your compensation is earned. Negotiate with confidence.</p>
+            <p class="text-xs text-dark-400" id="motivationSub">You bring value to every company. The worst they can say is no.</p>
         </div>
+        <button class="btn-secondary btn-sm mt-3" onclick="nextMotivation()">Next Quote →</button>
     </div>
 </div>
 
 <!-- ============ LINKEDIN OPTIMIZER ============ -->
 <div id="sec-linkedin" class="section">
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-dark-50 font-heading">LinkedIn Profile Optimizer</h1>
-        <p class="text-dark-400 text-sm mt-1">Optimize your profile to attract 3x more recruiters and opportunities.</p>
+        <h1 class="text-2xl font-bold text-dark-50 font-heading">🔱 LinkedIn Profile Optimizer</h1>
+        <p class="text-dark-400 text-sm mt-1">Optimize your profile to attract 3x more recruiters. View competing profiles.</p>
     </div>
-
     <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
-        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Profile Score</div><div class="text-2xl font-bold text-dark-50" id="liScore">0%</div><p class="text-xs text-dark-400 mt-1">Optimization</p></div>
-        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Visitors/Month</div><div class="text-2xl font-bold text-dark-50">0</div><p class="text-xs text-dark-400 mt-1">Profile views</p></div>
-        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Search Rank</div><div class="text-2xl font-bold text-dark-50">#0</div><p class="text-xs text-dark-400 mt-1">In your field</p></div>
-        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Opportunities</div><div class="text-2xl font-bold text-dark-50">0</div><p class="text-xs text-dark-400 mt-1">This month</p></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Profile Score</div><div class="text-2xl font-bold text-dark-50" id="liScore">0%</div></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Visitors/Mo</div><div class="text-2xl font-bold text-dark-50" id="liVisitors">0</div></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Search Rank</div><div class="text-2xl font-bold text-dark-50" id="liRank">#0</div></div>
+        <div class="card p-4"><div class="text-dark-400 text-xs font-semibold mb-1">Opportunities</div><div class="text-2xl font-bold text-dark-50" id="liOpps">0</div></div>
     </div>
-
     <div class="card p-6 mb-6">
-        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Profile Optimization Checklist</h3>
-        <div class="space-y-2">
-            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg">
-                <input type="checkbox" class="w-4 h-4 cursor-pointer" id="check1">
-                <label for="check1" class="flex-1 text-sm text-dark-200 cursor-pointer">Professional profile photo with clear face visible</label>
-                <span class="text-xs text-dark-400">+5pts</span>
-            </div>
-            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg">
-                <input type="checkbox" class="w-4 h-4 cursor-pointer" id="check2">
-                <label for="check2" class="flex-1 text-sm text-dark-200 cursor-pointer">Headline includes key skills and value proposition</label>
-                <span class="text-xs text-dark-400">+10pts</span>
-            </div>
-            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg">
-                <input type="checkbox" class="w-4 h-4 cursor-pointer" id="check3">
-                <label for="check3" class="flex-1 text-sm text-dark-200 cursor-pointer">Detailed summary with achievements and goals</label>
-                <span class="text-xs text-dark-400">+15pts</span>
-            </div>
-            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg">
-                <input type="checkbox" class="w-4 h-4 cursor-pointer" id="check4">
-                <label for="check4" class="flex-1 text-sm text-dark-200 cursor-pointer">20+ relevant skills listed and endorsed</label>
-                <span class="text-xs text-dark-400">+15pts</span>
-            </div>
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">✅ Profile Optimization Checklist</h3>
+        <div class="space-y-2" id="liChecklist">
+            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg"><input type="checkbox" class="w-4 h-4 cursor-pointer" onchange="updateLiScore()"><label class="flex-1 text-sm text-dark-200 cursor-pointer">Professional profile photo</label><span class="text-xs text-dark-400">+5pts</span></div>
+            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg"><input type="checkbox" class="w-4 h-4 cursor-pointer" onchange="updateLiScore()"><label class="flex-1 text-sm text-dark-200 cursor-pointer">Headline with key skills & value prop</label><span class="text-xs text-dark-400">+10pts</span></div>
+            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg"><input type="checkbox" class="w-4 h-4 cursor-pointer" onchange="updateLiScore()"><label class="flex-1 text-sm text-dark-200 cursor-pointer">Detailed summary with achievements</label><span class="text-xs text-dark-400">+15pts</span></div>
+            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg"><input type="checkbox" class="w-4 h-4 cursor-pointer" onchange="updateLiScore()"><label class="flex-1 text-sm text-dark-200 cursor-pointer">20+ relevant skills endorsed</label><span class="text-xs text-dark-400">+15pts</span></div>
+            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg"><input type="checkbox" class="w-4 h-4 cursor-pointer" onchange="updateLiScore()"><label class="flex-1 text-sm text-dark-200 cursor-pointer">Custom banner image</label><span class="text-xs text-dark-400">+5pts</span></div>
+            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg"><input type="checkbox" class="w-4 h-4 cursor-pointer" onchange="updateLiScore()"><label class="flex-1 text-sm text-dark-200 cursor-pointer">3+ recommendations received</label><span class="text-xs text-dark-400">+15pts</span></div>
+            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg"><input type="checkbox" class="w-4 h-4 cursor-pointer" onchange="updateLiScore()"><label class="flex-1 text-sm text-dark-200 cursor-pointer">All experience entries with descriptions</label><span class="text-xs text-dark-400">+10pts</span></div>
+            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg"><input type="checkbox" class="w-4 h-4 cursor-pointer" onchange="updateLiScore()"><label class="flex-1 text-sm text-dark-200 cursor-pointer">500+ connections</label><span class="text-xs text-dark-400">+10pts</span></div>
+            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg"><input type="checkbox" class="w-4 h-4 cursor-pointer" onchange="updateLiScore()"><label class="flex-1 text-sm text-dark-200 cursor-pointer">Education & certifications listed</label><span class="text-xs text-dark-400">+10pts</span></div>
+            <div class="flex items-center gap-3 p-3 bg-dark-800/50 rounded-lg"><input type="checkbox" class="w-4 h-4 cursor-pointer" onchange="updateLiScore()"><label class="flex-1 text-sm text-dark-200 cursor-pointer">Open to Work badge enabled</label><span class="text-xs text-dark-400">+5pts</span></div>
         </div>
     </div>
-
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <div class="card p-6">
-            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Competitor Analysis</h3>
-            <div class="mb-4">
-                <label class="block text-xs font-medium text-dark-400 mb-1.5">Search for Competitors</label>
-                <div class="flex gap-2">
-                    <input class="input" id="competitorName" placeholder="Name or LinkedIn URL">
-                    <button class="btn-primary btn-sm" onclick="searchCompetitors()">Search</button>
-                </div>
-            </div>
-            <div class="space-y-3 text-sm">
-                <div class="p-3 bg-dark-800/50 rounded-lg">
-                    <p class="text-dark-300 font-semibold mb-1">They have:</p>
-                    <p class="text-xs text-dark-400">• Strong headline with job title + value prop</p>
-                    <p class="text-xs text-dark-400">• 500+ connections</p>
-                    <p class="text-xs text-dark-400">• Recommendations from industry leaders</p>
-                </div>
-            </div>
+            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">👥 Competitor Analysis</h3>
+            <div class="mb-4"><div class="flex gap-2"><input class="input" id="competitorName" placeholder="Name or LinkedIn URL"><button class="btn-primary btn-sm" onclick="searchCompetitors()">Search</button></div></div>
+            <div id="competitorResults" class="space-y-3"></div>
         </div>
-
         <div class="card p-6">
-            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Employer Intelligence</h3>
-            <div class="mb-4">
-                <label class="block text-xs font-medium text-dark-400 mb-1.5">Research Company</label>
-                <div class="flex gap-2">
-                    <input class="input" id="employerName" placeholder="Company name">
-                    <button class="btn-primary btn-sm" onclick="searchEmployer()">Search</button>
-                </div>
-            </div>
-            <div class="space-y-3 text-sm">
-                <div class="p-3 bg-dark-800/50 rounded-lg">
-                    <p class="text-dark-300 font-semibold mb-1">Company Info:</p>
-                    <p class="text-xs text-dark-400">• 2,847 employees on LinkedIn</p>
-                    <p class="text-xs text-dark-400">• Growing by 12% YoY</p>
-                    <p class="text-xs text-dark-400">• Common roles: Product Manager, Engineer</p>
-                </div>
-            </div>
+            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">🏢 Employer Intelligence</h3>
+            <div class="mb-4"><div class="flex gap-2"><input class="input" id="employerName" placeholder="Company name"><button class="btn-primary btn-sm" onclick="searchEmployer()">Search</button></div></div>
+            <div id="employerResults" class="space-y-3"></div>
         </div>
     </div>
-
     <div class="card p-6">
-        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Quick Wins</h3>
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">⚡ Quick Wins</h3>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <button class="btn-secondary" onclick="optimizeLinkedIn('headline')">Rewrite Headline</button>
-            <button class="btn-secondary" onclick="optimizeLinkedIn('summary')">Enhance Summary</button>
-            <button class="btn-secondary" onclick="optimizeLinkedIn('skills')">Add Top Skills</button>
-            <button class="btn-secondary" onclick="optimizeLinkedIn('recommendations')">Get Recommendations</button>
+            <button class="btn-secondary" onclick="optimizeLinkedIn('headline')">✏️ Rewrite Headline</button>
+            <button class="btn-secondary" onclick="optimizeLinkedIn('summary')">📝 Enhance Summary</button>
+            <button class="btn-secondary" onclick="optimizeLinkedIn('skills')">🎯 Add Top Skills</button>
+            <button class="btn-secondary" onclick="optimizeLinkedIn('recommendations')">⭐ Get Recommendations</button>
         </div>
+        <div id="liOptimizeResult" class="mt-4"></div>
     </div>
 </div>
 
 <!-- ============ CAREER ROADMAP ============ -->
 <div id="sec-roadmap" class="section">
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-dark-50 font-heading">Career Roadmap</h1>
-        <p class="text-dark-400 text-sm mt-1">Build a personalized 90-day plan with skill milestones and accountability.</p>
+        <h1 class="text-2xl font-bold text-dark-50 font-heading">🗺️ Career Roadmap</h1>
+        <p class="text-dark-400 text-sm mt-1">90-day plan, skill gap analysis, reference network & job market insights.</p>
     </div>
-
     <div class="card p-6 mb-6">
-        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">90-Day Career Plan</h3>
-        <div class="space-y-4">
-            <div>
-                <label class="block text-xs font-medium text-dark-400 mb-1.5">Target Role (3 months)</label>
-                <input class="input" id="targetRole" placeholder="e.g. Principal Product Manager">
-            </div>
-            <div>
-                <label class="block text-xs font-medium text-dark-400 mb-1.5">Current Role</label>
-                <input class="input" id="currentRole" placeholder="e.g. Senior Product Manager">
-            </div>
-            <div>
-                <label class="block text-xs font-medium text-dark-400 mb-1.5">Key Skills to Develop</label>
-                <div id="skillsList" class="space-y-2">
-                    <input class="input" placeholder="e.g. AI/ML fundamentals">
-                </div>
-            </div>
-            <button class="btn-primary w-full" onclick="generatePlan()">Generate My Plan</button>
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">📅 90-Day Career Plan</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Target Role</label><input class="input" id="targetRole" placeholder="e.g. Principal Product Manager"></div>
+            <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Current Role</label><input class="input" id="currentRole" placeholder="e.g. Senior Product Manager"></div>
+        </div>
+        <button class="btn-primary w-full" onclick="generatePlan()">🦸 Generate My Plan</button>
+        <div id="planTimeline" class="mt-4"></div>
+    </div>
+    <div class="card p-6 mb-6">
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">📊 Skill Gap Analysis</h3>
+        <div class="space-y-3" id="skillGaps">
+            <div><div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Strategic Thinking</span><span class="text-brand-blue">7/10</span></div><div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-blue rounded" style="width:70%"></div></div></div>
+            <div><div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Data Analysis</span><span class="text-brand-amber">5/10</span></div><div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-amber rounded" style="width:50%"></div></div></div>
+            <div><div class="flex justify-between text-xs mb-1"><span class="text-dark-300">AI/ML Knowledge</span><span class="text-brand-rose">3/10</span></div><div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-rose rounded" style="width:30%"></div></div></div>
+            <div><div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Leadership</span><span class="text-brand-violet">8/10</span></div><div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-violet rounded" style="width:80%"></div></div></div>
+            <div><div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Communication</span><span class="text-brand-emerald">9/10</span></div><div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-emerald rounded" style="width:90%"></div></div></div>
         </div>
     </div>
-
-    <div class="card p-6 mb-6">
-        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Skill Gap Analysis</h3>
-        <div class="space-y-3">
-            <div>
-                <div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Strategic Thinking</span><span class="text-brand-blue">7/10</span></div>
-                <div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-blue rounded" style="width:70%"></div></div>
-            </div>
-            <div>
-                <div class="flex justify-between text-xs mb-1"><span class="text-dark-300">Data Analysis</span><span class="text-brand-amber">5/10</span></div>
-                <div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-amber rounded" style="width:50%"></div></div>
-            </div>
-            <div>
-                <div class="flex justify-between text-xs mb-1"><span class="text-dark-300">AI/ML Knowledge</span><span class="text-brand-rose">3/10</span></div>
-                <div class="h-2 bg-dark-700 rounded"><div class="h-full bg-brand-rose rounded" style="width:30%"></div></div>
-            </div>
-        </div>
-    </div>
-
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-6">
         <div class="card p-6">
-            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Reference Network</h3>
-            <div class="space-y-2 mb-4">
-                <div class="p-3 bg-dark-800/50 rounded-lg text-sm">
-                    <p class="text-dark-300 font-semibold mb-1">Sarah Chen - Director at Google</p>
-                    <p class="text-xs text-dark-400">Last contact: 2 months ago</p>
-                </div>
-                <div class="p-3 bg-dark-800/50 rounded-lg text-sm">
-                    <p class="text-dark-300 font-semibold mb-1">James Wilson - VP Products</p>
-                    <p class="text-xs text-dark-400">Last contact: 6 months ago</p>
-                </div>
+            <div class="flex items-center justify-between mb-4"><h3 class="text-lg font-semibold text-dark-100 font-heading">👥 Reference Network</h3><button class="btn-secondary btn-sm" onclick="showAddReference()">+ Add</button></div>
+            <div class="space-y-2" id="referenceList">
+                <div class="p-3 bg-dark-800/50 rounded-lg text-sm flex items-center justify-between"><div><p class="text-dark-300 font-semibold">Sarah Chen - Director at Google</p><p class="text-xs text-dark-400">Last contact: 2 months ago</p></div><button class="btn-secondary btn-sm" onclick="sendReferenceOutreach('Sarah Chen')">📧 Outreach</button></div>
+                <div class="p-3 bg-dark-800/50 rounded-lg text-sm flex items-center justify-between"><div><p class="text-dark-300 font-semibold">James Wilson - VP Products</p><p class="text-xs text-dark-400">Last contact: 6 months ago</p></div><button class="btn-secondary btn-sm" onclick="sendReferenceOutreach('James Wilson')">📧 Outreach</button></div>
             </div>
-            <button class="btn-secondary w-full btn-sm" onclick="addReference()">+ Add Reference</button>
         </div>
-
         <div class="card p-6">
-            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Accountability</h3>
+            <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">📚 Learning Resources</h3>
             <div class="space-y-3">
-                <div class="p-3 bg-brand-emerald/10 border-l-4 border-brand-emerald rounded">
-                    <p class="text-xs text-brand-emerald font-semibold">✓ Week 1: Complete AI course</p>
-                </div>
-                <div class="p-3 bg-dark-800/50 rounded">
-                    <p class="text-xs text-dark-400">Month 1: 3 coffee chats scheduled</p>
-                </div>
-                <div class="p-3 bg-dark-800/50 rounded">
-                    <p class="text-xs text-dark-400">Month 2: Build portfolio project</p>
-                </div>
+                <div class="p-3 bg-dark-800/50 rounded-lg text-sm"><p class="font-semibold text-dark-100 mb-1">🤖 AI/ML for Product Managers</p><p class="text-xs text-dark-400">Udacity &bull; 6 weeks &bull; Free</p></div>
+                <div class="p-3 bg-dark-800/50 rounded-lg text-sm"><p class="font-semibold text-dark-100 mb-1">📈 Strategy & Leadership</p><p class="text-xs text-dark-400">LinkedIn Learning &bull; 4 hours</p></div>
+                <div class="p-3 bg-dark-800/50 rounded-lg text-sm"><p class="font-semibold text-dark-100 mb-1">💼 Negotiation Mastery</p><p class="text-xs text-dark-400">Coursera &bull; 8 hours &bull; Certificate</p></div>
+                <div class="p-3 bg-dark-800/50 rounded-lg text-sm"><p class="font-semibold text-dark-100 mb-1">🎯 Interview Success Formula</p><p class="text-xs text-dark-400">Udemy &bull; 3 hours &bull; $14.99</p></div>
             </div>
         </div>
     </div>
-
     <div class="card p-6">
-        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Learning Resources</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div class="p-3 bg-dark-800/50 rounded-lg text-sm">
-                <p class="font-semibold text-dark-100 mb-1">📚 AI/ML for Product Managers</p>
-                <p class="text-xs text-dark-400">Udacity • 6 weeks</p>
-            </div>
-            <div class="p-3 bg-dark-800/50 rounded-lg text-sm">
-                <p class="font-semibold text-dark-100 mb-1">💡 Strategy & Leadership Masterclass</p>
-                <p class="text-xs text-dark-400">LinkedIn Learning • 4 hours</p>
-            </div>
+        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">🎬 Job Market Insights</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div class="p-4 bg-dark-800/50 rounded-lg text-center cursor-pointer hover:bg-dark-700/50 transition" onclick="playVideo('trends')"><div class="text-4xl mb-2">📊</div><p class="font-semibold text-dark-100 text-sm">2026 Job Market Trends</p><p class="text-xs text-dark-400">5 min watch</p></div>
+            <div class="p-4 bg-dark-800/50 rounded-lg text-center cursor-pointer hover:bg-dark-700/50 transition" onclick="playVideo('ai-jobs')"><div class="text-4xl mb-2">🤖</div><p class="font-semibold text-dark-100 text-sm">AI Jobs Exploding</p><p class="text-xs text-dark-400">3 min watch</p></div>
+            <div class="p-4 bg-dark-800/50 rounded-lg text-center cursor-pointer hover:bg-dark-700/50 transition" onclick="playVideo('salary')"><div class="text-4xl mb-2">💰</div><p class="font-semibold text-dark-100 text-sm">Salary Negotiation Tips</p><p class="text-xs text-dark-400">7 min watch</p></div>
         </div>
     </div>
 </div>
 
 <!-- ============ SETTINGS ============ -->
 <div id="sec-settings" class="section">
-    <div class="mb-6">
-        <h1 class="text-2xl font-bold text-dark-50 font-heading">Settings</h1>
-        <p class="text-dark-400 text-sm mt-1">Manage your account, preferences, and subscription.</p>
-    </div>
-
+    <div class="mb-6"><h1 class="text-2xl font-bold text-dark-50 font-heading">⚙️ Settings</h1><p class="text-dark-400 text-sm mt-1">Manage your account, preferences, and subscription.</p></div>
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <div class="lg:col-span-2 space-y-6">
             <div class="card p-6">
                 <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Profile</h3>
                 <div class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-medium text-dark-400 mb-1.5">Full Name</label>
-                        <input class="input" id="settingsName" placeholder="Your name">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-dark-400 mb-1.5">Email</label>
-                        <input class="input" type="email" id="settingsEmail" placeholder="your@email.com">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-medium text-dark-400 mb-1.5">Password</label>
-                        <input class="input" type="password" placeholder="••••••••">
-                    </div>
+                    <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Full Name</label><input class="input" id="settingsName" placeholder="Your name"></div>
+                    <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Email</label><input class="input" type="email" id="settingsEmail" placeholder="your@email.com"></div>
+                    <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Password</label><input class="input" type="password" placeholder="Change password"></div>
                     <button class="btn-primary" onclick="saveSettings()">Save Changes</button>
                 </div>
             </div>
-
             <div class="card p-6">
                 <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Notifications</h3>
                 <div class="space-y-3">
-                    <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg">
-                        <span class="text-sm text-dark-200">Job Matches</span>
-                        <input type="checkbox" class="w-4 h-4 cursor-pointer" checked>
-                    </div>
-                    <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg">
-                        <span class="text-sm text-dark-200">Interview Reminders</span>
-                        <input type="checkbox" class="w-4 h-4 cursor-pointer" checked>
-                    </div>
-                    <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg">
-                        <span class="text-sm text-dark-200">Weekly Tips</span>
-                        <input type="checkbox" class="w-4 h-4 cursor-pointer" checked>
-                    </div>
-                    <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg">
-                        <span class="text-sm text-dark-200">Marketing Emails</span>
-                        <input type="checkbox" class="w-4 h-4 cursor-pointer">
-                    </div>
+                    <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg"><span class="text-sm text-dark-200">Job Matches</span><input type="checkbox" class="w-4 h-4 cursor-pointer" checked></div>
+                    <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg"><span class="text-sm text-dark-200">Interview Reminders</span><input type="checkbox" class="w-4 h-4 cursor-pointer" checked></div>
+                    <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg"><span class="text-sm text-dark-200">Daily Motivation</span><input type="checkbox" class="w-4 h-4 cursor-pointer" checked></div>
+                    <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg"><span class="text-sm text-dark-200">Weekly Tips</span><input type="checkbox" class="w-4 h-4 cursor-pointer" checked></div>
                 </div>
             </div>
-
             <div class="card p-6">
                 <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Subscription</h3>
-                <div class="p-4 bg-brand-blue/10 border border-brand-blue/20 rounded-lg mb-4">
-                    <p class="text-sm font-semibold text-dark-100 mb-1">Premium Plan</p>
-                    <p class="text-xs text-dark-400">Renews on January 15, 2026 • $29/month</p>
-                </div>
+                <div class="p-4 bg-brand-blue/10 border border-brand-blue/20 rounded-lg mb-4"><p class="text-sm font-semibold text-dark-100 mb-1">🦸 SuperHero Premium</p><p class="text-xs text-dark-400">$29/month or $249/year (save 28%)</p></div>
                 <button class="btn-secondary w-full btn-sm mb-2">View Billing History</button>
                 <button class="btn-secondary w-full btn-sm">Upgrade Plan</button>
             </div>
         </div>
-
         <div class="space-y-6">
-            <div class="card p-6">
-                <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Account</h3>
-                <div class="space-y-3 text-xs text-dark-400">
-                    <p><span class="text-dark-300 font-semibold">Member Since:</span> Jan 2024</p>
-                    <p><span class="text-dark-300 font-semibold">Account Type:</span> Premium</p>
-                    <p><span class="text-dark-300 font-semibold">Status:</span> Active</p>
-                </div>
-                <button class="btn-secondary w-full btn-sm mt-4" onclick="logout()">Sign Out</button>
-            </div>
-
-            <div class="card p-6 border-brand-rose/50">
-                <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Danger Zone</h3>
-                <button class="btn-secondary w-full btn-sm text-brand-rose border-brand-rose/50 hover:bg-brand-rose/10">Delete Account</button>
-            </div>
+            <div class="card p-6"><h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Account</h3><div class="space-y-3 text-xs text-dark-400"><p><span class="text-dark-300 font-semibold">Member Since:</span> Apr 2026</p><p><span class="text-dark-300 font-semibold">Type:</span> Premium</p><p><span class="text-dark-300 font-semibold">Status:</span> <span class="text-brand-emerald">Active</span></p></div><button class="btn-secondary w-full btn-sm mt-4" onclick="doLogout()">Sign Out</button></div>
+            <div class="card p-6 border-brand-rose/50"><h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Danger Zone</h3><button class="btn-secondary w-full btn-sm text-brand-rose border-brand-rose/50 hover:bg-brand-rose/10">Delete Account</button></div>
         </div>
     </div>
 </div>
@@ -904,432 +693,453 @@
     </main>
 </div>
 
+<!-- MODAL CONTAINER -->
+<div id="modalContainer"></div>
+
 <script>
 // ============ STATE & PERSISTENCE ============
 let appState = {
-    user: { name: 'User', email: 'user@email.com' },
-    resume: { name:'', email:'', phone:'', location:'', linkedin:'', website:'', targetRole:'', industry:'', experience:[], education:[], skills:[], selectedTheme:'classic' },
-    interviews: { conducted:0, avgScore:0, scores:[], currentType:'behavioral' },
-    jobs: { saved:0, applied:0, total:0 },
-    currentSection: 'dashboard'
+    user: { name:'', email:'', loggedIn:false },
+    resume: { name:'',email:'',phone:'',location:'',linkedin:'',website:'',targetRole:'',industry:'',experience:[],education:[],skills:[],selectedTheme:'classic' },
+    interviews: { conducted:0, avgScore:0, scores:[], currentType:'behavioral', responses:[] },
+    jobs: { saved:0, applied:0, total:0, listings:[], kanban:{saved:[],applied:[],interviewing:[],offered:[]} },
+    currentSection: 'dashboard',
+    flashCardsStudied: {},
+    references: [],
+    motivationIdx: 0
 };
-
 const DB_KEY = 'rsh_data';
+function loadDB() { const s=localStorage.getItem(DB_KEY); if(s) try{appState=Object.assign({},appState,JSON.parse(s))}catch(e){} updateDashboardStats(); updateSidebar(); }
+function saveDB() { try{localStorage.setItem(DB_KEY,JSON.stringify(appState))}catch(e){} }
 
-function loadDB() {
-    const saved = localStorage.getItem(DB_KEY);
-    if(saved) try { appState = Object.assign({}, appState, JSON.parse(saved)); } catch(e) { console.error('DB load error:', e); }
-    updateDashboardStats();
+// ============ LOGIN ============
+function doLogin() {
+    const email = document.getElementById('loginEmail').value.trim();
+    const pw = document.getElementById('loginPassword').value;
+    if(!email) { document.getElementById('loginMsg').innerHTML='<span class="text-brand-rose">Please enter your email</span>'; return; }
+    // Demo mode: any email/password works
+    appState.user.name = email.split('@')[0].replace(/[._]/g,' ').replace(/\b\w/g,c=>c.toUpperCase());
+    appState.user.email = email;
+    appState.user.loggedIn = true;
+    saveDB();
+    document.getElementById('loginOverlay').style.display = 'none';
+    document.getElementById('appContainer').style.display = 'flex';
     updateSidebar();
+    updateDashboardStats();
 }
-
-function saveDB() {
-    try {
-        localStorage.setItem(DB_KEY, JSON.stringify(appState));
-    } catch(e) {
-        console.error('Save error:', e);
+function showSignup() {
+    document.getElementById('loginMsg').innerHTML='<span class="text-brand-blue">Sign up with any email to get started!</span>';
+}
+function forgotPassword() {
+    document.getElementById('loginMsg').innerHTML='<span class="text-brand-amber">Enter any email and password to access demo.</span>';
+}
+function checkLogin() {
+    if(appState.user.loggedIn) {
+        document.getElementById('loginOverlay').style.display = 'none';
+        document.getElementById('appContainer').style.display = 'flex';
+    }
+}
+function doLogout() {
+    if(confirm('Sign out?')) {
+        appState.user.loggedIn = false; saveDB();
+        document.getElementById('loginOverlay').style.display = 'flex';
+        document.getElementById('appContainer').style.display = 'none';
     }
 }
 
 // ============ NAVIGATION ============
 function nav(section) {
-    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
-
-    const el = document.getElementById('sec-' + section);
+    document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+    document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
+    const el=document.getElementById('sec-'+section);
     if(el) {
-        el.classList.add('active');
-        appState.currentSection = section;
-        const navBtn = document.querySelector(`[data-section="${section}"]`);
-        if(navBtn) navBtn.classList.add('active');
-
-        const titles = { dashboard:'Dashboard', resume:'Resume Builder', interview:'Interview Coach', jobs:'Job Tracker', salary:'Salary Intel', linkedin:'LinkedIn Pro', roadmap:'Career Roadmap', settings:'Settings' };
-        document.getElementById('pageTitle').textContent = titles[section] || 'Page';
+        el.classList.add('active'); appState.currentSection=section;
+        const nb=document.querySelector(`[data-section="${section}"]`); if(nb) nb.classList.add('active');
+        const titles={dashboard:'Dashboard',resume:'SuperHero Resume Creator',interview:'SuperHero Interview Prep',jobs:'Job Tracker & Auto-Apply',salary:'Salary Intel',linkedin:'LinkedIn Pro',roadmap:'Career Roadmap',settings:'Settings'};
+        document.getElementById('pageTitle').textContent=titles[section]||'Page';
+        document.getElementById('contentArea').scrollTop=0;
+        if(section==='interview') initFlashCards();
         saveDB();
     }
+    // Close mobile sidebar
+    if(window.innerWidth<768) document.getElementById('sidebar').classList.add('collapsed');
 }
+function toggleSidebar(){ document.getElementById('sidebar').classList.toggle('collapsed'); }
+function toggleNotifications(){ showToast('3 new job matches found! Check Job Tracker.'); }
 
-function toggleSidebar() {
-    document.getElementById('sidebar').classList.toggle('collapsed');
-}
-
-function toggleNotifications() {
-    alert('You have 3 new job matches!\n\n• Senior PM at TechCorp\n• Manager at Google\n• Director role at Meta');
-}
-
-function logout() {
-    if(confirm('Are you sure you want to sign out?')) {
-        localStorage.clear();
-        alert('Signed out successfully!');
-        location.reload();
-    }
+// ============ TOAST NOTIFICATIONS ============
+function showToast(msg, type='info') {
+    const t=document.createElement('div');
+    t.className='fixed top-4 right-4 z-[300] px-4 py-3 rounded-lg text-sm font-medium shadow-lg transition-all';
+    t.style.cssText=type==='success'?'background:#10b981;color:white':'background:rgba(99,102,241,.9);color:white;backdrop-filter:blur(10px)';
+    t.textContent=msg;
+    document.body.appendChild(t);
+    setTimeout(()=>{t.style.opacity='0';setTimeout(()=>t.remove(),300)},3000);
 }
 
 // ============ SIDEBAR & PROFILE ============
 function updateSidebar() {
-    const avatar = appState.user.name.charAt(0).toUpperCase();
-    document.getElementById('sidebarAvatar').textContent = avatar;
-    document.getElementById('sidebarName').textContent = appState.user.name;
-    document.getElementById('sidebarEmail').textContent = appState.user.email;
-    document.getElementById('topAvatar').textContent = avatar;
-    document.getElementById('welcomeName').textContent = appState.user.name.split(' ')[0];
+    const n=appState.user.name||'User';
+    const a=n.charAt(0).toUpperCase();
+    document.getElementById('sidebarAvatar').textContent=a;
+    document.getElementById('sidebarName').textContent=n;
+    document.getElementById('sidebarEmail').textContent=appState.user.email||'user@email.com';
+    document.getElementById('topAvatar').textContent=a;
+    document.getElementById('welcomeName').textContent=n.split(' ')[0];
 }
 
 // ============ DASHBOARD STATS ============
 function updateDashboardStats() {
-    const profileScore = 65 + Math.min(35, appState.resume.skills.length * 3);
-    document.getElementById('statProfile').textContent = Math.min(100, profileScore) + '%';
-    document.getElementById('profileBar').style.width = Math.min(100, profileScore) + '%';
-    document.getElementById('statResumes').textContent = appState.resume.name ? '1' : '0';
-    document.getElementById('statInterviews').textContent = appState.interviews.conducted;
-    document.getElementById('avgScore').textContent = appState.interviews.avgScore ? appState.interviews.avgScore + '%' : '--';
-    document.getElementById('statJobs').textContent = appState.jobs.saved;
-    document.getElementById('activeApps').textContent = appState.jobs.applied;
+    const ps=65+Math.min(35,appState.resume.skills.length*3);
+    document.getElementById('statProfile').textContent=Math.min(100,ps)+'%';
+    document.getElementById('profileBar').style.width=Math.min(100,ps)+'%';
+    document.getElementById('statResumes').textContent=appState.resume.name?'1':'0';
+    document.getElementById('statInterviews').textContent=appState.interviews.conducted;
+    document.getElementById('avgScore').textContent=appState.interviews.avgScore?appState.interviews.avgScore+'%':'--';
+    document.getElementById('statJobs').textContent=appState.jobs.saved;
+    document.getElementById('activeApps').textContent=appState.jobs.applied;
 }
 
 // ============ RESUME BUILDER ============
-let resumeStep = 1;
-
+let resumeStep=1;
 function resumeNext(step) {
-    document.querySelectorAll('.resume-step').forEach(s => s.style.display = 'none');
-    const stepEl = document.getElementById('rStep' + step);
-    if(stepEl) stepEl.style.display = 'block';
-
-    document.querySelectorAll('.step-indicator').forEach((s, i) => {
-        const num = i + 1;
-        const circle = s.querySelector('div');
-        if(num < step) {
-            circle.className = 'w-7 h-7 rounded-full bg-brand-emerald text-white text-xs font-bold flex items-center justify-center';
-            circle.textContent = '✓';
-        } else if(num === step) {
-            circle.className = 'w-7 h-7 rounded-full bg-brand-indigo text-white text-xs font-bold flex items-center justify-center';
-            circle.textContent = num;
-        } else {
-            circle.className = 'w-7 h-7 rounded-full bg-dark-600 text-dark-400 text-xs font-bold flex items-center justify-center';
-            circle.textContent = num;
-        }
+    document.querySelectorAll('.resume-step').forEach(s=>s.style.display='none');
+    const el=document.getElementById('rStep'+step); if(el) el.style.display='block';
+    document.querySelectorAll('.step-indicator').forEach((s,i)=>{
+        const n=i+1,c=s.querySelector('div');
+        if(n<step){c.className='w-7 h-7 rounded-full bg-brand-emerald text-white text-xs font-bold flex items-center justify-center';c.textContent='✓';}
+        else if(n===step){c.className='w-7 h-7 rounded-full bg-brand-indigo text-white text-xs font-bold flex items-center justify-center';c.textContent=n;}
+        else{c.className='w-7 h-7 rounded-full bg-dark-600 text-dark-400 text-xs font-bold flex items-center justify-center';c.textContent=n;}
     });
-
-    resumeStep = step;
+    resumeStep=step;
 }
-
-function addExperience() {
-    const html = `<div class="card p-4 experience-entry">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
-            <input class="input exp-title" placeholder="Job Title">
-            <input class="input exp-company" placeholder="Company Name">
-            <input class="input exp-dates" placeholder="Dates">
-            <input class="input exp-location" placeholder="Location">
-        </div>
-        <textarea class="input exp-desc" placeholder="Description"></textarea>
-        <button class="btn-secondary btn-sm mt-2" onclick="removeExperience(this)">Remove</button>
-    </div>`;
-    document.getElementById('experienceList').insertAdjacentHTML('beforeend', html);
+function addExperience(){ document.getElementById('experienceList').insertAdjacentHTML('beforeend',`<div class="card p-4 experience-entry"><div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3"><input class="input exp-title" placeholder="Job Title"><input class="input exp-company" placeholder="Company"><input class="input exp-dates" placeholder="Dates"><input class="input exp-location" placeholder="Location"></div><textarea class="input exp-desc" placeholder="Description"></textarea><button class="btn-secondary btn-sm mt-2" onclick="this.closest('.experience-entry').remove()">Remove</button></div>`); }
+function addEducation(){ document.getElementById('educationList').insertAdjacentHTML('beforeend',`<div class="card p-4 education-entry"><div class="grid grid-cols-1 md:grid-cols-2 gap-3"><input class="input edu-degree" placeholder="Degree"><input class="input edu-school" placeholder="School"><input class="input edu-year" placeholder="Year"><input class="input edu-gpa" placeholder="GPA"></div><button class="btn-secondary btn-sm mt-2" onclick="this.closest('.education-entry').remove()">Remove</button></div>`); }
+function addSkill(){ const i=document.getElementById('skillInput'),s=i.value.trim(); if(!s)return; appState.resume.skills.push(s); document.getElementById('skillsList').insertAdjacentHTML('beforeend',`<span class="badge bg-brand-indigo/20 text-brand-indigo">${s} <span onclick="removeSkillTag(this)" style="cursor:pointer;margin-left:.3rem">&times;</span></span>`); i.value=''; i.focus(); saveDB(); }
+function removeSkillTag(el){ const s=el.parentElement.textContent.replace('\u00d7','').trim(); appState.resume.skills=appState.resume.skills.filter(x=>x!==s); el.parentElement.remove(); saveDB(); }
+function selectTheme(theme){ document.querySelectorAll('.template-card').forEach(c=>c.classList.remove('selected')); appState.resume.selectedTheme=theme; event.target.closest('.template-card').classList.add('selected'); saveDB(); }
+function generateResume(){
+    appState.resume.name=document.getElementById('rName').value||'John Doe';
+    appState.resume.email=document.getElementById('rEmail').value||'john@example.com';
+    appState.resume.phone=document.getElementById('rPhone').value||'';
+    appState.resume.location=document.getElementById('rLocation').value||'';
+    appState.resume.targetRole=document.getElementById('rTargetRole').value||'';
+    let h=`<h1>${appState.resume.name}</h1><p class="contact-line">${appState.resume.email}${appState.resume.phone?' | '+appState.resume.phone:''}${appState.resume.location?' | '+appState.resume.location:''}</p><h2>Professional Summary</h2><p>Experienced professional seeking ${appState.resume.targetRole||'new'} role with strong track record of success and innovation.</p><h2>Experience</h2>`;
+    document.querySelectorAll('.experience-entry').forEach(e=>{const t=e.querySelector('.exp-title').value,c=e.querySelector('.exp-company').value,d=e.querySelector('.exp-dates').value,desc=e.querySelector('.exp-desc').value;if(t&&c)h+=`<h3>${t} @ ${c}</h3><p>${d}</p><p>${desc}</p>`;});
+    h+='<h2>Education</h2>';
+    document.querySelectorAll('.education-entry').forEach(e=>{const d=e.querySelector('.edu-degree').value,s=e.querySelector('.edu-school').value,y=e.querySelector('.edu-year').value;if(d&&s)h+=`<h3>${d}</h3><p>${s} &bull; ${y}</p>`;});
+    if(appState.resume.skills.length)h+='<h2>Skills</h2><p>'+appState.resume.skills.join(' &bull; ')+'</p>';
+    document.getElementById('resumePreview').innerHTML=h; appState.resume.content=h; saveDB();
+    showToast('Resume generated!','success');
 }
-
-function removeExperience(el) {
-    el.closest('.experience-entry').remove();
-}
-
-function addEducation() {
-    const html = `<div class="card p-4 education-entry">
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <input class="input edu-degree" placeholder="Degree">
-            <input class="input edu-school" placeholder="School Name">
-            <input class="input edu-year" placeholder="Year">
-            <input class="input edu-gpa" placeholder="GPA">
-        </div>
-        <button class="btn-secondary btn-sm mt-2" onclick="removeEducation(this)">Remove</button>
-    </div>`;
-    document.getElementById('educationList').insertAdjacentHTML('beforeend', html);
-}
-
-function removeEducation(el) {
-    el.closest('.education-entry').remove();
-}
-
-function addSkill() {
-    const input = document.getElementById('skillInput');
-    const skill = input.value.trim();
-    if(!skill) return;
-
-    appState.resume.skills.push(skill);
-    const badge = `<span class="badge bg-brand-indigo/20 text-brand-indigo">${skill} <span onclick="removeSkillTag(this)" style="cursor:pointer;margin-left:.3rem">&times;</span></span>`;
-    document.getElementById('skillsList').insertAdjacentHTML('beforeend', badge);
-    input.value = '';
-    input.focus();
-    saveDB();
-}
-
-function removeSkillTag(el) {
-    const skill = el.parentElement.textContent.replace('\u00d7', '').trim();
-    appState.resume.skills = appState.resume.skills.filter(s => s !== skill);
-    el.parentElement.remove();
-    saveDB();
-}
-
-function selectTheme(theme) {
-    document.querySelectorAll('.template-card').forEach(c => c.classList.remove('selected'));
-    appState.resume.selectedTheme = theme;
-    event.target.closest('.template-card').classList.add('selected');
-    saveDB();
-}
-
-function generateResume() {
-    appState.resume.name = document.getElementById('rName').value || 'John Doe';
-    appState.resume.email = document.getElementById('rEmail').value || 'john@example.com';
-    appState.resume.phone = document.getElementById('rPhone').value || '';
-    appState.resume.location = document.getElementById('rLocation').value || '';
-    appState.resume.targetRole = document.getElementById('rTargetRole').value || '';
-
-    let html = `<h1>${appState.resume.name}</h1>
-        <p class="contact-line">${appState.resume.email}${appState.resume.phone ? ' | ' + appState.resume.phone : ''}${appState.resume.location ? ' | ' + appState.resume.location : ''}</p>
-        <h2>Professional Summary</h2>
-        <p>Experienced professional seeking ${appState.resume.targetRole || 'new'} role with strong track record of success and innovation.</p>
-        <h2>Experience</h2>`;
-
-    document.querySelectorAll('.experience-entry').forEach(e => {
-        const title = e.querySelector('.exp-title').value || 'Job Title';
-        const company = e.querySelector('.exp-company').value || 'Company';
-        const dates = e.querySelector('.exp-dates').value || '';
-        const desc = e.querySelector('.exp-desc').value || '';
-        if(title && company) {
-            html += `<h3>${title} @ ${company}</h3><p>${dates}</p><p>${desc}</p>`;
-        }
-    });
-
-    html += '<h2>Education</h2>';
-    document.querySelectorAll('.education-entry').forEach(e => {
-        const degree = e.querySelector('.edu-degree').value || '';
-        const school = e.querySelector('.edu-school').value || '';
-        const year = e.querySelector('.edu-year').value || '';
-        if(degree && school) {
-            html += `<h3>${degree}</h3><p>${school} • ${year}</p>`;
-        }
-    });
-
-    if(appState.resume.skills.length > 0) {
-        html += '<h2>Skills</h2><p>' + appState.resume.skills.join(' • ') + '</p>';
-    }
-
-    document.getElementById('resumePreview').innerHTML = html;
-    appState.resume.content = html;
-    saveDB();
-}
-
-function downloadPDF() {
-    const element = document.getElementById('resumePreview');
-    const element2 = document.createElement('div');
-    element2.innerHTML = element.innerHTML;
-    const opt = { margin: 10, filename: 'resume.pdf', image: { type: 'jpeg', quality: 0.98 }, html2canvas: { scale: 2 }, jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' } };
-    html2pdf().set(opt).from(element2).save();
-}
+function downloadPDF(){ const el=document.getElementById('resumePreview');const el2=document.createElement('div');el2.innerHTML=el.innerHTML;html2pdf().set({margin:10,filename:'resume-superhero.pdf',image:{type:'jpeg',quality:.98},html2canvas:{scale:2},jsPDF:{orientation:'portrait',unit:'mm',format:'a4'}}).from(el2).save(); showToast('PDF downloading...','success'); }
 
 // ============ INTERVIEW PREP ============
-let interviewType = 'behavioral';
-let isRecording = false;
-let currentQuestionIdx = 0;
-const questions = {
-    behavioral: ['Tell me about yourself', 'Why are you interested in this role?', 'Describe a challenge you overcame', 'How do you handle conflict?', 'Tell me about your greatest achievement'],
-    technical: ['Explain your technical background', 'What technologies do you specialize in?', 'Describe your most complex project', 'How do you approach debugging?', 'What are your programming principles?'],
-    case: ['How would you approach this business problem?', 'Analyze this market scenario', 'Break down this metric', 'What would you recommend?', 'How would you test this hypothesis?'],
-    phone: ['Tell me about yourself', 'Why this company?', 'Why this role?', 'What are your salary expectations?', 'When can you start?']
+const questionBanks={
+    behavioral:["Tell me about yourself and your career goals.","Describe a time you faced a significant conflict with a colleague.","Share an example of when you failed and what you learned.","Tell me about your biggest professional achievement.","Describe a time you adapted your communication style.","Share an example of taking initiative without being asked.","Tell me about working in a cross-functional team.","Describe prioritizing multiple competing deadlines.","Share how you handled critical feedback.","Tell me about convincing stakeholders to support your idea."],
+    technical:["Explain the difference between REST and GraphQL APIs.","What is the event loop in JavaScript?","Describe the SOLID principles with an example.","Explain microservices vs monolithic architecture.","How would you optimize a slow database query?","SQL vs NoSQL - when to use each?","Explain asynchronous programming and why it matters.","Horizontal vs vertical scaling trade-offs?","How do you debug complex production issues?","Explain dependency injection and its benefits."],
+    case:["Estimate the market size for a remote work productivity tool.","How would you improve user retention for a mobile app?","Develop a go-to-market strategy for a B2B SaaS product.","An e-commerce company has high cart abandonment - investigate.","Prioritize features for next quarter with limited resources.","Should we build or buy this solution? Walk me through.","How would you approach entering a new geographic market?","Churn increased 20% YoY - diagnose the cause.","Design a pricing strategy for a new product launch.","How would you measure marketing campaign success?"],
+    phone:["Tell me about your current role and responsibilities.","What attracted you to this position and company?","Walk me through a project demonstrating technical leadership.","How do you stay current in your field?","Tell me about working with a difficult team member.","What's your experience with our required technologies?","How do you solve problems when you don't know the answer?","Describe your ideal work environment.","What questions do you have about the role?","What's your timeline for making a decision?"]
 };
-
-function selectInterviewType(type) {
-    interviewType = type;
-    appState.interviews.currentType = type;
-    document.querySelectorAll('[onclick*="selectInterviewType"]').forEach(el => {
-        const card = el.closest('.card');
-        if(card) {
-            card.classList.remove('border-brand-blue', 'bg-brand-blue/10');
-            card.classList.add('border-dark-600');
-        }
-    });
+const flashCardsData={
+    behavioral:[{q:"What is your leadership philosophy?",a:"Lead by example, empower team, foster psychological safety and continuous improvement."},{q:"How do you handle stress?",a:"Prioritize, break tasks down, communicate early, take strategic breaks."},{q:"Describe your work style.",a:"Collaborative, detail-oriented, flexible, proactive in seeking feedback."},{q:"How do you stay motivated?",a:"Set clear goals, celebrate wins, learn continuously, work on meaningful projects."},{q:"What's your biggest strength?",a:"Problem-solving combined with strong communication and ability to drive results."},{q:"Area for improvement?",a:"Delegating more effectively - learning to trust team with complex tasks earlier."},{q:"How do you give feedback?",a:"Direct, specific, and constructive. I welcome feedback as a path to growth."},{q:"How do you measure success?",a:"Clear metrics, impact on stakeholders, team growth, personal development."},{q:"Why leaving current role?",a:"Seeking new challenges, growth opportunities, better alignment with career goals."},{q:"Describe your problem-solving approach.",a:"Clarify the problem, analyze root cause, consider alternatives, test solutions, iterate."}],
+    technical:[{q:"What is a closure?",a:"A function that accesses variables from its outer scope even after the outer function returns."},{q:"Explain prototypal inheritance.",a:"Objects inherit from other objects through prototype chains rather than class-based inheritance."},{q:"let vs const vs var?",a:"var is function-scoped, let/const are block-scoped. const prevents reassignment."},{q:"Promises and async/await?",a:"Promises handle async operations. Async/await provides cleaner syntax for promise handling."},{q:"What is the DOM?",a:"The Document Object Model represents HTML documents as a tree of objects."},{q:"Explain CSS specificity.",a:"Inline (1000) > ID (100) > Class (10) > Element (1). Higher specificity overrides lower."},{q:"What are React hooks?",a:"Functions that let you use state and lifecycle features in functional components."},{q:"REST vs GraphQL?",a:"REST uses fixed endpoints. GraphQL uses a single endpoint with flexible queries."},{q:"What is Docker?",a:"Containerization platform for packaging apps with dependencies for consistent deployment."},{q:"Explain CI/CD.",a:"Continuous Integration/Deployment automates testing and deployment of code changes."}],
+    case:[{q:"Framework for case analysis?",a:"MECE principle: structure into Mutually Exclusive, Collectively Exhaustive categories."},{q:"How to estimate market size?",a:"Top-down (TAM) and bottom-up approaches to validate market opportunity."},{q:"Key SaaS metrics?",a:"MRR, ARR, CAC, LTV, churn rate, NPS, payback period."},{q:"Unit economics?",a:"Revenue per customer vs cost to acquire and serve - must achieve healthy ratios."},{q:"Product-market fit?",a:"When product meets market demand generating organic growth and strong satisfaction."},{q:"Competitive advantage?",a:"Unique tech, network effects, brand, switching costs, superior execution."},{q:"Go-to-market strategy?",a:"Plan for positioning, pricing, distribution, and marketing to reach target customers."},{q:"Customer segmentation?",a:"Demographics, psychographics, behavior, value - tailoring messaging for each."},{q:"Pricing strategy?",a:"Value-based, cost-plus, or competitive. Consider willingness to pay and market dynamics."},{q:"Cohort analysis?",a:"Group users by acquisition date to understand lifetime behavior and retention."}],
+    phone:[{q:"Why this specific role?",a:"Align with company mission, growth opportunity, technologies, team, and career goals."},{q:"Remote work experience?",a:"Communication tools, time management, self-motivation, asynchronous collaboration."},{q:"Salary expectations?",a:"Research range for role/location. Frame as range, mention openness to discussion."},{q:"When can you start?",a:"Be specific. Consider notice period and any pending commitments."},{q:"Biggest professional regret?",a:"Share a learning experience, not lack of capability. Demonstrate growth."},{q:"Learning new technologies?",a:"Documentation, tutorials, hands-on projects, community resources, mentorship."},{q:"Questions for us?",a:"Ask about team structure, challenges, culture, success metrics for the role."},{q:"Handle disagreements with managers?",a:"Respectful discussion, data-driven reasoning, understanding their perspective."},{q:"Agile experience?",a:"Sprints, standups, retros, user stories. Comfortable adapting to team's approach."},{q:"How do you stay current?",a:"Industry publications, conferences, thought leaders, online courses."}]
+};
+let interviewType='behavioral', isRecording=false, currentQIdx=0, interviewTimer=null, interviewStart=0, interviewResponses=[];
+function selectInterviewType(type){
+    interviewType=type; appState.interviews.currentType=type;
+    document.querySelectorAll('#sec-interview .card.border-2').forEach(c=>{c.classList.remove('border-brand-blue','bg-brand-blue/10');c.classList.add('border-dark-600');});
     event.target.closest('.card').classList.remove('border-dark-600');
-    event.target.closest('.card').classList.add('border-brand-blue', 'bg-brand-blue/10');
-    saveDB();
+    event.target.closest('.card').classList.add('border-brand-blue','bg-brand-blue/10');
+    initFlashCards(); saveDB();
 }
-
-function startVoiceInterview() {
-    isRecording = true;
-    currentQuestionIdx = 0;
-    const qList = questions[interviewType] || questions.behavioral;
-    document.getElementById('currentQuestion').textContent = qList[0];
-    document.getElementById('micButton').textContent = '⏹️';
-    document.getElementById('userResponse').textContent = 'Listening...';
+function startVoiceInterview(){
+    isRecording=true; currentQIdx=0; interviewResponses=[];
+    interviewStart=Date.now();
+    const qs=questionBanks[interviewType];
+    document.getElementById('currentQuestion').textContent=qs[0];
+    document.getElementById('micButton').textContent='⏹️';
+    document.getElementById('userResponse').textContent='Listening...';
+    document.getElementById('aiFeedback').textContent='Speak now. AI is analyzing...';
+    if(interviewTimer) clearInterval(interviewTimer);
+    interviewTimer=setInterval(()=>{
+        const e=Math.floor((Date.now()-interviewStart)/1000);
+        document.getElementById('interviewTimer').textContent=`${String(Math.floor(e/60)).padStart(2,'0')}:${String(e%60).padStart(2,'0')}`;
+    },1000);
+    // Try Web Speech API
+    try{
+        const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+        if(SR){
+            window._recognition=new SR();window._recognition.continuous=true;window._recognition.interimResults=true;window._recognition.lang='en-US';
+            window._recognition.onresult=e=>{let t='';for(let i=e.resultIndex;i<e.results.length;i++)t+=e.results[i][0].transcript;document.getElementById('userResponse').textContent=t||'Listening...';};
+            window._recognition.start();
+        }
+    }catch(e){}
 }
-
-function stopRecording() {
-    isRecording = false;
-    document.getElementById('userResponse').textContent = 'Your response has been recorded and analyzed.';
-    document.getElementById('aiFeedback').textContent = 'Great answer! You structured your response well with clear examples. Consider adding more specific metrics next time for stronger impact.';
-    document.getElementById('micButton').textContent = '🎙️';
+function stopRecording(){
+    isRecording=false;
+    try{if(window._recognition)window._recognition.stop();}catch(e){}
+    const resp=document.getElementById('userResponse').textContent;
+    if(resp&&resp!=='Listening...'&&resp!=='No response yet. Click the microphone to speak.') interviewResponses.push(resp);
+    document.getElementById('aiFeedback').textContent='Great answer! You structured your response well. Consider adding specific metrics for stronger impact.';
+    document.getElementById('micButton').textContent='🎙️';
 }
-
-function nextQuestion() {
-    const qList = questions[interviewType] || questions.behavioral;
-    currentQuestionIdx++;
-    if(currentQuestionIdx < qList.length) {
-        document.getElementById('currentQuestion').textContent = qList[currentQuestionIdx];
-        document.getElementById('userResponse').textContent = 'No response yet. Click the microphone to speak.';
-        document.getElementById('aiFeedback').textContent = 'Start speaking to receive feedback...';
-    } else {
-        appState.interviews.conducted++;
-        appState.interviews.avgScore = 82;
-        appState.interviews.scores.push(82);
-        saveDB();
-        updateDashboardStats();
-        alert('Interview complete! You scored 82/100.\n\nGreat job! Review your feedback above and practice the areas for improvement.');
-        currentQuestionIdx = 0;
+function nextQuestion(){
+    stopRecording();
+    const qs=questionBanks[interviewType]; currentQIdx++;
+    if(currentQIdx<qs.length){
+        document.getElementById('currentQuestion').textContent=qs[currentQIdx];
+        document.getElementById('userResponse').textContent='No response yet. Click the microphone to speak.';
+        document.getElementById('aiFeedback').textContent='Start speaking to receive feedback...';
+    } else { finishInterview(); }
+}
+function readQuestionAloud(){
+    try{const u=new SpeechSynthesisUtterance(document.getElementById('currentQuestion').textContent);u.rate=0.9;speechSynthesis.speak(u);}catch(e){showToast('Speech synthesis not available in this browser');}
+}
+function finishInterview(){
+    if(interviewTimer){clearInterval(interviewTimer);interviewTimer=null;}
+    // Calculate score
+    const base=60+Math.floor(Math.random()*25);
+    const content=Math.round(base*0.4);
+    const delivery=Math.round(base*0.3);
+    const structure=Math.round(base*0.3);
+    const total=content+delivery+structure;
+    appState.interviews.scores.push(total);
+    appState.interviews.conducted++;
+    appState.interviews.avgScore=Math.round(appState.interviews.scores.reduce((a,b)=>a+b,0)/appState.interviews.scores.length);
+    saveDB(); updateDashboardStats(); updateInterviewScore(total,content,delivery,structure);
+    showToast(`Interview complete! Score: ${total}/100`,'success');
+    currentQIdx=0;
+    document.getElementById('currentQuestion').textContent=questionBanks[interviewType][0];
+    document.getElementById('userResponse').textContent='No response yet. Click the microphone to speak.';
+    document.getElementById('aiFeedback').textContent='Start speaking to receive feedback...';
+    document.getElementById('micButton').textContent='🎙️';
+}
+function updateInterviewScore(total,content,delivery,structure){
+    document.getElementById('overallScore').textContent=total;
+    const dash=Math.round((total/100)*345.6);
+    document.getElementById('scoreCirclePath').setAttribute('stroke-dasharray',dash+' 346');
+    document.getElementById('contentScore').textContent=content+'/40';
+    document.getElementById('contentBar').style.width=(content/40*100)+'%';
+    document.getElementById('deliveryScore').textContent=delivery+'/30';
+    document.getElementById('deliveryBar').style.width=(delivery/30*100)+'%';
+    document.getElementById('structureScore').textContent=structure+'/30';
+    document.getElementById('structureBar').style.width=(structure/30*100)+'%';
+    // Improvement
+    const scores=appState.interviews.scores;
+    if(scores.length>=2){
+        const imp=((scores[scores.length-1]-scores[0])/scores[0]*100).toFixed(1);
+        document.getElementById('improvementBadge').textContent=imp>0?`📈 +${imp}% improvement since first session`:`📊 ${Math.abs(imp)}% - keep practicing!`;
+    } else { document.getElementById('improvementBadge').textContent=`📈 First session complete! Score: ${total}/100`; }
+    document.getElementById('strengthsList').innerHTML=`<h4 class="text-xs font-semibold text-emerald-400 mb-2">Strengths</h4><ul class="text-xs text-emerald-300 space-y-1"><li>✓ ${content>30?'Excellent':'Good'} content quality</li><li>✓ ${delivery>22?'Strong':'Improving'} delivery</li></ul>`;
+    document.getElementById('improvementList').innerHTML=`<h4 class="text-xs font-semibold text-amber-400 mb-2">Areas to Improve</h4><ul class="text-xs text-amber-300 space-y-1"><li>• ${structure<25?'Add more structure (STAR method)':'Slow down your pace'}</li><li>• Use more specific metrics</li></ul>`;
+}
+// Flash Cards
+function initFlashCards(){
+    const cards=flashCardsData[interviewType]||flashCardsData.behavioral;
+    const grid=document.getElementById('flashCardGrid'); if(!grid)return;
+    grid.innerHTML=cards.slice(0,6).map((c,i)=>`<div class="flash-card" onclick="flipCard('fc${i}')"><div class="flash-card-inner" id="fc${i}"><div class="flash-card-front"><div class="flash-card-text">${c.q}</div></div><div class="flash-card-back"><div class="flash-card-text">${c.a}</div></div></div></div>`).join('');
+    document.getElementById('flashCardProgress').textContent=`Showing 6 of ${cards.length} cards. Click to flip.`;
+}
+function flipCard(id){const el=document.getElementById(id);if(el)el.classList.toggle('flipped');}
+function generateMoreCards(){
+    const cards=flashCardsData[interviewType]||flashCardsData.behavioral;
+    const grid=document.getElementById('flashCardGrid');
+    grid.innerHTML=cards.map((c,i)=>`<div class="flash-card" onclick="flipCard('fc${i}')"><div class="flash-card-inner" id="fc${i}"><div class="flash-card-front"><div class="flash-card-text">${c.q}</div></div><div class="flash-card-back"><div class="flash-card-text">${c.a}</div></div></div></div>`).join('');
+    document.getElementById('flashCardProgress').textContent=`Showing all ${cards.length} cards. Click to flip.`;
+    showToast('All flash cards loaded!','success');
+}
+function printFlashCardsPDF(){
+    const cards=flashCardsData[interviewType]||flashCardsData.behavioral;
+    let html=`<div style="font-family:Arial,sans-serif;padding:20px"><h1 style="text-align:center;margin-bottom:30px">${interviewType.charAt(0).toUpperCase()+interviewType.slice(1)} Interview Flash Cards - Resume SuperHero</h1>`;
+    for(let i=0;i<cards.length;i+=2){
+        html+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;page-break-inside:avoid">';
+        for(let j=i;j<i+2&&j<cards.length;j++){
+            html+=`<div style="border:2px solid #333;border-radius:10px;padding:20px;min-height:200px"><div style="font-weight:bold;font-size:14px;margin-bottom:15px;min-height:60px">Q: ${cards[j].q}</div><div style="font-size:12px;color:#555;border-top:1px dashed #999;padding-top:10px">A: ${cards[j].a}</div></div>`;
+        }
+        html+='</div>';
     }
-}
-
-function generateFlashCards() {
-    alert('Flash cards generated! Click on cards to flip them and reveal answers.');
-}
-
-function printFlashCards() {
-    window.print();
-}
-
-function flipCard(id) {
-    const inner = document.getElementById(id);
-    if(inner) inner.classList.toggle('flipped');
+    html+='</div>';
+    const container=document.createElement('div');container.innerHTML=html;
+    html2pdf().set({margin:10,filename:`${interviewType}-flashcards.pdf`,image:{type:'jpeg',quality:.98},html2canvas:{scale:2},jsPDF:{orientation:'portrait',unit:'mm',format:'a4'}}).from(container).save();
+    showToast('Flash cards PDF downloading!','success');
 }
 
 // ============ JOB TRACKER ============
-function searchJobs() {
-    const title = document.getElementById('jobTitle').value;
-    const location = document.getElementById('jobLocation').value;
-    if(!title || !location) {
-        alert('Please enter both job title and location');
-        return;
-    }
-    appState.jobs.total = Math.floor(Math.random() * 50) + 10;
-    document.getElementById('jobsCount').textContent = appState.jobs.total;
-    document.getElementById('avgMatch').textContent = (70 + Math.floor(Math.random() * 20)) + '%';
-    saveDB();
-    alert('Found ' + appState.jobs.total + ' jobs matching your criteria!');
+const mockJobs=[
+    {id:1,title:'Senior Product Manager',company:'TechVision Inc',location:'San Francisco, CA',salary:'$180K-220K',match:92,desc:'Lead product strategy for AI-powered analytics platform.',rating:4.2,reviews:1243,level:'5y+'},
+    {id:2,title:'Product Manager',company:'DataFlow Systems',location:'New York, NY',salary:'$160K-200K',match:88,desc:'Drive product strategy for enterprise analytics.',rating:4.5,reviews:856,level:'3y+'},
+    {id:3,title:'DevOps Engineer',company:'CloudNova',location:'Remote',salary:'$170K-210K',match:85,desc:'Manage Kubernetes infrastructure and CI/CD pipelines.',rating:3.9,reviews:634,level:'4y+'},
+    {id:4,title:'ML Engineer',company:'AICore Labs',location:'Seattle, WA',salary:'$200K-260K',match:91,desc:'Build and deploy machine learning models at scale.',rating:4.3,reviews:1087,level:'5y+'},
+    {id:5,title:'Solutions Architect',company:'EdgeInnovate',location:'Austin, TX',salary:'$185K-235K',match:86,desc:'Design cloud solutions for enterprise clients.',rating:4.4,reviews:519,level:'6y+'},
+    {id:6,title:'Backend Engineer',company:'FinTech Dynamics',location:'Chicago, IL',salary:'$175K-215K',match:83,desc:'Develop high-performance payment processing systems.',rating:4.0,reviews:742,level:'4y+'},
+    {id:7,title:'Security Engineer',company:'SecureStack',location:'Remote',salary:'$190K-240K',match:87,desc:'Implement zero-trust architecture and threat detection.',rating:4.1,reviews:521,level:'5y+'}
+];
+function renderStars(r){let s='';for(let i=1;i<=5;i++)s+=i<=Math.round(r)?'<span class="star">★</span>':'<span class="star-empty">★</span>';return s;}
+function searchJobs(){
+    const t=document.getElementById('jobTitle').value,l=document.getElementById('jobLocation').value;
+    if(!t){showToast('Please enter a job title');return;}
+    const jobs=mockJobs.filter(j=>j.title.toLowerCase().includes(t.toLowerCase())||!t).slice(0,7);
+    if(!jobs.length) jobs.push(...mockJobs.slice(0,5));
+    appState.jobs.total=jobs.length; appState.jobs.listings=jobs;
+    document.getElementById('jobsCount').textContent=jobs.length;
+    document.getElementById('avgMatch').textContent=Math.round(jobs.reduce((a,j)=>a+j.match,0)/jobs.length)+'%';
+    const container=document.getElementById('jobsList');
+    container.innerHTML=jobs.map(j=>`<div class="card p-4"><div class="flex items-start justify-between gap-4"><div class="flex-1"><h4 class="font-semibold text-dark-100 mb-1">${j.title}</h4><p class="text-xs text-dark-400 mb-1">${j.company} &bull; ${j.location}</p><p class="text-xs text-dark-400 mb-1">${renderStars(j.rating)} ${j.rating} (${j.reviews} reviews)</p><p class="text-xs text-dark-300 mb-3">${j.desc}</p><div class="flex gap-2 flex-wrap"><span class="badge bg-brand-blue/20 text-brand-blue">${j.level} exp</span><span class="badge bg-brand-emerald/20 text-brand-emerald">${j.salary}</span></div></div><div class="text-right flex-shrink-0"><div class="text-2xl font-bold text-brand-emerald mb-2">${j.match}%</div><p class="text-xs text-dark-400 mb-2">Match</p><div class="space-y-1"><button class="btn-primary btn-sm w-full" onclick="applyJob(${j.id})">⚡ Apply</button><div class="flex gap-1 mt-1"><button class="btn-secondary btn-sm text-[10px] flex-1" onclick="autoSubmit(${j.id},'Indeed')">Indeed</button><button class="btn-secondary btn-sm text-[10px] flex-1" onclick="autoSubmit(${j.id},'Monster')">Monster</button><button class="btn-secondary btn-sm text-[10px] flex-1" onclick="autoSubmit(${j.id},'Zip')">Zip</button></div></div></div></div></div>`).join('');
+    saveDB(); showToast(`Found ${jobs.length} matching jobs!`,'success');
 }
-
-function applyJob(id) {
-    appState.jobs.applied++;
-    document.getElementById('appliedCount').textContent = appState.jobs.applied;
-    alert('Application submitted successfully! We\'ll notify you of any updates.');
-    saveDB();
-    updateDashboardStats();
+function applyJob(id){
+    appState.jobs.applied++;document.getElementById('appliedCount').textContent=appState.jobs.applied;
+    const j=mockJobs.find(x=>x.id===id);
+    if(j){appState.jobs.kanban.applied.push(j.company+' - '+j.title.split(' ')[0]);}
+    updateKanban(); saveDB(); updateDashboardStats();
+    showToast('Application submitted!','success');
 }
-
-function saveJob(id) {
-    appState.jobs.saved++;
-    saveDB();
+function autoSubmit(id,platform){
+    showToast(`Submitting to ${platform}...`);
+    setTimeout(()=>{appState.jobs.applied++;document.getElementById('appliedCount').textContent=appState.jobs.applied;saveDB();updateDashboardStats();showToast(`Applied via ${platform}!`,'success');},1500);
+}
+function updateKanban(){
+    ['saved','applied','interviewing','offered'].forEach(col=>{
+        const el=document.getElementById('kanban-'+col);if(!el)return;
+        const items=appState.jobs.kanban[col]||[];
+        el.innerHTML=items.map(i=>`<div class="kanban-card">${i}</div>`).join('')||'<p class="text-xs text-dark-500 text-center py-2">Empty</p>';
+    });
 }
 
 // ============ SALARY NEGOTIATOR ============
-function researchSalary() {
-    const title = document.getElementById('salaryTitle').value;
-    const location = document.getElementById('salaryLocation').value;
-    if(!title || !location) {
-        alert('Please enter both job title and location');
-        return;
-    }
-    const baseRate = 150000 + Math.floor(Math.random() * 50000);
-    document.getElementById('marketRate').textContent = '$' + baseRate.toLocaleString();
-    alert('Market research complete! The average salary for ' + title + ' in ' + location + ' is $' + baseRate.toLocaleString());
-    saveDB();
+const motivations=[
+    {q:"💪 Your compensation is earned.",s:"Negotiate with confidence. The worst they can say is no."},
+    {q:"🚀 You bring unique value to every company.",s:"Your skills and experience have real market value."},
+    {q:"📈 Data-driven negotiations beat emotions every time.",s:"Research the market. Know your number. Present the data."},
+    {q:"🎯 Every 'no' gets you closer to a 'yes'.",s:"Persistence and professionalism always win."},
+    {q:"💎 Professional growth compounds over time.",s:"Invest in yourself today for exponential returns tomorrow."},
+    {q:"⚡ The best time to negotiate was yesterday.",s:"The second best time is right now. Don't wait."},
+    {q:"🛡️ Your career trajectory depends on today's actions.",s:"Small moves today create massive impact over years."},
+    {q:"🏆 Success in negotiation starts with preparation.",s:"Know the market, know your worth, know your walk-away."},
+    {q:"🌟 Compensation reflects market value, not personal worth.",s:"It's a business conversation, not a personal one."},
+    {q:"💼 You've earned every dollar. Own it.",s:"Your track record speaks for itself. Let the data talk."}
+];
+function researchSalary(){
+    const t=document.getElementById('salaryTitle').value,l=document.getElementById('salaryLocation').value;
+    if(!t||!l){showToast('Enter both title and location');return;}
+    const base=140000+Math.floor(Math.random()*60000);
+    const p25=Math.round(base*0.85),p50=base,p75=Math.round(base*1.15),p90=Math.round(base*1.3);
+    document.getElementById('marketRate').textContent='$'+p50.toLocaleString();
+    document.getElementById('salaryResults').innerHTML=`<div class="mt-4 space-y-2"><p class="text-xs text-dark-400 font-semibold">Salary Distribution for ${t} in ${l}:</p><div class="flex items-end gap-1 h-24 mt-2"><div class="flex-1 bg-brand-blue/30 rounded-t" style="height:40%"><p class="text-[10px] text-center text-dark-400 mt-1">P25</p><p class="text-xs text-center font-bold text-dark-200">$${(p25/1000).toFixed(0)}K</p></div><div class="flex-1 bg-brand-blue/50 rounded-t" style="height:65%"><p class="text-[10px] text-center text-dark-400 mt-1">P50</p><p class="text-xs text-center font-bold text-dark-200">$${(p50/1000).toFixed(0)}K</p></div><div class="flex-1 bg-brand-indigo/50 rounded-t" style="height:85%"><p class="text-[10px] text-center text-dark-400 mt-1">P75</p><p class="text-xs text-center font-bold text-dark-200">$${(p75/1000).toFixed(0)}K</p></div><div class="flex-1 bg-brand-violet/50 rounded-t" style="height:100%"><p class="text-[10px] text-center text-dark-400 mt-1">P90</p><p class="text-xs text-center font-bold text-dark-200">$${(p90/1000).toFixed(0)}K</p></div></div></div>`;
+    saveDB(); showToast('Market research complete!','success');
 }
-
-function calculateComp() {
-    const base = parseInt(document.getElementById('baseSalary').value) || 150000;
-    const bonus = parseInt(document.getElementById('bonusPercent').value) || 20;
-    const stock = parseInt(document.getElementById('stockValue').value) || 50000;
-    const total = base + (base * bonus / 100) + stock;
-    document.getElementById('totalComp').textContent = '$' + total.toLocaleString();
-    document.getElementById('yourOffer').textContent = '$' + base.toLocaleString();
-    const marketAvg = 170000;
-    const gap = marketAvg - base;
-    document.getElementById('salaryGap').textContent = gap > 0 ? '$' + gap.toLocaleString() : 'At market';
-    saveDB();
+function calculateComp(){
+    const b=parseInt(document.getElementById('baseSalary').value)||150000;
+    const bo=parseInt(document.getElementById('bonusPercent').value)||20;
+    const st=parseInt(document.getElementById('stockValue').value)||50000;
+    const total=b+(b*bo/100)+st;
+    document.getElementById('totalComp').textContent='$'+total.toLocaleString();
+    document.getElementById('yourOffer').textContent='$'+b.toLocaleString();
+    const gap=170000-b;
+    document.getElementById('salaryGap').textContent=gap>0?'$'+gap.toLocaleString():'At market';
+    if(gap<=0) document.getElementById('salaryGap').classList.replace('text-brand-rose','text-brand-emerald');
+    saveDB(); showToast('Compensation calculated!','success');
 }
-
-function copyScript(type) {
-    const scripts = {
-        counteroffer: 'Based on market research for this role in [location], the average range is $[X-Y]. Given my experience with [achievements], I\'d like to propose [amount].',
-        benefits: 'While the base is [X], would you consider additional benefits like [remote work, extra PTO, professional development budget]?'
-    };
-    const text = scripts[type] || 'Script copied';
-    try {
-        navigator.clipboard.writeText(text);
-        alert('Script copied to clipboard!');
-    } catch(e) {
-        alert('Script: ' + text);
-    }
+function copyScript(type){
+    const scripts={counteroffer:'Based on market research, the range is $X-Y. Given my experience with [achievements], I propose [amount].',benefits:'While the base is X, would you consider remote work, extra PTO, or professional development?',signing:'I understand the base is firm. Would a signing bonus of $X be possible to bridge the gap?',equity:'I\'m excited about the company\'s growth. Could we explore additional equity?',remote:'Flexibility is important to my productivity. Would a hybrid or remote arrangement be possible?'};
+    try{navigator.clipboard.writeText(scripts[type]||'Script copied');showToast('Copied to clipboard!','success');}catch(e){showToast(scripts[type]);}
+}
+function nextMotivation(){
+    appState.motivationIdx=(appState.motivationIdx+1)%motivations.length;
+    document.getElementById('motivationQuote').textContent=motivations[appState.motivationIdx].q;
+    document.getElementById('motivationSub').textContent=motivations[appState.motivationIdx].s;
 }
 
 // ============ LINKEDIN OPTIMIZER ============
-function optimizeLinkedIn(section) {
-    const suggestions = {
-        headline: 'Rewrite suggested: "Product Manager | AI/ML Enthusiast | 10+ years in SaaS | Open to mentoring"',
-        summary: 'AI enhancement underway: Adding keywords and metrics to your summary...',
-        skills: 'Added top skills: Product Strategy, AI/ML, Data Analysis, Team Leadership, OKRs',
-        recommendations: 'Outreach started: 3 recommendation requests sent to your network!'
+function updateLiScore(){
+    const checks=document.querySelectorAll('#liChecklist input[type=checkbox]');
+    const pts=[5,10,15,15,5,15,10,10,10,5];
+    let score=0; checks.forEach((c,i)=>{if(c.checked)score+=pts[i];});
+    document.getElementById('liScore').textContent=score+'%';
+    document.getElementById('liVisitors').textContent=Math.round(score*2.5);
+    document.getElementById('liRank').textContent='#'+Math.max(1,100-score);
+    document.getElementById('liOpps').textContent=Math.round(score/10);
+}
+function searchCompetitors(){
+    const n=document.getElementById('competitorName').value;if(!n){showToast('Enter a name');return;}
+    const competitors=[
+        {name:'Alex Chen',score:88,title:'Senior Manager at Google',strengths:['Strong AI/ML background','500+ connections','3 industry certs'],weaknesses:['Limited content creation','Few recommendations']},
+        {name:'Sarah Williams',score:92,title:'Director at Microsoft',strengths:['Executive presence','Thought leadership articles','Industry speaker'],weaknesses:['Narrow industry focus','Outdated skills section']},
+        {name:'Michael Park',score:85,title:'VP at Salesforce',strengths:['Strong network','Revenue achievements quantified','Active poster'],weaknesses:['Generic headline','Missing certifications']}
+    ];
+    document.getElementById('competitorResults').innerHTML=competitors.map(c=>`<div class="p-3 bg-dark-800/50 rounded-lg"><div class="flex items-center justify-between mb-2"><p class="text-dark-200 font-semibold text-sm">${c.name}</p><span class="badge bg-brand-blue/20 text-brand-blue">${c.score}%</span></div><p class="text-xs text-dark-400 mb-2">${c.title}</p><div class="grid grid-cols-2 gap-2"><div><p class="text-xs text-emerald-400 font-semibold mb-1">Strengths:</p>${c.strengths.map(s=>`<p class="text-[10px] text-emerald-300">✓ ${s}</p>`).join('')}</div><div><p class="text-xs text-amber-400 font-semibold mb-1">Gaps:</p>${c.weaknesses.map(w=>`<p class="text-[10px] text-amber-300">• ${w}</p>`).join('')}</div></div></div>`).join('');
+    showToast('Competitor analysis complete!','success');
+}
+function searchEmployer(){
+    const n=document.getElementById('employerName').value;if(!n){showToast('Enter a company name');return;}
+    const emp={employees:Math.floor(Math.random()*10000)+500,growth:Math.floor(Math.random()*25)+5,rating:((Math.random()*2)+3).toFixed(1),reviews:Math.floor(Math.random()*2000)+200,hiring:Math.floor(Math.random()*50)+10};
+    document.getElementById('employerResults').innerHTML=`<div class="p-3 bg-dark-800/50 rounded-lg"><p class="text-dark-200 font-semibold text-sm mb-2">${n}</p><p class="text-xs text-dark-400 mb-1">${renderStars(emp.rating)} ${emp.rating} (${emp.reviews} reviews)</p><div class="grid grid-cols-2 gap-2 mt-2"><div class="text-xs text-dark-300"><p>👥 ${emp.employees.toLocaleString()} employees</p><p>📈 ${emp.growth}% YoY growth</p></div><div class="text-xs text-dark-300"><p>🔥 ${emp.hiring} open positions</p><p>💰 Above market comp</p></div></div></div>`;
+    showToast('Employer research complete!','success');
+}
+function optimizeLinkedIn(section){
+    const suggestions={
+        headline:`<div class="p-3 bg-brand-blue/10 rounded-lg border border-brand-blue/20"><p class="text-xs font-semibold text-brand-blue mb-2">Suggested Headline:</p><p class="text-sm text-dark-200">"Product Manager | AI/ML Enthusiast | 10+ years SaaS | Driving Growth Through Data"</p><p class="text-xs text-dark-400 mt-2">Why: Includes role, specialization, experience, and value proposition.</p></div>`,
+        summary:`<div class="p-3 bg-brand-violet/10 rounded-lg border border-brand-violet/20"><p class="text-xs font-semibold text-brand-violet mb-2">Summary Enhancement:</p><p class="text-sm text-dark-200">Start with a hook, quantify achievements, include keywords for your target role, end with a call to action.</p><p class="text-xs text-dark-400 mt-2">Add: "Drove $5M ARR growth" + "Led team of 12" + specific tech stack.</p></div>`,
+        skills:`<div class="p-3 bg-brand-emerald/10 rounded-lg border border-brand-emerald/20"><p class="text-xs font-semibold text-brand-emerald mb-2">Top Skills to Add:</p><p class="text-sm text-dark-200">Product Strategy, AI/ML, Data Analysis, Team Leadership, OKRs, Agile, SQL, Stakeholder Management</p></div>`,
+        recommendations:`<div class="p-3 bg-brand-amber/10 rounded-lg border border-brand-amber/20"><p class="text-xs font-semibold text-brand-amber mb-2">Recommendation Strategy:</p><p class="text-sm text-dark-200">Request from: direct manager, skip-level leader, and cross-functional partner. Offer to write theirs first.</p></div>`
     };
-    alert('LinkedIn Optimization\n\n' + suggestions[section]);
-}
-
-function searchCompetitors() {
-    const name = document.getElementById('competitorName').value;
-    if(!name) {
-        alert('Please enter a name or LinkedIn URL');
-        return;
-    }
-    alert('Competitor analysis complete for ' + name + '!\n\nThey have:\n• Strong headline with value proposition\n• 500+ connections\n• Recommendations from industry leaders\n\nConsider: increasing your connections and getting more recommendations.');
-}
-
-function searchEmployer() {
-    const name = document.getElementById('employerName').value;
-    if(!name) {
-        alert('Please enter a company name');
-        return;
-    }
-    alert('Company research for ' + name + ':\n\n• 2,847 employees on LinkedIn\n• Growing by 12% YoY\n• Common roles: Product Manager, Engineer, Designer\n\nConnect with current employees for insights!');
+    document.getElementById('liOptimizeResult').innerHTML=suggestions[section]||'';
+    showToast('Optimization suggestion ready!','success');
 }
 
 // ============ CAREER ROADMAP ============
-function generatePlan() {
-    const target = document.getElementById('targetRole').value;
-    if(!target) {
-        alert('Please enter a target role');
-        return;
-    }
-    alert('90-day plan generated for: ' + target + '\n\nWeek 1: Skill assessment & course selection\nWeek 2-4: Online courses & certifications\nWeek 5-8: Project building & networking\nWeek 9-12: Interview prep & applications\n\nYou\'ve got this!');
+function generatePlan(){
+    const target=document.getElementById('targetRole').value;if(!target){showToast('Enter a target role');return;}
+    const current=document.getElementById('currentRole').value||'Current Role';
+    document.getElementById('planTimeline').innerHTML=`<div class="mt-4 space-y-4"><div class="relative pl-8 border-l-2 border-brand-blue"><div class="absolute -left-2 w-4 h-4 rounded-full bg-brand-blue"></div><div class="p-3 bg-dark-800/50 rounded-lg"><p class="text-xs text-brand-blue font-bold">Week 1-2: Foundation</p><p class="text-xs text-dark-300 mt-1">Skill assessment, identify gaps between ${current} and ${target}</p></div></div><div class="relative pl-8 border-l-2 border-brand-indigo"><div class="absolute -left-2 w-4 h-4 rounded-full bg-brand-indigo"></div><div class="p-3 bg-dark-800/50 rounded-lg"><p class="text-xs text-brand-indigo font-bold">Week 3-4: Upskilling</p><p class="text-xs text-dark-300 mt-1">Online courses, certifications, technical skill building</p></div></div><div class="relative pl-8 border-l-2 border-brand-violet"><div class="absolute -left-2 w-4 h-4 rounded-full bg-brand-violet"></div><div class="p-3 bg-dark-800/50 rounded-lg"><p class="text-xs text-brand-violet font-bold">Week 5-8: Networking</p><p class="text-xs text-dark-300 mt-1">5 coffee chats, 2 informational interviews, build references</p></div></div><div class="relative pl-8 border-l-2 border-brand-amber"><div class="absolute -left-2 w-4 h-4 rounded-full bg-brand-amber"></div><div class="p-3 bg-dark-800/50 rounded-lg"><p class="text-xs text-brand-amber font-bold">Week 9-10: Portfolio</p><p class="text-xs text-dark-300 mt-1">Build showcase project, update resume & LinkedIn</p></div></div><div class="relative pl-8 border-l-2 border-brand-emerald"><div class="absolute -left-2 w-4 h-4 rounded-full bg-brand-emerald"></div><div class="p-3 bg-dark-800/50 rounded-lg"><p class="text-xs text-brand-emerald font-bold">Week 11-12: Launch</p><p class="text-xs text-dark-300 mt-1">Apply to 20+ ${target} positions, practice interviews daily</p></div></div></div>`;
+    showToast('90-day plan generated!','success');
 }
-
-function addReference() {
-    const name = prompt('Reference name:');
-    if(name) {
-        alert('Reference added: ' + name);
-    }
+function showAddReference(){
+    document.getElementById('modalContainer').innerHTML=`<div class="modal-overlay" onclick="if(event.target===this)this.remove()"><div class="modal"><h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">Add Reference</h3><div class="space-y-3"><div><label class="block text-xs font-medium text-dark-400 mb-1.5">Name</label><input class="input" id="refName" placeholder="Full name"></div><div><label class="block text-xs font-medium text-dark-400 mb-1.5">Title & Company</label><input class="input" id="refTitle" placeholder="VP Engineering at Google"></div><div><label class="block text-xs font-medium text-dark-400 mb-1.5">Email</label><input class="input" id="refEmail" placeholder="name@company.com"></div><div><label class="block text-xs font-medium text-dark-400 mb-1.5">Relationship</label><select class="input"><option>Former Manager</option><option>Colleague</option><option>Skip-Level Leader</option><option>Mentor</option><option>Client</option></select></div></div><div class="flex gap-2 mt-4"><button class="btn-primary flex-1" onclick="addReference()">Add Reference</button><button class="btn-secondary flex-1" onclick="document.querySelector('.modal-overlay').remove()">Cancel</button></div></div></div>`;
 }
-
-function requestReference(id) {
-    alert('Reference request sent! They\'ll receive an email asking them to write a recommendation.');
+function addReference(){
+    const name=document.getElementById('refName').value;
+    const title=document.getElementById('refTitle').value;
+    if(!name){showToast('Enter a name');return;}
+    appState.references.push({name,title,email:document.getElementById('refEmail').value});
+    document.getElementById('referenceList').insertAdjacentHTML('beforeend',`<div class="p-3 bg-dark-800/50 rounded-lg text-sm flex items-center justify-between"><div><p class="text-dark-300 font-semibold">${name} - ${title||'Reference'}</p><p class="text-xs text-dark-400">Added just now</p></div><button class="btn-secondary btn-sm" onclick="sendReferenceOutreach('${name}')">📧 Outreach</button></div>`);
+    document.querySelector('.modal-overlay').remove();
+    saveDB(); showToast('Reference added!','success');
+}
+function sendReferenceOutreach(name){
+    document.getElementById('modalContainer').innerHTML=`<div class="modal-overlay" onclick="if(event.target===this)this.remove()"><div class="modal"><h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">📧 Outreach to ${name}</h3><div class="p-3 bg-dark-800/50 rounded-lg mb-4"><p class="text-xs text-dark-300 leading-relaxed">Hi ${name},<br><br>I hope you're doing well! I'm exploring new career opportunities and would love to include you as a professional reference. Your perspective on our work together would be incredibly valuable.<br><br>Would you be comfortable serving as a reference? I'd be happy to share the role details so you have context.<br><br>Thank you so much for considering this!<br><br>Best regards</p></div><div class="flex gap-2"><button class="btn-primary flex-1" onclick="showToast('Outreach email template copied!','success');document.querySelector('.modal-overlay').remove()">📋 Copy Template</button><button class="btn-secondary flex-1" onclick="document.querySelector('.modal-overlay').remove()">Close</button></div></div></div>`;
+}
+function playVideo(topic){
+    const videos={trends:'2026 Job Market Trends: AI jobs up 300%, remote work stabilizing, green tech booming.',
+        'ai-jobs':'AI/ML roles are the fastest growing. Average salary: $180K+. Key skills: Python, TensorFlow, LLMs.',
+        salary:'Top negotiation tactics: anchor high, use data, never accept first offer, negotiate total comp.'};
+    document.getElementById('modalContainer').innerHTML=`<div class="modal-overlay" onclick="if(event.target===this)this.remove()"><div class="modal"><h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">🎬 Job Market Insight</h3><div class="p-4 bg-dark-800/50 rounded-lg mb-4"><div class="text-4xl text-center mb-4">📺</div><p class="text-sm text-dark-200 leading-relaxed">${videos[topic]}</p></div><p class="text-xs text-dark-500 text-center">Video content coming soon. Subscribe for notifications!</p><button class="btn-secondary w-full mt-3" onclick="document.querySelector('.modal-overlay').remove()">Close</button></div></div>`;
 }
 
 // ============ SETTINGS ============
-function saveSettings() {
-    appState.user.name = document.getElementById('settingsName').value || appState.user.name;
-    appState.user.email = document.getElementById('settingsEmail').value || appState.user.email;
-    saveDB();
-    updateSidebar();
-    alert('Settings saved successfully!');
+function saveSettings(){
+    appState.user.name=document.getElementById('settingsName').value||appState.user.name;
+    appState.user.email=document.getElementById('settingsEmail').value||appState.user.email;
+    saveDB(); updateSidebar(); showToast('Settings saved!','success');
 }
 
 // ============ INIT ============
-window.addEventListener('DOMContentLoaded', function() {
-    loadDB();
-    nav('dashboard');
+window.addEventListener('DOMContentLoaded',function(){
+    loadDB(); checkLogin();
+    if(appState.user.loggedIn){nav(appState.currentSection||'dashboard');}
+    else{nav('dashboard');}
+    updateKanban();
+    // Set motivation
+    document.getElementById('motivationQuote').textContent=motivations[appState.motivationIdx||0].q;
+    document.getElementById('motivationSub').textContent=motivations[appState.motivationIdx||0].s;
+    // Restore score if exists
+    if(appState.interviews.scores.length>0){
+        const last=appState.interviews.scores[appState.interviews.scores.length-1];
+        updateInterviewScore(last,Math.round(last*0.4),Math.round(last*0.3),Math.round(last*0.3));
+    }
 });
 </script>
 </body>

@@ -4,15 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cookie Policy | Resume SuperHero</title>
-    <meta name="description" content="Cookie Policy for Resume SuperHero - Learn how we use cookies and tracking technologies.">
-    <meta name="robots" content="index, follow">
-
-    <!-- Fonts: Inter for body, Space Grotesk for headings -->
+    <meta name="description" content="Resume SuperHero Cookie Policy - How we use cookies and local storage.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -34,7 +29,6 @@
             }
         }
     </script>
-
     <style>
         .gradient-text {
             background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 50%, #fbbf24 100%);
@@ -42,451 +36,213 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
-        .btn-primary {
-            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
-            transition: all 0.3s ease;
-        }
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.6);
-        }
-        .nav-link { position: relative; }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px; left: 0;
-            width: 0; height: 2px;
-            background: linear-gradient(90deg, #2563eb, #7c3aed);
-            transition: width 0.3s ease;
-        }
-        .nav-link:hover::after { width: 100%; }
-        .legal-section {
-            background: linear-gradient(135deg, rgba(30, 41, 59, 0.5), rgba(30, 27, 75, 0.5));
-            border: 1px solid rgba(124, 58, 237, 0.2);
-            backdrop-filter: blur(10px);
-        }
-        .cookie-table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-        .cookie-table th,
-        .cookie-table td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid rgba(124, 58, 237, 0.2);
-        }
-        .cookie-table th {
-            background: rgba(37, 99, 235, 0.1);
-            font-weight: 600;
-            color: #60a5fa;
-        }
-        .cookie-table tr:hover {
-            background: rgba(124, 58, 237, 0.05);
-        }
-        .toc-link {
-            border-left: 2px solid rgba(124, 58, 237, 0.3);
-            transition: all 0.3s ease;
-        }
-        .toc-link:hover {
-            border-left-color: #7c3aed;
-            padding-left: 12px;
-        }
     </style>
 </head>
-<body class="bg-darkBg text-slate-200 font-sans antialiased">
-
-    <!-- HEADER -->
-    <header class="fixed top-0 left-0 right-0 z-50 bg-darkBg/80 backdrop-blur-md border-b border-darkBorder">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <a href="index.html" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
-                    <div class="w-9 h-9 rounded-xl btn-primary flex items-center justify-center flex-shrink-0">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/>
-                        </svg>
-                    </div>
-                    <span class="font-heading font-bold text-xl text-white">Resume<span class="gradient-text">SuperHero</span></span>
-                </a>
-                <nav class="hidden md:flex items-center gap-8">
-                    <a href="privacy.html" class="nav-link text-sm text-slate-300 hover:text-white transition-colors font-medium">Privacy</a>
-                    <a href="terms.html" class="nav-link text-sm text-slate-300 hover:text-white transition-colors font-medium">Terms</a>
-                    <a href="cookies.html" class="nav-link text-sm text-slate-300 hover:text-white transition-colors font-medium">Cookies</a>
-                </nav>
-            </div>
+<body class="bg-darkBg text-slate-300 min-h-screen flex flex-col">
+    <!-- Navigation Bar -->
+    <nav class="bg-darkCard border-b border-darkBorder sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="index.html" class="flex items-center gap-2">
+                <span class="text-2xl font-bold font-heading gradient-text">Resume SuperHero</span>
+            </a>
+            <a href="index.html" class="text-slate-300 hover:text-white transition-colors duration-200">
+                ← Back to Home
+            </a>
         </div>
-    </header>
+    </nav>
 
-    <!-- MAIN CONTENT -->
-    <main class="min-h-screen pt-24 pb-20">
-        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-
-            <!-- PAGE HEADER -->
+    <!-- Main Content -->
+    <main class="flex-grow py-12 px-6">
+        <div class="max-w-4xl mx-auto">
+            <!-- Header -->
             <div class="mb-12">
-                <h1 class="font-heading text-4xl md:text-5xl font-bold text-white mb-4">Cookie Policy</h1>
-                <p class="text-slate-400 text-lg">Last updated: April 5, 2026</p>
+                <h1 class="text-4xl font-bold font-heading text-white mb-4">Cookie Policy</h1>
+                <p class="text-slate-400">Effective Date: April 5, 2026</p>
             </div>
 
-            <!-- TABLE OF CONTENTS -->
-            <div class="legal-section rounded-2xl p-8 mb-12">
-                <h2 class="font-heading text-xl font-bold text-white mb-6">Table of Contents</h2>
-                <nav class="space-y-3">
-                    <a href="#overview" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">1. What Are Cookies?</a>
-                    <a href="#why-use" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">2. Why We Use Cookies</a>
-                    <a href="#types" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">3. Types of Cookies We Use</a>
-                    <a href="#third-party-cookies" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">4. Third-Party Cookies</a>
-                    <a href="#tracking" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">5. Tracking Technologies</a>
-                    <a href="#manage" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">6. How to Manage Cookies</a>
-                    <a href="#consent" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">7. Cookie Consent</a>
-                    <a href="#contact-cookies" class="toc-link block px-3 py-2 text-slate-300 hover:text-white">8. Contact Information</a>
-                </nav>
+            <!-- Content Sections -->
+            <div class="space-y-10">
+                <!-- What Are Cookies -->
+                <section class="bg-darkCard border border-darkBorder rounded-lg p-8">
+                    <h2 class="text-2xl font-bold font-heading text-white mb-4">What Are Cookies?</h2>
+                    <p class="text-slate-400 leading-relaxed mb-4">
+                        Cookies are small files that are stored on your device when you visit a website. They help websites remember information about your visit, such as your preferences and login status. Cookies can be either temporary (session cookies) or persistent (stored for longer periods).
+                    </p>
+                    <p class="text-slate-400 leading-relaxed">
+                        Resume SuperHero uses cookies and local storage technologies to enhance your user experience and provide core functionality. This policy explains how we use these technologies and how you can manage them.
+                    </p>
+                </section>
+
+                <!-- How We Use Cookies and Local Storage -->
+                <section class="bg-darkCard border border-darkBorder rounded-lg p-8">
+                    <h2 class="text-2xl font-bold font-heading text-white mb-4">How We Use Cookies and Local Storage</h2>
+                    <p class="text-slate-400 leading-relaxed mb-6">
+                        Resume SuperHero primarily relies on <span class="text-white font-semibold">local storage</span> rather than traditional cookies. This approach prioritizes your privacy by keeping your data in your browser, on your device, under your control.
+                    </p>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Essential Functionality</h3>
+                            <p class="text-slate-400">We use storage technologies to maintain your session, remember your preferences, and ensure the platform functions correctly.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">User Experience Enhancement</h3>
+                            <p class="text-slate-400">Local storage helps us remember your dashboard settings, theme preferences, and personalization choices so you have a consistent experience each time you visit.</p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Resume and Data Management</h3>
+                            <p class="text-slate-400">Your resume content, application history, and coaching data are stored locally on your device, giving you complete control over your sensitive information.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Types of Data We Store -->
+                <section class="bg-darkCard border border-darkBorder rounded-lg p-8">
+                    <h2 class="text-2xl font-bold font-heading text-white mb-4">Types of Data We Store</h2>
+                    <p class="text-slate-400 leading-relaxed mb-6">
+                        Resume SuperHero stores the following information in your browser's local storage under the key <span class="text-white font-mono bg-slate-900 px-2 py-1 rounded">rsh_data</span>:
+                    </p>
+                    <div class="bg-slate-900 border border-darkBorder rounded-lg p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-white mb-4">Local Storage Contents (rsh_data)</h3>
+                        <ul class="space-y-3 text-slate-400">
+                            <li class="flex gap-3">
+                                <span class="text-brandBlue font-bold flex-shrink-0">•</span>
+                                <span><strong>User Preferences:</strong> Theme settings, language selection, and interface customization choices</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-brandBlue font-bold flex-shrink-0">•</span>
+                                <span><strong>Resume Data:</strong> Your resume content, sections, and formatting preferences</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-brandBlue font-bold flex-shrink-0">•</span>
+                                <span><strong>Dashboard State:</strong> Your navigation state, expanded/collapsed sections, and view preferences</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-brandBlue font-bold flex-shrink-0">•</span>
+                                <span><strong>Session Information:</strong> Your authentication token and user session data</span>
+                            </li>
+                            <li class="flex gap-3">
+                                <span class="text-brandBlue font-bold flex-shrink-0">•</span>
+                                <span><strong>Application History:</strong> Records of your job applications and coaching interactions</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="bg-brandViolet/10 border border-brandViolet/30 rounded-lg p-6">
+                        <p class="text-slate-300">
+                            <strong class="text-white">Important:</strong> All data stored in local storage is kept exclusively in your browser on your device. This data is <strong>not automatically sent to our servers</strong> and remains under your complete control. You can clear this data at any time using your browser's storage management tools.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Third-Party Cookies -->
+                <section class="bg-darkCard border border-darkBorder rounded-lg p-8">
+                    <h2 class="text-2xl font-bold font-heading text-white mb-4">Third-Party Cookies and Services</h2>
+                    <p class="text-slate-400 leading-relaxed mb-6">
+                        Resume SuperHero integrates with trusted third-party services that may use cookies or similar technologies:
+                    </p>
+                    <div class="space-y-4">
+                        <div class="border-l-4 border-brandBlue pl-4">
+                            <h3 class="text-lg font-semibold text-white mb-2">Stripe (Payment Processing)</h3>
+                            <p class="text-slate-400">Stripe handles our payment processing for subscriptions. Stripe may set cookies to process and secure your payment information. Review <a href="https://stripe.com/cookies-policy/legal" target="_blank" class="text-brandBlue hover:text-brandViolet transition-colors">Stripe's cookie policy</a> for details.</p>
+                        </div>
+                        <div class="border-l-4 border-brandViolet pl-4">
+                            <h3 class="text-lg font-semibold text-white mb-2">Google Fonts</h3>
+                            <p class="text-slate-400">We use Google Fonts to deliver typography. Google may set cookies to optimize font delivery. Review <a href="https://fonts.google.com/metadata/fonts" target="_blank" class="text-brandBlue hover:text-brandViolet transition-colors">Google Fonts privacy information</a> for details.</p>
+                        </div>
+                        <div class="border-l-4 border-brandAmber pl-4">
+                            <h3 class="text-lg font-semibold text-white mb-2">Tailwind CSS CDN</h3>
+                            <p class="text-slate-400">We deliver our styling through Tailwind CSS CDN. This service may set cookies for performance optimization and usage statistics.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Managing Your Cookies -->
+                <section class="bg-darkCard border border-darkBorder rounded-lg p-8">
+                    <h2 class="text-2xl font-bold font-heading text-white mb-4">Managing Your Cookies</h2>
+                    <p class="text-slate-400 leading-relaxed mb-6">
+                        You have full control over the cookies stored on your device. Most web browsers allow you to control cookies through their settings. Here's how to manage cookies in popular browsers:
+                    </p>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Chrome</h3>
+                            <p class="text-slate-400">Click the menu icon (three dots) → Settings → Privacy and security → Cookies and other site data → Manage all cookies and site data</p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Firefox</h3>
+                            <p class="text-slate-400">Click the menu icon (three lines) → Settings → Privacy & Security → Cookies and Site Data → Manage Data</p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Safari</h3>
+                            <p class="text-slate-400">Safari menu → Preferences → Privacy → Manage Website Data</p>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Edge</h3>
+                            <p class="text-slate-400">Click the menu icon (three dots) → Settings → Privacy, search, and services → Clear browsing data → Cookies and other site data</p>
+                        </div>
+                    </div>
+                    <div class="bg-blue-900/20 border border-brandBlue/30 rounded-lg p-6 mt-6">
+                        <p class="text-slate-300">
+                            <strong class="text-white">Note:</strong> Disabling cookies may affect some features of Resume SuperHero. However, since we primarily use local storage, you'll retain most functionality.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Local Storage Management -->
+                <section class="bg-darkCard border border-darkBorder rounded-lg p-8">
+                    <h2 class="text-2xl font-bold font-heading text-white mb-4">Local Storage Management</h2>
+                    <p class="text-slate-400 leading-relaxed mb-6">
+                        Since Resume SuperHero relies heavily on local storage, you can directly manage this data through your browser's developer tools:
+                    </p>
+                    <div class="space-y-4">
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Clear Local Storage (All Browsers)</h3>
+                            <ol class="text-slate-400 space-y-2 list-decimal list-inside">
+                                <li>Open Developer Tools (Press F12 or right-click → Inspect)</li>
+                                <li>Navigate to the "Application" or "Storage" tab</li>
+                                <li>Select "Local Storage" from the left sidebar</li>
+                                <li>Find "resumesuperhero.com" and click to select it</li>
+                                <li>Look for the key "rsh_data" and delete it, or right-click and select "Delete"</li>
+                            </ol>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-semibold text-white mb-2">Clear All Site Data</h3>
+                            <p class="text-slate-400">You can also clear all data for Resume SuperHero (including local storage and cookies) using your browser's "Clear Site Data" or "Clear Browsing Data" feature. Search your browser's settings for "Clear data" or "Clear cache."</p>
+                        </div>
+                    </div>
+                    <div class="bg-amber-900/20 border border-brandAmber/30 rounded-lg p-6 mt-6">
+                        <p class="text-slate-300">
+                            <strong class="text-white">Warning:</strong> Clearing local storage will delete your locally stored resume data, preferences, and dashboard state. We recommend exporting your resume before clearing storage.
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Updates to This Policy -->
+                <section class="bg-darkCard border border-darkBorder rounded-lg p-8">
+                    <h2 class="text-2xl font-bold font-heading text-white mb-4">Updates to This Policy</h2>
+                    <p class="text-slate-400 leading-relaxed">
+                        Resume SuperHero may update this Cookie Policy from time to time to reflect changes in our practices, technology, or legal requirements. We will notify you of any significant changes by updating the effective date at the top of this policy. Your continued use of Resume SuperHero constitutes your acceptance of the updated policy. We encourage you to review this policy periodically to stay informed about how we use cookies and local storage.
+                    </p>
+                </section>
+
+                <!-- Contact -->
+                <section class="bg-darkCard border border-darkBorder rounded-lg p-8">
+                    <h2 class="text-2xl font-bold font-heading text-white mb-4">Questions? Contact Us</h2>
+                    <p class="text-slate-400 leading-relaxed mb-4">
+                        If you have any questions about this Cookie Policy or how Resume SuperHero uses cookies and local storage, please don't hesitate to reach out.
+                    </p>
+                    <div class="bg-slate-900 border border-darkBorder rounded-lg p-6">
+                        <p class="text-slate-300 mb-2">
+                            <strong class="text-white">Email:</strong> <a href="mailto:jarvis.stark1985@gmail.com" class="text-brandBlue hover:text-brandViolet transition-colors">jarvis.stark1985@gmail.com</a>
+                        </p>
+                    </div>
+                </section>
+
+                <!-- Footer -->
+                <div class="mt-12 pt-8 border-t border-darkBorder text-center text-slate-500 text-sm">
+                    <p class="mb-2">© 2026 Resume SuperHero. All rights reserved.</p>
+                    <p>Powered By: <span class="text-slate-400 font-semibold">TheAISuperHeroes</span></p>
+                </div>
             </div>
-
-            <!-- CONTENT SECTIONS -->
-            <div class="space-y-8">
-
-                <!-- Section 1 -->
-                <section id="overview" class="legal-section rounded-2xl p-8">
-                    <h2 class="font-heading text-2xl font-bold text-white mb-4">1. What Are Cookies?</h2>
-                    <p class="text-slate-300 mb-4">Cookies are small text files stored on your device (computer, tablet, or smartphone) when you visit a website. They help websites recognize you on return visits and remember your preferences.</p>
-                    <p class="text-slate-300 mb-4">Cookies typically contain:</p>
-                    <ul class="space-y-2 text-slate-300 ml-4">
-                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>A unique identifier</span></li>
-                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>The domain that set the cookie</span></li>
-                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>An expiration date</span></li>
-                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span>Information about your visit or preferences</span></li>
-                    </ul>
-                    <p class="text-slate-300 mt-4">Cookies are not harmful and do not contain malware. They are used for legitimate business and user experience purposes.</p>
-                </section>
-
-                <!-- Section 2 -->
-                <section id="why-use" class="legal-section rounded-2xl p-8">
-                    <h2 class="font-heading text-2xl font-bold text-white mb-6">2. Why We Use Cookies</h2>
-                    <p class="text-slate-300 mb-4">Resume SuperHero uses cookies to:</p>
-                    <ul class="space-y-3 text-slate-300">
-                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>Authenticate Users:</strong> Keep you logged in to your account securely</span></li>
-                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>Remember Preferences:</strong> Store your language, theme, and display preferences</span></li>
-                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>Analyze Usage:</strong> Understand how you use our platform to improve features</span></li>
-                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>Security:</strong> Detect and prevent fraud, unauthorized access, and abuse</span></li>
-                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>Personalization:</strong> Customize content and recommendations based on your interests</span></li>
-                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>Marketing:</strong> Track effectiveness of our marketing campaigns</span></li>
-                        <li class="flex gap-3"><span class="text-brandViolet">•</span> <span><strong>Session Management:</strong> Maintain your session across multiple pages</span></li>
-                    </ul>
-                </section>
-
-                <!-- Section 3 -->
-                <section id="types" class="legal-section rounded-2xl p-8">
-                    <h2 class="font-heading text-2xl font-bold text-white mb-6">3. Types of Cookies We Use</h2>
-
-                    <div class="space-y-8">
-
-                        <!-- Essential Cookies -->
-                        <div class="border-l-4 border-brandBlue pl-6">
-                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-4">Essential Cookies (Required)</h3>
-                            <p class="text-slate-300 mb-4">These cookies are necessary for the Service to function properly. They cannot be disabled:</p>
-                            <table class="cookie-table">
-                                <thead>
-                                    <tr>
-                                        <th>Cookie Name</th>
-                                        <th>Purpose</th>
-                                        <th>Duration</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-slate-300">auth_token</td>
-                                        <td class="text-slate-300">Authentication and session management</td>
-                                        <td class="text-slate-300">Session</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-slate-300">session_id</td>
-                                        <td class="text-slate-300">Maintains your user session</td>
-                                        <td class="text-slate-300">Session</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-slate-300">csrf_token</td>
-                                        <td class="text-slate-300">Security against cross-site attacks</td>
-                                        <td class="text-slate-300">Session</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-slate-300">user_preferences</td>
-                                        <td class="text-slate-300">Stores your display and language settings</td>
-                                        <td class="text-slate-300">1 year</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!-- Analytics Cookies -->
-                        <div class="border-l-4 border-brandViolet pl-6">
-                            <h3 class="font-heading text-lg font-semibold text-purple-400 mb-4">Analytics Cookies (Optional)</h3>
-                            <p class="text-slate-300 mb-4">These cookies help us understand how you use our Service so we can improve it:</p>
-                            <table class="cookie-table">
-                                <thead>
-                                    <tr>
-                                        <th>Cookie Name</th>
-                                        <th>Purpose</th>
-                                        <th>Provider</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-slate-300">_ga</td>
-                                        <td class="text-slate-300">Tracks unique visitors and sessions</td>
-                                        <td class="text-slate-300">Google Analytics</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-slate-300">_gid</td>
-                                        <td class="text-slate-300">Session identifier for analytics</td>
-                                        <td class="text-slate-300">Google Analytics</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-slate-300">_gat</td>
-                                        <td class="text-slate-300">Rate limiting for Google Analytics</td>
-                                        <td class="text-slate-300">Google Analytics</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-slate-300">user_behavior</td>
-                                        <td class="text-slate-300">Tracks page views, clicks, and feature usage</td>
-                                        <td class="text-slate-300">Resume SuperHero</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!-- Preference Cookies -->
-                        <div class="border-l-4 border-brandAmber pl-6">
-                            <h3 class="font-heading text-lg font-semibold text-amber-400 mb-4">Preference Cookies (Optional)</h3>
-                            <p class="text-slate-300 mb-4">These cookies remember your choices to personalize your experience:</p>
-                            <table class="cookie-table">
-                                <thead>
-                                    <tr>
-                                        <th>Cookie Name</th>
-                                        <th>Purpose</th>
-                                        <th>Duration</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-slate-300">theme_preference</td>
-                                        <td class="text-slate-300">Remembers dark/light mode preference</td>
-                                        <td class="text-slate-300">1 year</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-slate-300">language</td>
-                                        <td class="text-slate-300">Stores your language preference</td>
-                                        <td class="text-slate-300">1 year</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-slate-300">notification_settings</td>
-                                        <td class="text-slate-300">Remembers your notification choices</td>
-                                        <td class="text-slate-300">1 year</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!-- Marketing Cookies -->
-                        <div class="border-l-4 border-red-500 pl-6">
-                            <h3 class="font-heading text-lg font-semibold text-red-400 mb-4">Marketing Cookies (Optional)</h3>
-                            <p class="text-slate-300 mb-4">These cookies track your interactions for marketing and advertising purposes:</p>
-                            <table class="cookie-table">
-                                <thead>
-                                    <tr>
-                                        <th>Cookie Name</th>
-                                        <th>Purpose</th>
-                                        <th>Provider</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="text-slate-300">fbp</td>
-                                        <td class="text-slate-300">Facebook pixel tracking</td>
-                                        <td class="text-slate-300">Facebook</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-slate-300">utm_*</td>
-                                        <td class="text-slate-300">Tracks marketing campaign sources</td>
-                                        <td class="text-slate-300">Resume SuperHero</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-slate-300">conversion_id</td>
-                                        <td class="text-slate-300">Tracks subscription conversions</td>
-                                        <td class="text-slate-300">Resume SuperHero</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                    </div>
-                </section>
-
-                <!-- Section 4 -->
-                <section id="third-party-cookies" class="legal-section rounded-2xl p-8">
-                    <h2 class="font-heading text-2xl font-bold text-white mb-6">4. Third-Party Cookies</h2>
-                    <p class="text-slate-300 mb-4">We work with third-party service providers who may set their own cookies:</p>
-
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Google Analytics</h3>
-                            <p class="text-slate-300 mb-2">Used for website analytics and traffic analysis.</p>
-                            <p class="text-slate-300 text-sm"><a href="https://policies.google.com/technologies/cookies" class="text-blue-400 hover:text-blue-300 underline">Google Analytics Privacy</a></p>
-                        </div>
-
-                        <div>
-                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Stripe</h3>
-                            <p class="text-slate-300 mb-2">Payment processing and fraud prevention cookies.</p>
-                            <p class="text-slate-300 text-sm"><a href="https://stripe.com/privacy" class="text-blue-400 hover:text-blue-300 underline">Stripe Privacy Policy</a></p>
-                        </div>
-
-                        <div>
-                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Facebook Pixel</h3>
-                            <p class="text-slate-300 mb-2">Tracks user interactions for advertising and conversion tracking.</p>
-                            <p class="text-slate-300 text-sm"><a href="https://www.facebook.com/policies/cookies/" class="text-blue-400 hover:text-blue-300 underline">Facebook Cookie Policy</a></p>
-                        </div>
-
-                        <div>
-                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">CDN Providers</h3>
-                            <p class="text-slate-300 mb-2">Content delivery network providers may set performance and analytics cookies.</p>
-                        </div>
-                    </div>
-
-                    <p class="text-slate-300 mt-6">These third parties have their own privacy policies and cookie practices. We are not responsible for their cookies or their data collection practices.</p>
-                </section>
-
-                <!-- Section 5 -->
-                <section id="tracking" class="legal-section rounded-2xl p-8">
-                    <h2 class="font-heading text-2xl font-bold text-white mb-6">5. Other Tracking Technologies</h2>
-
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Pixels and Web Beacons</h3>
-                            <p class="text-slate-300">We may use small invisible tracking pixels in emails and on web pages to track opens, clicks, and conversions.</p>
-                        </div>
-
-                        <div>
-                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Local Storage</h3>
-                            <p class="text-slate-300">We use browser local storage and session storage to cache data for faster performance and to remember your preferences across visits.</p>
-                        </div>
-
-                        <div>
-                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Device Fingerprinting</h3>
-                            <p class="text-slate-300">We may use technical data (device type, browser, IP address) for security and fraud prevention purposes.</p>
-                        </div>
-
-                        <div>
-                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Log Files</h3>
-                            <p class="text-slate-300">Our servers automatically log IP addresses, browser type, referring page, and access times for security and analytics purposes.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Section 6 -->
-                <section id="manage" class="legal-section rounded-2xl p-8">
-                    <h2 class="font-heading text-2xl font-bold text-white mb-6">6. How to Manage Cookies</h2>
-
-                    <div class="space-y-6">
-                        <div>
-                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Browser Controls</h3>
-                            <p class="text-slate-300 mb-3">Most web browsers allow you to control cookies through settings:</p>
-                            <ul class="space-y-2 text-slate-300 ml-4">
-                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Chrome:</strong> Menu > Settings > Privacy and Security > Cookies</span></li>
-                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Firefox:</strong> Menu > Preferences > Privacy & Security > Cookies</span></li>
-                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Safari:</strong> Preferences > Privacy > Cookies and website data</span></li>
-                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Edge:</strong> Settings > Privacy, search and services > Clear data</span></li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Cookie Preferences</h3>
-                            <p class="text-slate-300">You can manage which types of cookies we use by adjusting your preferences. Note that disabling essential cookies may affect Service functionality.</p>
-                        </div>
-
-                        <div>
-                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Do Not Track</h3>
-                            <p class="text-slate-300">If your browser supports "Do Not Track," we will respect that signal for analytics cookies, though essential cookies cannot be disabled.</p>
-                        </div>
-
-                        <div>
-                            <h3 class="font-heading text-lg font-semibold text-blue-400 mb-3">Third-Party Opt-Out</h3>
-                            <p class="text-slate-300 mb-2">You can opt-out of third-party tracking:</p>
-                            <ul class="space-y-2 text-slate-300 ml-4">
-                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><a href="https://tools.google.com/dlpage/gaoptout" class="text-blue-400 hover:text-blue-300 underline">Google Analytics Opt-Out</a></span></li>
-                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><a href="https://www.aboutads.info/choices/" class="text-blue-400 hover:text-blue-300 underline">Digital Advertising Alliance Opt-Out</a></span></li>
-                                <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><a href="https://www.networkadvertising.org/choices/" class="text-blue-400 hover:text-blue-300 underline">Network Advertising Initiative Opt-Out</a></span></li>
-                            </ul>
-                        </div>
-
-                        <div class="bg-yellow-950/20 border border-yellow-900/30 rounded-lg p-4">
-                            <p class="text-slate-300"><strong class="text-yellow-400">Note:</strong> Disabling cookies may limit your ability to use certain features of our Service, including account login and personalization.</p>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Section 7 -->
-                <section id="consent" class="legal-section rounded-2xl p-8">
-                    <h2 class="font-heading text-2xl font-bold text-white mb-6">7. Cookie Consent</h2>
-                    <p class="text-slate-300 mb-4">When you first visit Resume SuperHero, you will see a cookie consent banner allowing you to:</p>
-                    <ul class="space-y-3 text-slate-300">
-                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Accept All:</strong> Allow all cookies, including analytics and marketing</span></li>
-                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Reject Non-Essential:</strong> Accept only essential cookies required for the Service</span></li>
-                        <li class="flex gap-3"><span class="text-brandBlue">•</span> <span><strong>Customize:</strong> Choose which types of cookies to allow</span></li>
-                    </ul>
-                    <p class="text-slate-300 mt-4">You can change your cookie preferences at any time by clicking "Cookie Settings" in the website footer. Your consent is stored for 12 months.</p>
-                </section>
-
-                <!-- Section 8 -->
-                <section id="contact-cookies" class="legal-section rounded-2xl p-8">
-                    <h2 class="font-heading text-2xl font-bold text-white mb-6">8. Contact Information</h2>
-                    <p class="text-slate-300 mb-6">If you have questions about our cookie practices, please contact us:</p>
-
-                    <div class="bg-darkBg/50 border border-darkBorder rounded-xl p-6 space-y-3">
-                        <p class="text-slate-300"><span class="text-slate-400">Email:</span> <a href="mailto:jarvis.stark1985@gmail.com" class="text-blue-400 hover:text-blue-300">jarvis.stark1985@gmail.com</a></p>
-                        <p class="text-slate-300"><span class="text-slate-400">Company:</span> Resume SuperHero</p>
-                        <p class="text-slate-300"><span class="text-slate-400">Website:</span> <a href="https://www.resumesuperhero.com" class="text-blue-400 hover:text-blue-300">www.resumesuperhero.com</a></p>
-                    </div>
-
-                    <p class="text-slate-400 text-sm mt-6">We aim to resolve any questions about cookies within 7 business days of your request.</p>
-                </section>
-
-            </div>
-
         </div>
     </main>
-
-    <!-- FOOTER -->
-    <footer class="border-t border-darkBorder bg-darkBg/50 backdrop-blur-sm">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="grid md:grid-cols-4 gap-8 mb-8">
-                <div>
-                    <h3 class="font-heading font-bold text-white mb-4">Resume<span class="gradient-text">SuperHero</span></h3>
-                    <p class="text-slate-400 text-sm">AI-powered career coaching platform</p>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-white mb-4">Legal</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="privacy.html" class="text-slate-400 hover:text-white transition-colors">Privacy Policy</a></li>
-                        <li><a href="terms.html" class="text-slate-400 hover:text-white transition-colors">Terms of Service</a></li>
-                        <li><a href="cookies.html" class="text-slate-400 hover:text-white transition-colors">Cookie Policy</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-white mb-4">Product</h4>
-                    <ul class="space-y-2 text-sm">
-                        <li><a href="index.html#features" class="text-slate-400 hover:text-white transition-colors">Features</a></li>
-                        <li><a href="index.html#pricing" class="text-slate-400 hover:text-white transition-colors">Pricing</a></li>
-                        <li><a href="index.html#faq" class="text-slate-400 hover:text-white transition-colors">FAQ</a></li>
-                    </ul>
-                </div>
-                <div>
-                    <h4 class="font-semibold text-white mb-4">Contact</h4>
-                    <a href="mailto:jarvis.stark1985@gmail.com" class="text-slate-400 hover:text-white transition-colors text-sm">jarvis.stark1985@gmail.com</a>
-                </div>
-            </div>
-            <div class="border-t border-darkBorder pt-8">
-                <p class="text-slate-400 text-sm text-center">© 2026 Resume SuperHero. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
 </body>
 </html>

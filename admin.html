@@ -3,2341 +3,383 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume SuperHero - Admin Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Resume SuperHero - Admin</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config={theme:{extend:{colors:{dark:{900:'#0a0e1a',800:'#0f172a',700:'#1e293b',600:'#334155',500:'#475569',400:'#64748b',300:'#94a3b8',200:'#cbd5e1',100:'#e2e8f0',50:'#f1f5f9'},brand:{blue:'#3b82f6',indigo:'#6366f1',violet:'#8b5cf6',amber:'#f59e0b',emerald:'#10b981',rose:'#f43f5e'}},fontFamily:{sans:['Inter','sans-serif'],heading:['Space Grotesk','sans-serif']}}}}
+    </script>
     <style>
-        :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --border-color: #334155;
-            --brand-blue: #2563eb;
-            --brand-violet: #7c3aed;
-            --brand-amber: #fbbf24;
-            --text-primary: #f1f5f9;
-            --text-secondary: #cbd5e1;
-        }
-
-        * {
-            font-family: 'Inter', sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-primary);
-            color: var(--text-primary);
-        }
-
-        .card {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 8px 16px;
-            border-radius: 6px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border: none;
-            font-size: 14px;
-        }
-
-        .btn-primary {
-            background-color: var(--brand-blue);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #1d4ed8;
-            transform: translateY(-2px);
-        }
-
-        .btn-secondary {
-            background-color: var(--bg-secondary);
-            color: var(--text-primary);
-            border: 1px solid var(--border-color);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--brand-blue);
-            color: var(--brand-blue);
-        }
-
-        .btn-sm {
-            padding: 4px 12px;
-            font-size: 12px;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            color: var(--text-secondary);
-        }
-
-        .nav-item:hover {
-            background-color: rgba(37, 99, 235, 0.1);
-            color: var(--text-primary);
-        }
-
-        .nav-item.active {
-            background-color: var(--brand-blue);
-            color: white;
-        }
-
-        .content-section {
-            display: none;
-        }
-
-        .content-section.active {
-            display: block;
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-        }
-
-        .stat-card {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-        }
-
-        .stat-value {
-            font-size: 32px;
-            font-weight: 700;
-            color: var(--brand-blue);
-        }
-
-        .stat-label {
-            font-size: 13px;
-            color: var(--text-secondary);
-            margin-top: 8px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 8px;
-            background-color: var(--bg-primary);
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--brand-violet), var(--brand-blue));
-            transition: width 0.3s ease;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th {
-            text-align: left;
-            padding: 12px;
-            font-weight: 600;
-            font-size: 12px;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        td {
-            padding: 14px 12px;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 14px;
-        }
-
-        tr:hover {
-            background-color: rgba(37, 99, 235, 0.05);
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .badge-success {
-            background-color: rgba(34, 197, 94, 0.15);
-            color: #22c55e;
-        }
-
-        .badge-warning {
-            background-color: rgba(251, 191, 36, 0.15);
-            color: var(--brand-amber);
-        }
-
-        .badge-danger {
-            background-color: rgba(239, 68, 68, 0.15);
-            color: #ef4444;
-        }
-
-        .badge-info {
-            background-color: rgba(37, 99, 235, 0.15);
-            color: var(--brand-blue);
-        }
-
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .modal.active {
-            display: flex;
-        }
-
-        .modal-content {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 30px;
-            max-width: 600px;
-            width: 90%;
-            max-height: 80vh;
-            overflow-y: auto;
-        }
-
-        .modal-header {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-close {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            font-size: 24px;
-            cursor: pointer;
-        }
-
-        .form-group {
-            margin-bottom: 16px;
-        }
-
-        .form-label {
-            display: block;
-            font-size: 13px;
-            font-weight: 600;
-            margin-bottom: 6px;
-            color: var(--text-secondary);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 10px;
-            background-color: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            color: var(--text-primary);
-            font-size: 14px;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--brand-blue);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .search-box {
-            position: relative;
-        }
-
-        .search-box input {
-            padding-left: 36px;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-secondary);
-        }
-
-        .notification-badge {
-            background-color: #ef4444;
-            color: white;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            font-weight: 700;
-        }
-
-        .countdown {
-            background: linear-gradient(135deg, var(--brand-violet), var(--brand-blue));
-            border-radius: 8px;
-            padding: 20px;
-            color: white;
-            margin-bottom: 20px;
-        }
-
-        .countdown-title {
-            font-size: 14px;
-            opacity: 0.9;
-            margin-bottom: 10px;
-        }
-
-        .countdown-timer {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .countdown-subtitle {
-            font-size: 12px;
-            opacity: 0.8;
-        }
-
-        .activity-item {
-            padding: 12px;
-            border-bottom: 1px solid var(--border-color);
-            font-size: 13px;
-        }
-
-        .activity-item:last-child {
-            border-bottom: none;
-        }
-
-        .activity-time {
-            color: var(--text-secondary);
-            font-size: 12px;
-        }
-
-        .activity-text {
-            margin-top: 4px;
-        }
-
-        .chart-container {
-            position: relative;
-            height: 300px;
-            margin: 20px 0;
-        }
-
-        .textarea {
-            width: 100%;
-            padding: 10px;
-            background-color: var(--bg-primary);
-            border: 1px solid var(--border-color);
-            border-radius: 6px;
-            color: var(--text-primary);
-            font-size: 14px;
-            resize: vertical;
-            font-family: 'Inter', sans-serif;
-        }
-
-        .textarea:focus {
-            outline: none;
-            border-color: var(--brand-blue);
-            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
-        }
-
-        .filter-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .filter-btn {
-            padding: 8px 14px;
-            border-radius: 6px;
-            border: 1px solid var(--border-color);
-            background-color: transparent;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 13px;
-            transition: all 0.2s ease;
-        }
-
-        .filter-btn.active {
-            background-color: var(--brand-blue);
-            border-color: var(--brand-blue);
-            color: white;
-        }
-
-        .filter-btn:hover {
-            border-color: var(--brand-blue);
-            color: var(--text-primary);
-        }
-
-        @media (max-width: 1024px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        .sidebar.collapsed {
-            max-width: 80px;
-        }
-
-        .sidebar.collapsed .nav-label {
-            display: none;
-        }
-
-        .sidebar.collapsed .logo-text {
-            display: none;
-        }
-
-        .chart-wrapper {
-            background-color: var(--bg-secondary);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 20px;
-            margin: 20px 0;
-        }
-
-        .grid-2col {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-
-        .cohort-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 12px;
-        }
-
-        .cohort-table th,
-        .cohort-table td {
-            padding: 8px;
-            text-align: right;
-            border: 1px solid var(--border-color);
-        }
-
-        .cohort-table th:first-child,
-        .cohort-table td:first-child {
-            text-align: left;
-        }
-
-        .cohort-cell {
-            background-color: rgba(37, 99, 235, 0.1);
-            color: var(--brand-blue);
-            font-weight: 600;
-        }
-
-        .input-group {
-            display: flex;
-            gap: 10px;
-            margin-bottom: 20px;
-        }
-
-        .input-group input {
-            flex: 1;
-        }
-
-        .mt-20 { margin-top: 20px; }
-        .mb-20 { margin-bottom: 20px; }
-        .mb-10 { margin-bottom: 10px; }
-        .p-20 { padding: 20px; }
+        *{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;background:#0a0e1a;color:#e2e8f0;overflow:hidden;height:100vh}h1,h2,h3,h4,h5,h6{font-family:'Space Grotesk',sans-serif}
+        ::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:#0f172a}::-webkit-scrollbar-thumb{background:#334155;border-radius:3px}
+        .glass{background:rgba(30,41,59,.6);backdrop-filter:blur(20px);border:1px solid rgba(51,65,85,.5)}
+        .gradient-text{background:linear-gradient(135deg,#3b82f6,#8b5cf6,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+        .sidebar{width:240px;min-width:240px;height:100vh;background:rgba(15,23,42,.95);border-right:1px solid rgba(51,65,85,.5);display:flex;flex-direction:column}
+        .nav-btn{display:flex;align-items:center;gap:.65rem;padding:.6rem .85rem;margin:.1rem .4rem;border-radius:.5rem;cursor:pointer;transition:all .2s;color:#94a3b8;font-size:.8rem;border:1px solid transparent}
+        .nav-btn:hover{background:rgba(99,102,241,.08);color:#e2e8f0}.nav-btn.active{background:linear-gradient(135deg,rgba(59,130,246,.15),rgba(139,92,246,.1));color:#a5b4fc;border-color:rgba(99,102,241,.2)}
+        .section{display:none;animation:fadeIn .3s ease}.section.active{display:block}@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+        .card{background:rgba(30,41,59,.5);border:1px solid rgba(51,65,85,.5);border-radius:.75rem;transition:all .2s}.card:hover{border-color:rgba(51,65,85,.8)}
+        .input{width:100%;background:rgba(15,23,42,.6);border:1px solid rgba(51,65,85,.6);color:#e2e8f0;padding:.55rem .75rem;border-radius:.5rem;font-size:.85rem;transition:all .2s;outline:none}.input:focus{border-color:#6366f1;box-shadow:0 0 0 3px rgba(99,102,241,.1)}
+        .btn-primary{background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;padding:.55rem 1.1rem;border-radius:.5rem;font-weight:600;font-size:.8rem;border:none;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:.4rem}.btn-primary:hover{transform:translateY(-1px);box-shadow:0 4px 15px rgba(99,102,241,.3)}
+        .btn-secondary{background:rgba(30,41,59,.6);color:#e2e8f0;padding:.55rem 1.1rem;border-radius:.5rem;font-weight:500;font-size:.8rem;border:1px solid rgba(51,65,85,.6);cursor:pointer;transition:all .2s}.btn-secondary:hover{background:rgba(99,102,241,.1);border-color:rgba(99,102,241,.3)}
+        .btn-sm{padding:.35rem .7rem;font-size:.75rem}
+        .badge{display:inline-flex;align-items:center;padding:.15rem .55rem;border-radius:1rem;font-size:.65rem;font-weight:600}
+        .progress-track{height:5px;background:rgba(51,65,85,.4);border-radius:3px;overflow:hidden}.progress-fill{height:100%;border-radius:3px;transition:width .5s ease}
+        table{width:100%;border-collapse:collapse}th{text-align:left;padding:.6rem .75rem;font-size:.7rem;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.04em;border-bottom:1px solid rgba(51,65,85,.5)}td{padding:.6rem .75rem;font-size:.8rem;border-bottom:1px solid rgba(51,65,85,.3);color:#cbd5e1}tr:hover td{background:rgba(99,102,241,.03)}
+        .stat-card{position:relative;overflow:hidden}.stat-card::after{content:'';position:absolute;top:-40%;right:-20%;width:100px;height:100px;border-radius:50%;opacity:.06}
+        .login-container{min-height:100vh;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#0a0e1a,#1e1b4b,#0a0e1a)}
+        .tab{padding:.45rem .85rem;cursor:pointer;color:#94a3b8;border-bottom:2px solid transparent;font-size:.8rem;font-weight:500;transition:all .2s;white-space:nowrap}.tab:hover{color:#e2e8f0}.tab.active{color:#a5b4fc;border-bottom-color:#6366f1}
     </style>
 </head>
-<body class="bg-slate-950">
-    <!-- Login Screen -->
-    <div id="loginScreen" class="fixed inset-0 bg-slate-950 flex items-center justify-center z-50">
-        <div class="card p-20" style="max-width: 400px; width: 90%;">
-            <div style="text-align: center; margin-bottom: 30px;">
-                <div style="font-size: 48px; margin-bottom: 15px;">🎯</div>
-                <h1 style="font-size: 24px; font-weight: 700; margin-bottom: 8px;">Resume SuperHero</h1>
-                <p style="color: var(--text-secondary);">Admin Dashboard</p>
+<body>
+
+<!-- LOGIN SCREEN -->
+<div id="loginScreen" class="login-container">
+    <div class="card p-8 w-full max-w-sm" style="background:rgba(30,41,59,.8);border-color:rgba(99,102,241,.2)">
+        <div class="text-center mb-6">
+            <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-brand-blue to-brand-violet flex items-center justify-center mx-auto mb-3">
+                <svg width="22" height="22" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
             </div>
-
-            <div class="form-group">
-                <label class="form-label">Email or Username</label>
-                <input type="text" id="loginUsername" class="form-input" placeholder="Username" autocomplete="off">
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">Password</label>
-                <input type="password" id="loginPassword" class="form-input" placeholder="••••••••">
-            </div>
-
-            <button onclick="handleLogin()" class="btn btn-primary" style="width: 100%; padding: 12px;">Sign In</button>
-
+            <h1 class="text-xl font-bold text-dark-50 font-heading">Admin Portal</h1>
+            <p class="text-xs text-dark-400 mt-1">Resume SuperHero Management</p>
+        </div>
+        <div class="space-y-3">
+            <div><label class="block text-xs font-medium text-dark-400 mb-1">Username</label><input class="input" id="loginUser" placeholder="Enter username" autocomplete="off"></div>
+            <div><label class="block text-xs font-medium text-dark-400 mb-1">Password</label><input class="input" id="loginPass" type="password" placeholder="Enter password" autocomplete="off" onkeydown="if(event.key==='Enter')doLogin()"></div>
+            <button class="btn-primary w-full justify-center" onclick="doLogin()">Sign In</button>
+            <p class="text-xs text-center text-brand-rose hidden" id="loginError">Invalid credentials. Please try again.</p>
         </div>
     </div>
+</div>
 
-    <!-- Main Dashboard -->
-    <div id="dashboard" style="display: none; min-height: 100vh;">
-        <!-- Sidebar -->
-        <div class="sidebar fixed left-0 top-0 h-screen w-64 bg-slate-900 border-r border-slate-700 overflow-y-auto transition-all duration-300" style="border-color: var(--border-color);">
-            <div style="padding: 20px; border-bottom: 1px solid var(--border-color);">
-                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 5px;">
-                    <div style="font-size: 28px;">🎯</div>
-                    <div class="logo-text" style="font-weight: 700;">Resume SuperHero</div>
+<!-- ADMIN DASHBOARD -->
+<div id="adminApp" class="flex h-screen" style="display:none">
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+        <div class="p-4 border-b border-dark-600/50">
+            <div class="flex items-center gap-2">
+                <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-brand-blue to-brand-violet flex items-center justify-center">
+                    <svg width="16" height="16" fill="none" stroke="#fff" stroke-width="2.5" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                 </div>
-                <div class="logo-text" style="font-size: 12px; color: var(--text-secondary);">Admin Panel</div>
+                <div><h1 class="text-sm font-bold text-dark-50 font-heading leading-tight">RSH Admin</h1><p class="text-[9px] text-dark-500 uppercase tracking-wider">Control Center</p></div>
             </div>
-
-            <nav style="padding: 20px 0;">
-                <div class="nav-item active" data-section="dashboard" onclick="navigateTo('dashboard')">
-                    <span style="font-size: 18px;">📊</span>
-                    <span class="nav-label">Dashboard</span>
-                </div>
-                <div class="nav-item" data-section="users" onclick="navigateTo('users')">
-                    <span style="font-size: 18px;">👥</span>
-                    <span class="nav-label">Users</span>
-                </div>
-                <div class="nav-item" data-section="revenue" onclick="navigateTo('revenue')">
-                    <span style="font-size: 18px;">💰</span>
-                    <span class="nav-label">Revenue & Billing</span>
-                </div>
-                <div class="nav-item" data-section="analytics" onclick="navigateTo('analytics')">
-                    <span style="font-size: 18px;">📈</span>
-                    <span class="nav-label">Analytics</span>
-                </div>
-                <div class="nav-item" data-section="content" onclick="navigateTo('content')">
-                    <span style="font-size: 18px;">📝</span>
-                    <span class="nav-label">Content</span>
-                </div>
-                <div class="nav-item" data-section="support" onclick="navigateTo('support')">
-                    <span style="font-size: 18px;">🎧</span>
-                    <span class="nav-label">Support</span>
-                </div>
-                <div class="nav-item" data-section="marketing" onclick="navigateTo('marketing')">
-                    <span style="font-size: 18px;">📢</span>
-                    <span class="nav-label">Marketing</span>
-                </div>
-                <div class="nav-item" data-section="settings" onclick="navigateTo('settings')">
-                    <span style="font-size: 18px;">⚙️</span>
-                    <span class="nav-label">Settings</span>
-                </div>
-            </nav>
         </div>
-
-        <!-- Main Content -->
-        <div style="margin-left: 256px;">
-            <!-- Header -->
-            <div class="card" style="border-radius: 0; border-left: none; border-right: none; border-top: none; padding: 15px 30px; display: flex; justify-content: space-between; align-items: center;">
-                <h1 id="pageTitle" style="font-size: 24px; font-weight: 700;">Dashboard</h1>
-                <div style="display: flex; gap: 20px; align-items: center;">
-                    <div style="position: relative; cursor: pointer;" onclick="toggleNotifications()">
-                        <span style="font-size: 20px;">🔔</span>
-                        <div class="notification-badge" style="position: absolute; top: -8px; right: -8px;">3</div>
-                    </div>
-                    <div style="width: 1px; height: 30px; background-color: var(--border-color);"></div>
-                    <div style="display: flex; align-items: center; gap: 10px; cursor: pointer;" onclick="toggleAdminMenu()">
-                        <div style="width: 36px; height: 36px; background: linear-gradient(135deg, var(--brand-violet), var(--brand-blue)); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px;">👤</div>
-                        <div>
-                            <div style="font-size: 13px; font-weight: 600;">Admin</div>
-                            <div style="font-size: 11px; color: var(--text-secondary);">Super Admin</div>
-                        </div>
-                    </div>
-                </div>
+        <nav class="flex-1 overflow-y-auto py-2" id="adminNav">
+            <div class="px-3 mb-1 mt-1"><span class="text-[9px] font-semibold text-dark-600 uppercase tracking-wider px-2">Overview</span></div>
+            <div class="nav-btn active" data-s="dashboard" onclick="navTo('dashboard')"><span>📊</span>Dashboard</div>
+            <div class="nav-btn" data-s="revenue" onclick="navTo('revenue')"><span>💰</span>Revenue</div>
+            <div class="px-3 mb-1 mt-2"><span class="text-[9px] font-semibold text-dark-600 uppercase tracking-wider px-2">Management</span></div>
+            <div class="nav-btn" data-s="users" onclick="navTo('users')"><span>👥</span>Users</div>
+            <div class="nav-btn" data-s="analytics" onclick="navTo('analytics')"><span>📈</span>Analytics</div>
+            <div class="nav-btn" data-s="content" onclick="navTo('content')"><span>📝</span>Content</div>
+            <div class="px-3 mb-1 mt-2"><span class="text-[9px] font-semibold text-dark-600 uppercase tracking-wider px-2">Operations</span></div>
+            <div class="nav-btn" data-s="support" onclick="navTo('support')"><span>🎫</span>Support</div>
+            <div class="nav-btn" data-s="marketing" onclick="navTo('marketing')"><span>📢</span>Marketing</div>
+            <div class="nav-btn" data-s="settings" onclick="navTo('settings')"><span>⚙️</span>Settings</div>
+        </nav>
+        <div class="p-3 border-t border-dark-600/50">
+            <div class="flex items-center gap-2 mb-2">
+                <div class="w-7 h-7 rounded-full bg-gradient-to-br from-brand-rose to-brand-violet flex items-center justify-center text-[10px] font-bold text-white">JA</div>
+                <div class="flex-1"><div class="text-xs font-medium text-dark-200">Jarvis Admin</div><div class="text-[9px] text-dark-500">Super Admin</div></div>
             </div>
+            <button onclick="doLogout()" class="btn-secondary btn-sm w-full text-center text-dark-400 hover:text-brand-rose" style="justify-content:center">Sign Out</button>
+        </div>
+    </aside>
 
-            <!-- Admin Menu Dropdown -->
-            <div id="adminMenu" style="position: absolute; top: 70px; right: 30px; background-color: var(--bg-secondary); border: 1px solid var(--border-color); border-radius: 8px; min-width: 200px; display: none; z-index: 100;">
-                <div style="padding: 12px 16px; border-bottom: 1px solid var(--border-color); font-size: 12px; color: var(--text-secondary);">
-                    jarvis.stark1985@gmail.com
-                </div>
-                <button class="btn btn-secondary" style="width: 100%; text-align: left; padding: 12px 16px; border: none; background: none; border-radius: 0;">👤 Profile</button>
-                <button class="btn btn-secondary" style="width: 100%; text-align: left; padding: 12px 16px; border: none; background: none; border-radius: 0;">⚙️ Settings</button>
-                <button onclick="handleLogout()" class="btn btn-secondary" style="width: 100%; text-align: left; padding: 12px 16px; border: none; background: none; border-radius: 0; color: #ef4444;">🚪 Logout</button>
+    <!-- MAIN -->
+    <main class="flex-1 flex flex-col overflow-hidden">
+        <header class="h-12 flex items-center justify-between px-5 border-b border-dark-600/50 bg-dark-800/80 backdrop-blur-md flex-shrink-0">
+            <h2 class="text-sm font-semibold text-dark-100 font-heading" id="adminPageTitle">Dashboard</h2>
+            <div class="flex items-center gap-3">
+                <span class="text-[10px] text-dark-500" id="headerDate"></span>
+                <span class="badge bg-brand-emerald/20 text-emerald-400">Live</span>
             </div>
+        </header>
+        <div class="flex-1 overflow-y-auto" id="adminContent">
+            <div class="max-w-6xl mx-auto p-5">
 
-            <!-- Content Area -->
-            <div style="padding: 30px;">
-                <!-- Dashboard Section -->
-                <div id="dashboard-section" class="content-section active">
-                    <!-- Countdown Timer -->
-                    <div class="countdown">
-                        <div class="countdown-title">🎯 $10K Revenue Goal</div>
-                        <div class="countdown-timer" id="countdownTimer">26d 15h 42m</div>
-                        <div class="progress-bar">
-                            <div class="progress-fill" style="width: 0%;" id="goalProgressBar"></div>
-                        </div>
-                        <div class="countdown-subtitle">
-                            Current: $0 / $10,000 (0%) • Deadline: May 3, 2026
-                        </div>
-                    </div>
+<!-- ADMIN DASHBOARD -->
+<div id="s-dashboard" class="section active">
+    <div class="card p-5 mb-5" style="background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(139,92,246,.08))">
+        <div class="flex items-center justify-between flex-wrap gap-3">
+            <div><h2 class="text-lg font-bold text-dark-50 font-heading">$10,000 Revenue Goal</h2><p class="text-xs text-dark-400 mt-1">Deadline: May 3, 2026 • <span id="daysLeft"></span> days remaining</p></div>
+            <div class="text-right"><div class="text-2xl font-bold gradient-text" id="totalRevenue">$0</div><div class="text-[10px] text-dark-500">of $10,000 target</div></div>
+        </div>
+        <div class="progress-track mt-3 h-2"><div class="progress-fill bg-gradient-to-r from-brand-blue to-brand-violet" id="goalBar" style="width:0%"></div></div>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
+        <div class="card p-4 stat-card"><div class="text-[10px] text-dark-500 font-semibold uppercase tracking-wider mb-1">MRR</div><div class="text-xl font-bold text-dark-50" id="kpiMRR">$0</div><div class="flex items-center gap-1 mt-1"><span class="text-[10px] text-brand-emerald">↑ 0%</span></div></div>
+        <div class="card p-4 stat-card"><div class="text-[10px] text-dark-500 font-semibold uppercase tracking-wider mb-1">Total Users</div><div class="text-xl font-bold text-dark-50" id="kpiUsers">0</div><div class="flex items-center gap-1 mt-1"><span class="text-[10px] text-dark-400" id="kpiNewUsers">0 this week</span></div></div>
+        <div class="card p-4 stat-card"><div class="text-[10px] text-dark-500 font-semibold uppercase tracking-wider mb-1">Paid Subscribers</div><div class="text-xl font-bold text-dark-50" id="kpiPaid">0</div><div class="flex items-center gap-1 mt-1"><span class="text-[10px] text-dark-400" id="kpiConversion">0% conversion</span></div></div>
+        <div class="card p-4 stat-card"><div class="text-[10px] text-dark-500 font-semibold uppercase tracking-wider mb-1">Churn Rate</div><div class="text-xl font-bold text-dark-50" id="kpiChurn">0%</div><div class="flex items-center gap-1 mt-1"><span class="text-[10px] text-dark-400">Monthly</span></div></div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-5">
+        <div class="card p-4"><h3 class="text-xs font-semibold text-dark-300 mb-3 font-heading">Revenue (Last 14 Days)</h3><canvas id="revenueChart" height="180"></canvas></div>
+        <div class="card p-4"><h3 class="text-xs font-semibold text-dark-300 mb-3 font-heading">User Growth</h3><canvas id="userChart" height="180"></canvas></div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
+        <div class="card p-4 lg:col-span-2"><h3 class="text-xs font-semibold text-dark-300 mb-3 font-heading">Recent Activity</h3><div class="space-y-2" id="adminActivity"></div></div>
+        <div class="card p-4"><h3 class="text-xs font-semibold text-dark-300 mb-3 font-heading">Quick Actions</h3><div class="space-y-2">
+            <button class="btn-secondary btn-sm w-full text-left" onclick="navTo('users')">👥 View Users</button>
+            <button class="btn-secondary btn-sm w-full text-left" onclick="navTo('revenue')">💰 Revenue Details</button>
+            <button class="btn-secondary btn-sm w-full text-left" onclick="navTo('support')">🎫 Open Tickets</button>
+            <button class="btn-secondary btn-sm w-full text-left" onclick="navTo('marketing')">📢 Campaigns</button>
+            <button class="btn-secondary btn-sm w-full text-left" onclick="navTo('analytics')">📈 Full Analytics</button>
+        </div></div>
+    </div>
+</div>
 
-                    <!-- Quick Stats -->
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-value">$0</div>
-                            <div class="stat-label">Total Revenue</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">$0</div>
-                            <div class="stat-label">Monthly Recurring Revenue</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">0</div>
-                            <div class="stat-label">Active Subscribers</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">0%</div>
-                            <div class="stat-label">Churn Rate</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">0</div>
-                            <div class="stat-label">New Signups Today</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">0</div>
-                            <div class="stat-label">Active Sessions</div>
-                        </div>
-                    </div>
+<!-- REVENUE -->
+<div id="s-revenue" class="section">
+    <div class="mb-5"><h1 class="text-xl font-bold text-dark-50 font-heading">Revenue & Billing</h1><p class="text-dark-400 text-xs mt-1">Track income, subscriptions, and financial health.</p></div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">Total Revenue</div><div class="text-lg font-bold gradient-text" id="revTotal">$0</div></div>
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">This Month</div><div class="text-lg font-bold text-dark-50" id="revMonth">$0</div></div>
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">Avg Revenue/User</div><div class="text-lg font-bold text-dark-50" id="revARPU">$0</div></div>
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">LTV Estimate</div><div class="text-lg font-bold text-dark-50" id="revLTV">$0</div></div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-5">
+        <div class="card p-4"><h3 class="text-xs font-semibold text-dark-300 mb-3 font-heading">Revenue Breakdown</h3><canvas id="revBreakdownChart" height="200"></canvas></div>
+        <div class="card p-4"><h3 class="text-xs font-semibold text-dark-300 mb-3 font-heading">Subscription Tiers</h3><div class="space-y-3" id="tierBreakdown"></div></div>
+    </div>
+    <div class="card p-4"><h3 class="text-xs font-semibold text-dark-300 mb-3 font-heading">Recent Transactions</h3>
+        <table><thead><tr><th>Date</th><th>Customer</th><th>Plan</th><th>Amount</th><th>Status</th></tr></thead><tbody id="transTable"></tbody></table>
+    </div>
+</div>
 
-                    <!-- Revenue Chart -->
-                    <div class="chart-wrapper">
-                        <h3 style="font-weight: 600; margin-bottom: 15px;">Revenue Trend (30 days)</h3>
-                        <div class="chart-container">
-                            <canvas id="revenueChart"></canvas>
-                        </div>
-                    </div>
+<!-- USERS -->
+<div id="s-users" class="section">
+    <div class="flex items-center justify-between mb-5 flex-wrap gap-3">
+        <div><h1 class="text-xl font-bold text-dark-50 font-heading">User Management</h1><p class="text-dark-400 text-xs mt-1">View and manage all registered users.</p></div>
+        <div class="flex gap-2"><input class="input" style="width:200px" id="userSearch" placeholder="Search users..." oninput="filterUsers()"><button class="btn-primary btn-sm" onclick="exportUsers()">Export CSV</button></div>
+    </div>
+    <div class="flex gap-2 mb-4 overflow-x-auto" id="userTabs">
+        <div class="tab active" onclick="filterUserTab('all',this)">All <span class="badge bg-dark-600 text-dark-300 ml-1" id="countAll">0</span></div>
+        <div class="tab" onclick="filterUserTab('active',this)">Active <span class="badge bg-brand-emerald/20 text-emerald-400 ml-1" id="countActive">0</span></div>
+        <div class="tab" onclick="filterUserTab('trial',this)">Trial <span class="badge bg-brand-amber/20 text-amber-400 ml-1" id="countTrial">0</span></div>
+        <div class="tab" onclick="filterUserTab('churned',this)">Churned <span class="badge bg-brand-rose/20 text-rose-400 ml-1" id="countChurned">0</span></div>
+    </div>
+    <div class="card p-4 overflow-x-auto"><table><thead><tr><th>User</th><th>Email</th><th>Plan</th><th>Status</th><th>Joined</th><th>Resumes</th><th>Actions</th></tr></thead><tbody id="userTable"></tbody></table></div>
+</div>
 
-                    <!-- Quick Stats & Activity -->
-                    <div class="grid-2col">
-                        <div class="card p-20">
-                            <h3 style="font-weight: 600; margin-bottom: 15px;">Today's Metrics</h3>
-                            <div style="display: flex; justify-content: space-between; margin-bottom: 15px;">
-                                <div>
-                                    <div style="font-size: 12px; color: var(--text-secondary);">Conversion Rate</div>
-                                    <div style="font-size: 20px; font-weight: 700; color: var(--brand-blue);">2.4%</div>
-                                </div>
-                                <div>
-                                    <div style="font-size: 12px; color: var(--text-secondary);">Avg Session Duration</div>
-                                    <div style="font-size: 20px; font-weight: 700; color: var(--brand-violet);">4m 32s</div>
-                                </div>
-                            </div>
-                            <div style="border-bottom: 1px solid var(--border-color); margin-bottom: 15px;"></div>
-                            <div style="font-size: 13px;">
-                                <div style="margin-bottom: 8px;">✅ 12 page views</div>
-                                <div>✅ 1 signup initiated</div>
-                            </div>
-                        </div>
+<!-- ANALYTICS -->
+<div id="s-analytics" class="section">
+    <div class="mb-5"><h1 class="text-xl font-bold text-dark-50 font-heading">Analytics</h1><p class="text-dark-400 text-xs mt-1">Deep dive into usage, engagement, and funnel metrics.</p></div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">Page Views (7d)</div><div class="text-lg font-bold text-dark-50" id="anViews">0</div></div>
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">Avg Session</div><div class="text-lg font-bold text-dark-50" id="anSession">0m</div></div>
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">Resumes Created</div><div class="text-lg font-bold text-dark-50" id="anResumes">0</div></div>
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">Interviews Done</div><div class="text-lg font-bold text-dark-50" id="anInterviews">0</div></div>
+    </div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 mb-5">
+        <div class="card p-4"><h3 class="text-xs font-semibold text-dark-300 mb-3 font-heading">Feature Usage</h3><canvas id="featureChart" height="200"></canvas></div>
+        <div class="card p-4"><h3 class="text-xs font-semibold text-dark-300 mb-3 font-heading">Conversion Funnel</h3><div id="funnel" class="space-y-2"></div></div>
+    </div>
+    <div class="card p-4"><h3 class="text-xs font-semibold text-dark-300 mb-3 font-heading">Traffic Sources</h3><canvas id="trafficChart" height="150"></canvas></div>
+</div>
 
-                        <div class="card p-20">
-                            <h3 style="font-weight: 600; margin-bottom: 15px;">Recent Activity</h3>
-                            <div id="activityFeed" style="max-height: 300px; overflow-y: auto;">
-                                <div class="activity-item">
-                                    <div class="activity-time">Just now</div>
-                                    <div class="activity-text">Sarah Johnson viewed pricing page</div>
-                                </div>
-                                <div class="activity-item">
-                                    <div class="activity-time">2 minutes ago</div>
-                                    <div class="activity-text">Dashboard accessed by admin@resumesuperhero.com</div>
-                                </div>
-                                <div class="activity-item">
-                                    <div class="activity-time">5 minutes ago</div>
-                                    <div class="activity-text">Interview prep course viewed by Michael Chen</div>
-                                </div>
-                                <div class="activity-item">
-                                    <div class="activity-time">12 minutes ago</div>
-                                    <div class="activity-text">Resume template #3 downloaded by Jessica Martinez</div>
-                                </div>
-                                <div class="activity-item">
-                                    <div class="activity-time">1 hour ago</div>
-                                    <div class="activity-text">New user registered: David Thompson</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- CONTENT -->
+<div id="s-content" class="section">
+    <div class="flex items-center justify-between mb-5">
+        <div><h1 class="text-xl font-bold text-dark-50 font-heading">Content Management</h1><p class="text-dark-400 text-xs mt-1">Manage learning resources, templates, and blog posts.</p></div>
+        <button class="btn-primary btn-sm" onclick="showContentForm()">+ New Content</button>
+    </div>
+    <div id="contentForm" class="card p-5 mb-5" style="display:none">
+        <h3 class="text-sm font-semibold text-dark-100 mb-3 font-heading">Add Content</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+            <input class="input" id="cTitle" placeholder="Title">
+            <select class="input" id="cType"><option>Article</option><option>Video</option><option>Template</option><option>Guide</option></select>
+            <select class="input" id="cCategory"><option>Resume</option><option>Interview</option><option>Career</option><option>Skills</option></select>
+        </div>
+        <textarea class="input mb-3" id="cBody" placeholder="Content body or description..." rows="3" style="resize:vertical;min-height:80px"></textarea>
+        <div class="flex gap-2"><button class="btn-primary btn-sm" onclick="saveContent()">Publish</button><button class="btn-secondary btn-sm" onclick="hideContentForm()">Cancel</button></div>
+    </div>
+    <div class="card p-4 overflow-x-auto"><table><thead><tr><th>Title</th><th>Type</th><th>Category</th><th>Views</th><th>Published</th><th>Actions</th></tr></thead><tbody id="contentTable"></tbody></table></div>
+</div>
 
-                <!-- Users Section -->
-                <div id="users-section" class="content-section">
-                    <div style="margin-bottom: 20px;">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                            <h2 style="font-size: 18px; font-weight: 700;">User Management</h2>
-                            <div style="display: flex; gap: 10px;">
-                                <button onclick="openUserModal()" class="btn btn-primary">+ Add User</button>
-                                <button onclick="exportUsers()" class="btn btn-secondary btn-sm">📥 Export CSV</button>
-                            </div>
-                        </div>
+<!-- SUPPORT -->
+<div id="s-support" class="section">
+    <div class="mb-5"><h1 class="text-xl font-bold text-dark-50 font-heading">Support Tickets</h1><p class="text-dark-400 text-xs mt-1">Manage customer support requests.</p></div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">Open Tickets</div><div class="text-lg font-bold text-brand-amber" id="openTickets">0</div></div>
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">Avg Response</div><div class="text-lg font-bold text-dark-50" id="avgResponse">--</div></div>
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">Resolved Today</div><div class="text-lg font-bold text-brand-emerald" id="resolvedToday">0</div></div>
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">CSAT Score</div><div class="text-lg font-bold text-dark-50" id="csatScore">--</div></div>
+    </div>
+    <div class="card p-4 overflow-x-auto"><table><thead><tr><th>ID</th><th>Subject</th><th>User</th><th>Priority</th><th>Status</th><th>Created</th><th>Actions</th></tr></thead><tbody id="ticketTable"></tbody></table></div>
+</div>
 
-                        <div class="search-box" style="margin-bottom: 20px;">
-                            <span class="search-icon">🔍</span>
-                            <input type="text" id="userSearch" class="form-input" placeholder="Search users by name or email..." onkeyup="filterUsers()">
-                        </div>
+<!-- MARKETING -->
+<div id="s-marketing" class="section">
+    <div class="flex items-center justify-between mb-5">
+        <div><h1 class="text-xl font-bold text-dark-50 font-heading">Marketing</h1><p class="text-dark-400 text-xs mt-1">Campaigns, SEO, and growth initiatives.</p></div>
+        <button class="btn-primary btn-sm" onclick="showCampaignForm()">+ New Campaign</button>
+    </div>
+    <div id="campaignForm" class="card p-5 mb-5" style="display:none">
+        <h3 class="text-sm font-semibold text-dark-100 mb-3 font-heading">Create Campaign</h3>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
+            <input class="input" id="campName" placeholder="Campaign Name">
+            <select class="input" id="campChannel"><option>SEO</option><option>Social Media</option><option>Email</option><option>PPC</option><option>Content Marketing</option><option>Referral</option></select>
+            <input class="input" id="campBudget" placeholder="Budget ($)" type="number">
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+            <input class="input" id="campStart" type="date"><input class="input" id="campEnd" type="date">
+        </div>
+        <div class="flex gap-2"><button class="btn-primary btn-sm" onclick="saveCampaign()">Launch</button><button class="btn-secondary btn-sm" onclick="hideCampaignForm()">Cancel</button></div>
+    </div>
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-5">
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">Active Campaigns</div><div class="text-lg font-bold text-dark-50" id="activeCampaigns">0</div></div>
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">Total Spend</div><div class="text-lg font-bold text-dark-50" id="totalSpend">$0</div></div>
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">Leads Generated</div><div class="text-lg font-bold text-dark-50" id="totalLeads">0</div></div>
+        <div class="card p-4"><div class="text-[10px] text-dark-500 font-semibold mb-1">Cost Per Lead</div><div class="text-lg font-bold text-dark-50" id="cpl">$0</div></div>
+    </div>
+    <div class="card p-4 overflow-x-auto"><table><thead><tr><th>Campaign</th><th>Channel</th><th>Budget</th><th>Leads</th><th>Conv %</th><th>Status</th><th>Actions</th></tr></thead><tbody id="campaignTable"></tbody></table></div>
+</div>
 
-                        <div class="filter-group">
-                            <button class="filter-btn active" onclick="setUserFilter('all')">All Users</button>
-                            <button class="filter-btn" onclick="setUserFilter('active')">Active</button>
-                            <button class="filter-btn" onclick="setUserFilter('trial')">Trial</button>
-                            <button class="filter-btn" onclick="setUserFilter('canceled')">Canceled</button>
-                        </div>
-                    </div>
-
-                    <div class="card p-20">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
-                                    <th>Plan</th>
-                                    <th>Status</th>
-                                    <th>Joined</th>
-                                    <th>Last Active</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="usersTable">
-                                <!-- Populated by JS -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Revenue & Billing Section -->
-                <div id="revenue-section" class="content-section">
-                    <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 20px;">Revenue & Billing</h2>
-
-                    <div class="stats-grid" style="margin-bottom: 30px;">
-                        <div class="stat-card">
-                            <div class="stat-value">$0</div>
-                            <div class="stat-label">Total Revenue (All Time)</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">$0</div>
-                            <div class="stat-label">Monthly Recurring Revenue</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">0</div>
-                            <div class="stat-label">Active Subscriptions</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">0</div>
-                            <div class="stat-label">Failed Payments</div>
-                        </div>
-                    </div>
-
-                    <!-- MRR Trend Chart -->
-                    <div class="chart-wrapper">
-                        <h3 style="font-weight: 600; margin-bottom: 15px;">MRR Trend</h3>
-                        <div class="chart-container">
-                            <canvas id="mrrChart"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- Revenue Breakdown -->
-                    <div class="grid-2col" style="margin-bottom: 30px;">
-                        <div class="chart-wrapper">
-                            <h3 style="font-weight: 600; margin-bottom: 15px;">Revenue Breakdown</h3>
-                            <div class="chart-container">
-                                <canvas id="revenueBreakdownChart"></canvas>
-                            </div>
-                        </div>
-
-                        <div class="card p-20">
-                            <h3 style="font-weight: 600; margin-bottom: 20px;">Pricing Overview</h3>
-                            <div style="display: grid; gap: 15px;">
-                                <div style="padding-bottom: 15px; border-bottom: 1px solid var(--border-color);">
-                                    <div style="font-weight: 600; margin-bottom: 5px;">Monthly Plan</div>
-                                    <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 10px;">$9.99/month</div>
-                                    <div style="display: flex; justify-content: space-between; font-size: 13px;">
-                                        <span>Subscribers: <strong style="color: var(--brand-blue);">0</strong></span>
-                                        <span>MRR: <strong style="color: var(--brand-blue);">$0</strong></span>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div style="font-weight: 600; margin-bottom: 5px;">Annual Plan</div>
-                                    <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 10px;">$99.99/year (20% off)</div>
-                                    <div style="display: flex; justify-content: space-between; font-size: 13px;">
-                                        <span>Subscribers: <strong style="color: var(--brand-violet);">0</strong></span>
-                                        <span>ARR: <strong style="color: var(--brand-violet);">$0</strong></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Recent Transactions -->
-                    <div class="card p-20">
-                        <h3 style="font-weight: 600; margin-bottom: 15px;">Recent Transactions</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Customer</th>
-                                    <th>Amount</th>
-                                    <th>Type</th>
-                                    <th>Date</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="transactionsTable">
-                                <!-- Populated by JS -->
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Financial Projections -->
-                    <div class="card p-20" style="margin-top: 20px;">
-                        <h3 style="font-weight: 600; margin-bottom: 20px;">Path to $10K Revenue Goal</h3>
-                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
-                            <div>
-                                <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">Customers needed at current MRR</div>
-                                <div style="font-size: 24px; font-weight: 700; color: var(--brand-blue);">1,000+</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">Required monthly growth rate</div>
-                                <div style="font-size: 24px; font-weight: 700; color: var(--brand-violet);">23%</div>
-                            </div>
-                            <div>
-                                <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">Projected reach date</div>
-                                <div style="font-size: 24px; font-weight: 700; color: var(--brand-amber);">Aug 2026</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Stripe Link -->
-                    <div class="card p-20" style="margin-top: 20px; background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1)); border: 1px solid var(--brand-blue);">
-                        <h3 style="font-weight: 600; margin-bottom: 10px;">Stripe Payment Link</h3>
-                        <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 15px;">
-                            Share this link with customers to complete purchases
-                        </p>
-                        <div style="display: flex; gap: 10px; align-items: center;">
-                            <input type="text" class="form-input" value="https://buy.stripe.com/6oUbJ0fvAaQj8ca7nWfbq00" readonly style="font-size: 12px;">
-                            <button onclick="copyToClipboard('https://buy.stripe.com/6oUbJ0fvAaQj8ca7nWfbq00')" class="btn btn-primary btn-sm">Copy</button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Analytics Section -->
-                <div id="analytics-section" class="content-section">
-                    <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 20px;">Analytics</h2>
-
-                    <div class="stats-grid" style="margin-bottom: 30px;">
-                        <div class="stat-card">
-                            <div class="stat-value">0</div>
-                            <div class="stat-label">Total Page Views</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">0</div>
-                            <div class="stat-label">Unique Visitors</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">2.4%</div>
-                            <div class="stat-label">Conversion Rate</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">4m 32s</div>
-                            <div class="stat-label">Avg Session Duration</div>
-                        </div>
-                    </div>
-
-                    <!-- Feature Usage -->
-                    <div class="chart-wrapper">
-                        <h3 style="font-weight: 600; margin-bottom: 15px;">Feature Usage</h3>
-                        <div class="chart-container">
-                            <canvas id="featureUsageChart"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- Conversion Funnel -->
-                    <div class="grid-2col" style="margin-bottom: 30px;">
-                        <div class="card p-20">
-                            <h3 style="font-weight: 600; margin-bottom: 20px;">Conversion Funnel (30 days)</h3>
-                            <div style="display: flex; flex-direction: column; gap: 12px;">
-                                <div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                        <span style="font-size: 13px;">Visits</span>
-                                        <span style="font-weight: 600;">0</span>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 100%;"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                        <span style="font-size: 13px;">Signups</span>
-                                        <span style="font-weight: 600;">0 (-%)</span>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 0%;"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                        <span style="font-size: 13px;">Trial Started</span>
-                                        <span style="font-weight: 600;">0 (-%)</span>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 0%;"></div>
-                                    </div>
-                                </div>
-                                <div>
-                                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
-                                        <span style="font-size: 13px;">Paid Conversion</span>
-                                        <span style="font-weight: 600;">0 (0%)</span>
-                                    </div>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill" style="width: 0%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="chart-wrapper">
-                            <h3 style="font-weight: 600; margin-bottom: 15px;">Traffic Sources</h3>
-                            <div class="chart-container">
-                                <canvas id="trafficSourcesChart"></canvas>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Retention Cohort -->
-                    <div class="card p-20">
-                        <h3 style="font-weight: 600; margin-bottom: 20px;">Retention Cohort (Last 12 Months)</h3>
-                        <table class="cohort-table">
-                            <thead>
-                                <tr>
-                                    <th>Cohort</th>
-                                    <th>Users</th>
-                                    <th>Week 1</th>
-                                    <th>Week 2</th>
-                                    <th>Week 3</th>
-                                    <th>Week 4</th>
-                                    <th>Month 2</th>
-                                    <th>Month 3</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Apr 2026</td>
-                                    <td>8</td>
-                                    <td class="cohort-cell">100%</td>
-                                    <td class="cohort-cell">75%</td>
-                                    <td class="cohort-cell">62%</td>
-                                    <td class="cohort-cell">50%</td>
-                                    <td>-</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr style="opacity: 0.6;">
-                                    <td>Mar 2026</td>
-                                    <td>12</td>
-                                    <td class="cohort-cell">100%</td>
-                                    <td class="cohort-cell">83%</td>
-                                    <td class="cohort-cell">67%</td>
-                                    <td class="cohort-cell">58%</td>
-                                    <td class="cohort-cell">42%</td>
-                                    <td>-</td>
-                                </tr>
-                                <tr style="opacity: 0.4;">
-                                    <td>Feb 2026</td>
-                                    <td>15</td>
-                                    <td class="cohort-cell">100%</td>
-                                    <td class="cohort-cell">80%</td>
-                                    <td class="cohort-cell">67%</td>
-                                    <td class="cohort-cell">60%</td>
-                                    <td class="cohort-cell">47%</td>
-                                    <td class="cohort-cell">33%</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Geographic Distribution -->
-                    <div class="card p-20" style="margin-top: 20px;">
-                        <h3 style="font-weight: 600; margin-bottom: 20px;">Top Countries</h3>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Country</th>
-                                    <th>Users</th>
-                                    <th>Sessions</th>
-                                    <th>Conversion Rate</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>🇺🇸 United States</td>
-                                    <td>5</td>
-                                    <td>18</td>
-                                    <td><span class="badge badge-success">4.2%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>🇨🇦 Canada</td>
-                                    <td>2</td>
-                                    <td>6</td>
-                                    <td><span class="badge badge-info">2.1%</span></td>
-                                </tr>
-                                <tr>
-                                    <td>🇬🇧 United Kingdom</td>
-                                    <td>1</td>
-                                    <td>3</td>
-                                    <td><span class="badge badge-warning">1.8%</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Content Management Section -->
-                <div id="content-section" class="content-section">
-                    <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 20px;">Content Management</h2>
-
-                    <!-- Tabs -->
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
-                        <button onclick="switchContentTab('courses')" class="content-tab active" data-tab="courses" style="padding: 8px 16px; border-bottom: 2px solid var(--brand-blue); color: var(--brand-blue); cursor: pointer; background: none; border: none; font-weight: 600;">📚 Courses</button>
-                        <button onclick="switchContentTab('templates')" class="content-tab" data-tab="templates" style="padding: 8px 16px; border-bottom: 2px solid transparent; color: var(--text-secondary); cursor: pointer; background: none; border: none; font-weight: 600;">📄 Templates</button>
-                        <button onclick="switchContentTab('questions')" class="content-tab" data-tab="questions" style="padding: 8px 16px; border-bottom: 2px solid transparent; color: var(--text-secondary); cursor: pointer; background: none; border: none; font-weight: 600;">❓ Questions</button>
-                        <button onclick="switchContentTab('blog')" class="content-tab" data-tab="blog" style="padding: 8px 16px; border-bottom: 2px solid transparent; color: var(--text-secondary); cursor: pointer; background: none; border: none; font-weight: 600;">📰 Blog</button>
-                    </div>
-
-                    <!-- Courses Tab -->
-                    <div id="courses-tab" class="content-tab-content">
-                        <div style="margin-bottom: 20px;">
-                            <button onclick="openContentModal('course')" class="btn btn-primary">+ Add Course</button>
-                        </div>
-                        <div class="card p-20">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Course Name</th>
-                                        <th>Lessons</th>
-                                        <th>Enrolled</th>
-                                        <th>Status</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Resume Power Moves</strong></td>
-                                        <td>8</td>
-                                        <td>245</td>
-                                        <td><span class="badge badge-success">Published</span></td>
-                                        <td>
-                                            <button class="btn btn-secondary btn-sm" onclick="editContent('course', 1)">Edit</button>
-                                            <button class="btn btn-secondary btn-sm" style="color: #ef4444;">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Interview Mastery</strong></td>
-                                        <td>12</td>
-                                        <td>189</td>
-                                        <td><span class="badge badge-success">Published</span></td>
-                                        <td>
-                                            <button class="btn btn-secondary btn-sm" onclick="editContent('course', 2)">Edit</button>
-                                            <button class="btn btn-secondary btn-sm" style="color: #ef4444;">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>LinkedIn Profile Optimization</strong></td>
-                                        <td>6</td>
-                                        <td>156</td>
-                                        <td><span class="badge badge-warning">Draft</span></td>
-                                        <td>
-                                            <button class="btn btn-secondary btn-sm" onclick="editContent('course', 3)">Edit</button>
-                                            <button class="btn btn-secondary btn-sm" style="color: #ef4444;">Delete</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Templates Tab -->
-                    <div id="templates-tab" class="content-tab-content" style="display: none;">
-                        <div style="margin-bottom: 20px;">
-                            <button onclick="openContentModal('template')" class="btn btn-primary">+ Add Template</button>
-                        </div>
-                        <div class="card p-20">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Template Name</th>
-                                        <th>Category</th>
-                                        <th>Downloads</th>
-                                        <th>Rating</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Executive Resume</strong></td>
-                                        <td>Professional</td>
-                                        <td>856</td>
-                                        <td>⭐ 4.8/5</td>
-                                        <td>
-                                            <button class="btn btn-secondary btn-sm">Edit</button>
-                                            <button class="btn btn-secondary btn-sm" style="color: #ef4444;">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Modern Creative</strong></td>
-                                        <td>Design</td>
-                                        <td>623</td>
-                                        <td>⭐ 4.6/5</td>
-                                        <td>
-                                            <button class="btn btn-secondary btn-sm">Edit</button>
-                                            <button class="btn btn-secondary btn-sm" style="color: #ef4444;">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Academic Resume</strong></td>
-                                        <td>Academic</td>
-                                        <td>412</td>
-                                        <td>⭐ 4.5/5</td>
-                                        <td>
-                                            <button class="btn btn-secondary btn-sm">Edit</button>
-                                            <button class="btn btn-secondary btn-sm" style="color: #ef4444;">Delete</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Questions Tab -->
-                    <div id="questions-tab" class="content-tab-content" style="display: none;">
-                        <div style="margin-bottom: 20px;">
-                            <button onclick="openContentModal('question')" class="btn btn-primary">+ Add Question</button>
-                        </div>
-                        <div class="card p-20">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Question</th>
-                                        <th>Category</th>
-                                        <th>Difficulty</th>
-                                        <th>Used Count</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>Tell me about yourself</strong></td>
-                                        <td>Icebreaker</td>
-                                        <td><span class="badge badge-success">Easy</span></td>
-                                        <td>342</td>
-                                        <td>
-                                            <button class="btn btn-secondary btn-sm">Edit</button>
-                                            <button class="btn btn-secondary btn-sm" style="color: #ef4444;">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>What's your biggest weakness?</strong></td>
-                                        <td>Behavioral</td>
-                                        <td><span class="badge badge-warning">Medium</span></td>
-                                        <td>289</td>
-                                        <td>
-                                            <button class="btn btn-secondary btn-sm">Edit</button>
-                                            <button class="btn btn-secondary btn-sm" style="color: #ef4444;">Delete</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <!-- Blog Tab -->
-                    <div id="blog-tab" class="content-tab-content" style="display: none;">
-                        <div style="margin-bottom: 20px;">
-                            <button onclick="openContentModal('blog')" class="btn btn-primary">+ Write Article</button>
-                        </div>
-                        <div class="card p-20">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Author</th>
-                                        <th>Views</th>
-                                        <th>Status</th>
-                                        <th>Published</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td><strong>10 Resume Mistakes That Cost You Interviews</strong></td>
-                                        <td>Jarvis</td>
-                                        <td>1,245</td>
-                                        <td><span class="badge badge-success">Published</span></td>
-                                        <td>Mar 28, 2026</td>
-                                        <td>
-                                            <button class="btn btn-secondary btn-sm">Edit</button>
-                                            <button class="btn btn-secondary btn-sm" style="color: #ef4444;">Delete</button>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>How to Ace Your Behavioral Interview</strong></td>
-                                        <td>Ryan</td>
-                                        <td>892</td>
-                                        <td><span class="badge badge-success">Published</span></td>
-                                        <td>Mar 25, 2026</td>
-                                        <td>
-                                            <button class="btn btn-secondary btn-sm">Edit</button>
-                                            <button class="btn btn-secondary btn-sm" style="color: #ef4444;">Delete</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Support Section -->
-                <div id="support-section" class="content-section">
-                    <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 20px;">Customer Support</h2>
-
-                    <div style="margin-bottom: 20px;">
-                        <div class="filter-group">
-                            <button class="filter-btn active" onclick="setSupportFilter('all')">All Tickets</button>
-                            <button class="filter-btn" onclick="setSupportFilter('critical')">🔴 Critical</button>
-                            <button class="filter-btn" onclick="setSupportFilter('high')">🟠 High</button>
-                            <button class="filter-btn" onclick="setSupportFilter('medium')">🟡 Medium</button>
-                            <button class="filter-btn" onclick="setSupportFilter('low')">🟢 Low</button>
-                        </div>
-                    </div>
-
-                    <div class="card p-20">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>User</th>
-                                    <th>Subject</th>
-                                    <th>Priority</th>
-                                    <th>Status</th>
-                                    <th>Created</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody id="supportTable">
-                                <!-- Populated by JS -->
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- FAQ Manager -->
-                    <h3 style="font-size: 16px; font-weight: 700; margin-top: 30px; margin-bottom: 15px;">FAQ Manager</h3>
-                    <div style="margin-bottom: 20px;">
-                        <button onclick="openFAQModal()" class="btn btn-primary">+ Add FAQ</button>
-                    </div>
-                    <div class="card p-20">
-                        <div style="display: grid; gap: 15px;">
-                            <div style="padding: 15px; border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer;" onclick="toggleFAQ(this)">
-                                <div style="font-weight: 600; margin-bottom: 5px;">How do I update my resume?</div>
-                                <div style="font-size: 13px; color: var(--text-secondary);">Click the FAQ item to expand →</div>
-                            </div>
-                            <div style="padding: 15px; border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer;" onclick="toggleFAQ(this)">
-                                <div style="font-weight: 600; margin-bottom: 5px;">What resume templates are available?</div>
-                                <div style="font-size: 13px; color: var(--text-secondary);">Click the FAQ item to expand →</div>
-                            </div>
-                            <div style="padding: 15px; border: 1px solid var(--border-color); border-radius: 6px; cursor: pointer;" onclick="toggleFAQ(this)">
-                                <div style="font-weight: 600; margin-bottom: 5px;">Can I get a refund?</div>
-                                <div style="font-size: 13px; color: var(--text-secondary);">Click the FAQ item to expand →</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Marketing Section -->
-                <div id="marketing-section" class="content-section">
-                    <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 20px;">Marketing</h2>
-
-                    <!-- Campaign Tracker -->
-                    <h3 style="font-size: 16px; font-weight: 700; margin-bottom: 15px;">Campaign Tracker</h3>
-                    <div style="margin-bottom: 20px;">
-                        <button onclick="openCampaignModal()" class="btn btn-primary">+ New Campaign</button>
-                    </div>
-                    <div class="card p-20" style="margin-bottom: 30px;">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Campaign Name</th>
-                                    <th>Channel</th>
-                                    <th>Status</th>
-                                    <th>Budget</th>
-                                    <th>Leads</th>
-                                    <th>Conversions</th>
-                                    <th>ROI</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong>Google Ads - Career Search</strong></td>
-                                    <td>Paid Search</td>
-                                    <td><span class="badge badge-success">Active</span></td>
-                                    <td>$500</td>
-                                    <td>47</td>
-                                    <td>3</td>
-                                    <td>120%</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>LinkedIn Influencer Partnership</strong></td>
-                                    <td>Social</td>
-                                    <td><span class="badge badge-success">Active</span></td>
-                                    <td>$800</td>
-                                    <td>156</td>
-                                    <td>12</td>
-                                    <td>87%</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Email Newsletter - March</strong></td>
-                                    <td>Email</td>
-                                    <td><span class="badge badge-info">Completed</span></td>
-                                    <td>$0</td>
-                                    <td>234</td>
-                                    <td>8</td>
-                                    <td>∞</td>
-                                </tr>
-                                <tr>
-                                    <td><strong>Reddit AMA Campaign</strong></td>
-                                    <td>Community</td>
-                                    <td><span class="badge badge-warning">Planned</span></td>
-                                    <td>$100</td>
-                                    <td>0</td>
-                                    <td>0</td>
-                                    <td>-</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- SEO & Social -->
-                    <div class="grid-2col">
-                        <div class="card p-20">
-                            <h3 style="font-weight: 600; margin-bottom: 15px;">🔍 Top SEO Keywords</h3>
-                            <div style="display: grid; gap: 12px;">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <div style="font-weight: 600;">resume builder</div>
-                                        <div style="font-size: 12px; color: var(--text-secondary);">Rank #12 (1,200 searches/mo)</div>
-                                    </div>
-                                    <span style="color: #22c55e;">📈 +3</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <div style="font-weight: 600;">interview prep</div>
-                                        <div style="font-size: 12px; color: var(--text-secondary);">Rank #8 (2,100 searches/mo)</div>
-                                    </div>
-                                    <span style="color: #22c55e;">📈 +5</span>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <div style="font-weight: 600;">career coach</div>
-                                        <div style="font-size: 12px; color: var(--text-secondary);">Rank #24 (890 searches/mo)</div>
-                                    </div>
-                                    <span style="color: #ef4444;">📉 -2</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card p-20">
-                            <h3 style="font-weight: 600; margin-bottom: 15px;">📱 Social Media Stats</h3>
-                            <div style="display: grid; gap: 12px;">
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <div style="font-weight: 600;">LinkedIn Followers</div>
-                                        <div style="font-size: 12px; color: var(--text-secondary);">This month</div>
-                                    </div>
-                                    <div style="text-align: right;">
-                                        <div style="font-weight: 700; color: var(--brand-blue);">856</div>
-                                        <div style="font-size: 12px; color: #22c55e;">+45 this week</div>
-                                    </div>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <div style="font-weight: 600;">Twitter/X Followers</div>
-                                        <div style="font-size: 12px; color: var(--text-secondary);">This month</div>
-                                    </div>
-                                    <div style="text-align: right;">
-                                        <div style="font-weight: 700; color: var(--brand-violet);">342</div>
-                                        <div style="font-size: 12px; color: #22c55e;">+28 this week</div>
-                                    </div>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; align-items: center;">
-                                    <div>
-                                        <div style="font-weight: 600;">Avg Post Engagement</div>
-                                        <div style="font-size: 12px; color: var(--text-secondary);">Last 30 days</div>
-                                    </div>
-                                    <div style="text-align: right;">
-                                        <div style="font-weight: 700; color: var(--brand-amber);">3.2%</div>
-                                        <div style="font-size: 12px; color: #22c55e;">↑ 0.5% vs prev month</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Promo Codes -->
-                    <h3 style="font-size: 16px; font-weight: 700; margin-top: 30px; margin-bottom: 15px;">🎟️ Promo Codes & Coupons</h3>
-                    <div style="margin-bottom: 20px;">
-                        <button onclick="openPromoModal()" class="btn btn-primary">+ Create Promo Code</button>
-                    </div>
-                    <div class="card p-20">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Code</th>
-                                    <th>Discount</th>
-                                    <th>Uses</th>
-                                    <th>Max Uses</th>
-                                    <th>Expires</th>
-                                    <th>Status</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><strong style="font-family: monospace; color: var(--brand-blue);">LAUNCH20</strong></td>
-                                    <td>20% off</td>
-                                    <td>45</td>
-                                    <td>100</td>
-                                    <td>May 3, 2026</td>
-                                    <td><span class="badge badge-success">Active</span></td>
-                                </tr>
-                                <tr>
-                                    <td><strong style="font-family: monospace; color: var(--brand-blue);">FRIEND15</strong></td>
-                                    <td>$15 off</td>
-                                    <td>12</td>
-                                    <td>Unlimited</td>
-                                    <td>No expiry</td>
-                                    <td><span class="badge badge-success">Active</span></td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Settings Section -->
-                <div id="settings-section" class="content-section">
-                    <h2 style="font-size: 18px; font-weight: 700; margin-bottom: 30px;">Settings</h2>
-
-                    <!-- Site Configuration -->
-                    <div class="card p-20" style="margin-bottom: 20px;">
-                        <h3 style="font-weight: 600; margin-bottom: 20px;">🌐 Site Configuration</h3>
-                        <div class="form-group">
-                            <label class="form-label">Site Name</label>
-                            <input type="text" class="form-input" value="Resume SuperHero" onchange="saveSetting('siteName', this.value)">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Tagline</label>
-                            <input type="text" class="form-input" value="Land Your Dream Job in 30 Days" onchange="saveSetting('tagline', this.value)">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Contact Email</label>
-                            <input type="email" class="form-input" value="hello@resumesuperhero.com" onchange="saveSetting('contactEmail', this.value)">
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">Support Email</label>
-                            <input type="email" class="form-input" value="support@resumesuperhero.com" onchange="saveSetting('supportEmail', this.value)">
-                        </div>
-                    </div>
-
-                    <!-- Pricing Settings -->
-                    <div class="card p-20" style="margin-bottom: 20px;">
-                        <h3 style="font-weight: 600; margin-bottom: 20px;">💳 Pricing Settings</h3>
-                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-                            <div>
-                                <h4 style="font-weight: 600; margin-bottom: 15px;">Monthly Plan</h4>
-                                <div class="form-group">
-                                    <label class="form-label">Monthly Price ($)</label>
-                                    <input type="number" class="form-input" value="9.99" step="0.01" onchange="saveSetting('monthlyPrice', this.value)">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Trial Length (days)</label>
-                                    <input type="number" class="form-input" value="7" onchange="saveSetting('trialLength', this.value)">
-                                </div>
-                            </div>
-                            <div>
-                                <h4 style="font-weight: 600; margin-bottom: 15px;">Annual Plan</h4>
-                                <div class="form-group">
-                                    <label class="form-label">Annual Price ($)</label>
-                                    <input type="number" class="form-input" value="99.99" step="0.01" onchange="saveSetting('annualPrice', this.value)">
-                                </div>
-                                <div class="form-group">
-                                    <label class="form-label">Discount vs Monthly (%)</label>
-                                    <input type="number" class="form-input" value="20" onchange="saveSetting('annualDiscount', this.value)">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Stripe Integration -->
-                    <div class="card p-20" style="margin-bottom: 20px; background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(124, 58, 237, 0.1)); border: 1px solid var(--brand-blue);">
-                        <h3 style="font-weight: 600; margin-bottom: 15px;">🔗 Stripe Integration</h3>
-                        <div style="display: grid; gap: 15px; font-size: 13px;">
-                            <div>
-                                <div style="color: var(--text-secondary); margin-bottom: 5px;">Product ID</div>
-                                <div style="font-family: monospace; color: var(--brand-blue);">prod_UH7Ag4kUsPfZq2</div>
-                            </div>
-                            <div>
-                                <div style="color: var(--text-secondary); margin-bottom: 5px;">Price ID (Monthly)</div>
-                                <div style="font-family: monospace; color: var(--brand-blue);">price_1234567890</div>
-                            </div>
-                            <div>
-                                <div style="color: var(--text-secondary); margin-bottom: 5px;">Publishable Key</div>
-                                <div style="font-family: monospace;">pk_live_••••••••••••••••</div>
-                            </div>
-                            <div style="padding-top: 15px; border-top: 1px solid var(--border-color);">
-                                <button class="btn btn-primary btn-sm">Re-authenticate Stripe</button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Email Notifications -->
-                    <div class="card p-20" style="margin-bottom: 20px;">
-                        <h3 style="font-weight: 600; margin-bottom: 20px;">📧 Email Notifications</h3>
-                        <div style="display: grid; gap: 15px;">
-                            <div style="display: flex; align-items: center; gap: 15px;">
-                                <input type="checkbox" id="emailNewSignups" checked>
-                                <label for="emailNewSignups" style="cursor: pointer; margin: 0;">
-                                    <div style="font-weight: 500;">Email on New Signups</div>
-                                    <div style="font-size: 12px; color: var(--text-secondary);">Get notified when users create new accounts</div>
-                                </label>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 15px;">
-                                <input type="checkbox" id="emailNewSubscriptions" checked>
-                                <label for="emailNewSubscriptions" style="cursor: pointer; margin: 0;">
-                                    <div style="font-weight: 500;">Email on New Subscriptions</div>
-                                    <div style="font-size: 12px; color: var(--text-secondary);">Get notified when users convert to paid</div>
-                                </label>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 15px;">
-                                <input type="checkbox" id="emailFailedPayments" checked>
-                                <label for="emailFailedPayments" style="cursor: pointer; margin: 0;">
-                                    <div style="font-weight: 500;">Email on Failed Payments</div>
-                                    <div style="font-size: 12px; color: var(--text-secondary);">Alert me to payment issues immediately</div>
-                                </label>
-                            </div>
-                            <div style="display: flex; align-items: center; gap: 15px;">
-                                <input type="checkbox" id="emailChurn">
-                                <label for="emailChurn" style="cursor: pointer; margin: 0;">
-                                    <div style="font-weight: 500;">Email on Cancellations</div>
-                                    <div style="font-size: 12px; color: var(--text-secondary);">Get notified when subscribers cancel</div>
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Admin Users -->
-                    <div class="card p-20" style="margin-bottom: 20px;">
-                        <h3 style="font-weight: 600; margin-bottom: 15px;">👥 Admin Users</h3>
-                        <div style="margin-bottom: 15px;">
-                            <button onclick="openAdminUserModal()" class="btn btn-primary">+ Add Admin User</button>
-                        </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Added</th>
-                                    <th>Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>jarvis.stark1985@gmail.com</td>
-                                    <td><span class="badge badge-info">Super Admin</span></td>
-                                    <td>Apr 2, 2026</td>
-                                    <td><span class="badge badge-success">Active</span></td>
-                                    <td>
-                                        <button class="btn btn-secondary btn-sm">Edit</button>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <!-- Maintenance Mode -->
-                    <div class="card p-20">
-                        <h3 style="font-weight: 600; margin-bottom: 15px;">🔧 System Settings</h3>
-                        <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
-                            <input type="checkbox" id="maintenanceMode">
-                            <label for="maintenanceMode" style="cursor: pointer; margin: 0;">
-                                <div style="font-weight: 500;">Maintenance Mode</div>
-                                <div style="font-size: 12px; color: var(--text-secondary);">Site will show maintenance page to all users</div>
-                            </label>
-                        </div>
-                        <div style="border-top: 1px solid var(--border-color); padding-top: 20px;">
-                            <h4 style="font-weight: 600; margin-bottom: 10px;">Data & Backup</h4>
-                            <div style="display: flex; gap: 10px;">
-                                <button class="btn btn-secondary">📥 Export All Data</button>
-                                <button class="btn btn-secondary">💾 Create Backup</button>
-                                <button class="btn btn-secondary" style="color: #ef4444;">🗑️ Delete All Demo Data</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- SETTINGS -->
+<div id="s-settings" class="section">
+    <div class="mb-5"><h1 class="text-xl font-bold text-dark-50 font-heading">Settings</h1><p class="text-dark-400 text-xs mt-1">Platform configuration and integrations.</p></div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        <div class="card p-5"><h3 class="text-sm font-semibold text-dark-100 mb-3 font-heading">General</h3>
+            <div class="space-y-3"><div><label class="block text-xs text-dark-400 mb-1">Site Name</label><input class="input" value="Resume SuperHero"></div><div><label class="block text-xs text-dark-400 mb-1">Domain</label><input class="input" value="www.resumesuperhero.com" disabled></div><div><label class="block text-xs text-dark-400 mb-1">Support Email</label><input class="input" value="jarvis.stark1985@gmail.com"></div></div>
+            <button class="btn-primary btn-sm mt-4">Save</button>
+        </div>
+        <div class="card p-5"><h3 class="text-sm font-semibold text-dark-100 mb-3 font-heading">Integrations</h3>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg"><div class="flex items-center gap-2"><span class="text-sm">💳</span><div><div class="text-xs font-semibold text-dark-200">Stripe</div><div class="text-[10px] text-dark-500">Payment processing</div></div></div><span class="badge bg-brand-emerald/20 text-emerald-400">Connected</span></div>
+                <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg"><div class="flex items-center gap-2"><span class="text-sm">📧</span><div><div class="text-xs font-semibold text-dark-200">Gmail</div><div class="text-[10px] text-dark-500">Email notifications</div></div></div><span class="badge bg-brand-emerald/20 text-emerald-400">Connected</span></div>
+                <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg"><div class="flex items-center gap-2"><span class="text-sm">📊</span><div><div class="text-xs font-semibold text-dark-200">Google Analytics</div><div class="text-[10px] text-dark-500">Traffic tracking</div></div></div><span class="badge bg-brand-amber/20 text-amber-400">Setup Required</span></div>
+                <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg"><div class="flex items-center gap-2"><span class="text-sm">🤖</span><div><div class="text-xs font-semibold text-dark-200">AI API (Claude)</div><div class="text-[10px] text-dark-500">AI features backend</div></div></div><span class="badge bg-brand-amber/20 text-amber-400">Setup Required</span></div>
+            </div>
+        </div>
+        <div class="card p-5"><h3 class="text-sm font-semibold text-dark-100 mb-3 font-heading">Pricing</h3>
+            <div class="space-y-3">
+                <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg"><div><div class="text-xs font-semibold text-dark-200">Monthly Plan</div><div class="text-[10px] text-dark-500">Full access, billed monthly</div></div><div class="text-sm font-bold text-dark-100">$9.99/mo</div></div>
+                <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg"><div><div class="text-xs font-semibold text-dark-200">Annual Plan</div><div class="text-[10px] text-dark-500">Full access, billed yearly</div></div><div class="text-sm font-bold text-dark-100">$79.99/yr</div></div>
+                <div class="flex items-center justify-between p-3 bg-dark-800/50 rounded-lg"><div><div class="text-xs font-semibold text-dark-200">Lifetime</div><div class="text-[10px] text-dark-500">One-time payment</div></div><div class="text-sm font-bold text-dark-100">$199.99</div></div>
+            </div>
+        </div>
+        <div class="card p-5"><h3 class="text-sm font-semibold text-dark-100 mb-3 font-heading">Security</h3>
+            <div class="space-y-3">
+                <button class="btn-secondary w-full text-left text-xs">Change Admin Password</button>
+                <button class="btn-secondary w-full text-left text-xs">Manage Admin Users</button>
+                <button class="btn-secondary w-full text-left text-xs">View Audit Log</button>
+                <button class="btn-secondary w-full text-left text-xs">API Key Management</button>
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Modals -->
-
-    <!-- User Detail Modal -->
-    <div id="userModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span id="userModalTitle">User Details</span>
-                <button class="modal-close" onclick="closeModal('userModal')">×</button>
-            </div>
-            <div id="userModalContent">
-                <!-- Populated by JS -->
             </div>
         </div>
-    </div>
-
-    <!-- Content Manager Modal -->
-    <div id="contentModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span id="contentModalTitle">Add Content</span>
-                <button class="modal-close" onclick="closeModal('contentModal')">×</button>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Title</label>
-                <input type="text" class="form-input" id="contentTitle">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Description</label>
-                <textarea class="textarea" id="contentDesc" rows="4"></textarea>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Category</label>
-                <input type="text" class="form-input" id="contentCat">
-            </div>
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button class="btn btn-primary" onclick="saveContent()">Save</button>
-                <button class="btn btn-secondary" onclick="closeModal('contentModal')">Cancel</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- FAQ Modal -->
-    <div id="faqModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span>Add FAQ</span>
-                <button class="modal-close" onclick="closeModal('faqModal')">×</button>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Question</label>
-                <input type="text" class="form-input" id="faqQuestion">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Answer</label>
-                <textarea class="textarea" id="faqAnswer" rows="5"></textarea>
-            </div>
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button class="btn btn-primary" onclick="saveFAQ()">Save</button>
-                <button class="btn btn-secondary" onclick="closeModal('faqModal')">Cancel</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Campaign Modal -->
-    <div id="campaignModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span>New Campaign</span>
-                <button class="modal-close" onclick="closeModal('campaignModal')">×</button>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Campaign Name</label>
-                <input type="text" class="form-input" id="campaignName">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Channel</label>
-                <select class="form-input" id="campaignChannel">
-                    <option>Paid Search</option>
-                    <option>Social</option>
-                    <option>Email</option>
-                    <option>Content</option>
-                    <option>Community</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Budget ($)</label>
-                <input type="number" class="form-input" id="campaignBudget" step="10">
-            </div>
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button class="btn btn-primary" onclick="saveCampaign()">Create</button>
-                <button class="btn btn-secondary" onclick="closeModal('campaignModal')">Cancel</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- Promo Modal -->
-    <div id="promoModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <span>Create Promo Code</span>
-                <button class="modal-close" onclick="closeModal('promoModal')">×</button>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Code</label>
-                <input type="text" class="form-input" id="promoCode" placeholder="e.g., SUMMER25">
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
-                <div class="form-group">
-                    <label class="form-label">Discount Type</label>
-                    <select class="form-input" id="discountType" onchange="updateDiscountUI()">
-                        <option>Percentage (%)</option>
-                        <option>Fixed ($)</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Discount Amount</label>
-                    <input type="number" class="form-input" id="discountAmount" placeholder="e.g., 15">
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="form-label">Max Uses (leave blank for unlimited)</label>
-                <input type="number" class="form-input" id="promoMaxUses">
-            </div>
-            <div class="form-group">
-                <label class="form-label">Expiry Date (optional)</label>
-                <input type="date" class="form-input" id="promoExpiry">
-            </div>
-            <div style="display: flex; gap: 10px; margin-top: 20px;">
-                <button class="btn btn-primary" onclick="savePromo()">Create</button>
-                <button class="btn btn-secondary" onclick="closeModal('promoModal')">Cancel</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // APP STATE
-        const appState = {
-            currentSection: 'dashboard',
-            isLoggedIn: false,
-            currentUser: null,
-            userFilter: 'all',
-            supportFilter: 'all',
-            sampleUsers: [
-                { id: 1, name: 'Sarah Johnson', email: 'sarah@example.com', plan: 'Professional', status: 'active', joined: '2026-03-15', lastActive: '2 hours ago' },
-                { id: 2, name: 'Michael Chen', email: 'michael@example.com', plan: 'Premium', status: 'active', joined: '2026-03-20', lastActive: '30 mins ago' },
-                { id: 3, name: 'Jessica Martinez', email: 'jessica@example.com', plan: 'Basic', status: 'trial', joined: '2026-04-01', lastActive: '5 mins ago' },
-                { id: 4, name: 'David Thompson', email: 'david@example.com', plan: 'Professional', status: 'active', joined: '2026-03-10', lastActive: '1 hour ago' },
-                { id: 5, name: 'Emily Watson', email: 'emily@example.com', plan: 'Basic', status: 'canceled', joined: '2026-02-28', lastActive: '10 days ago' },
-                { id: 6, name: 'Robert Kim', email: 'robert@example.com', plan: 'Premium', status: 'active', joined: '2026-03-05', lastActive: '12 mins ago' },
-                { id: 7, name: 'Lisa Anderson', email: 'lisa@example.com', plan: 'Professional', status: 'active', joined: '2026-03-22', lastActive: '1 day ago' },
-                { id: 8, name: 'James Wilson', email: 'james@example.com', plan: 'Basic', status: 'trial', joined: '2026-04-02', lastActive: '3 hours ago' },
-                { id: 9, name: 'Amanda Taylor', email: 'amanda@example.com', plan: 'Premium', status: 'active', joined: '2026-03-12', lastActive: 'Just now' },
-                { id: 10, name: 'Chris Lee', email: 'chris@example.com', plan: 'Basic', status: 'active', joined: '2026-03-25', lastActive: '45 mins ago' },
-            ],
-            sampleTransactions: [
-                { id: 'TXN001', customer: 'Sarah Johnson', amount: 9.99, type: 'subscription', date: '2026-04-04', status: 'success' },
-                { id: 'TXN002', customer: 'Michael Chen', amount: 99.99, type: 'subscription_annual', date: '2026-04-02', status: 'success' },
-                { id: 'TXN003', customer: 'David Thompson', amount: 9.99, type: 'subscription', date: '2026-04-01', status: 'success' },
-                { id: 'TXN004', customer: 'Jessica Martinez', amount: -9.99, type: 'refund', date: '2026-03-30', status: 'success' },
-                { id: 'TXN005', customer: 'Robert Kim', amount: 9.99, type: 'subscription', date: '2026-03-28', status: 'success' },
-            ],
-            sampleTickets: [
-                { id: 'TKT001', user: 'Sarah Johnson', subject: 'Resume template not downloading', priority: 'high', status: 'open', created: '2026-04-04' },
-                { id: 'TKT002', user: 'Michael Chen', subject: 'Interview prep video buffering', priority: 'medium', status: 'in_progress', created: '2026-04-03' },
-                { id: 'TKT003', user: 'Jessica Martinez', subject: 'Billing question', priority: 'low', status: 'resolved', created: '2026-04-02' },
-                { id: 'TKT004', user: 'David Thompson', subject: 'Cannot login to account', priority: 'critical', status: 'open', created: '2026-04-04' },
-                { id: 'TKT005', user: 'Emily Watson', subject: 'Request refund', priority: 'high', status: 'waiting_customer', created: '2026-03-25' },
-            ],
-            revenueChartInstance: null,
-            mrrChartInstance: null,
-            revenueBreakdownChartInstance: null,
-            featureUsageChartInstance: null,
-            trafficSourcesChartInstance: null,
-        };
-
-        const titles = {
-            dashboard: '📊 Dashboard',
-            users: '👥 User Management',
-            revenue: '💰 Revenue & Billing',
-            analytics: '📈 Analytics',
-            content: '📝 Content Management',
-            support: '🎧 Support',
-            marketing: '📢 Marketing',
-            settings: '⚙️ Settings'
-        };
-
-        // LOGIN HANDLER
-        function handleLogin() {
-            const username = document.getElementById('loginUsername').value;
-            const password = document.getElementById('loginPassword').value;
-
-            if (username === 'jarvisadmin' && password === 'Jarvissuperhero1985') {
-                appState.isLoggedIn = true;
-                appState.currentUser = { email: 'jarvis.stark1985@gmail.com', role: 'Super Admin' };
-                document.getElementById('loginScreen').style.display = 'none';
-                document.getElementById('dashboard').style.display = 'block';
-                initializeDashboard();
-            } else {
-                alert('Invalid credentials.');
-            }
-        }
-
-        function handleLogout() {
-            appState.isLoggedIn = false;
-            document.getElementById('dashboard').style.display = 'none';
-            document.getElementById('loginScreen').style.display = 'flex';
-            document.getElementById('loginPassword').value = '';
-            document.getElementById('adminMenu').style.display = 'none';
-        }
-
-        // NAVIGATION
-        function navigateTo(section) {
-            document.querySelectorAll('.content-section').forEach(el => el.classList.remove('active'));
-            document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
-
-            const sectionEl = document.getElementById(section + '-section');
-            if (sectionEl) sectionEl.classList.add('active');
-
-            const navItem = document.querySelector(`.nav-item[data-section="${section}"]`);
-            if (navItem) navItem.classList.add('active');
-
-            document.getElementById('pageTitle').textContent = titles[section] || 'Dashboard';
-            appState.currentSection = section;
-            document.getElementById('adminMenu').style.display = 'none';
-
-            // Initialize charts when needed
-            setTimeout(() => {
-                if (section === 'dashboard') initRevenueChart();
-                if (section === 'revenue') initMRRChart();
-                if (section === 'analytics') {
-                    initFeatureUsageChart();
-                    initTrafficSourcesChart();
-                }
-            }, 100);
-        }
-
-        // USERS SECTION
-        function renderUsers() {
-            const tbody = document.getElementById('usersTable');
-            tbody.innerHTML = '';
-
-            let filtered = appState.sampleUsers;
-            if (appState.userFilter !== 'all') {
-                filtered = filtered.filter(u => u.status === appState.userFilter);
-            }
-
-            const searchTerm = document.getElementById('userSearch')?.value.toLowerCase() || '';
-            if (searchTerm) {
-                filtered = filtered.filter(u =>
-                    u.name.toLowerCase().includes(searchTerm) ||
-                    u.email.toLowerCase().includes(searchTerm)
-                );
-            }
-
-            filtered.forEach(user => {
-                const row = document.createElement('tr');
-                let statusClass = 'badge-success';
-                if (user.status === 'trial') statusClass = 'badge-info';
-                if (user.status === 'canceled') statusClass = 'badge-danger';
-
-                row.innerHTML = `
-                    <td>${user.name}</td>
-                    <td>${user.email}</td>
-                    <td>${user.plan}</td>
-                    <td><span class="badge ${statusClass}">${user.status.charAt(0).toUpperCase() + user.status.slice(1)}</span></td>
-                    <td>${user.joined}</td>
-                    <td>${user.lastActive}</td>
-                    <td>
-                        <button class="btn btn-secondary btn-sm" onclick="viewUserDetails(${user.id})">View</button>
-                    </td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        function setUserFilter(status) {
-            appState.userFilter = status;
-            document.querySelectorAll('[onclick*="setUserFilter"]').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            renderUsers();
-        }
-
-        function filterUsers() {
-            renderUsers();
-        }
-
-        function viewUserDetails(userId) {
-            const user = appState.sampleUsers.find(u => u.id === userId);
-            const content = `
-                <div class="form-group">
-                    <label class="form-label">Name</label>
-                    <input type="text" class="form-input" value="${user.name}" readonly>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Email</label>
-                    <input type="email" class="form-input" value="${user.email}" readonly>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Plan</label>
-                    <input type="text" class="form-input" value="${user.plan}" readonly>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Status</label>
-                    <input type="text" class="form-input" value="${user.status}" readonly>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Joined</label>
-                    <input type="text" class="form-input" value="${user.joined}" readonly>
-                </div>
-                <div class="form-group">
-                    <label class="form-label">Last Active</label>
-                    <input type="text" class="form-input" value="${user.lastActive}" readonly>
-                </div>
-                <h4 style="font-weight: 600; margin-top: 20px; margin-bottom: 15px;">Subscription History</h4>
-                <div style="background-color: var(--bg-primary); padding: 15px; border-radius: 6px; font-size: 13px;">
-                    <div style="margin-bottom: 10px;">📅 <strong>Current Plan:</strong> ${user.plan}</div>
-                    <div style="margin-bottom: 10px;">💵 <strong>Billing:</strong> Monthly at $9.99</div>
-                    <div>🔄 <strong>Renewal Date:</strong> May ${Math.floor(Math.random() * 28) + 1}, 2026</div>
-                </div>
-                <div style="display: flex; gap: 10px; margin-top: 20px;">
-                    <button class="btn btn-secondary" onclick="closeModal('userModal')">Close</button>
-                    <button class="btn btn-secondary" style="color: #ef4444;">Send Support Email</button>
-                </div>
-            `;
-            document.getElementById('userModalContent').innerHTML = content;
-            document.getElementById('userModalTitle').textContent = `${user.name} - Details`;
-            openModal('userModal');
-        }
-
-        function openUserModal() {
-            document.getElementById('userModalContent').innerHTML = '<p>Add new user form would go here</p>';
-            openModal('userModal');
-        }
-
-        function exportUsers() {
-            let csv = 'Name,Email,Plan,Status,Joined\n';
-            appState.sampleUsers.forEach(u => {
-                csv += `${u.name},${u.email},${u.plan},${u.status},${u.joined}\n`;
-            });
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'users.csv';
-            a.click();
-            window.URL.revokeObjectURL(url);
-        }
-
-        // REVENUE SECTION
-        function renderTransactions() {
-            const tbody = document.getElementById('transactionsTable');
-            tbody.innerHTML = '';
-            appState.sampleTransactions.forEach(txn => {
-                const row = document.createElement('tr');
-                let statusClass = 'badge-success';
-                if (txn.status === 'failed') statusClass = 'badge-danger';
-                row.innerHTML = `
-                    <td>${txn.id}</td>
-                    <td>${txn.customer}</td>
-                    <td>$${Math.abs(txn.amount).toFixed(2)}</td>
-                    <td>${txn.type.replace('_', ' ')}</td>
-                    <td>${txn.date}</td>
-                    <td><span class="badge ${statusClass}">${txn.status}</span></td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        // SUPPORT SECTION
-        function renderSupportTickets() {
-            const tbody = document.getElementById('supportTable');
-            tbody.innerHTML = '';
-
-            let filtered = appState.sampleTickets;
-            if (appState.supportFilter !== 'all') {
-                filtered = filtered.filter(t => t.priority === appState.supportFilter);
-            }
-
-            filtered.forEach(ticket => {
-                const row = document.createElement('tr');
-                let priorityBadge = 'badge-info';
-                if (ticket.priority === 'critical') priorityBadge = 'badge-danger';
-                if (ticket.priority === 'high') priorityBadge = 'badge-warning';
-                if (ticket.priority === 'medium') priorityBadge = 'badge-info';
-
-                let statusBadge = 'badge-success';
-                if (ticket.status === 'open') statusBadge = 'badge-danger';
-                if (ticket.status === 'in_progress') statusBadge = 'badge-info';
-                if (ticket.status === 'waiting_customer') statusBadge = 'badge-warning';
-
-                row.innerHTML = `
-                    <td>${ticket.id}</td>
-                    <td>${ticket.user}</td>
-                    <td>${ticket.subject}</td>
-                    <td><span class="badge ${priorityBadge}">${ticket.priority}</span></td>
-                    <td><span class="badge ${statusBadge}">${ticket.status.replace('_', ' ')}</span></td>
-                    <td>${ticket.created}</td>
-                    <td>
-                        <button class="btn btn-secondary btn-sm" onclick="viewTicket('${ticket.id}')">View</button>
-                    </td>
-                `;
-                tbody.appendChild(row);
-            });
-        }
-
-        function setSupportFilter(priority) {
-            appState.supportFilter = priority;
-            document.querySelectorAll('[onclick*="setSupportFilter"]').forEach(btn => btn.classList.remove('active'));
-            event.target.classList.add('active');
-            renderSupportTickets();
-        }
-
-        function viewTicket(id) {
-            const ticket = appState.sampleTickets.find(t => t.id === id);
-            alert(`Ticket ${id}: ${ticket.subject}\nPriority: ${ticket.priority}\nStatus: ${ticket.status}`);
-        }
-
-        // CONTENT MANAGEMENT
-        function switchContentTab(tab) {
-            document.querySelectorAll('.content-tab-content').forEach(el => el.style.display = 'none');
-            document.querySelectorAll('.content-tab').forEach(el => {
-                el.style.borderBottomColor = 'transparent';
-                el.style.color = 'var(--text-secondary)';
-            });
-
-            document.getElementById(tab + '-tab').style.display = 'block';
-            event.target.style.borderBottomColor = 'var(--brand-blue)';
-            event.target.style.color = 'var(--brand-blue)';
-        }
-
-        function openContentModal(type) {
-            const titles = {
-                course: 'Add New Course',
-                template: 'Add Resume Template',
-                question: 'Add Interview Question',
-                blog: 'Write Blog Post'
-            };
-            document.getElementById('contentModalTitle').textContent = titles[type];
-            openModal('contentModal');
-        }
-
-        function editContent(type, id) {
-            document.getElementById('contentModalTitle').textContent = `Edit ${type}`;
-            openModal('contentModal');
-        }
-
-        function saveContent() {
-            alert('Content saved!');
-            closeModal('contentModal');
-        }
-
-        // MODALS
-        function openModal(modalId) {
-            document.getElementById(modalId).classList.add('active');
-        }
-
-        function closeModal(modalId) {
-            document.getElementById(modalId).classList.remove('active');
-        }
-
-        function openFAQModal() {
-            openModal('faqModal');
-        }
-
-        function saveFAQ() {
-            alert('FAQ saved!');
-            closeModal('faqModal');
-        }
-
-        function toggleFAQ(el) {
-            const text = el.querySelector('div:nth-child(2)');
-            if (text.style.display === 'none') {
-                text.style.display = 'block';
-            } else {
-                text.style.display = 'none';
-            }
-        }
-
-        function openCampaignModal() {
-            openModal('campaignModal');
-        }
-
-        function saveCampaign() {
-            alert('Campaign created!');
-            closeModal('campaignModal');
-        }
-
-        function openPromoModal() {
-            openModal('promoModal');
-        }
-
-        function savePromo() {
-            const code = document.getElementById('promoCode').value;
-            if (!code) {
-                alert('Please enter a promo code');
-                return;
-            }
-            alert(`Promo code "${code}" created!`);
-            closeModal('promoModal');
-        }
-
-        function updateDiscountUI() {
-            // Dynamic UI update based on discount type
-        }
-
-        function openAdminUserModal() {
-            alert('Add admin user form');
-        }
-
-        // ADMIN MENU
-        function toggleAdminMenu() {
-            const menu = document.getElementById('adminMenu');
-            menu.style.display = menu.style.display === 'none' ? 'block' : 'none';
-        }
-
-        function toggleNotifications() {
-            alert('3 new notifications:\n1. New user signup: Jessica Martinez\n2. Payment received: $9.99\n3. Support ticket: Resume Download Issue');
-        }
-
-        // SETTINGS
-        function saveSetting(key, value) {
-            console.log(`Setting saved: ${key} = ${value}`);
-        }
-
-        // UTILITY
-        function copyToClipboard(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                alert('Copied to clipboard!');
-            });
-        }
-
-        // COUNTDOWN TIMER
-        function updateCountdownTimer() {
-            const deadline = new Date('2026-05-03').getTime();
-            const now = new Date().getTime();
-            const distance = deadline - now;
-
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const mins = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-
-            const timerEl = document.getElementById('countdownTimer');
-            if (timerEl) {
-                timerEl.textContent = `${days}d ${hours}h ${mins}m`;
-            }
-        }
-
-        // CHARTS
-        function initRevenueChart() {
-            const ctx = document.getElementById('revenueChart');
-            if (!ctx || appState.revenueChartInstance) return;
-
-            appState.revenueChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'],
-                    datasets: [{
-                        label: 'Daily Revenue ($)',
-                        data: [0, 0, 0, 9.99, 9.99, 9.99, 19.98],
-                        borderColor: 'var(--brand-blue)',
-                        backgroundColor: 'rgba(37, 99, 235, 0.1)',
-                        tension: 0.4,
-                        fill: true,
-                        pointBackgroundColor: 'var(--brand-blue)',
-                        pointBorderColor: 'var(--bg-secondary)',
-                        pointBorderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: { color: 'var(--border-color)' },
-                            ticks: { color: 'var(--text-secondary)' }
-                        },
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: 'var(--text-secondary)' }
-                        }
-                    }
-                }
-            });
-        }
-
-        function initMRRChart() {
-            const ctx = document.getElementById('mrrChart');
-            if (!ctx || appState.mrrChartInstance) return;
-
-            appState.mrrChartInstance = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Feb', 'Mar', 'Apr'],
-                    datasets: [{
-                        label: 'MRR ($)',
-                        data: [0, 0, 39.96],
-                        borderColor: 'var(--brand-violet)',
-                        backgroundColor: 'rgba(124, 58, 237, 0.1)',
-                        tension: 0.4,
-                        fill: true,
-                        pointBackgroundColor: 'var(--brand-violet)',
-                        pointBorderColor: 'var(--bg-secondary)',
-                        pointBorderWidth: 2
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: {
-                            beginAtZero: true,
-                            grid: { color: 'var(--border-color)' },
-                            ticks: { color: 'var(--text-secondary)' }
-                        },
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: 'var(--text-secondary)' }
-                        }
-                    }
-                }
-            });
-        }
-
-        function initFeatureUsageChart() {
-            const ctx = document.getElementById('featureUsageChart');
-            if (!ctx || appState.featureUsageChartInstance) return;
-
-            appState.featureUsageChartInstance = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Resume Builder', 'Interview Prep', 'Cover Letter', 'Analytics', 'Templates'],
-                    datasets: [{
-                        label: 'Usage Count',
-                        data: [245, 189, 156, 98, 342],
-                        backgroundColor: [
-                            'var(--brand-blue)',
-                            'var(--brand-violet)',
-                            'var(--brand-amber)',
-                            '#22c55e',
-                            '#ef4444'
-                        ]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { display: false }
-                    },
-                    scales: {
-                        y: {
-                            grid: { color: 'var(--border-color)' },
-                            ticks: { color: 'var(--text-secondary)' }
-                        },
-                        x: {
-                            grid: { display: false },
-                            ticks: { color: 'var(--text-secondary)' }
-                        }
-                    }
-                }
-            });
-        }
-
-        function initTrafficSourcesChart() {
-            const ctx = document.getElementById('trafficSourcesChart');
-            if (!ctx || appState.trafficSourcesChartInstance) return;
-
-            appState.trafficSourcesChartInstance = new Chart(ctx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Organic', 'Paid Search', 'Social', 'Direct', 'Referral'],
-                    datasets: [{
-                        data: [45, 28, 15, 8, 4],
-                        backgroundColor: [
-                            'var(--brand-blue)',
-                            'var(--brand-violet)',
-                            'var(--brand-amber)',
-                            '#22c55e',
-                            '#ef4444'
-                        ],
-                        borderColor: 'var(--bg-secondary)'
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: {
-                            position: 'bottom',
-                            labels: { color: 'var(--text-primary)' }
-                        }
-                    }
-                }
-            });
-        }
-
-        // INITIALIZE DASHBOARD
-        function initializeDashboard() {
-            renderUsers();
-            renderTransactions();
-            renderSupportTickets();
-            navigateTo('dashboard');
-            updateCountdownTimer();
-            setInterval(updateCountdownTimer, 60000); // Update every minute
-
-            // Close admin menu when clicking outside
-            document.addEventListener('click', (e) => {
-                const menu = document.getElementById('adminMenu');
-                if (!e.target.closest('[onclick*="toggleAdminMenu"]') && !e.target.closest('#adminMenu')) {
-                    menu.style.display = 'none';
-                }
-            });
-        }
-
-        // Initialize on load (auto-login for demo)
-        window.addEventListener('load', () => {
-            document.getElementById('loginUsername').value = '';
-            document.getElementById('loginPassword').value = '';
-        });
-    </script>
+    </main>
+</div>
+
+<script>
+// AUTH
+function doLogin(){const u=document.getElementById('loginUser').value,p=document.getElementById('loginPass').value;if(u==='jarvisadmin'&&p==='Jarvissuperhero1985'){document.getElementById('loginScreen').style.display='none';document.getElementById('adminApp').style.display='flex';initAdmin()}else{document.getElementById('loginError').classList.remove('hidden');setTimeout(()=>document.getElementById('loginError').classList.add('hidden'),3000)}}
+function doLogout(){if(confirm('Sign out?')){document.getElementById('adminApp').style.display='none';document.getElementById('loginScreen').style.display='flex';document.getElementById('loginUser').value='';document.getElementById('loginPass').value=''}}
+
+// NAV
+const titles={dashboard:'Dashboard',revenue:'Revenue & Billing',users:'User Management',analytics:'Analytics',content:'Content Management',support:'Support Tickets',marketing:'Marketing',settings:'Settings'};
+function navTo(s){document.querySelectorAll('.section').forEach(el=>el.classList.remove('active'));document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));const sec=document.getElementById('s-'+s);if(sec)sec.classList.add('active');const btn=document.querySelector(`.nav-btn[data-s="${s}"]`);if(btn)btn.classList.add('active');document.getElementById('adminPageTitle').textContent=titles[s]||'Dashboard';if(s==='revenue')renderTransactions()}
+
+// MOCK DATA
+const mockUsers=[{id:1,name:'Sarah Chen',email:'sarah.chen@gmail.com',plan:'Premium',status:'active',joined:'2026-04-02',resumes:3,interviews:5},{id:2,name:'Marcus Johnson',email:'mjohnson@yahoo.com',plan:'Premium',status:'active',joined:'2026-04-01',resumes:2,interviews:3},{id:3,name:'Priya Patel',email:'priya.p@outlook.com',plan:'Monthly',status:'active',joined:'2026-04-03',resumes:1,interviews:1},{id:4,name:'James Wilson',email:'jwilson@gmail.com',plan:'Trial',status:'trial',joined:'2026-04-04',resumes:0,interviews:0},{id:5,name:'Elena Rodriguez',email:'elena.r@gmail.com',plan:'Annual',status:'active',joined:'2026-03-28',resumes:4,interviews:8},{id:6,name:'David Kim',email:'dkim@hotmail.com',plan:'Monthly',status:'active',joined:'2026-03-30',resumes:2,interviews:2},{id:7,name:'Lisa Thompson',email:'lisaT@gmail.com',plan:'Trial',status:'trial',joined:'2026-04-04',resumes:1,interviews:0},{id:8,name:'Robert Chen',email:'rchen@outlook.com',plan:'Premium',status:'churned',joined:'2026-03-15',resumes:1,interviews:1},{id:9,name:'Amanda Foster',email:'afoster@gmail.com',plan:'Monthly',status:'active',joined:'2026-04-02',resumes:2,interviews:4},{id:10,name:'Kevin Zhang',email:'kzhang@yahoo.com',plan:'Annual',status:'active',joined:'2026-03-25',resumes:5,interviews:12}];
+const mockTickets=[{id:'T-001',subject:'Cannot download PDF resume',user:'sarah.chen@gmail.com',priority:'High',status:'Open',created:'2026-04-04'},{id:'T-002',subject:'Login issue on mobile',user:'mjohnson@yahoo.com',priority:'Medium',status:'Open',created:'2026-04-03'},{id:'T-003',subject:'Feature request: Cover letter builder',user:'elena.r@gmail.com',priority:'Low',status:'Open',created:'2026-04-02'},{id:'T-004',subject:'Billing question about annual plan',user:'dkim@hotmail.com',priority:'Medium',status:'Resolved',created:'2026-04-01'}];
+const mockContent=[{id:1,title:'The STAR Method for Resume Bullets',type:'Article',category:'Resume',views:342,published:'2026-04-01'},{id:2,title:'ATS-Proof Your Resume',type:'Guide',category:'Resume',views:567,published:'2026-03-28'},{id:3,title:'Behavioral Interview Mastery',type:'Article',category:'Interview',views:289,published:'2026-03-25'},{id:4,title:'Top Skills for 2026',type:'Article',category:'Skills',views:431,published:'2026-03-20'}];
+const mockCampaigns=[{id:1,name:'Launch Week Push',channel:'Social Media',budget:50,leads:23,conv:8.5,status:'Active'},{id:2,name:'SEO Content Blitz',channel:'SEO',budget:0,leads:45,conv:3.2,status:'Active'},{id:3,name:'Reddit Career Subs',channel:'Content Marketing',budget:0,leads:18,conv:5.1,status:'Active'},{id:4,name:'Email Outreach V1',channel:'Email',budget:10,leads:8,conv:2.8,status:'Paused'}];
+
+// INIT
+function initAdmin(){
+    document.getElementById('headerDate').textContent=new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric',year:'numeric'});
+    const days=Math.ceil((new Date('2026-05-03')-new Date())/(864e5));
+    document.getElementById('daysLeft').textContent=days;
+    updateKPIs();renderCharts();renderUsers();renderTickets();renderContent();renderCampaigns();renderAnalytics();renderAdminActivity();
+}
+
+function updateKPIs(){
+    const paid=mockUsers.filter(u=>u.status==='active'&&u.plan!=='Trial').length,mrr=paid*9.99,rev=mrr;
+    document.getElementById('totalRevenue').textContent='$'+rev.toFixed(2);
+    document.getElementById('kpiMRR').textContent='$'+mrr.toFixed(2);
+    document.getElementById('goalBar').style.width=Math.min((rev/10000)*100,100)+'%';
+    document.getElementById('kpiUsers').textContent=mockUsers.length;
+    document.getElementById('kpiNewUsers').textContent=mockUsers.filter(u=>u.joined>='2026-04-01').length+' this week';
+    document.getElementById('kpiPaid').textContent=paid;
+    document.getElementById('kpiConversion').textContent=Math.round(paid/mockUsers.length*100)+'% conversion';
+    document.getElementById('kpiChurn').textContent=Math.round(mockUsers.filter(u=>u.status==='churned').length/mockUsers.length*100)+'%';
+    document.getElementById('revTotal').textContent='$'+rev.toFixed(2);
+    document.getElementById('revMonth').textContent='$'+mrr.toFixed(2);
+    document.getElementById('revARPU').textContent='$'+(paid>0?(mrr/paid).toFixed(2):'0');
+    document.getElementById('revLTV').textContent='$'+(9.99*12).toFixed(2);
+    document.getElementById('tierBreakdown').innerHTML=[{name:'Monthly ($9.99)',count:mockUsers.filter(u=>u.plan==='Monthly').length,color:'brand-blue'},{name:'Annual ($79.99)',count:mockUsers.filter(u=>u.plan==='Annual').length,color:'brand-violet'},{name:'Premium ($9.99)',count:mockUsers.filter(u=>u.plan==='Premium').length,color:'brand-amber'},{name:'Trial (Free)',count:mockUsers.filter(u=>u.plan==='Trial').length,color:'dark-400'}].map(t=>`<div class="flex items-center justify-between"><div class="flex items-center gap-2"><div class="w-2 h-2 rounded-full bg-${t.color}"></div><span class="text-xs text-dark-300">${t.name}</span></div><span class="text-xs font-semibold text-dark-200">${t.count} users</span></div>`).join('');
+}
+
+function renderCharts(){
+    const days=Array.from({length:14},(_,i)=>{const d=new Date();d.setDate(d.getDate()-13+i);return d.toLocaleDateString('en-US',{month:'short',day:'numeric'})});
+    const opts={responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(51,65,85,.3)'},ticks:{color:'#64748b',font:{size:9}}},y:{grid:{color:'rgba(51,65,85,.3)'},ticks:{color:'#64748b',font:{size:9}}}}};
+    new Chart(document.getElementById('revenueChart'),{type:'line',data:{labels:days,datasets:[{label:'Revenue ($)',data:[0,0,0,0,0,0,0,0,9.99,9.99,19.98,29.97,49.95,69.93],borderColor:'#6366f1',backgroundColor:'rgba(99,102,241,.1)',fill:true,tension:.4,pointRadius:2}]},options:{...opts,scales:{...opts.scales,y:{...opts.scales.y,ticks:{...opts.scales.y.ticks,callback:v=>'$'+v}}}}});
+    new Chart(document.getElementById('userChart'),{type:'bar',data:{labels:days,datasets:[{label:'Users',data:[0,0,0,0,1,1,2,3,4,5,6,7,8,10],backgroundColor:'rgba(99,102,241,.5)',borderRadius:4}]},options:opts});
+    new Chart(document.getElementById('revBreakdownChart'),{type:'doughnut',data:{labels:['Monthly','Annual','Premium','Trial'],datasets:[{data:[3,2,3,2],backgroundColor:['#3b82f6','#8b5cf6','#f59e0b','#475569']}]},options:{responsive:true,plugins:{legend:{position:'bottom',labels:{color:'#94a3b8',font:{size:10}}}}}});
+    new Chart(document.getElementById('featureChart'),{type:'bar',data:{labels:['Resume Builder','Interview Coach','LinkedIn Opt','Job Tracker','Salary Intel','Learning Hub'],datasets:[{label:'Usage',data:[45,32,28,22,15,38],backgroundColor:['#3b82f6','#8b5cf6','#10b981','#f59e0b','#f43f5e','#6366f1'],borderRadius:4}]},options:{indexAxis:'y',responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{color:'rgba(51,65,85,.3)'},ticks:{color:'#64748b',font:{size:9}}},y:{grid:{display:false},ticks:{color:'#94a3b8',font:{size:10}}}}}});
+    new Chart(document.getElementById('trafficChart'),{type:'bar',data:{labels:['Direct','Google','Social','Referral','Email'],datasets:[{label:'Visitors',data:[120,85,45,30,20],backgroundColor:['#6366f1','#3b82f6','#8b5cf6','#10b981','#f59e0b'],borderRadius:4}]},options:{responsive:true,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{color:'#94a3b8',font:{size:10}}},y:{grid:{color:'rgba(51,65,85,.3)'},ticks:{color:'#64748b',font:{size:9}}}}}});
+}
+
+function renderAdminActivity(){
+    const acts=['New user registered: James Wilson','Subscription: Priya Patel → Monthly','Resume created by Sarah Chen','Support ticket T-001 opened','Campaign "Launch Week Push" started','New user: Lisa Thompson','Interview completed by Elena Rodriguez','Payment received: $9.99 from Marcus Johnson'];
+    document.getElementById('adminActivity').innerHTML=acts.map((a,i)=>`<div class="flex items-start gap-2"><div class="w-1.5 h-1.5 rounded-full bg-brand-indigo mt-1.5 flex-shrink-0"></div><div><p class="text-xs text-dark-300">${a}</p><p class="text-[9px] text-dark-600">${Math.floor(Math.random()*48)+1}h ago</p></div></div>`).join('');
+}
+
+// USERS
+let userFilter='all';
+function renderUsers(){
+    const search=(document.getElementById('userSearch')?.value||'').toLowerCase();
+    let users=mockUsers;if(userFilter!=='all')users=users.filter(u=>u.status===userFilter);if(search)users=users.filter(u=>u.name.toLowerCase().includes(search)||u.email.toLowerCase().includes(search));
+    document.getElementById('countAll').textContent=mockUsers.length;document.getElementById('countActive').textContent=mockUsers.filter(u=>u.status==='active').length;document.getElementById('countTrial').textContent=mockUsers.filter(u=>u.status==='trial').length;document.getElementById('countChurned').textContent=mockUsers.filter(u=>u.status==='churned').length;
+    const sc={active:'bg-brand-emerald/20 text-emerald-400',trial:'bg-brand-amber/20 text-amber-400',churned:'bg-brand-rose/20 text-rose-400'};
+    document.getElementById('userTable').innerHTML=users.map(u=>`<tr><td><div class="flex items-center gap-2"><div class="w-6 h-6 rounded-full bg-gradient-to-br from-brand-blue to-brand-violet flex items-center justify-center text-[9px] text-white font-bold">${u.name.split(' ').map(n=>n[0]).join('')}</div><span class="text-xs font-medium">${u.name}</span></div></td><td class="text-xs text-dark-400">${u.email}</td><td><span class="badge bg-dark-600 text-dark-300">${u.plan}</span></td><td><span class="badge ${sc[u.status]||''}">${u.status}</span></td><td class="text-xs text-dark-400">${u.joined}</td><td class="text-xs">${u.resumes}</td><td><button class="btn-secondary btn-sm text-[10px]" onclick="alert('User: ${u.name}\\nEmail: ${u.email}\\nPlan: ${u.plan}\\nResumes: ${u.resumes}\\nInterviews: ${u.interviews}')">View</button></td></tr>`).join('');
+}
+function filterUsers(){renderUsers()}
+function filterUserTab(tab,el){userFilter=tab;document.querySelectorAll('#userTabs .tab').forEach(t=>t.classList.remove('active'));el.classList.add('active');renderUsers()}
+function exportUsers(){const csv='Name,Email,Plan,Status,Joined,Resumes,Interviews\n'+mockUsers.map(u=>`${u.name},${u.email},${u.plan},${u.status},${u.joined},${u.resumes},${u.interviews}`).join('\n');const blob=new Blob([csv],{type:'text/csv'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='users_export.csv';a.click()}
+
+// TICKETS
+function renderTickets(){
+    document.getElementById('openTickets').textContent=mockTickets.filter(t=>t.status==='Open').length;document.getElementById('avgResponse').textContent='2.4h';document.getElementById('resolvedToday').textContent=mockTickets.filter(t=>t.status==='Resolved').length;document.getElementById('csatScore').textContent='4.2/5';
+    const pc={High:'bg-brand-rose/20 text-rose-400',Medium:'bg-brand-amber/20 text-amber-400',Low:'bg-dark-600 text-dark-300'},stc={Open:'bg-brand-amber/20 text-amber-400',Resolved:'bg-brand-emerald/20 text-emerald-400'};
+    document.getElementById('ticketTable').innerHTML=mockTickets.map(t=>`<tr><td class="text-xs font-mono">${t.id}</td><td class="text-xs">${t.subject}</td><td class="text-xs text-dark-400">${t.user}</td><td><span class="badge ${pc[t.priority]||''}">${t.priority}</span></td><td><span class="badge ${stc[t.status]||''}">${t.status}</span></td><td class="text-xs text-dark-400">${t.created}</td><td><button class="btn-secondary btn-sm text-[10px]" onclick="alert('Ticket ${t.id}: ${t.subject}')">View</button></td></tr>`).join('');
+}
+
+// CONTENT
+function renderContent(){document.getElementById('contentTable').innerHTML=mockContent.map(c=>`<tr><td class="text-xs font-medium">${c.title}</td><td><span class="badge bg-dark-600 text-dark-300">${c.type}</span></td><td class="text-xs text-dark-400">${c.category}</td><td class="text-xs">${c.views}</td><td class="text-xs text-dark-400">${c.published}</td><td><button class="btn-secondary btn-sm text-[10px]">Edit</button></td></tr>`).join('')}
+function showContentForm(){document.getElementById('contentForm').style.display='block'}
+function hideContentForm(){document.getElementById('contentForm').style.display='none'}
+function saveContent(){const t=document.getElementById('cTitle').value;if(!t){alert('Title required');return}mockContent.unshift({id:Date.now(),title:t,type:document.getElementById('cType').value,category:document.getElementById('cCategory').value,views:0,published:new Date().toISOString().split('T')[0]});renderContent();hideContentForm();document.getElementById('cTitle').value='';document.getElementById('cBody').value=''}
+
+// CAMPAIGNS
+function renderCampaigns(){
+    document.getElementById('activeCampaigns').textContent=mockCampaigns.filter(c=>c.status==='Active').length;const spend=mockCampaigns.reduce((a,c)=>a+c.budget,0),leads=mockCampaigns.reduce((a,c)=>a+c.leads,0);
+    document.getElementById('totalSpend').textContent='$'+spend;document.getElementById('totalLeads').textContent=leads;document.getElementById('cpl').textContent=leads>0?'$'+(spend/leads).toFixed(2):'$0';
+    const stc={Active:'bg-brand-emerald/20 text-emerald-400',Paused:'bg-brand-amber/20 text-amber-400',Ended:'bg-dark-600 text-dark-300'};
+    document.getElementById('campaignTable').innerHTML=mockCampaigns.map(c=>`<tr><td class="text-xs font-medium">${c.name}</td><td class="text-xs text-dark-400">${c.channel}</td><td class="text-xs">$${c.budget}</td><td class="text-xs">${c.leads}</td><td class="text-xs">${c.conv}%</td><td><span class="badge ${stc[c.status]||''}">${c.status}</span></td><td><button class="btn-secondary btn-sm text-[10px]">Edit</button></td></tr>`).join('');
+}
+function showCampaignForm(){document.getElementById('campaignForm').style.display='block';document.getElementById('campStart').valueAsDate=new Date()}
+function hideCampaignForm(){document.getElementById('campaignForm').style.display='none'}
+function saveCampaign(){const n=document.getElementById('campName').value;if(!n){alert('Name required');return}mockCampaigns.unshift({id:Date.now(),name:n,channel:document.getElementById('campChannel').value,budget:parseInt(document.getElementById('campBudget').value)||0,leads:0,conv:0,status:'Active'});renderCampaigns();hideCampaignForm()}
+
+// ANALYTICS
+function renderAnalytics(){
+    document.getElementById('anViews').textContent='1,247';document.getElementById('anSession').textContent='4.2m';document.getElementById('anResumes').textContent=mockUsers.reduce((a,u)=>a+u.resumes,0);document.getElementById('anInterviews').textContent=mockUsers.reduce((a,u)=>a+u.interviews,0);
+    const total=1247,signups=mockUsers.length,active=mockUsers.filter(u=>u.status==='active').length,paid=mockUsers.filter(u=>u.status==='active'&&u.plan!=='Trial').length;
+    document.getElementById('funnel').innerHTML=[{s:'Website Visitors',c:total,p:100},{s:'Sign Ups',c:signups,p:((signups/total)*100).toFixed(1)},{s:'Active Users',c:active,p:((active/total)*100).toFixed(1)},{s:'Paid Subscribers',c:paid,p:((paid/total)*100).toFixed(1)}].map(f=>`<div><div class="flex items-center justify-between mb-1"><span class="text-xs text-dark-300">${f.s}</span><span class="text-xs font-semibold text-dark-200">${f.c} (${f.p}%)</span></div><div class="progress-track"><div class="progress-fill bg-gradient-to-r from-brand-blue to-brand-violet" style="width:${f.p}%"></div></div></div>`).join('');
+}
+
+// TRANSACTIONS
+function renderTransactions(){
+    const trans=mockUsers.filter(u=>u.status==='active'&&u.plan!=='Trial').map(u=>({date:u.joined,name:u.name,plan:u.plan,amount:u.plan==='Annual'?'$79.99':'$9.99',status:'Paid'}));
+    document.getElementById('transTable').innerHTML=trans.map(t=>`<tr><td class="text-xs text-dark-400">${t.date}</td><td class="text-xs">${t.name}</td><td><span class="badge bg-dark-600 text-dark-300">${t.plan}</span></td><td class="text-xs font-semibold text-brand-emerald">${t.amount}</td><td><span class="badge bg-brand-emerald/20 text-emerald-400">${t.status}</span></td></tr>`).join('');
+}
+</script>
 </body>
 </html>

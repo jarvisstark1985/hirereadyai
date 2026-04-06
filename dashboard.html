@@ -8,7 +8,42 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script src="https://js.puter.com/v2/"></script>
+    <!-- Kokoro.js TTS Engine — human-sounding AI voice, runs 100% in browser -->
+    <script type="module">
+    // Load Kokoro TTS model in background so it's ready when interview starts
+    (async function initKokoroTTS(){
+        window._kokoroReady=false;
+        window._kokoroLoading=false;
+        window._kokoroTTS=null;
+        window._kokoroError=null;
+        // Preload on first user interaction to avoid blocking page load
+        const startLoad=async()=>{
+            if(window._kokoroLoading||window._kokoroReady) return;
+            window._kokoroLoading=true;
+            try{
+                const {KokoroTTS}=await import('https://esm.sh/kokoro-js@1.2.1');
+                const tts=await KokoroTTS.from_pretrained('onnx-community/Kokoro-82M-v1.0-ONNX',{
+                    dtype:'q8',
+                    device:'wasm'
+                });
+                window._kokoroTTS=tts;
+                window._kokoroReady=true;
+                window._kokoroLoading=false;
+                console.log('Kokoro TTS model loaded successfully');
+            }catch(e){
+                console.warn('Kokoro TTS failed to load:',e);
+                window._kokoroError=e;
+                window._kokoroLoading=false;
+            }
+        };
+        // Start loading when user first interacts with page
+        ['click','touchstart','keydown'].forEach(evt=>{
+            document.addEventListener(evt,()=>startLoad(),{once:false,passive:true});
+        });
+        // Also expose manual trigger
+        window._loadKokoroTTS=startLoad;
+    })();
+    </script>
     <script>
         tailwind.config = {
             theme: {
@@ -924,7 +959,7 @@ function nextQuestion(){
         }});
     } else { finishInterview(); }
 }
-// === HUMAN-SOUNDING AI INTERVIEWER VOICE ENGINE (OpenAI TTS via Puter.js) ===
+// === INTERVIEWER VOICE ENGINE (Kokoro.js — human-sounding AI TTS in browser) ===
 let _currentAudio=null;
 const _interviewerLeadIns={
     first:["Welcome. Let's get started with your first question.","Thanks for joining today. Let's jump right in.","Great to meet you. Let's begin the interview.","Alright, let's kick things off."],
@@ -939,59 +974,54 @@ function _getLeadIn(type){
     else pool=_interviewerLeadIns.next;
     return pool[Math.floor(Math.random()*pool.length)];
 }
-let _puterReady=false;
-async function _ensurePuterAuth(){
-    if(_puterReady) return true;
-    try{
-        if(typeof puter!=='undefined'&&puter.auth){
-            const signedIn=puter.auth.isSignedIn();
-            if(!signedIn){
-                showToast('Enabling AI voice — sign in when prompted (free)','info');
-                await puter.auth.signIn();
-            }
-            _puterReady=true;
-            return true;
-        }
-    }catch(e){console.warn('Puter auth failed:',e);}
-    return false;
-}
+// Kokoro voice ID — af_heart is a warm, natural American female voice
+// Other options: af_bella, af_sarah, am_adam, am_michael (m=male, f=female)
+const _kokoroVoice='af_heart';
 async function speakAsInterviewer(text,opts={}){
-    // Stop any current audio
+    // Stop any current playback
     if(_currentAudio){try{_currentAudio.pause();_currentAudio.currentTime=0;}catch(e){}_currentAudio=null;}
+    try{speechSynthesis.cancel();}catch(e){}
     const indicator=document.getElementById('speakerIndicator');
     const leadIn=opts.leadIn||'';
     const fullText=leadIn?(leadIn+' ... '+text):text;
-    // Try OpenAI TTS via Puter.js first
-    try{
-        if(indicator){indicator.style.display='inline-flex';indicator.querySelector('span:last-child').textContent='Generating AI voice...';}
-        const authed=await _ensurePuterAuth();
-        if(!authed) throw new Error('Puter auth unavailable');
-        const audio=await puter.ai.txt2speech(fullText,{
-            provider:'openai',
-            voice:'ash',
-            model:'gpt-4o-mini-tts',
-            instructions:'You are a professional hiring manager conducting a job interview. Speak in a calm, warm, confident tone with natural pacing. Pause briefly between sentences. Sound like a real person having a conversation, not like you are reading from a script.'
-        });
-        _currentAudio=audio;
-        if(indicator) indicator.querySelector('span:last-child').textContent='Interviewer Speaking...';
-        audio.onended=()=>{
-            if(indicator) indicator.style.display='none';
-            _currentAudio=null;
-            if(opts.onEnd) opts.onEnd();
-        };
-        audio.onerror=()=>{
-            if(indicator) indicator.style.display='none';
-            _currentAudio=null;
-            _fallbackSpeak(fullText,opts);
-        };
-        audio.play();
-    }catch(e){
-        console.warn('OpenAI TTS failed, falling back to browser voice:',e);
-        if(indicator) indicator.style.display='none';
-        _fallbackSpeak(fullText,opts);
+    // Try Kokoro TTS first (human-sounding AI voice)
+    if(window._kokoroReady&&window._kokoroTTS){
+        try{
+            if(indicator){indicator.style.display='inline-flex';indicator.querySelector('span:last-child').textContent='Interviewer Speaking...';}
+            const result=await window._kokoroTTS.generate(fullText,{voice:_kokoroVoice});
+            const wavBlob=new Blob([result.toWav()],{type:'audio/wav'});
+            const audio=new Audio(URL.createObjectURL(wavBlob));
+            _currentAudio=audio;
+            audio.onended=()=>{
+                if(indicator) indicator.style.display='none';
+                _currentAudio=null;
+                URL.revokeObjectURL(audio.src);
+                if(opts.onEnd) opts.onEnd();
+            };
+            audio.onerror=()=>{
+                if(indicator) indicator.style.display='none';
+                _currentAudio=null;
+                _browserTTSFallback(fullText,opts);
+            };
+            audio.play();
+            return;
+        }catch(e){
+            console.warn('Kokoro TTS generation failed, falling back:',e);
+        }
     }
+    // If Kokoro is still loading, show status and trigger load
+    if(window._kokoroLoading&&!window._kokoroReady){
+        if(indicator){indicator.style.display='inline-flex';indicator.querySelector('span:last-child').textContent='Loading AI voice engine...';}
+        showToast('AI voice engine loading — using standard voice for now','info');
+    } else if(!window._kokoroLoading&&!window._kokoroReady){
+        // Trigger load for next time
+        if(window._loadKokoroTTS) window._loadKokoroTTS();
+    }
+    // Fallback to browser TTS
+    _browserTTSFallback(fullText,opts);
 }
-function _fallbackSpeak(text,opts={}){
+function _browserTTSFallback(text,opts={}){
+    const indicator=document.getElementById('speakerIndicator');
     try{
         speechSynthesis.cancel();
         const u=new SpeechSynthesisUtterance(text);
@@ -999,12 +1029,14 @@ function _fallbackSpeak(text,opts={}){
         const preferred=voices.find(v=>/google\s+us\s+english/i.test(v.name))||voices.find(v=>/en[-_]us/i.test(v.lang))||voices[0];
         if(preferred) u.voice=preferred;
         u.rate=0.92;u.pitch=1.0;u.volume=1.0;u.lang='en-US';
-        const indicator=document.getElementById('speakerIndicator');
         u.onstart=()=>{if(indicator) indicator.style.display='inline-flex';};
         u.onend=()=>{if(indicator) indicator.style.display='none';if(opts.onEnd) opts.onEnd();};
-        u.onerror=()=>{if(indicator) indicator.style.display='none';};
+        u.onerror=()=>{if(indicator) indicator.style.display='none';if(opts.onEnd) opts.onEnd();};
         speechSynthesis.speak(u);
-    }catch(e){showToast('Voice not available in this browser');}
+    }catch(e){
+        if(indicator) indicator.style.display='none';
+        if(opts.onEnd) opts.onEnd();
+    }
 }
 function readQuestionAloud(opts={}){
     const text=document.getElementById('currentQuestion').textContent;

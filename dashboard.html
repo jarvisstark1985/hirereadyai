@@ -142,8 +142,9 @@
             <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Email</label><input class="input" id="loginEmail" type="email" placeholder="you@example.com"></div>
             <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Password</label><input class="input" id="loginPassword" type="password" placeholder="Enter password" onkeypress="if(event.key==='Enter')doLogin()"></div>
             <button class="btn-primary w-full justify-center" onclick="doLogin()">Sign In</button>
+            <p class="text-xs text-dark-500 text-center" style="margin-top:6px">Requires an active paid subscription</p>
             <div class="text-center">
-                <button class="text-xs text-brandBlue hover:text-brandViolet cursor-pointer bg-transparent border-none" onclick="showSignup()">Create an account</button>
+                <button class="text-xs text-brandBlue hover:text-brandViolet cursor-pointer bg-transparent border-none" onclick="showSignup()">Subscribe &amp; Create Account</button>
                 <span class="text-dark-600 mx-2">|</span>
                 <button class="text-xs text-dark-400 hover:text-dark-200 cursor-pointer bg-transparent border-none" onclick="forgotPassword()">Forgot password?</button>
             </div>
@@ -1258,12 +1259,87 @@ const questionBanks={
 function loadDB(){const s=localStorage.getItem(DB_KEY);if(s)try{const d=JSON.parse(s);const def=JSON.parse(JSON.stringify(appState));Object.keys(d).forEach(k=>{if(typeof d[k]==='object'&&d[k]!==null&&!Array.isArray(d[k])&&def[k]){def[k]=Object.assign({},def[k],d[k]);}else{def[k]=d[k];}});if(!def.jobs.kanban)def.jobs.kanban={saved:[],applied:[],interviewing:[],offered:[]};appState=def;}catch(e){}updateDashboardStats();updateSidebar();}
 function saveDB(){try{localStorage.setItem(DB_KEY,JSON.stringify(appState))}catch(e){}}
 
-// ============ AUTH ============
-function doLogin(){const e=document.getElementById('loginEmail').value,p=document.getElementById('loginPassword').value;if(!e||!p)return;appState.user.email=e;appState.user.name=e.split('@')[0];saveDB();document.getElementById('loginOverlay').style.display='none';document.getElementById('appContainer').style.display='flex';updateSidebar();loadDB();}
-function showSignup(){showToast('Create account at resumesuperhero.com','info');}
-function forgotPassword(){showToast('Reset link sent to email','success');}
-function checkLogin(){const s=localStorage.getItem(DB_KEY);if(s)try{appState=JSON.parse(s);if(appState.user.email){document.getElementById('loginOverlay').style.display='none';document.getElementById('appContainer').style.display='flex';updateSidebar();}}catch(e){}}
-function doLogout(){localStorage.removeItem(DB_KEY);document.getElementById('appContainer').style.display='none';document.getElementById('loginOverlay').style.display='flex';document.getElementById('loginEmail').value='';document.getElementById('loginPassword').value='';}
+// ============ AUTH (Stripe-Verified) ============
+const AUTH_API='https://rsh-auth-api.jarvis-stark1985.workers.dev';
+const AUTH_TOKEN_KEY='rsh_auth_token';
+let authLoading=false;
+
+async function doLogin(){
+    if(authLoading)return;
+    const e=document.getElementById('loginEmail').value.trim(),p=document.getElementById('loginPassword').value;
+    const msgEl=document.getElementById('loginMsg');
+    if(!e||!p){msgEl.innerHTML='<span style="color:#f43f5e">Please enter email and password</span>';return;}
+    if(!validateEmail(e)){msgEl.innerHTML='<span style="color:#f43f5e">Please enter a valid email address</span>';return;}
+    authLoading=true;
+    const btn=document.querySelector('#loginOverlay .btn-primary');
+    const origText=btn.textContent;
+    btn.textContent='Verifying...';btn.style.opacity='0.6';
+    msgEl.innerHTML='';
+    try{
+        const r=await fetch(AUTH_API+'/login',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({email:e,password:p})
+        });
+        const d=await r.json();
+        if(d.success&&d.token){
+            localStorage.setItem(AUTH_TOKEN_KEY,d.token);
+            appState.user.email=d.user.email;
+            appState.user.name=d.user.name;
+            appState.user.plan=d.user.plan||'';
+            saveDB();
+            document.getElementById('loginOverlay').style.display='none';
+            document.getElementById('appContainer').style.display='flex';
+            updateSidebar();loadDB();
+            showToast('Welcome back, '+escapeHTML(d.user.name)+'!','success');
+        }else{
+            const errMsg=d.error||'Login failed';
+            msgEl.innerHTML='<span style="color:#f43f5e">'+escapeHTML(errMsg)+'</span>';
+            if(d.subscription_expired){
+                msgEl.innerHTML+='<br><a href="https://buy.stripe.com/6oUbJ0fvAaQj8ca7nWfbq00" target="_blank" style="color:#2563eb;font-size:11px;text-decoration:underline">Renew subscription →</a>';
+            }
+        }
+    }catch(err){
+        msgEl.innerHTML='<span style="color:#f43f5e">Connection error. Please try again.</span>';
+    }
+    btn.textContent=origText;btn.style.opacity='1';
+    authLoading=false;
+}
+function showSignup(){window.open('https://buy.stripe.com/6oUbJ0fvAaQj8ca7nWfbq00','_blank');}
+function forgotPassword(){showToast('Contact support@resumesuperhero.com to reset your password','info');}
+async function checkLogin(){
+    const token=localStorage.getItem(AUTH_TOKEN_KEY);
+    if(!token){
+        const s=localStorage.getItem(DB_KEY);
+        if(s)try{const d=JSON.parse(s);if(d.user&&d.user.email&&!localStorage.getItem(AUTH_TOKEN_KEY)){localStorage.removeItem(DB_KEY);}}catch(e){}
+        return;
+    }
+    try{
+        const r=await fetch(AUTH_API+'/verify',{
+            method:'POST',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({token})
+        });
+        const d=await r.json();
+        if(d.valid){
+            const s=localStorage.getItem(DB_KEY);
+            if(s)try{appState=JSON.parse(s);}catch(e){}
+            appState.user.email=d.user.email;
+            appState.user.name=d.user.name;
+            saveDB();
+            document.getElementById('loginOverlay').style.display='none';
+            document.getElementById('appContainer').style.display='flex';
+            updateSidebar();loadDB();
+        }else{
+            localStorage.removeItem(AUTH_TOKEN_KEY);
+        }
+    }catch(e){
+        // If offline, allow cached session
+        const s=localStorage.getItem(DB_KEY);
+        if(s)try{appState=JSON.parse(s);if(appState.user.email){document.getElementById('loginOverlay').style.display='none';document.getElementById('appContainer').style.display='flex';updateSidebar();}}catch(e){}
+    }
+}
+function doLogout(){localStorage.removeItem(DB_KEY);localStorage.removeItem(AUTH_TOKEN_KEY);document.getElementById('appContainer').style.display='none';document.getElementById('loginOverlay').style.display='flex';document.getElementById('loginEmail').value='';document.getElementById('loginPassword').value='';document.getElementById('loginMsg').innerHTML='';}
 
 // ============ NAVIGATION ============
 function nav(section){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));document.getElementById('sec-'+section).classList.add('active');document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));document.querySelector('[data-section="'+section+'"]').classList.add('active');const titles={dashboard:'Dashboard',resume:'Resume Creator',interview:'Interview Coaching',jobs:'Job Tracker',salary:'Salary Intel',linkedin:'LinkedIn Pro',roadmap:'Career Roadmap',settings:'Settings'};document.getElementById('pageTitle').textContent=titles[section]||'Dashboard';if(section==='interview')initFlashCards();if(section==='resume'){rbCurrentStep=1;document.querySelectorAll('.rb-step').forEach(s=>s.classList.remove('active'));document.getElementById('rb-step-1').classList.add('active');}closeSidebar();}

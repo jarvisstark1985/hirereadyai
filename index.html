@@ -620,6 +620,77 @@
         </div>
     </section>
 
+    <!-- MOTIVATIONAL VIDEO -->
+    <section class="py-20 bg-darkBg relative overflow-hidden" id="motivation">
+        <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at 40% 60%, rgba(37, 99, 235, 0.15) 0%, transparent 70%);"></div>
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center mb-12">
+                <h2 class="font-heading text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white mb-4">Your Career Transformation<br><span class="gradient-text">Starts Right Now.</span></h2>
+                <p class="text-slate-300 text-lg max-w-2xl mx-auto">Watch real stories of job seekers who went from stuck to unstoppable with Resume SuperHero.</p>
+            </div>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+                <div class="bg-darkCard border border-darkBorder rounded-2xl overflow-hidden card-hover group cursor-pointer" onclick="document.getElementById('motivVidModal').classList.remove('hidden')">
+                    <div class="aspect-video relative flex items-center justify-center" style="background:linear-gradient(135deg,#2563eb,#7c3aed);background-size:cover;background-position:center">
+                        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent 50%,rgba(0,0,0,.2))"></div>
+                        <div class="w-16 h-16 bg-white/95 rounded-full flex items-center justify-center z-10 shadow-lg group-hover:scale-110 transition-transform">
+                            <svg width="28" height="28" fill="#0f172a" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <span class="absolute top-3 right-3 bg-black/60 text-white text-xs font-semibold px-2 py-1 rounded backdrop-blur-sm z-10">Motivation</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-heading font-semibold text-white text-base mb-1">You've Got This</h3>
+                        <p class="text-slate-400 text-sm">A quick boost of motivation before you take the leap.</p>
+                    </div>
+                </div>
+                <div class="bg-darkCard border border-darkBorder rounded-2xl overflow-hidden card-hover group cursor-pointer" onclick="document.getElementById('motivVidModal').classList.remove('hidden')">
+                    <div class="aspect-video relative flex items-center justify-center" style="background:linear-gradient(135deg,#7c3aed,#a855f7);background-size:cover;background-position:center">
+                        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent 50%,rgba(0,0,0,.2))"></div>
+                        <div class="w-16 h-16 bg-white/95 rounded-full flex items-center justify-center z-10 shadow-lg group-hover:scale-110 transition-transform">
+                            <svg width="28" height="28" fill="#0f172a" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <span class="absolute top-3 right-3 bg-black/60 text-white text-xs font-semibold px-2 py-1 rounded backdrop-blur-sm z-10">Level Up</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-heading font-semibold text-white text-base mb-1">Level Up Your Career</h3>
+                        <p class="text-slate-400 text-sm">See how AI superpowers transform your job search overnight.</p>
+                    </div>
+                </div>
+                <div class="bg-darkCard border border-darkBorder rounded-2xl overflow-hidden card-hover group cursor-pointer sm:col-span-2 lg:col-span-1" onclick="document.getElementById('motivVidModal').classList.remove('hidden')">
+                    <div class="aspect-video relative flex items-center justify-center" style="background:linear-gradient(135deg,#2563eb,#fbbf24);background-size:cover;background-position:center">
+                        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6),transparent 50%,rgba(0,0,0,.2))"></div>
+                        <div class="w-16 h-16 bg-white/95 rounded-full flex items-center justify-center z-10 shadow-lg group-hover:scale-110 transition-transform">
+                            <svg width="28" height="28" fill="#0f172a" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <span class="absolute top-3 right-3 bg-black/60 text-white text-xs font-semibold px-2 py-1 rounded backdrop-blur-sm z-10">Launch</span>
+                    </div>
+                    <div class="p-5">
+                        <h3 class="font-heading font-semibold text-white text-base mb-1">Career Rocket Launch</h3>
+                        <p class="text-slate-400 text-sm">Your dream job is closer than you think. Start now.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="https://buy.stripe.com/6oUbJ0fvAaQj8ca7nWfbq00" class="btn-primary px-10 py-4 rounded-xl text-base font-bold text-white inline-block">Get Started for $9.99/mo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Motivational Video Modal -->
+    <div id="motivVidModal" class="hidden" style="position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:100;display:flex;align-items:center;justify-content:center;backdrop-filter:blur(4px)" onclick="if(event.target===this)this.classList.add('hidden')">
+        <div class="bg-darkBg border border-darkBorder rounded-2xl p-6 max-w-lg w-11/12 animate-modal-fade">
+            <div class="flex items-center justify-between mb-4">
+                <h3 class="font-heading font-semibold text-white text-lg">Motivation</h3>
+                <button onclick="document.getElementById('motivVidModal').classList.add('hidden')" class="text-slate-400 hover:text-white transition-colors" style="background:none;border:none;cursor:pointer">
+                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg>
+                </button>
+            </div>
+            <div class="aspect-video rounded-xl flex items-center justify-center mb-4" style="background:linear-gradient(135deg,#2563eb,#7c3aed);background-size:cover;background-position:center">
+                <div style="background:rgba(0,0,0,.5);padding:10px 20px;border-radius:8px;backdrop-filter:blur(4px);color:#fff;font-weight:600">Video Coming Soon</div>
+            </div>
+            <p class="text-slate-400 text-sm">Full motivational videos are available inside the dashboard after you subscribe.</p>
+        </div>
+    </div>
+
     <!-- DARK CTA -->
     <section class="py-24 bg-darkBg relative overflow-hidden">
         <div class="absolute inset-0 pointer-events-none" style="background: radial-gradient(ellipse at center, rgba(124, 58, 237, 0.2) 0%, transparent 70%);"></div>

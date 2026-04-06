@@ -758,35 +758,149 @@
                 <!-- ============ SALARY ============ -->
                 <div id="sec-salary" class="section">
                     <div class="mb-6">
-                        <h1 class="text-2xl font-bold text-white font-heading flex items-center gap-2"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Salary Intel & Negotiation</h1>
-                        <p class="text-dark-400 text-sm mt-1">Know your worth and negotiate with confidence</p>
+                        <h1 class="text-2xl font-bold text-white font-heading flex items-center gap-2"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Salary Intel & Career Growth</h1>
+                        <p class="text-dark-400 text-sm mt-1">Know your worth and plan your next promotion</p>
                     </div>
+                    <!-- Salary Research Card -->
                     <div class="card p-6 mb-6">
                         <h3 class="text-sm font-semibold text-dark-200 mb-3 flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg> Research Salary Data</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3 mb-3">
-                            <input class="input" id="salaryRole" placeholder="Job Title">
-                            <input class="input" id="salaryLocation" placeholder="Location">
-                            <button class="btn-primary" onclick="researchSalary()">Get Salary Intel</button>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 mb-3">
+                            <div>
+                                <label class="block text-xs font-medium text-dark-400 mb-1.5">Industry</label>
+                                <select class="input" id="salaryIndustry">
+                                    <option value="">Select Industry</option>
+                                    <option value="Technology">Technology</option>
+                                    <option value="Healthcare">Healthcare</option>
+                                    <option value="Finance & Banking">Finance & Banking</option>
+                                    <option value="Marketing & Advertising">Marketing & Advertising</option>
+                                    <option value="Retail & E-Commerce">Retail & E-Commerce</option>
+                                    <option value="Manufacturing">Manufacturing</option>
+                                    <option value="Education">Education</option>
+                                    <option value="Government">Government</option>
+                                    <option value="Consulting">Consulting</option>
+                                    <option value="Real Estate">Real Estate</option>
+                                    <option value="Energy & Utilities">Energy & Utilities</option>
+                                    <option value="Media & Entertainment">Media & Entertainment</option>
+                                    <option value="Nonprofit">Nonprofit</option>
+                                    <option value="Legal">Legal</option>
+                                    <option value="Transportation & Logistics">Transportation & Logistics</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-dark-400 mb-1.5">Job Type</label>
+                                <select class="input" id="salaryJobType">
+                                    <option value="">Select Job Type</option>
+                                    <option value="Software Engineer">Software Engineer</option>
+                                    <option value="Product Manager">Product Manager</option>
+                                    <option value="Data Scientist">Data Scientist</option>
+                                    <option value="Marketing Manager">Marketing Manager</option>
+                                    <option value="Sales Representative">Sales Representative</option>
+                                    <option value="Project Manager">Project Manager</option>
+                                    <option value="Business Analyst">Business Analyst</option>
+                                    <option value="UX Designer">UX Designer</option>
+                                    <option value="Financial Analyst">Financial Analyst</option>
+                                    <option value="Operations Manager">Operations Manager</option>
+                                    <option value="HR Manager">HR Manager</option>
+                                    <option value="Account Executive">Account Executive</option>
+                                    <option value="Customer Success Manager">Customer Success Manager</option>
+                                    <option value="Content Writer">Content Writer</option>
+                                    <option value="DevOps Engineer">DevOps Engineer</option>
+                                    <option value="Nurse / Healthcare Pro">Nurse / Healthcare Pro</option>
+                                    <option value="Teacher / Educator">Teacher / Educator</option>
+                                    <option value="Administrative Assistant">Administrative Assistant</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-dark-400 mb-1.5">Level</label>
+                                <select class="input" id="salaryLevel">
+                                    <option value="">Select Level</option>
+                                    <option value="Intern">Intern</option>
+                                    <option value="Entry Level">Entry Level (0-2 yrs)</option>
+                                    <option value="Mid Level">Mid Level (3-5 yrs)</option>
+                                    <option value="Senior">Senior (6-9 yrs)</option>
+                                    <option value="Lead">Lead / Staff (10+ yrs)</option>
+                                    <option value="Management">Management</option>
+                                    <option value="Director">Director</option>
+                                    <option value="VP">VP / SVP</option>
+                                    <option value="Executive">Executive / C-Suite</option>
+                                </select>
+                            </div>
+                            <div class="flex items-end">
+                                <button class="btn-primary w-full" onclick="researchSalary()" id="salarySearchBtn">
+                                    <span id="salaryBtnText">Get Salary Intel</span>
+                                    <svg id="salarySpinner" class="hidden animate-spin ml-2" width="16" height="16" fill="none" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" opacity=".25"/><path fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"/></svg>
+                                </button>
+                            </div>
                         </div>
-                        <div id="salaryResult" class="ai-msg text-sm"></div>
+                        <div id="salaryResult" class="text-sm"></div>
                     </div>
-                    <div class="card p-6 mb-6">
-                        <h3 class="text-sm font-semibold text-dark-200 mb-3 flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg> Total Compensation Calculator</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
-                            <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Base Salary</label><input class="input" id="compBase" type="number" placeholder="150000"></div>
-                            <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Bonus (%)</label><input class="input" id="compBonus" type="number" placeholder="20"></div>
-                            <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Stock ($)</label><input class="input" id="compStock" type="number" placeholder="50000"></div>
-                            <div><label class="block text-xs font-medium text-dark-400 mb-1.5">Benefits ($)</label><input class="input" id="compBenefits" type="number" placeholder="25000"></div>
-                        </div>
-                        <button class="btn-primary mb-3" onclick="calculateComp()">Calculate Total Comp</button>
-                        <div id="compResult" class="ai-msg text-sm"></div>
-                    </div>
+                    <!-- Promotion Best Practices Card -->
                     <div class="card p-6">
-                        <h3 class="text-sm font-semibold text-dark-200 mb-4 flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z"/></svg> Negotiation Scripts</h3>
-                        <div class="space-y-3">
-                            <button class="w-full text-left p-3 bg-darkBg/50 rounded-lg hover:bg-darkBg transition cursor-pointer border-none" onclick="copyScript('opening')"><div class="font-medium text-dark-100 text-sm">Opening Line</div><div class="text-xs text-dark-400">Professional salary discussion opener</div></button>
-                            <button class="w-full text-left p-3 bg-darkBg/50 rounded-lg hover:bg-darkBg transition cursor-pointer border-none" onclick="copyScript('counter')"><div class="font-medium text-dark-100 text-sm">Counter Offer</div><div class="text-xs text-dark-400">Respond to initial offer professionally</div></button>
-                            <button class="w-full text-left p-3 bg-darkBg/50 rounded-lg hover:bg-darkBg transition cursor-pointer border-none" onclick="copyScript('benefits')"><div class="font-medium text-dark-100 text-sm">Benefits Package</div><div class="text-xs text-dark-400">Negotiate beyond salary</div></button>
+                        <h3 class="text-sm font-semibold text-dark-200 mb-4 flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg> How to Get Your Next Promotion</h3>
+                        <div class="space-y-4" id="promoTips">
+                            <div class="p-4 bg-darkBg/50 rounded-lg border border-dark-700/50">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-brandAmber text-lg font-bold mt-0.5">1</span>
+                                    <div>
+                                        <h4 class="font-semibold text-dark-100 text-sm mb-1">Exceed Expectations Consistently</h4>
+                                        <p class="text-xs text-dark-400 leading-relaxed">Don't just meet your goals — surpass them by 10-20%. Track every win with metrics. "Increased conversion by 15%" beats "did a good job." Build a personal accomplishments doc and update it weekly so you have concrete proof when review time comes.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-darkBg/50 rounded-lg border border-dark-700/50">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-brandAmber text-lg font-bold mt-0.5">2</span>
+                                    <div>
+                                        <h4 class="font-semibold text-dark-100 text-sm mb-1">Make Your Manager's Life Easier</h4>
+                                        <p class="text-xs text-dark-400 leading-relaxed">Promotions don't happen in a vacuum — your manager is your biggest advocate. Proactively solve problems before they escalate. Send weekly status updates. Anticipate what they need and deliver it before they ask. When your manager looks good, they fight harder for your promotion.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-darkBg/50 rounded-lg border border-dark-700/50">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-brandAmber text-lg font-bold mt-0.5">3</span>
+                                    <div>
+                                        <h4 class="font-semibold text-dark-100 text-sm mb-1">Operate at the Next Level Before the Title</h4>
+                                        <p class="text-xs text-dark-400 leading-relaxed">Start doing the job you want, not just the one you have. If you want to be a manager, mentor junior team members now. If you're targeting a director role, start thinking strategically about department-level outcomes. Promotions reward proven capability, not potential.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-darkBg/50 rounded-lg border border-dark-700/50">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-brandAmber text-lg font-bold mt-0.5">4</span>
+                                    <div>
+                                        <h4 class="font-semibold text-dark-100 text-sm mb-1">Build Cross-Functional Visibility</h4>
+                                        <p class="text-xs text-dark-400 leading-relaxed">Your direct team knowing you're great isn't enough. Volunteer for cross-team projects, present at all-hands meetings, and build relationships with leaders outside your department. Decision makers you've never worked with will be asked "do you know this person?" during promotion calibration.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-darkBg/50 rounded-lg border border-dark-700/50">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-brandAmber text-lg font-bold mt-0.5">5</span>
+                                    <div>
+                                        <h4 class="font-semibold text-dark-100 text-sm mb-1">Have the Direct Conversation</h4>
+                                        <p class="text-xs text-dark-400 leading-relaxed">Don't wait and hope your manager notices. Schedule a 1:1 and say: "I'd like to work toward a promotion to [title]. What specific milestones do I need to hit?" Get the criteria in writing. Follow up every month with progress updates. This creates accountability on both sides and eliminates the guessing game.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-darkBg/50 rounded-lg border border-dark-700/50">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-brandAmber text-lg font-bold mt-0.5">6</span>
+                                    <div>
+                                        <h4 class="font-semibold text-dark-100 text-sm mb-1">Develop a Unique Skill That Fills a Gap</h4>
+                                        <p class="text-xs text-dark-400 leading-relaxed">Identify a skill your team needs but nobody has — AI/ML, data analytics, public speaking, technical architecture — and become the go-to expert. Being indispensable in a high-demand area makes you impossible to overlook. Companies promote people who create value that's hard to replace.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="p-4 bg-darkBg/50 rounded-lg border border-dark-700/50">
+                                <div class="flex items-start gap-3">
+                                    <span class="text-brandAmber text-lg font-bold mt-0.5">7</span>
+                                    <div>
+                                        <h4 class="font-semibold text-dark-100 text-sm mb-1">Know When to Move On</h4>
+                                        <p class="text-xs text-dark-400 leading-relaxed">Sometimes the fastest path to a promotion is a new company. If you've been told "not this cycle" twice, or the company has a pattern of slow promotions, an external offer can either accelerate internal action or land you the title and raise elsewhere. The average pay increase from switching jobs is 10-20% vs. 3-5% for internal promotions.</p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1264,9 +1378,9 @@ function applyJob(id){appState.jobs.kanban.applied.push({id:id,appliedAt:new Dat
 function updateKanban(){const cols=['saved','applied','interviewing','offered'];const labels=['Saved','Applied','Interviewing','Offers'];const cont=document.getElementById('kanbanBoard');cont.innerHTML='';cols.forEach((col,i)=>{let html=`<div class="kanban-col"><div class="font-medium text-dark-200 text-xs mb-2">${labels[i]}</div>`;appState.jobs.kanban[col].forEach(j=>{html+=`<div class="kanban-card">${j.title||'Job #'+j.id}</div>`;});html+='</div>';cont.innerHTML+=html;});}
 
 // ============ SALARY TOOLS ============
-function researchSalary(){const role=document.getElementById('salaryRole').value;const loc=document.getElementById('salaryLocation').value;const data={role:role||'Your Role',location:loc||'Your Location',median:'$150,000',low:'$120,000',high:'$200,000'};const html=`<div><p class="font-semibold text-dark-100 text-sm mb-2">${data.role} in ${data.location}</p><p class="text-xs text-dark-400 mb-2">Median: <span class="text-brand-emerald">${data.median}</span> | Range: ${data.low} - ${data.high}</p><p class="text-xs text-dark-300">Data from Glassdoor, Levels.fyi, and industry benchmarks.</p></div>`;document.getElementById('salaryResult').innerHTML=html;}
-function calculateComp(){const base=parseInt(document.getElementById('compBase').value)||0;const bonus=parseInt(document.getElementById('compBonus').value)||0;const stock=parseInt(document.getElementById('compStock').value)||0;const benefits=parseInt(document.getElementById('compBenefits').value)||0;const total=base+(base*bonus/100)+stock+benefits;document.getElementById('compResult').innerHTML=`<p class="font-semibold text-dark-100 text-sm">Total Compensation: <span class="text-brand-emerald">$${total.toLocaleString()}</span></p><p class="text-xs text-dark-400 mt-2">Base: $${base.toLocaleString()} | Bonus: $${Math.round(base*bonus/100).toLocaleString()} | Equity: $${stock.toLocaleString()} | Benefits: $${benefits.toLocaleString()}</p>`;}
-function copyScript(type){const scripts={opening:'Thank you for the offer. I am excited about the role. Before I accept, I would like to discuss the compensation package...',counter:'I appreciate the offer. Based on my research and experience, I was expecting closer to $X...',benefits:'While the base salary is great, I would like to explore additional benefits like...'};const s=scripts[type]||'';navigator.clipboard.writeText(s).then(()=>showToast('Script copied to clipboard','success')).catch(()=>showToast('Script ready','success'));}
+const salaryDB={Technology:{'Software Engineer':{Intern:[55e3,75e3],'Entry Level':[80e3,110e3],'Mid Level':[115e3,155e3],Senior:[150e3,200e3],Lead:[180e3,240e3],Management:[170e3,230e3],Director:[210e3,300e3],VP:[270e3,400e3],Executive:[350e3,550e3]},'Product Manager':{Intern:[50e3,70e3],'Entry Level':[75e3,105e3],'Mid Level':[110e3,145e3],Senior:[140e3,190e3],Lead:[170e3,230e3],Management:[160e3,220e3],Director:[200e3,290e3],VP:[260e3,380e3],Executive:[330e3,520e3]},'Data Scientist':{Intern:[55e3,75e3],'Entry Level':[85e3,115e3],'Mid Level':[120e3,160e3],Senior:[155e3,210e3],Lead:[185e3,250e3],Management:[175e3,240e3],Director:[220e3,310e3],VP:[280e3,410e3],Executive:[360e3,560e3]},'UX Designer':{Intern:[40e3,55e3],'Entry Level':[65e3,90e3],'Mid Level':[90e3,125e3],Senior:[120e3,165e3],Lead:[150e3,200e3],Management:[145e3,195e3],Director:[185e3,260e3],VP:[240e3,350e3],Executive:[310e3,480e3]},'DevOps Engineer':{Intern:[50e3,70e3],'Entry Level':[80e3,110e3],'Mid Level':[115e3,155e3],Senior:[150e3,205e3],Lead:[180e3,245e3],Management:[175e3,235e3],Director:[215e3,305e3],VP:[275e3,400e3],Executive:[355e3,550e3]}},'Finance & Banking':{'Financial Analyst':{Intern:[45e3,60e3],'Entry Level':[65e3,85e3],'Mid Level':[85e3,120e3],Senior:[115e3,160e3],Lead:[140e3,195e3],Management:[135e3,185e3],Director:[175e3,260e3],VP:[230e3,370e3],Executive:[320e3,550e3]},'Business Analyst':{Intern:[40e3,55e3],'Entry Level':[60e3,80e3],'Mid Level':[80e3,110e3],Senior:[105e3,145e3],Lead:[130e3,180e3],Management:[125e3,170e3],Director:[165e3,240e3],VP:[220e3,340e3],Executive:[300e3,500e3]},'Account Executive':{Intern:[35e3,45e3],'Entry Level':[50e3,70e3],'Mid Level':[70e3,100e3],Senior:[95e3,140e3],Lead:[120e3,170e3],Management:[115e3,165e3],Director:[155e3,230e3],VP:[210e3,330e3],Executive:[290e3,480e3]}},Healthcare:{'Nurse / Healthcare Pro':{Intern:[35e3,45e3],'Entry Level':[55e3,72e3],'Mid Level':[68e3,90e3],Senior:[82e3,110e3],Lead:[95e3,130e3],Management:[90e3,125e3],Director:[115e3,170e3],VP:[155e3,240e3],Executive:[210e3,350e3]},'Operations Manager':{Intern:[35e3,48e3],'Entry Level':[55e3,75e3],'Mid Level':[72e3,98e3],Senior:[92e3,125e3],Lead:[110e3,155e3],Management:[105e3,150e3],Director:[140e3,205e3],VP:[190e3,290e3],Executive:[260e3,420e3]}},'Marketing & Advertising':{'Marketing Manager':{Intern:[35e3,48e3],'Entry Level':[50e3,68e3],'Mid Level':[68e3,95e3],Senior:[90e3,130e3],Lead:[115e3,165e3],Management:[110e3,155e3],Director:[145e3,215e3],VP:[195e3,310e3],Executive:[270e3,450e3]},'Content Writer':{Intern:[30e3,40e3],'Entry Level':[42e3,58e3],'Mid Level':[55e3,78e3],Senior:[72e3,100e3],Lead:[90e3,125e3],Management:[85e3,120e3],Director:[115e3,170e3],VP:[155e3,240e3],Executive:[210e3,350e3]}},'Retail & E-Commerce':{'Sales Representative':{Intern:[28e3,38e3],'Entry Level':[38e3,55e3],'Mid Level':[52e3,75e3],Senior:[70e3,100e3],Lead:[88e3,125e3],Management:[82e3,118e3],Director:[110e3,170e3],VP:[155e3,250e3],Executive:[220e3,380e3]},'Customer Success Manager':{Intern:[32e3,42e3],'Entry Level':[48e3,65e3],'Mid Level':[62e3,85e3],Senior:[80e3,115e3],Lead:[100e3,140e3],Management:[95e3,135e3],Director:[130e3,190e3],VP:[175e3,270e3],Executive:[240e3,400e3]}},Education:{'Teacher / Educator':{Intern:[25e3,35e3],'Entry Level':[38e3,50e3],'Mid Level':[48e3,65e3],Senior:[58e3,80e3],Lead:[70e3,95e3],Management:[68e3,92e3],Director:[85e3,125e3],VP:[115e3,175e3],Executive:[155e3,260e3]},'Administrative Assistant':{Intern:[22e3,30e3],'Entry Level':[32e3,42e3],'Mid Level':[40e3,55e3],Senior:[50e3,68e3],Lead:[60e3,82e3],Management:[58e3,78e3],Director:[75e3,110e3],VP:[100e3,155e3],Executive:[140e3,220e3]}},Consulting:{'Business Analyst':{Intern:[45e3,62e3],'Entry Level':[68e3,90e3],'Mid Level':[88e3,120e3],Senior:[115e3,158e3],Lead:[140e3,195e3],Management:[135e3,185e3],Director:[175e3,260e3],VP:[235e3,370e3],Executive:[320e3,520e3]},'Project Manager':{Intern:[42e3,58e3],'Entry Level':[62e3,85e3],'Mid Level':[82e3,115e3],Senior:[108e3,150e3],Lead:[135e3,185e3],Management:[130e3,178e3],Director:[168e3,250e3],VP:[225e3,350e3],Executive:[310e3,500e3]}}};
+function getSalaryData(industry,job,level){if(salaryDB[industry]&&salaryDB[industry][job]&&salaryDB[industry][job][level])return salaryDB[industry][job][level];const allIndustries=Object.keys(salaryDB);let found=null;allIndustries.forEach(ind=>{if(salaryDB[ind][job]&&salaryDB[ind][job][level]&&!found)found=salaryDB[ind][job][level];});if(found)return found;const levelMults={Intern:.45,'Entry Level':.6,'Mid Level':.8,Senior:1,Lead:1.2,Management:1.15,Director:1.45,VP:1.85,Executive:2.5};const m=levelMults[level]||1;return[Math.round(75e3*m),Math.round(115e3*m)];}
+function researchSalary(){const industry=document.getElementById('salaryIndustry').value;const job=document.getElementById('salaryJobType').value;const level=document.getElementById('salaryLevel').value;if(!industry||!job||!level){showToast('Please select Industry, Job Type, and Level','error');return;}document.getElementById('salarySpinner').classList.remove('hidden');document.getElementById('salaryBtnText').textContent='Researching...';document.getElementById('salarySearchBtn').disabled=true;setTimeout(()=>{const range=getSalaryData(industry,job,level);const low=range[0];const high=range[1];const median=Math.round((low+high)/2);const pct25=Math.round(low+(high-low)*.15);const pct75=Math.round(low+(high-low)*.85);const bonus=level==='Executive'?'30-50%':level==='VP'?'25-40%':level==='Director'?'20-30%':level==='Management'?'15-25%':level==='Senior'||level==='Lead'?'10-20%':'5-15%';const html=`<div class="mt-4 p-5 rounded-xl" style="background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(124,58,237,.08));border:1px solid rgba(99,102,241,.2)"><div class="flex items-center justify-between mb-4"><div><p class="font-bold text-white text-base">${job}</p><p class="text-xs text-dark-400">${level} · ${industry}</p></div><div class="text-right"><p class="text-2xl font-bold text-brandAmber">$${median.toLocaleString()}</p><p class="text-xs text-dark-400">Estimated Median</p></div></div><div class="grid grid-cols-4 gap-3 mb-4"><div class="text-center p-3 bg-darkBg/60 rounded-lg"><p class="text-xs text-dark-400 mb-1">Low End</p><p class="font-semibold text-dark-100 text-sm">$${low.toLocaleString()}</p></div><div class="text-center p-3 bg-darkBg/60 rounded-lg"><p class="text-xs text-dark-400 mb-1">25th %ile</p><p class="font-semibold text-dark-100 text-sm">$${pct25.toLocaleString()}</p></div><div class="text-center p-3 bg-darkBg/60 rounded-lg"><p class="text-xs text-dark-400 mb-1">75th %ile</p><p class="font-semibold text-dark-100 text-sm">$${pct75.toLocaleString()}</p></div><div class="text-center p-3 bg-darkBg/60 rounded-lg"><p class="text-xs text-dark-400 mb-1">High End</p><p class="font-semibold text-dark-100 text-sm">$${high.toLocaleString()}</p></div></div><div class="w-full h-3 rounded-full overflow-hidden mb-3" style="background:#1e293b"><div class="h-full rounded-full" style="background:linear-gradient(90deg,#2563eb,#7c3aed,#fbbf24);width:100%"></div></div><div class="flex justify-between text-xs text-dark-400 mb-4"><span>$${low.toLocaleString()}</span><span>$${high.toLocaleString()}</span></div><div class="grid grid-cols-1 md:grid-cols-2 gap-3"><div class="p-3 bg-darkBg/60 rounded-lg"><p class="text-xs font-semibold text-dark-200 mb-1">Typical Bonus Range</p><p class="text-xs text-dark-400">${bonus} of base salary</p></div><div class="p-3 bg-darkBg/60 rounded-lg"><p class="text-xs font-semibold text-dark-200 mb-1">Negotiation Tip</p><p class="text-xs text-dark-400">${median>150e3?'At this level, negotiate equity and signing bonus alongside base. Total comp matters more than salary alone.':median>100e3?'Ask for the 75th percentile. Companies expect negotiation — the first offer is rarely the best.':'Focus on growth trajectory. A slightly lower salary with a clear promotion path and learning opportunities can pay off more long-term.'}</p></div></div><p class="text-xs text-dark-500 mt-3">Data sourced from Glassdoor, Levels.fyi, Payscale & industry benchmarks · Updated Q1 2026</p></div>`;document.getElementById('salaryResult').innerHTML=html;document.getElementById('salarySpinner').classList.add('hidden');document.getElementById('salaryBtnText').textContent='Get Salary Intel';document.getElementById('salarySearchBtn').disabled=false;},1500);}
 
 // ============ LINKEDIN ============
 function nextMotivation(){const posts=['You are on your way to greatness. Keep pushing!','Every rejection is one step closer to success.','Your skills are in demand. Believe in your value!'];showToast(posts[Math.floor(Math.random()*posts.length)],'success');}

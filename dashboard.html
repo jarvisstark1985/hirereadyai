@@ -939,15 +939,33 @@ function _getLeadIn(type){
     else pool=_interviewerLeadIns.next;
     return pool[Math.floor(Math.random()*pool.length)];
 }
-async function speakAsInterviewer(text,opts={}){
+let _puterReady=false;
+async function _ensurePuterAuth(){
+    if(_puterReady) return true;
     try{
-        // Stop any current audio
-        if(_currentAudio){try{_currentAudio.pause();_currentAudio.currentTime=0;}catch(e){}_currentAudio=null;}
-        const indicator=document.getElementById('speakerIndicator');
-        if(indicator) indicator.style.display='inline-flex';
-        const leadIn=opts.leadIn||'';
-        const fullText=leadIn?(leadIn+' ... '+text):text;
-        // Use OpenAI TTS via Puter.js - truly human-sounding voice
+        if(typeof puter!=='undefined'&&puter.auth){
+            const signedIn=puter.auth.isSignedIn();
+            if(!signedIn){
+                showToast('Enabling AI voice — sign in when prompted (free)','info');
+                await puter.auth.signIn();
+            }
+            _puterReady=true;
+            return true;
+        }
+    }catch(e){console.warn('Puter auth failed:',e);}
+    return false;
+}
+async function speakAsInterviewer(text,opts={}){
+    // Stop any current audio
+    if(_currentAudio){try{_currentAudio.pause();_currentAudio.currentTime=0;}catch(e){}_currentAudio=null;}
+    const indicator=document.getElementById('speakerIndicator');
+    const leadIn=opts.leadIn||'';
+    const fullText=leadIn?(leadIn+' ... '+text):text;
+    // Try OpenAI TTS via Puter.js first
+    try{
+        if(indicator){indicator.style.display='inline-flex';indicator.querySelector('span:last-child').textContent='Generating AI voice...';}
+        const authed=await _ensurePuterAuth();
+        if(!authed) throw new Error('Puter auth unavailable');
         const audio=await puter.ai.txt2speech(fullText,{
             provider:'openai',
             voice:'ash',
@@ -955,6 +973,7 @@ async function speakAsInterviewer(text,opts={}){
             instructions:'You are a professional hiring manager conducting a job interview. Speak in a calm, warm, confident tone with natural pacing. Pause briefly between sentences. Sound like a real person having a conversation, not like you are reading from a script.'
         });
         _currentAudio=audio;
+        if(indicator) indicator.querySelector('span:last-child').textContent='Interviewer Speaking...';
         audio.onended=()=>{
             if(indicator) indicator.style.display='none';
             _currentAudio=null;
@@ -963,15 +982,13 @@ async function speakAsInterviewer(text,opts={}){
         audio.onerror=()=>{
             if(indicator) indicator.style.display='none';
             _currentAudio=null;
-            // Fallback to browser TTS if OpenAI fails
             _fallbackSpeak(fullText,opts);
         };
         audio.play();
     }catch(e){
         console.warn('OpenAI TTS failed, falling back to browser voice:',e);
-        const indicator=document.getElementById('speakerIndicator');
         if(indicator) indicator.style.display='none';
-        _fallbackSpeak((opts.leadIn?(opts.leadIn+' ... '+text):text),opts);
+        _fallbackSpeak(fullText,opts);
     }
 }
 function _fallbackSpeak(text,opts={}){

@@ -1480,7 +1480,7 @@ function generateMoreCards(){showToast('Generated 5 more interview questions','s
 let jobSearchResults=[];let jobPage=0;let jobsCache=null;
 // API Config: Set endpoint to your Cloudflare Worker URL when deployed for live Indeed data
 // null = use cached real job data from Indeed; string = live API endpoint
-const JOB_API_CONFIG={endpoint:null,cacheUrl:'jobs-cache.json'};
+const JOB_API_CONFIG={endpoint:'https://rsh-jobs-api.jarvis-stark1985.workers.dev/',cacheUrl:'jobs-cache.json'};
 // Load saved location on init
 (function initJobLocation(){const loc=JSON.parse(localStorage.getItem('rsh_jobLocation')||'null');if(loc){document.getElementById('jobUserCity').value=loc.city||'';document.getElementById('jobUserZip').value=loc.zip||'';const badge=document.getElementById('savedLocationBadge');badge.classList.remove('hidden');document.getElementById('savedLocationText').textContent=loc.city+(loc.zip?' '+loc.zip:'');}const resume=JSON.parse(localStorage.getItem('rsh_resume')||'null');if(resume){document.getElementById('resumePreview').classList.remove('hidden');document.getElementById('resumeFileName').textContent=resume.name;document.getElementById('resumeUploadText').textContent='Resume uploaded: '+resume.name;}})();
 // Pre-load job cache

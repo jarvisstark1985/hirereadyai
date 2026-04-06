@@ -101,28 +101,10 @@
         .modal{background:#0f172a;border:1px solid rgba(51,65,85,.6);border-radius:1rem;padding:2rem;max-width:560px;width:90%;max-height:80vh;overflow-y:auto}
         .login-overlay{position:fixed;inset:0;background:#0f172a;z-index:200;display:flex;align-items:center;justify-content:center}
         .login-box{background:#1e293b;border:1px solid #334155;border-radius:1rem;padding:2.5rem;max-width:400px;width:90%}
-        .video-player-card{background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(124,58,237,.08));border:1px solid rgba(124,58,237,.2);border-radius:.75rem;overflow:hidden;transition:all .3s;cursor:pointer}
-        .video-player-card:hover{border-color:rgba(124,58,237,.4);box-shadow:0 0 25px rgba(124,58,237,.15);transform:translateY(-2px)}
-        .video-thumbnail{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#2563eb,#7c3aed);background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-        .video-thumbnail::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6) 0%,transparent 50%,rgba(0,0,0,.2) 100%)}
-        .video-play-btn{position:absolute;width:56px;height:56px;background:rgba(255,255,255,.95);border-radius:50%;display:flex;align-items:center;justify-content:center;z-index:10;transition:all .3s;box-shadow:0 4px 15px rgba(0,0,0,.3);color:#0f172a}
-        .video-player-card:hover .video-play-btn{transform:scale(1.1);background:#fff}
-        .video-title{padding:1rem;text-align:center}
-        .video-title-text{font-weight:600;font-size:.95rem;color:#e2e8f0;margin-bottom:.25rem}
-        .video-desc{font-size:.75rem;color:#94a3b8}
-        .video-badge{position:absolute;top:.75rem;right:.75rem;background:rgba(0,0,0,.6);color:#fff;padding:.25rem .5rem;border-radius:.25rem;font-size:.65rem;font-weight:600;z-index:5;backdrop-filter:blur(4px)}
         .hidden{display:none!important}
         .hero-banner{background:linear-gradient(135deg,#2563eb,#7c3aed,#a855f7);background-size:cover;background-position:center;position:relative;overflow:hidden;border-radius:.75rem;margin-bottom:2rem}
         .hero-banner::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6) 0%,transparent 40%,rgba(0,0,0,.3) 100%)}
         .hero-tagline{position:absolute;bottom:0;left:0;right:0;text-align:center;padding:1.5rem;color:#fff;font-weight:700;font-size:1.1rem;text-shadow:0 2px 10px rgba(0,0,0,.3);z-index:10}
-        .video-scroll-row{display:flex;gap:1rem;overflow-x:auto;padding:.75rem 0;scroll-behavior:smooth}
-        .video-scroll-row::-webkit-scrollbar{height:4px}
-        .video-scroll-row::-webkit-scrollbar-thumb{background:#334155;border-radius:2px}
-        .video-card-small{flex:0 0 calc(20% - .8rem);min-width:120px;border-radius:.5rem;overflow:hidden;aspect-ratio:4/5;background:linear-gradient(135deg,rgba(37,99,235,.1),rgba(124,58,237,.1));background-size:cover;background-position:center;border:1px solid rgba(124,58,237,.2);cursor:pointer;transition:all .3s}
-        .video-card-small:hover{transform:scale(1.05);border-color:rgba(124,58,237,.4)}
-        .video-card-small-content{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.75rem;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(0,0,0,.2) 40%,transparent 100%)}
-        .video-card-small-icon{margin-bottom:.5rem;color:#a5b4fc}
-        .video-card-small-title{font-size:.65rem;font-weight:600;color:#e2e8f0;line-height:1.2}
         #sidebarOverlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:40;display:none}
         #sidebarOverlay.active{display:block}
         @media(max-width:768px){
@@ -130,7 +112,6 @@
             .sidebar{position:fixed;left:0;top:0;transform:translateX(-100%);z-index:50}
             .sidebar.open{transform:translateX(0)}
             .mobile-toggle{display:flex!important}
-            .video-card-small{flex:0 0 calc(33.3% - .75rem)}
             .main-wrap{height:auto;overflow:visible}
             .main-wrap main{overflow:visible}
             .sections-scroll{overflow:visible!important}
@@ -188,7 +169,7 @@
             <div class="px-3 mb-1"><span class="text-[10px] font-semibold text-dark-500 uppercase tracking-wider px-2">MAIN</span></div>
             <div class="nav-btn active" data-section="dashboard" onclick="nav('dashboard')"><span class="icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-4 0a1 1 0 01-1-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 01-1 1h-2z"/></svg></span>Dashboard</div>
             <div class="nav-btn" data-section="resume" onclick="nav('resume')"><span class="icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg></span>SuperHero Resume Creator</div>
-            <div class="nav-btn" data-section="interview" onclick="nav('interview')"><span class="icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></span>Video Interview Coaching</div>
+            <div class="nav-btn" data-section="interview" onclick="nav('interview')"><span class="icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg></span>Interview Prep</div>
             <div class="px-3 mt-3 mb-1"><span class="text-[10px] font-semibold text-dark-500 uppercase tracking-wider px-2">TOOLS</span></div>
             <div class="nav-btn" data-section="jobs" onclick="nav('jobs')"><span class="icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg></span>Job Tracker & Auto-Apply</div>
             <div class="nav-btn" data-section="salary" onclick="nav('salary')"><span class="icon"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></span>Salary Intel</div>
@@ -237,13 +218,12 @@
                         <p class="text-dark-400 text-sm mt-1">Your AI-powered career command center</p>
                     </div>
 
-                    <!-- Welcome Video Hero -->
-                    <div class="hero-banner aspect-video flex items-center justify-center mb-6" style="cursor:pointer;position:relative;border-radius:.75rem;overflow:hidden">
-                        <video src="https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/99fef0dd-8213-431c-b8f0-7b5f183eb3d2-L60dra4va98LyR12DB8bKw-output.mp4?x-kcdn-pid=112372" muted autoplay loop playsinline style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"></video>
-                        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 50%,rgba(0,0,0,.3) 100%);z-index:1"></div>
-                        <div class="video-play-btn" style="z-index:2" onclick="playVideoModal('welcome-hero')"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                        <div class="video-badge" style="z-index:2">Welcome</div>
-                        <div class="hero-tagline" style="z-index:2">Every Hero Has an Origin Story. This is Yours.</div>
+                    <!-- Hero Banner -->
+                    <div class="hero-banner flex items-center justify-center mb-6" style="border-radius:.75rem;overflow:hidden;background:linear-gradient(135deg,#1e1b4b,#2563eb,#7c3aed);padding:3rem 2rem;text-align:center">
+                        <div>
+                            <h2 class="text-2xl sm:text-3xl font-bold text-white font-heading mb-2">Every Hero Has an Origin Story.</h2>
+                            <p class="text-slate-300 text-sm">This is yours. Build your resume, ace your interviews, land your dream job.</p>
+                        </div>
                     </div>
 
                     <!-- Stats -->
@@ -270,18 +250,6 @@
                         </div>
                     </div>
 
-                    <!-- Daily Motivation Video Strip -->
-                    <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-dark-100 font-heading mb-3 flex items-center gap-2"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg> Daily Motivation</h3>
-                        <div class="video-scroll-row" id="motivationScroll">
-                            <div class="video-card-small" onclick="playVideoModal('youve-got-this')"><div class="video-card-small-content"><div class="video-card-small-icon"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor"/></svg></div><div class="video-card-small-title">You've Got This</div></div></div>
-                            <div class="video-card-small" onclick="playVideoModal('level-up')"><div class="video-card-small-content"><div class="video-card-small-icon"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor"/></svg></div><div class="video-card-small-title">Level Up</div></div></div>
-                            <div class="video-card-small" onclick="playVideoModal('interview-champion')"><div class="video-card-small-content"><div class="video-card-small-icon"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor"/></svg></div><div class="video-card-small-title">Interview Champion</div></div></div>
-                            <div class="video-card-small" onclick="playVideoModal('resume-master')"><div class="video-card-small-content"><div class="video-card-small-icon"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor"/></svg></div><div class="video-card-small-title">Resume Master</div></div></div>
-                            <div class="video-card-small" onclick="playVideoModal('career-rocket')"><div class="video-card-small-content"><div class="video-card-small-icon"><svg width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M10 8l6 4-6 4V8z" fill="currentColor"/></svg></div><div class="video-card-small-title">Career Rocket</div></div></div>
-                        </div>
-                    </div>
-
                     <!-- Quick Actions -->
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <button onclick="nav('resume')" class="card p-6 text-left hover:border-brandBlue group cursor-pointer bg-transparent">
@@ -296,8 +264,8 @@
                         <button onclick="nav('interview')" class="card p-6 text-left hover:border-brandViolet group cursor-pointer bg-transparent">
                             <div class="flex items-start justify-between mb-2">
                                 <div>
-                                    <h3 class="font-semibold text-dark-100 mb-1 font-heading flex items-center gap-2"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg> Interview Coach</h3>
-                                    <p class="text-xs text-dark-400">Video-guided interview training</p>
+                                    <h3 class="font-semibold text-dark-100 mb-1 font-heading flex items-center gap-2"><svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg> Interview Prep</h3>
+                                    <p class="text-xs text-dark-400">Flashcards, quizzes & AI coaching</p>
                                 </div>
                                 <span class="text-dark-400 group-hover:translate-x-1 transition"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg></span>
                             </div>
@@ -640,7 +608,7 @@
                 <div id="sec-interview" class="section">
                     <div class="mb-6">
                         <h1 class="text-2xl font-bold text-white font-heading flex items-center gap-2"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg> SuperHero Interview Coaching</h1>
-                        <p class="text-dark-400 text-sm mt-1">Video-guided interview prep with 100-point scoring system</p>
+                        <p class="text-dark-400 text-sm mt-1">Flashcards, quizzes & AI-powered interview coaching</p>
                     </div>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
                         <div class="card p-4 text-center cursor-pointer border-2 border-brandBlue bg-brandBlue/10" onclick="selectInterviewType('behavioral')"><svg class="mx-auto mb-2" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg><div class="font-semibold text-sm text-dark-100">Behavioral</div></div>
@@ -655,12 +623,6 @@
                     </div>
                     <div class="card p-6 mb-6">
                         <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading flex items-center gap-2"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg> AI Interview Coach</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            <div class="video-player-card" data-video="interview-tutorial" onclick="playVideoModal('interview-tutorial')">
-                                <div class="video-thumbnail"><div class="video-play-btn"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-badge">Tutorial</div></div>
-                                <div class="video-title"><div class="video-title-text">Interview Tips & Tricks</div><div class="video-desc">8 min - All Levels</div></div>
-                            </div>
-                        </div>
                         <div class="bg-darkBg/50 p-4 rounded-lg mb-4">
                             <div class="flex items-center justify-between mb-2"><p class="text-dark-400 text-sm">Current Question:</p><p class="text-dark-500 text-xs" id="interviewTimer"></p></div>
                             <p class="text-dark-100 font-medium" id="currentQuestion">Tell me about yourself and your career goals.</p>
@@ -696,10 +658,79 @@
                             <div><div class="ai-msg mb-4"><p class="text-xs text-dark-300 leading-relaxed" id="scoreMessage">Complete interviews to see your detailed performance metrics and AI-generated improvement plan.</p></div></div>
                         </div>
                     </div>
+                    <div class="card p-6 mb-6">
+                        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading flex items-center gap-2"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Interview Flashcards</h3>
+                        <div class="mb-4">
+                            <div class="flex gap-2 mb-4 overflow-x-auto pb-2" id="categoryTabs">
+                                <button class="px-4 py-2 rounded-lg text-sm font-medium transition whitespace-nowrap" data-category="All" onclick="filterFlashcardCategory('All')" style="background:#7c3aed;color:#fff">Study All</button>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="text-sm text-dark-400" id="cardCounter">Card 1 of 1</span>
+                                <span class="text-sm text-dark-400" id="cardDifficulty"></span>
+                            </div>
+                            <div class="flash-card" onclick="toggleFlashcard()" id="flashcardDisplay">
+                                <div class="flash-card-inner">
+                                    <div class="flash-card-front">
+                                        <div class="flash-card-text" id="flashcardQuestion">Click to start studying flashcards</div>
+                                    </div>
+                                    <div class="flash-card-back">
+                                        <div class="flash-card-text" id="flashcardAnswer">Best answer will appear here</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 mb-4">
+                            <button class="btn-secondary flex-1" onclick="prevFlashcard()">← Previous</button>
+                            <button class="btn-secondary flex-1" onclick="nextFlashcard()">Next →</button>
+                        </div>
+                        <button class="w-full btn-primary" onclick="printFlashcards()">Print Flashcards (PDF)</button>
+                    </div>
+
                     <div class="card p-6">
-                        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading flex items-center gap-2"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Interview Questions Flash Cards</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4" id="flashCardsContainer"></div>
-                        <button class="btn-secondary" onclick="generateMoreCards()">+ Generate More Questions</button>
+                        <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading flex items-center gap-2"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M7 20H5a2 2 0 01-2-2V7a2 2 0 012-2h10a2 2 0 012 2v6"/></svg> Interview Quiz</h3>
+                        <div id="quizStartScreen" class="text-center">
+                            <p class="text-dark-400 mb-4">Challenge yourself with 15 questions. Questions are randomized and cover mix of easy & hard topics.</p>
+                            <div class="mb-4">
+                                <label class="block text-xs font-medium text-dark-400 mb-2">Select Category</label>
+                                <select class="input" id="quizCategory">
+                                    <option value="All">All Categories</option>
+                                    <option value="Entry Level / First Job">Entry Level / First Job</option>
+                                    <option value="Management / Leadership">Management / Leadership</option>
+                                    <option value="Executive / C-Suite">Executive / C-Suite</option>
+                                    <option value="Behavioral / STAR Method">Behavioral / STAR Method</option>
+                                    <option value="Technical / Problem-Solving">Technical / Problem-Solving</option>
+                                    <option value="Salary Negotiation">Salary Negotiation</option>
+                                </select>
+                            </div>
+                            <button class="btn-primary w-full" onclick="startQuiz()">Start Quiz</button>
+                        </div>
+                        <div id="quizScreen" class="hidden">
+                            <div class="mb-4">
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-sm font-semibold text-dark-400" id="quizProgress">Question 1 of 15</span>
+                                    <span class="text-sm text-dark-400" id="quizTimer">0s</span>
+                                </div>
+                                <div class="progress-track">
+                                    <div class="progress-fill" id="quizProgressBar" style="width:0%;background:#7c3aed"></div>
+                                </div>
+                            </div>
+                            <div class="mb-4">
+                                <p class="text-dark-100 font-medium mb-3" id="quizQuestion">Question text</p>
+                                <div class="space-y-2" id="quizChoices"></div>
+                            </div>
+                            <button class="btn-primary w-full" onclick="submitQuizAnswer()" id="quizSubmitBtn">Submit Answer</button>
+                        </div>
+                        <div id="quizResultsScreen" class="hidden text-center">
+                            <div class="mb-6">
+                                <div class="text-5xl font-bold text-white mb-2" id="finalScore">0/100</div>
+                                <div class="text-2xl font-semibold text-brandViolet mb-1" id="finalGrade">A</div>
+                                <p class="text-dark-400 mb-2" id="quizTimeDisplay">Time: 0s</p>
+                                <p class="text-sm text-dark-400" id="correctCount">Correct: 0 questions</p>
+                            </div>
+                            <button class="btn-primary w-full" onclick="retakeQuiz()">Retake Quiz</button>
+                        </div>
                     </div>
                 </div>
 
@@ -708,12 +739,6 @@
                     <div class="mb-6">
                         <h1 class="text-2xl font-bold text-white font-heading flex items-center gap-2"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg> Job Tracker & Auto-Apply</h1>
                         <p class="text-dark-400 text-sm mt-1">Find, track, and land your dream role with AI assistance</p>
-                    </div>
-                    <div class="mb-6">
-                        <div class="video-player-card" data-video="job-tracker-intro" onclick="playVideoModal('job-tracker-intro')">
-                            <div class="video-thumbnail"><div class="video-play-btn"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-badge">Tutorial</div></div>
-                            <div class="video-title"><div class="video-title-text">Job Hunting Like a Hero</div><div class="video-desc">5 min - Beginner</div></div>
-                        </div>
                     </div>
                     <div class="card p-6 mb-6">
                         <h3 class="text-sm font-semibold text-dark-200 mb-3 flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg> Job Search</h3>
@@ -735,12 +760,6 @@
                     <div class="mb-6">
                         <h1 class="text-2xl font-bold text-white font-heading flex items-center gap-2"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Salary Intel & Negotiation</h1>
                         <p class="text-dark-400 text-sm mt-1">Know your worth and negotiate with confidence</p>
-                    </div>
-                    <div class="mb-6">
-                        <div class="video-player-card" data-video="salary-intro" onclick="playVideoModal('salary-intro')">
-                            <div class="video-thumbnail"><div class="video-play-btn"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-badge">Tutorial</div></div>
-                            <div class="video-title"><div class="video-title-text">Negotiate Your Worth</div><div class="video-desc">7 min - Intermediate</div></div>
-                        </div>
                     </div>
                     <div class="card p-6 mb-6">
                         <h3 class="text-sm font-semibold text-dark-200 mb-3 flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg> Research Salary Data</h3>
@@ -777,12 +796,6 @@
                     <div class="mb-6">
                         <h1 class="text-2xl font-bold text-white font-heading flex items-center gap-2"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg> LinkedIn Pro Optimizer</h1>
                         <p class="text-dark-400 text-sm mt-1">Attract recruiters and land dream roles with a killer LinkedIn profile</p>
-                    </div>
-                    <div class="mb-6">
-                        <div class="video-player-card" data-video="linkedin-intro" onclick="playVideoModal('linkedin-intro')">
-                            <div class="video-thumbnail"><div class="video-play-btn"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-badge">Tutorial</div></div>
-                            <div class="video-title"><div class="video-title-text">LinkedIn Mastery</div><div class="video-desc">10 min - Intermediate</div></div>
-                        </div>
                     </div>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                         <button onclick="optimizeLinkedIn('headline')" class="card p-6 text-left hover:border-brandBlue group cursor-pointer bg-transparent">
@@ -821,23 +834,6 @@
                         </div>
                         <div id="roadmapResult" class="ai-msg text-sm"></div>
                     </div>
-                    <div class="mb-6">
-                        <h3 class="text-lg font-semibold text-dark-100 font-heading mb-3 flex items-center gap-2"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"/></svg> Market Insights</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div class="video-player-card" data-video="market-trends" onclick="playVideoModal('market-trends')">
-                                <div class="video-thumbnail"><div class="video-play-btn"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-badge">Trends</div></div>
-                                <div class="video-title"><div class="video-title-text">2026 Job Market Trends</div><div class="video-desc">6 min</div></div>
-                            </div>
-                            <div class="video-player-card" data-video="ai-jobs" onclick="playVideoModal('ai-jobs')">
-                                <div class="video-thumbnail"><div class="video-play-btn"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-badge">Growth</div></div>
-                                <div class="video-title"><div class="video-title-text">AI Jobs Exploding</div><div class="video-desc">5 min</div></div>
-                            </div>
-                            <div class="video-player-card" data-video="salary-tips" onclick="playVideoModal('salary-tips')">
-                                <div class="video-thumbnail"><div class="video-play-btn"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div><div class="video-badge">Skills</div></div>
-                                <div class="video-title"><div class="video-title-text">Salary Negotiation Tips</div><div class="video-desc">4 min</div></div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="card p-6">
                         <h3 class="text-sm font-semibold text-dark-200 mb-3 flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg> Build Your Reference Network</h3>
                         <button class="btn-secondary btn-sm mb-4" onclick="showAddReference()">+ Add Reference Contact</button>
@@ -866,20 +862,6 @@
             </div>
         </div>
     </main>
-</div>
-
-<!-- Video Player Modal -->
-<div class="modal-overlay hidden" id="videoModal" onclick="if(event.target===this)closeVideoModal()">
-    <div class="modal">
-        <div class="flex items-center justify-between mb-4">
-            <h3 class="text-lg font-semibold text-dark-100 font-heading" id="videoModalTitle">Video</h3>
-            <button onclick="closeVideoModal()" class="text-dark-400 hover:text-dark-100 cursor-pointer bg-transparent border-none"><svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12"/></svg></button>
-        </div>
-        <div id="videoPreview" class="aspect-video rounded-lg flex items-center justify-center mb-4" style="background:linear-gradient(135deg,#2563eb,#7c3aed);background-size:cover;background-position:center">
-            <div style="background:rgba(0,0,0,.5);padding:10px 20px;border-radius:8px;backdrop-filter:blur(4px);color:#fff;font-weight:600;font-size:.9rem">Video Coming Soon</div>
-        </div>
-        <p class="text-sm text-dark-400" id="videoModalDesc">Video coming soon</p>
-    </div>
 </div>
 
 <script>
@@ -1114,13 +1096,165 @@ function aiEnhanceResume(){
 }
 function downloadPDF(){const el=document.getElementById('resumePreview');if(!el||!el.innerHTML){showToast('Generate a resume first','error');return;}const el2=document.createElement('div');el2.innerHTML=el.innerHTML;el2.style.background='#fff';html2pdf().set({margin:0,filename:'resume-superhero-'+rbSelectedTheme+'.pdf',image:{type:'jpeg',quality:.98},html2canvas:{scale:2,useCORS:true},jsPDF:{orientation:'portrait',unit:'mm',format:'a4'}}).from(el2).save();showToast('PDF downloading...','success');}
 
+// ============ INTERVIEW QUESTION BANK ============
+const interviewQBank=[{"category":"Entry Level / First Job","difficulty":"easy","question":"Tell me about yourself.","correctAnswer":"I'm a recent graduate with a degree in [Your Major] from [University]. During my studies, I completed [number] internships where I gained hands-on experience in [relevant skills]. I'm excited to bring my analytical abilities, work ethic, and eagerness to learn to this role and contribute to your team.","wrongAnswers":["I'm 22 years old and I like playing video games and going out with friends.","I just need a job so I can pay my student loans.","I studied [major] but honestly it wasn't my passion, I'm just here for the paycheck."]},{"category":"Entry Level / First Job","difficulty":"easy","question":"What do you know about our company?","correctAnswer":"I researched your company and was impressed by your mission to [company mission]. I noticed you recently [recent achievement/news], which aligns with my interest in [relevant field]. Your company's commitment to innovation and team development particularly appeals to me.","wrongAnswers":["Honestly, I don't know much about your company, I just saw the job posting.","You're the company that sells stuff, right?","I know you're competing with [Competitor], but I don't really follow your industry."]},{"category":"Entry Level / First Job","difficulty":"easy","question":"Why do you want this job?","correctAnswer":"This position aligns perfectly with my career goals in [field]. The job description shows you need skills in [specific skills] which I developed through my internship at [company] and coursework in [relevant course]. I'm excited about the opportunity to grow with your team and contribute meaningfully from day one.","wrongAnswers":["I need a job and this was the first one I saw on Indeed.","The salary is decent and it's close to my apartment.","I don't really know, but you guys seemed to like my resume."]},{"category":"Entry Level / First Job","difficulty":"easy","question":"What are your greatest strengths?","correctAnswer":"I'm a quick learner who thrives in collaborative environments. During my internship at [Company], I quickly mastered [software/tool] and contributed to a project that increased efficiency by 15%. I'm also detail-oriented and take initiative to solve problems without constant supervision.","wrongAnswers":["I'm really smart and I work harder than everyone else.","I'm good at everything, honestly.","I'm a perfectionist and I can be stubborn if I think I'm right."]},{"category":"Entry Level / First Job","difficulty":"easy","question":"What are your weaknesses?","correctAnswer":"Early in my career, I sometimes spent too much time perfecting details rather than meeting deadlines. However, I recognized this pattern and have worked on prioritizing tasks more effectively. Now I use project management tools like Asana to keep myself on track and balance quality with timeliness.","wrongAnswers":["I don't really have any weaknesses.","I'm too much of a perfectionist and I work too hard.","I'm bad at math and I procrastinate a lot."]},{"category":"Management / Leadership","difficulty":"easy","question":"What is your leadership philosophy?","correctAnswer":"I believe great leaders empower their teams by setting clear expectations, providing constructive feedback, and removing obstacles. I focus on developing people's strengths rather than fixing weaknesses. In my current role managing 8 people, I've implemented monthly one-on-ones and a mentoring program that's resulted in three promotions within my team.","wrongAnswers":["I lead by making sure everyone follows my rules and does exactly what I say.","People should just figure out what they need to do.","I'm more of a friend to my team than a boss."]},{"category":"Behavioral / STAR Method","difficulty":"easy","question":"Tell me about a time you worked successfully on a team to achieve a goal.","correctAnswer":"I worked with sales, marketing, and product teams to launch a new service line. I led cross-functional meetings weekly, ensured clear communication of goals, and removed obstacles. My role was coordinating timelines and aligning priorities. The launch exceeded targets by 20% and strengthened relationships between departments that continue collaborating effectively.","wrongAnswers":["We had a team project but I mostly did my own thing.","Everyone on my team was incompetent so I had to carry them.","I don't remember any significant team achievements."]},{"category":"Technical / Problem-Solving","difficulty":"easy","question":"Walk me through your approach to solving a complex problem.","correctAnswer":"I start by breaking the problem into smaller components and identifying root causes rather than symptoms. I gather data, consider multiple hypotheses, test assumptions, and document findings. For example, when troubleshooting slow database performance, I checked query logs, analyzed execution plans, and found unindexed columns causing 80% of the delay. Focused solution then became obvious.","wrongAnswers":["I just try random solutions until one works.","I ask someone else to solve it for me.","I guess at the root cause and implement a fix quickly."]},{"category":"Salary Negotiation","difficulty":"easy","question":"What are your salary expectations for this role?","correctAnswer":"Based on market research for this role in this region, my experience level, and the value I bring, I'm targeting a range of $X to $Y. I'm open to discussing how this aligns with your budget and what the total compensation package includes beyond base salary.","wrongAnswers":["I have no idea, what are you offering?","I'll take whatever you're willing to pay.","I need way more than market rate."]},{"category":"Entry Level / First Job","difficulty":"medium","question":"Tell me about a time you worked on a team project. What was your role?","correctAnswer":"During my capstone project, I worked with four other students to develop a marketing campaign for a nonprofit. I took ownership of social media strategy, created a content calendar, and coordinated with team members. Our strategy resulted in a 40% increase in follower engagement and the organization adopted our recommendations.","wrongAnswers":["I mostly just showed up to meetings and did whatever my team lead told me to do.","I did all the work because my teammates weren't very good.","We didn't really define roles, we just kind of figured it out as we went."]},{"category":"Management / Leadership","difficulty":"medium","question":"Tell me about a time you had to give negative feedback to an employee.","correctAnswer":"A strong performer was becoming defensive in team meetings, dismissing others' ideas. I scheduled a private conversation, used specific examples, and explained how it impacted team dynamics. I asked for their perspective and we brainstormed solutions together. Their openness and my constructive approach led to better collaboration and they were promoted within a year.","wrongAnswers":["I don't usually give negative feedback, I just let problems work themselves out.","I called them out in front of the team so everyone would see they were wrong.","I told them they needed to change or they'd be fired."]},{"category":"Behavioral / STAR Method","difficulty":"medium","question":"Describe a situation where you had to handle a difficult or upset customer.","correctAnswer":"A customer was frustrated because their project had multiple delays. I listened without interrupting, acknowledged their frustration was valid, explained what caused delays, and outlined a concrete recovery plan with daily updates. I also offered a 15% discount on future work. Within weeks, they were our most engaged customer and referred new business.","wrongAnswers":["I got defensive and blamed them for not being clear in requirements.","I avoided the difficult customer and hoped they'd go away.","I just gave them a refund without understanding the real issue."]},{"category":"Technical / Problem-Solving","difficulty":"medium","question":"Tell me about a time you had to troubleshoot a technical issue under time pressure.","correctAnswer":"A production system was down affecting customers. I prioritized identifying the issue over implementing a fix. I checked recent changes, monitored system logs, found a bad deployment, and rolled back within 20 minutes. I then investigated what caused the deployment to succeed through testing without catching the error. This led to improved testing procedures.","wrongAnswers":["I made a quick fix without understanding the root cause.","I panicked and made the situation worse.","I waited for someone more senior to make a decision."]},{"category":"Executive / C-Suite","difficulty":"easy","question":"Tell me about your strategic vision for this role.","correctAnswer":"For this VP role, I envision transforming our [department/function] from a cost center to a strategic revenue driver by implementing AI automation, increasing market share by 25% within 18 months, and building a high-performance culture. I'd focus on talent acquisition, process innovation, and establishing key partnerships to accelerate growth while maintaining operational excellence.","wrongAnswers":["I'll just continue doing what the previous person did.","I don't really have a vision, I'll see what needs fixing when I get there.","My vision is to increase profit margins at any cost."]},{"category":"Behavioral / STAR Method","difficulty":"hard","question":"Tell me about a time you had to learn a complex skill quickly.","correctAnswer":"A promotion required proficiency in Python coding. I'd never coded before. I took an online course, practiced daily coding challenges, and built a small internal tool. Within 3 months, I was writing production code. My willingness to invest in learning demonstrated capability and gained credibility with the technical team.","wrongAnswers":["I've never had to learn a completely new skill.","I took a course but never really applied it.","I asked someone else to do it rather than learning myself."]},{"category":"Technical / Problem-Solving","difficulty":"hard","question":"Describe a situation where you had to make trade-offs between different solutions.","correctAnswer":"We needed to choose between building custom software or buying a SaaS solution. I evaluated cost, timeline, control, and maintenance burden. The SaaS solution cost more initially but got us to market 6 months faster with lower long-term overhead. I presented the analysis and the team chose the SaaS option, which proved correct.","wrongAnswers":["I chose the cheapest option without considering other factors.","I built custom when a solution already existed.","I let others decide without analyzing trade-offs."]},{"category":"Management / Leadership","difficulty":"hard","question":"How do you balance being a supportive leader with holding people accountable?","correctAnswer":"Support and accountability are complementary, not opposing forces. I'm transparent about expectations and deadlines, provide resources and coaching proactively, and hold people responsible for results. When someone misses a deadline, I first ask what obstacles they faced and how I can help. I've found this approach increases both accountability and team trust.","wrongAnswers":["Either you're supportive and let people slide, or you're tough and hold them accountable.","I focus on accountability because being supportive makes people weak.","I'm too supportive and I let people get away with missing targets."]},{"category":"Salary Negotiation","difficulty":"medium","question":"An offer is made at $80K but you were expecting $95K. How do you respond?","correctAnswer":"I'd thank them, say I'm excited about the role, and ask if there's flexibility on the offer. I'd explain my market research showing the range, reference my specific value contributions, and ask if $95K is possible or what the maximum flexibility is. I'd be open to discussing other benefits if base salary is fixed.","wrongAnswers":["I'd immediately accept because I'm afraid to negotiate.","I'd reject it outright without discussion.","I'd accept but resent the company for underpaying me."]},{"category":"Entry Level / First Job","difficulty":"hard","question":"Where do you see yourself in five years?","correctAnswer":"In five years, I see myself as a skilled [specific role] with deep expertise in [relevant area]. I want to have taken on increasingly complex projects, perhaps led a small initiative, and become someone junior employees can learn from. I'm committed to continuous learning and advancing within [company type/industry].","wrongAnswers":["I have no idea, I just want to get through the first few months.","Hopefully in a much better job making a lot more money.","I want your job eventually."]},{"category":"Behavioral / STAR Method","difficulty":"hard","question":"Tell me about a time you had to balance competing priorities with limited resources.","correctAnswer":"Three urgent projects landed simultaneously with a team of 5. I mapped dependencies, identified which project had the highest impact, sequence-loaded the others, and negotiated timelines with stakeholders. I reallocated resources strategically and all projects delivered successfully, though slightly staggered. Stakeholders appreciated the transparency.","wrongAnswers":["I tried to do everything at once and quality suffered.","I focused on my preferred project and ignored the others.","I asked leadership to make the decision instead of deciding myself."]}];
+
+// ============ FLASHCARD & QUIZ STATE ============
+let currentFlashcardCategory='All';let currentFlashcardIndex=0;let allFlashcards=[];let quizState={inProgress:false,category:'All',questions:[],currentIndex:0,selectedAnswers:[],startTime:0,correctCount:0};
+
+function initFlashCards(){
+    const categoryTabs=document.getElementById('categoryTabs');
+    if(!categoryTabs)return;
+    const categories=new Set(['All']);
+    interviewQBank.forEach(q=>categories.add(q.category));
+    categoryTabs.innerHTML='';
+    categories.forEach(cat=>{
+        const btn=document.createElement('button');
+        btn.className='px-4 py-2 rounded-lg text-sm font-medium transition whitespace-nowrap';
+        btn.setAttribute('data-category',cat);
+        btn.textContent=cat;
+        btn.onclick=()=>filterFlashcardCategory(cat);
+        if(cat==='All')btn.style.cssText='background:#7c3aed;color:#fff';
+        else btn.style.cssText='background:rgba(124,58,237,.1);color:#94a3b8;border:1px solid rgba(124,58,237,.2)';
+        categoryTabs.appendChild(btn);
+    });
+    filterFlashcardCategory('All');
+}
+
+function filterFlashcardCategory(category){
+    currentFlashcardCategory=category;
+    currentFlashcardIndex=0;
+    if(category==='All'){
+        allFlashcards=interviewQBank;
+    } else {
+        allFlashcards=interviewQBank.filter(q=>q.category===category);
+    }
+    document.querySelectorAll('[data-category]').forEach(btn=>{
+        btn.style.cssText=btn.getAttribute('data-category')===category?'background:#7c3aed;color:#fff':'background:rgba(124,58,237,.1);color:#94a3b8;border:1px solid rgba(124,58,237,.2)';
+    });
+    displayFlashcard();
+}
+
+function displayFlashcard(){
+    if(allFlashcards.length===0){showToast('No questions in this category','info');return;}
+    const q=allFlashcards[currentFlashcardIndex];
+    document.getElementById('flashcardQuestion').textContent=q.question;
+    document.getElementById('flashcardAnswer').textContent=q.correctAnswer;
+    document.getElementById('cardCounter').textContent=`Card ${currentFlashcardIndex+1} of ${allFlashcards.length}`;
+    document.getElementById('cardDifficulty').textContent=`Difficulty: ${q.difficulty.charAt(0).toUpperCase()+q.difficulty.slice(1)}`;
+    document.getElementById('flashcardDisplay').querySelector('.flash-card-inner').classList.remove('flipped');
+}
+
+function toggleFlashcard(){
+    const inner=document.getElementById('flashcardDisplay').querySelector('.flash-card-inner');
+    inner.classList.toggle('flipped');
+}
+
+function prevFlashcard(){
+    if(currentFlashcardIndex>0){currentFlashcardIndex--;displayFlashcard();}else{showToast('Already at first card','info');}
+}
+
+function nextFlashcard(){
+    if(currentFlashcardIndex<allFlashcards.length-1){currentFlashcardIndex++;displayFlashcard();}else{showToast('Already at last card','info');}
+}
+
+function printFlashcards(){
+    let htmlContent='<html><head><style>body{font-family:Arial,sans-serif;margin:0;padding:10px}.page-break{page-break-after:always;margin-bottom:20px}.card{display:inline-block;width:calc(50% - 10px);margin:5px;padding:15px;border:1px solid #ccc;box-sizing:border-box;min-height:150px;break-inside:avoid}.card-q{font-weight:bold;margin-bottom:10px;color:#333}.card-a{color:#555;font-size:12px;line-height:1.4}</style></head><body>';
+    const printCards=allFlashcards.slice(0,20);
+    printCards.forEach((card,idx)=>{
+        if(idx%2===0&&idx>0)htmlContent+='<div class="page-break"></div>';
+        htmlContent+=`<div class="card"><div class="card-q">Q: ${card.question}</div><div class="card-a">A: ${card.correctAnswer}</div></div>`;
+    });
+    htmlContent+='</body></html>';
+    const win=window.open('','','width=800,height=600');
+    win.document.write(htmlContent);
+    win.document.close();
+    win.print();
+}
+
+function startQuiz(){
+    const category=document.getElementById('quizCategory').value;
+    let quizQuestions=category==='All'?interviewQBank:interviewQBank.filter(q=>q.category===category);
+    quizQuestions=quizQuestions.sort(()=>Math.random()-0.5).slice(0,15);
+    quizState.inProgress=true;
+    quizState.category=category;
+    quizState.questions=quizQuestions;
+    quizState.currentIndex=0;
+    quizState.selectedAnswers=[];
+    quizState.startTime=Date.now();
+    quizState.correctCount=0;
+    document.getElementById('quizStartScreen').classList.add('hidden');
+    document.getElementById('quizScreen').classList.remove('hidden');
+    displayQuizQuestion();
+    startQuizTimer();
+}
+
+function displayQuizQuestion(){
+    if(quizState.currentIndex>=quizState.questions.length){endQuiz();return;}
+    const q=quizState.questions[quizState.currentIndex];
+    document.getElementById('quizQuestion').textContent=q.question;
+    document.getElementById('quizProgress').textContent=`Question ${quizState.currentIndex+1} of 15`;
+    document.getElementById('quizProgressBar').style.width=((quizState.currentIndex/15)*100)+'%';
+    const choices=[q.correctAnswer,...q.wrongAnswers].sort(()=>Math.random()-0.5);
+    let html='';
+    choices.forEach((choice,idx)=>{
+        html+=`<label style="display:flex;align-items:center;padding:12px;border:1px solid rgba(51,65,85,.6);border-radius:6px;cursor:pointer;transition:all .2s" onmouseover="this.style.borderColor='rgba(124,58,237,.4)'" onmouseout="this.style.borderColor='rgba(51,65,85,.6)'"><input type="radio" name="quizAnswer" value="${idx}" style="margin-right:10px"><span class="text-sm text-dark-100">${choice}</span></label>`;
+    });
+    document.getElementById('quizChoices').innerHTML=html;
+    document.getElementById('quizSubmitBtn').textContent='Submit Answer';
+}
+
+function submitQuizAnswer(){
+    const selected=document.querySelector('input[name="quizAnswer"]:checked');
+    if(!selected){showToast('Please select an answer','error');return;}
+    const selectedIdx=parseInt(selected.value);
+    const q=quizState.questions[quizState.currentIndex];
+    const selectedText=document.querySelectorAll('input[name="quizAnswer"]').parentElement;
+    const isCorrect=selectedIdx===0;
+    if(isCorrect){quizState.correctCount++;}
+    quizState.selectedAnswers.push({question:q.question,selected:isCorrect,correct:q.correctAnswer});
+    quizState.currentIndex++;
+    if(quizState.currentIndex<quizState.questions.length){
+        displayQuizQuestion();
+    } else {
+        endQuiz();
+    }
+}
+
+function endQuiz(){
+    const elapsed=Math.floor((Date.now()-quizState.startTime)/1000);
+    const score=Math.round((quizState.correctCount/15)*100);
+    let grade='F';
+    if(score>=90)grade='A';else if(score>=80)grade='B';else if(score>=70)grade='C';else if(score>=60)grade='D';
+    document.getElementById('finalScore').textContent=`${score}/100`;
+    document.getElementById('finalGrade').textContent=grade;
+    document.getElementById('quizTimeDisplay').textContent=`Time: ${elapsed}s`;
+    document.getElementById('correctCount').textContent=`Correct: ${quizState.correctCount} of 15 questions`;
+    document.getElementById('quizScreen').classList.add('hidden');
+    document.getElementById('quizResultsScreen').classList.remove('hidden');
+    localStorage.setItem('bestQuizScore',Math.max(score,parseInt(localStorage.getItem('bestQuizScore')||'0')));
+}
+
+function retakeQuiz(){
+    document.getElementById('quizResultsScreen').classList.add('hidden');
+    document.getElementById('quizStartScreen').classList.remove('hidden');
+    quizState.inProgress=false;
+}
+
+function startQuizTimer(){
+    setInterval(()=>{
+        if(!quizState.inProgress)return;
+        const elapsed=Math.floor((Date.now()-quizState.startTime)/1000);
+        document.getElementById('quizTimer').textContent=elapsed+'s';
+    },1000);
+}
+
 // ============ INTERVIEW COACHING ============
 function selectInterviewType(type){interviewType=type;document.querySelectorAll('[onclick*="selectInterviewType"]').forEach(e=>{e.classList.remove('border-brandBlue','bg-brandBlue/10');e.classList.add('border-dark-600');});event.currentTarget.classList.remove('border-dark-600');event.currentTarget.classList.add('border-brandBlue','bg-brandBlue/10');const qs=questionBanks[type]||[];if(qs.length>0){currentQIdx=0;document.getElementById('currentQuestion').textContent=qs[0].q;}}
 function submitInterviewAnswer(){const ans=document.getElementById('userResponse').value.trim();if(!ans){showToast('Please type an answer','error');return;}interviewResponses.push(ans);const fb=['Great response! Strong structure and specific examples.','Excellent answer. Consider adding metrics to strengthen your points.','Good answer. Work on being more concise while keeping key details.'];document.getElementById('aiFeedback').textContent=fb[Math.floor(Math.random()*fb.length)];updateInterviewScore(60+Math.floor(Math.random()*30),75,70,65);}
 function nextQuestion(){const qs=questionBanks[interviewType];currentQIdx++;if(currentQIdx<qs.length){document.getElementById('currentQuestion').textContent=qs[currentQIdx].q;document.getElementById('userResponse').value='';document.getElementById('aiFeedback').textContent='Type your answer when ready...';}else{finishInterview();}}
 function finishInterview(){const base=60+Math.floor(Math.random()*25);const content=Math.round(base*0.4);const delivery=Math.round(base*0.35);const structure=Math.round(base*0.25);updateInterviewScore(Math.round(base),content,delivery,structure);showToast('Interview completed! Check your score.','success');}
 function updateInterviewScore(total,content,delivery,structure){document.getElementById('overallScore').textContent=total;const pct=(total/100)*346;document.getElementById('scoreCirclePath').setAttribute('stroke-dasharray',pct+' 346');document.getElementById('scoreContent').style.width=Math.min(100,content*1.3)+'%';document.getElementById('scoreDelivery').style.width=Math.min(100,delivery*1.4)+'%';document.getElementById('scoreStructure').style.width=Math.min(100,structure*1.5)+'%';let msg='';if(total>=85)msg='Exceptional! You are interview-ready. Great answers with strong examples and clear structure.';else if(total>=70)msg='Good foundation. Practice adding more specific metrics and examples to your answers.';else msg='Keep practicing! Focus on STAR method and specific achievements.';document.getElementById('scoreMessage').textContent=msg;}
-function initFlashCards(){const qs=questionBanks[interviewType];const cont=document.getElementById('flashCardsContainer');cont.innerHTML='';qs.forEach((qa,i)=>{const id='fc-'+i;cont.innerHTML+=`<div class="flash-card" id="${id}" onclick="flipCard('${id}-inner')"><div class="flash-card-inner" id="${id}-inner"><div class="flash-card-front"><div class="flash-card-text">${qa.q}</div></div><div class="flash-card-back"><div class="flash-card-text">${qa.a}</div></div></div></div>`;});}
 function flipCard(id){const el=document.getElementById(id);if(el)el.classList.toggle('flipped');}
 function generateMoreCards(){showToast('Generated 5 more interview questions','success');}
 
@@ -1146,88 +1280,11 @@ function showAddReference(){showToast('Add reference contact details','info');}
 function addReference(){showToast('Reference added successfully','success');}
 function sendReferenceOutreach(name){showToast(`Outreach message sent to ${name}`,'success');}
 
-// ============ VIDEO THUMBNAILS ============
-const klingBase='https://s15-kling.klingai.com/kimg/';
-const videoThumbs={
-    'welcome-hero':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJNWE1NzlkYjAtNDUzNi00ZTM3LTk0NzctZDYxOTQyYjkyNWMxLW9XckxvRUVnN2ZMZEFTVGZWQXZDb0Etb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
-    'resume-tutorial':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJMDdhNzQwN2QtZGE4Mi00OTRlLTk2MGMtOWI4MmYxMjlhMWUwLXJ2bHFtTmNodmYxT1FrUUd4NGlkNEEtb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
-    'interview-tutorial':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJNTQ3NmYwMTctYzUwZi00MjcxLWJkYWEtNzZiMjdiZjBkMjBjLUxxTDZCVjhldHZzcW01cGV4QVpHN2ctb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
-    'job-tracker-intro':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJMGRlMmY5ZmEtZTU0Ni00OGI1LTk5ZTUtODg2OTBiNjNmNmZiLXRxWGF3SE1VZXBCZjZ6R3cyZjgwQkEtb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
-    'salary-intro':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJOTY5YmEyYjAtZDc1YS00MzhmLWFkOGMtYTcxNGQxM2U2ZjJhLWJWVGxjNEhZVnVRUzRmQ2Z4dFc4V1Etb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
-    'linkedin-intro':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJNmUzNDhhMDgtYzk4OS00MmJjLTgwM2UtMGNiOTJlODQxZTExLVBHTGNvYVJPN3dCbkFJT0xWNzZzQ2ctb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
-    'market-trends':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJNjA5NmQwMGUtY2EyZi00MjkwLWE3NjctNjY1MTdjYzU4ZTk0LVI3czlGbG4tM1N3bFFQbVpGU2ZNQXctb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
-    'ai-jobs':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJMWVmMWRkN2UtZDE4OC00NGJmLTg5ODgtMjU2MGRjYzViN2M2LXNZZ0I0S3BuNGxqQ1Y3MUFob21TMUEtb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
-    'salary-tips':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJNTllNjNkNWQtY2U1Yy00NjFhLTlhYzUtMWFjNzg0YjBiM2ViLWFISzY2QXRraUZodjhCODRqUE1wZGctb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
-    'youve-got-this':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJM2MxODZmM2EtM2E1Ny00NWY1LWE0ZjYtZmE3NWNjN2UzZmMyLXhIdWlkN3MzeFJMOEFDSlVwTDJ4TEEtb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
-    'level-up':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJMmI3NzdiNmEtMWM0My00OWNjLWE1YzUtMzkzNjhmYTJjN2EzLVNMT1VFNU9xaWozSzFvN1NycVliS0Etb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
-    'interview-champion':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJYTAzNTBlN2YtMDdmNy00ZTgyLWEyYmEtYWNlOTg4NWUzZDFkLUZyVTh0eVpSY0hSZHBTbWhJRzM1a1Etb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
-    'resume-master':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJMDI4YWI2NzMtNjViYS00YWFkLWEyNmItNzQ3ZDBjYTkyZmNkLXhUSGhYanYzOWQ4TDBwdnBIU2hTT1Etb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
-    'career-rocket':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJMWQyOTk0ZmYtNjJkZi00YjVlLTk4ZmUtMjlkMzQzMjllY2Y2LTFQbHRsZ3hUMkdSX3NXcXZYV2QwdVEtb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372'
-};
-function applyVideoThumbs(){Object.keys(videoThumbs).forEach(id=>{const els=document.querySelectorAll(`[onclick*="${id}"]`);els.forEach(el=>{el.style.backgroundImage=`url('${videoThumbs[id]}')`;});const thumbs=document.querySelectorAll(`[data-video="${id}"] .video-thumbnail`);thumbs.forEach(el=>{el.style.backgroundImage=`url('${videoThumbs[id]}')`;});});const hero=document.querySelector('.hero-banner');if(hero&&videoThumbs['welcome-hero']){hero.style.backgroundImage=`url('${videoThumbs['welcome-hero']}')`;}}
-
-// ============ VIDEO PLAYER ============
-const videoSources={
-    'welcome-hero':'https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/99fef0dd-8213-431c-b8f0-7b5f183eb3d2-L60dra4va98LyR12DB8bKw-output.mp4?x-kcdn-pid=112372',
-    'resume-tutorial':'https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/e509e592-aa40-41dc-93f6-2712bbcd30c8-_vdm8jYQMGM9EriOmSyOrQ-output.mp4?x-kcdn-pid=112372',
-    'youve-got-this':'https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/d8eca0a9-0ec7-4d84-8c45-e8ecd44a3eeb-rLDHrAYBaAHMXYhh_LCbwg-output.mp4?x-kcdn-pid=112372',
-    'level-up':'https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/9827ca6a-cd01-45a3-8070-ac927752e9a9-cR8mVJ1-UXZf6zGw2f80BA-output.mp4?x-kcdn-pid=112372',
-    'resume-master':'https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/ebc29e8a-b0d3-4995-a88f-6ea1b86e0f2d-KEoSESs7ObKMCd7Gt1ichA-output.mp4?x-kcdn-pid=112372',
-    'career-rocket':'https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/d8eca0a9-0ec7-4d84-8c45-e8ecd44a3eeb-rLDHrAYBaAHMXYhh_LCbwg-output.mp4?x-kcdn-pid=112372',
-    'interview-champion':'https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/99fef0dd-8213-431c-b8f0-7b5f183eb3d2-L60dra4va98LyR12DB8bKw-output.mp4?x-kcdn-pid=112372'
-};
-function playVideoModal(videoId){
-    const modal=document.getElementById('videoModal');
-    const titleEl=document.getElementById('videoModalTitle');
-    const descEl=document.getElementById('videoModalDesc');
-    const previewEl=document.getElementById('videoPreview');
-    const videos={
-        'welcome-hero':{title:'Welcome to Your Journey',desc:'Your career coach is here to guide you every step of the way.'},
-        'resume-tutorial':{title:'Build Your SuperHero Resume',desc:'Watch how AI transforms your resume into a powerful career tool.'},
-        'interview-tutorial':{title:'Interview Tips & Tricks',desc:'Master behavioral and technical interviews'},
-        'job-tracker-intro':{title:'Job Hunting Like a Hero',desc:'Find and track your dream job'},
-        'salary-intro':{title:'Negotiate Your Worth',desc:'Salary research and negotiation tactics'},
-        'linkedin-intro':{title:'LinkedIn Mastery',desc:'Attract recruiters and opportunities'},
-        'market-trends':{title:'2026 Job Market Trends',desc:'What is hot in the job market'},
-        'ai-jobs':{title:'AI Jobs Exploding',desc:'Hottest career paths in AI and tech'},
-        'salary-tips':{title:'Salary Negotiation Tips',desc:'Pro tactics for negotiating better offers'},
-        'youve-got-this':{title:'You Have Got This',desc:'A confident professional walking purposefully. Your career starts with confidence.'},
-        'level-up':{title:'Level Up',desc:'A diverse team celebrating success together. You are next.'},
-        'interview-champion':{title:'Interview Champion',desc:'Your coach is ready to help you ace every interview.'},
-        'resume-master':{title:'Resume Master',desc:'Transform your resume with AI-powered insights.'},
-        'career-rocket':{title:'Career Rocket',desc:'Launch your career with confidence and purpose.'}
-    };
-    const v=videos[videoId]||{title:'Video',desc:'Coming soon'};
-    titleEl.textContent=v.title;
-    descEl.textContent=v.desc;
-    const vidSrc=videoSources[videoId];
-    if(vidSrc){
-        previewEl.style.backgroundImage='';
-        previewEl.innerHTML='<video src="'+vidSrc+'" controls autoplay playsinline style="width:100%;height:100%;object-fit:contain;border-radius:8px"></video>';
-    } else {
-        const thumb=videoThumbs[videoId];
-        if(thumb){
-            previewEl.style.backgroundImage=`url('${thumb}')`;
-            previewEl.innerHTML='<div style="background:rgba(0,0,0,.5);padding:10px 20px;border-radius:8px;backdrop-filter:blur(4px);color:#fff;font-weight:600;font-size:.9rem">Video Coming Soon</div>';
-        } else {
-            previewEl.style.backgroundImage='';
-            previewEl.innerHTML='<div style="color:#fff;font-weight:600">Video Coming Soon</div>';
-        }
-    }
-    modal.classList.remove('hidden');
-}
-function closeVideoModal(){
-    const previewEl=document.getElementById('videoPreview');
-    const vid=previewEl.querySelector('video');
-    if(vid){vid.pause();vid.src='';}
-    document.getElementById('videoModal').classList.add('hidden');
-}
-
 // ============ SETTINGS ============
 function saveSettings(){appState.user.name=document.getElementById('settingsName').value;appState.user.email=document.getElementById('settingsEmail').value;appState.user.jobTitle=document.getElementById('settingsJobTitle').value;appState.user.industry=document.getElementById('settingsIndustry').value;saveDB();updateSidebar();showToast('Settings saved','success');}
 
 // ============ INITIALIZATION ============
-window.addEventListener('DOMContentLoaded',function(){checkLogin();applyVideoThumbs();});
+window.addEventListener('DOMContentLoaded',function(){checkLogin();});
 </script>
 </body>
 </html>

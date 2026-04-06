@@ -82,8 +82,8 @@
         /* Video player styles */
         .video-player-card{background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(139,92,246,.1));border:1px solid rgba(99,102,241,.2);border-radius:.75rem;overflow:hidden;transition:all .3s;cursor:pointer}
         .video-player-card:hover{border-color:rgba(99,102,241,.4);box-shadow:0 0 25px rgba(99,102,241,.15);transform:translateY(-2px)}
-        .video-thumbnail{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#3b82f6,#8b5cf6);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
-        .video-thumbnail::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,.3),rgba(139,92,246,.3));animation:heroGlow 3s ease-in-out infinite}
+        .video-thumbnail{width:100%;aspect-ratio:16/9;background:linear-gradient(135deg,#3b82f6,#8b5cf6);background-size:cover;background-position:center;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+        .video-thumbnail::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6) 0%,transparent 50%,rgba(0,0,0,.2) 100%)}
         @keyframes heroGlow{0%,100%{opacity:.5}50%{opacity:1}}
         .video-play-btn{position:absolute;width:60px;height:60px;background:rgba(255,255,255,.95);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.5rem;z-index:10;transition:all .3s;box-shadow:0 4px 15px rgba(0,0,0,.3)}
         .video-player-card:hover .video-play-btn{transform:scale(1.1);background:#fff}
@@ -93,16 +93,16 @@
         .video-desc{font-size:.75rem;color:#94a3b8}
         .video-badge{position:absolute;top:.75rem;right:.75rem;background:rgba(0,0,0,.6);color:#fff;padding:.25rem .5rem;border-radius:.25rem;font-size:.65rem;font-weight:600;z-index:5;backdrop-filter:blur(4px)}
         .hidden{display:none!important}
-        .hero-banner{background:linear-gradient(135deg,#3b82f6,#8b5cf6,#a855f7);position:relative;overflow:hidden;border-radius:.75rem;margin-bottom:2rem}
-        .hero-banner::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(139,92,246,.05));animation:gradientShift 6s ease-in-out infinite}
+        .hero-banner{background:linear-gradient(135deg,#3b82f6,#8b5cf6,#a855f7);background-size:cover;background-position:center;position:relative;overflow:hidden;border-radius:.75rem;margin-bottom:2rem}
+        .hero-banner::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.6) 0%,transparent 40%,rgba(0,0,0,.3) 100%)}
         @keyframes gradientShift{0%,100%{opacity:.3}50%{opacity:.7}}
         .hero-tagline{position:absolute;bottom:0;left:0;right:0;text-align:center;padding:1.5rem;color:#fff;font-weight:700;font-size:1.1rem;text-shadow:0 2px 10px rgba(0,0,0,.3);z-index:10}
         .video-scroll-row{display:flex;gap:1rem;overflow-x:auto;padding:.75rem 0;scroll-behavior:smooth}
         .video-scroll-row::-webkit-scrollbar{height:4px}
         .video-scroll-row::-webkit-scrollbar-thumb{background:#334155;border-radius:2px}
-        .video-card-small{flex:0 0 calc(20% - .8rem);min-width:120px;border-radius:.5rem;overflow:hidden;aspect-ratio:4/5;background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(139,92,246,.1));border:1px solid rgba(99,102,241,.2);cursor:pointer;transition:all .3s}
+        .video-card-small{flex:0 0 calc(20% - .8rem);min-width:120px;border-radius:.5rem;overflow:hidden;aspect-ratio:4/5;background:linear-gradient(135deg,rgba(59,130,246,.1),rgba(139,92,246,.1));background-size:cover;background-position:center;border:1px solid rgba(99,102,241,.2);cursor:pointer;transition:all .3s}
         .video-card-small:hover{transform:scale(1.05);border-color:rgba(99,102,241,.4)}
-        .video-card-small-content{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.75rem}
+        .video-card-small-content{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:.75rem;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,rgba(0,0,0,.2) 40%,transparent 100%)}
         .video-card-small-emoji{font-size:2rem;margin-bottom:.5rem}
         .video-card-small-title{font-size:.65rem;font-weight:600;color:#e2e8f0;line-height:1.2}
         @media(max-width:768px){
@@ -305,7 +305,7 @@
 
                     <!-- Tutorial Video -->
                     <div class="mb-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="video-player-card" onclick="playVideoModal('resume-tutorial')">
+                        <div class="video-player-card" data-video="resume-tutorial" onclick="playVideoModal('resume-tutorial')">
                             <div class="video-thumbnail">
                                 <div class="video-play-btn">▶</div>
                                 <div class="video-emoji">📹</div>
@@ -422,7 +422,7 @@
                     <div class="card p-6 mb-6">
                         <h3 class="text-lg font-semibold text-dark-100 mb-4 font-heading">🎥 AI Interview Coach</h3>
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                            <div class="video-player-card" onclick="playVideoModal('interview-tutorial')">
+                            <div class="video-player-card" data-video="interview-tutorial" onclick="playVideoModal('interview-tutorial')">
                                 <div class="video-thumbnail">
                                     <div class="video-play-btn">▶</div>
                                     <div class="video-emoji">📚</div>
@@ -507,7 +507,7 @@
 
                     <!-- Tutorial Video -->
                     <div class="mb-6">
-                        <div class="video-player-card" onclick="playVideoModal('job-tracker-intro')">
+                        <div class="video-player-card" data-video="job-tracker-intro" onclick="playVideoModal('job-tracker-intro')">
                             <div class="video-thumbnail">
                                 <div class="video-play-btn">▶</div>
                                 <div class="video-emoji">🔍</div>
@@ -547,7 +547,7 @@
 
                     <!-- Tutorial Video -->
                     <div class="mb-6">
-                        <div class="video-player-card" onclick="playVideoModal('salary-intro')">
+                        <div class="video-player-card" data-video="salary-intro" onclick="playVideoModal('salary-intro')">
                             <div class="video-thumbnail">
                                 <div class="video-play-btn">▶</div>
                                 <div class="video-emoji">💰</div>
@@ -613,7 +613,7 @@
 
                     <!-- Tutorial Video -->
                     <div class="mb-6">
-                        <div class="video-player-card" onclick="playVideoModal('linkedin-intro')">
+                        <div class="video-player-card" data-video="linkedin-intro" onclick="playVideoModal('linkedin-intro')">
                             <div class="video-thumbnail">
                                 <div class="video-play-btn">▶</div>
                                 <div class="video-emoji">💼</div>
@@ -673,7 +673,7 @@
                     <div class="mb-6">
                         <h3 class="text-lg font-semibold text-dark-100 font-heading mb-3">📈 Market Insights</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div class="video-player-card" onclick="playVideoModal('market-trends')">
+                            <div class="video-player-card" data-video="market-trends" onclick="playVideoModal('market-trends')">
                                 <div class="video-thumbnail">
                                     <div class="video-play-btn">▶</div>
                                     <div class="video-emoji">📊</div>
@@ -684,7 +684,7 @@
                                     <div class="video-desc">6 min</div>
                                 </div>
                             </div>
-                            <div class="video-player-card" onclick="playVideoModal('ai-jobs')">
+                            <div class="video-player-card" data-video="ai-jobs" onclick="playVideoModal('ai-jobs')">
                                 <div class="video-thumbnail">
                                     <div class="video-play-btn">▶</div>
                                     <div class="video-emoji">🤖</div>
@@ -695,7 +695,7 @@
                                     <div class="video-desc">5 min</div>
                                 </div>
                             </div>
-                            <div class="video-player-card" onclick="playVideoModal('salary-tips')">
+                            <div class="video-player-card" data-video="salary-tips" onclick="playVideoModal('salary-tips')">
                                 <div class="video-thumbnail">
                                     <div class="video-play-btn">▶</div>
                                     <div class="video-emoji">💰</div>
@@ -847,6 +847,26 @@ function showAddReference(){showToast('Add reference contact details','info');}
 function addReference(){showToast('Reference added successfully','success');}
 function sendReferenceOutreach(name){showToast(`Outreach message sent to ${name}`,'success');}
 
+// ============ VIDEO THUMBNAILS ============
+const klingBase='https://s15-kling.klingai.com/kimg/';
+const videoThumbs={
+    'welcome-hero':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJNWE1NzlkYjAtNDUzNi00ZTM3LTk0NzctZDYxOTQyYjkyNWMxLW9XckxvRUVnN2ZMZEFTVGZWQXZDb0Etb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
+    'resume-tutorial':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJMDdhNzQwN2QtZGE4Mi00OTRlLTk2MGMtOWI4MmYxMjlhMWUwLXJ2bHFtTmNodmYxT1FrUUd4NGlkNEEtb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
+    'interview-tutorial':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJNTQ3NmYwMTctYzUwZi00MjcxLWJkYWEtNzZiMjdiZjBkMjBjLUxxTDZCVjhldHZzcW01cGV4QVpHN2ctb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
+    'job-tracker-intro':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJMGRlMmY5ZmEtZTU0Ni00OGI1LTk5ZTUtODg2OTBiNjNmNmZiLXRxWGF3SE1VZXBCZjZ6R3cyZjgwQkEtb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
+    'salary-intro':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJOTY5YmEyYjAtZDc1YS00MzhmLWFkOGMtYTcxNGQxM2U2ZjJhLWJWVGxjNEhZVnVRUzRmQ2Z4dFc4V1Etb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
+    'linkedin-intro':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJNmUzNDhhMDgtYzk4OS00MmJjLTgwM2UtMGNiOTJlODQxZTExLVBHTGNvYVJPN3dCbkFJT0xWNzZzQ2ctb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
+    'market-trends':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJNjA5NmQwMGUtY2EyZi00MjkwLWE3NjctNjY1MTdjYzU4ZTk0LVI3czlGbG4tM1N3bFFQbVpGU2ZNQXctb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
+    'ai-jobs':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJMWVmMWRkN2UtZDE4OC00NGJmLTg5ODgtMjU2MGRjYzViN2M2LXNZZ0I0S3BuNGxqQ1Y3MUFob21TMUEtb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
+    'salary-tips':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJNTllNjNkNWQtY2U1Yy00NjFhLTlhYzUtMWFjNzg0YjBiM2ViLWFISzY2QXRraUZodjhCODRqUE1wZGctb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
+    'youve-got-this':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJM2MxODZmM2EtM2E1Ny00NWY1LWE0ZjYtZmE3NWNjN2UzZmMyLXhIdWlkN3MzeFJMOEFDSlVwTDJ4TEEtb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
+    'level-up':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJMmI3NzdiNmEtMWM0My00OWNjLWE1YzUtMzkzNjhmYTJjN2EzLVNMT1VFNU9xaWozSzFvN1NycVliS0Etb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
+    'interview-champion':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJYTAzNTBlN2YtMDdmNy00ZTgyLWEyYmEtYWNlOTg4NWUzZDFkLUZyVTh0eVpSY0hSZHBTbWhJRzM1a1Etb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
+    'resume-master':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJMDI4YWI2NzMtNjViYS00YWFkLWEyNmItNzQ3ZDBjYTkyZmNkLXhUSGhYanYzOWQ4TDBwdnBIU2hTT1Etb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372',
+    'career-rocket':klingBase+'EMXN1y8qYwoGdXBsb2FkEg55bGFiLXN0dW50LXNncBpJMWQyOTk0ZmYtNjJkZi00YjVlLTk4ZmUtMjlkMzQzMjllY2Y2LTFQbHRsZ3hUMkdSX3NXcXZYV2QwdVEtb3V0cHV0X2ZmLmpwZw.origin?x-kcdn-pid=112372'
+};
+function applyVideoThumbs(){Object.keys(videoThumbs).forEach(id=>{const els=document.querySelectorAll(`[onclick*="${id}"]`);els.forEach(el=>{el.style.backgroundImage=`url('${videoThumbs[id]}')`;});const thumbs=document.querySelectorAll(`[data-video="${id}"] .video-thumbnail`);thumbs.forEach(el=>{el.style.backgroundImage=`url('${videoThumbs[id]}')`;});});const hero=document.querySelector('.hero-banner');if(hero&&videoThumbs['welcome-hero']){hero.style.backgroundImage=`url('${videoThumbs['welcome-hero']}')`;}}
+
 // ============ VIDEO PLAYER ============
 function playVideoModal(videoId){const modal=document.getElementById('videoModal');const player=document.getElementById('videoPlayer');const source=document.getElementById('videoSource');const title=document.getElementById('videoModalTitle');const desc=document.getElementById('videoModalDesc');const videos={
     'welcome-hero':{title:'Welcome to Your Journey',desc:'Superhero origin story welcome video'},
@@ -863,14 +883,14 @@ function playVideoModal(videoId){const modal=document.getElementById('videoModal
     'interview-champion':{title:'Interview Champion',desc:'Master the interview'},
     'resume-master':{title:'Resume Master',desc:'Craft the perfect resume'},
     'career-rocket':{title:'Career Rocket',desc:'Launch your career'}
-};const v=videos[videoId]||{title:'Video',desc:'Coming soon'};title.textContent=v.title;desc.textContent=v.desc;source.src=`videos/${videoId}.mp4`;player.style.display='none';const placeholder=document.createElement('div');placeholder.style.cssText='width:100%;height:100%;background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:.5rem;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600';placeholder.textContent='Video Coming Soon';player.parentElement.innerHTML='';player.parentElement.appendChild(placeholder);modal.classList.remove('hidden');}
+};const v=videos[videoId]||{title:'Video',desc:'Coming soon'};title.textContent=v.title;desc.textContent=v.desc;const thumb=videoThumbs[videoId];source.src=`videos/${videoId}.mp4`;player.style.display='none';const placeholder=document.createElement('div');placeholder.style.cssText='width:100%;height:100%;background:linear-gradient(135deg,#3b82f6,#8b5cf6);border-radius:.5rem;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:600;background-size:cover;background-position:center;flex-direction:column;gap:8px';if(thumb){placeholder.style.backgroundImage=`url('${thumb}')`;placeholder.innerHTML='<div style="background:rgba(0,0,0,.5);padding:8px 16px;border-radius:8px;backdrop-filter:blur(4px)">Video Preview</div>';}else{placeholder.textContent='Video Coming Soon';}player.parentElement.innerHTML='';player.parentElement.appendChild(placeholder);modal.classList.remove('hidden');}
 function closeVideoModal(){document.getElementById('videoModal').classList.add('hidden');}
 
 // ============ SETTINGS ============
 function saveSettings(){appState.user.name=document.getElementById('settingsName').value;appState.user.email=document.getElementById('settingsEmail').value;appState.user.jobTitle=document.getElementById('settingsJobTitle').value;appState.user.industry=document.getElementById('settingsIndustry').value;saveDB();updateSidebar();showToast('Settings saved','success');}
 
 // ============ INITIALIZATION ============
-window.addEventListener('DOMContentLoaded',function(){checkLogin();});
+window.addEventListener('DOMContentLoaded',function(){checkLogin();applyVideoThumbs();});
 </script>
 </body>
 </html>

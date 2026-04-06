@@ -238,12 +238,12 @@
                     </div>
 
                     <!-- Welcome Video Hero -->
-                    <div class="hero-banner aspect-video flex items-center justify-center mb-6" onclick="playVideoModal('welcome-hero')" style="cursor:pointer">
-                        <div class="video-thumbnail aspect-video w-full">
-                            <div class="video-play-btn"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
-                            <div class="video-badge">Welcome Hero</div>
-                        </div>
-                        <div class="hero-tagline">Every Hero Has an Origin Story. This is Yours.</div>
+                    <div class="hero-banner aspect-video flex items-center justify-center mb-6" style="cursor:pointer;position:relative;border-radius:.75rem;overflow:hidden">
+                        <video src="https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/99fef0dd-8213-431c-b8f0-7b5f183eb3d2-L60dra4va98LyR12DB8bKw-output.mp4?x-kcdn-pid=112372" muted autoplay loop playsinline style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0"></video>
+                        <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.7) 0%,transparent 50%,rgba(0,0,0,.3) 100%);z-index:1"></div>
+                        <div class="video-play-btn" style="z-index:2" onclick="playVideoModal('welcome-hero')"><svg width="24" height="24" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg></div>
+                        <div class="video-badge" style="z-index:2">Welcome</div>
+                        <div class="hero-tagline" style="z-index:2">Every Hero Has an Origin Story. This is Yours.</div>
                     </div>
 
                     <!-- Stats -->
@@ -1117,14 +1117,23 @@ const videoThumbs={
 function applyVideoThumbs(){Object.keys(videoThumbs).forEach(id=>{const els=document.querySelectorAll(`[onclick*="${id}"]`);els.forEach(el=>{el.style.backgroundImage=`url('${videoThumbs[id]}')`;});const thumbs=document.querySelectorAll(`[data-video="${id}"] .video-thumbnail`);thumbs.forEach(el=>{el.style.backgroundImage=`url('${videoThumbs[id]}')`;});});const hero=document.querySelector('.hero-banner');if(hero&&videoThumbs['welcome-hero']){hero.style.backgroundImage=`url('${videoThumbs['welcome-hero']}')`;}}
 
 // ============ VIDEO PLAYER ============
+const videoSources={
+    'welcome-hero':'https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/99fef0dd-8213-431c-b8f0-7b5f183eb3d2-L60dra4va98LyR12DB8bKw-output.mp4?x-kcdn-pid=112372',
+    'resume-tutorial':'https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/e509e592-aa40-41dc-93f6-2712bbcd30c8-_vdm8jYQMGM9EriOmSyOrQ-output.mp4?x-kcdn-pid=112372',
+    'youve-got-this':'https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/d8eca0a9-0ec7-4d84-8c45-e8ecd44a3eeb-rLDHrAYBaAHMXYhh_LCbwg-output.mp4?x-kcdn-pid=112372',
+    'level-up':'https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/9827ca6a-cd01-45a3-8070-ac927752e9a9-cR8mVJ1-UXZf6zGw2f80BA-output.mp4?x-kcdn-pid=112372',
+    'resume-master':'https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/ebc29e8a-b0d3-4995-a88f-6ea1b86e0f2d-KEoSESs7ObKMCd7Gt1ichA-output.mp4?x-kcdn-pid=112372',
+    'career-rocket':'https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/d8eca0a9-0ec7-4d84-8c45-e8ecd44a3eeb-rLDHrAYBaAHMXYhh_LCbwg-output.mp4?x-kcdn-pid=112372',
+    'interview-champion':'https://v15-kling.klingai.com/bs2/upload-ylab-stunt-sgp/99fef0dd-8213-431c-b8f0-7b5f183eb3d2-L60dra4va98LyR12DB8bKw-output.mp4?x-kcdn-pid=112372'
+};
 function playVideoModal(videoId){
     const modal=document.getElementById('videoModal');
     const titleEl=document.getElementById('videoModalTitle');
     const descEl=document.getElementById('videoModalDesc');
     const previewEl=document.getElementById('videoPreview');
     const videos={
-        'welcome-hero':{title:'Welcome to Your Journey',desc:'Superhero origin story welcome video'},
-        'resume-tutorial':{title:'Build Your SuperHero Resume',desc:'Learn the essentials of resume building'},
+        'welcome-hero':{title:'Welcome to Your Journey',desc:'Your career coach is here to guide you every step of the way.'},
+        'resume-tutorial':{title:'Build Your SuperHero Resume',desc:'Watch how AI transforms your resume into a powerful career tool.'},
         'interview-tutorial':{title:'Interview Tips & Tricks',desc:'Master behavioral and technical interviews'},
         'job-tracker-intro':{title:'Job Hunting Like a Hero',desc:'Find and track your dream job'},
         'salary-intro':{title:'Negotiate Your Worth',desc:'Salary research and negotiation tactics'},
@@ -1132,26 +1141,37 @@ function playVideoModal(videoId){
         'market-trends':{title:'2026 Job Market Trends',desc:'What is hot in the job market'},
         'ai-jobs':{title:'AI Jobs Exploding',desc:'Hottest career paths in AI and tech'},
         'salary-tips':{title:'Salary Negotiation Tips',desc:'Pro tactics for negotiating better offers'},
-        'youve-got-this':{title:'You Have Got This',desc:'Daily motivation'},
-        'level-up':{title:'Level Up',desc:'Push yourself further'},
-        'interview-champion':{title:'Interview Champion',desc:'Master the interview'},
-        'resume-master':{title:'Resume Master',desc:'Craft the perfect resume'},
-        'career-rocket':{title:'Career Rocket',desc:'Launch your career'}
+        'youve-got-this':{title:'You Have Got This',desc:'A confident professional walking purposefully. Your career starts with confidence.'},
+        'level-up':{title:'Level Up',desc:'A diverse team celebrating success together. You are next.'},
+        'interview-champion':{title:'Interview Champion',desc:'Your coach is ready to help you ace every interview.'},
+        'resume-master':{title:'Resume Master',desc:'Transform your resume with AI-powered insights.'},
+        'career-rocket':{title:'Career Rocket',desc:'Launch your career with confidence and purpose.'}
     };
     const v=videos[videoId]||{title:'Video',desc:'Coming soon'};
     titleEl.textContent=v.title;
     descEl.textContent=v.desc;
-    const thumb=videoThumbs[videoId];
-    if(thumb){
-        previewEl.style.backgroundImage=`url('${thumb}')`;
-        previewEl.innerHTML='<div style="background:rgba(0,0,0,.5);padding:10px 20px;border-radius:8px;backdrop-filter:blur(4px);color:#fff;font-weight:600;font-size:.9rem">Video Coming Soon</div>';
-    } else {
+    const vidSrc=videoSources[videoId];
+    if(vidSrc){
         previewEl.style.backgroundImage='';
-        previewEl.innerHTML='<div style="color:#fff;font-weight:600">Video Coming Soon</div>';
+        previewEl.innerHTML='<video src="'+vidSrc+'" controls autoplay playsinline style="width:100%;height:100%;object-fit:contain;border-radius:8px"></video>';
+    } else {
+        const thumb=videoThumbs[videoId];
+        if(thumb){
+            previewEl.style.backgroundImage=`url('${thumb}')`;
+            previewEl.innerHTML='<div style="background:rgba(0,0,0,.5);padding:10px 20px;border-radius:8px;backdrop-filter:blur(4px);color:#fff;font-weight:600;font-size:.9rem">Video Coming Soon</div>';
+        } else {
+            previewEl.style.backgroundImage='';
+            previewEl.innerHTML='<div style="color:#fff;font-weight:600">Video Coming Soon</div>';
+        }
     }
     modal.classList.remove('hidden');
 }
-function closeVideoModal(){document.getElementById('videoModal').classList.add('hidden');}
+function closeVideoModal(){
+    const previewEl=document.getElementById('videoPreview');
+    const vid=previewEl.querySelector('video');
+    if(vid){vid.pause();vid.src='';}
+    document.getElementById('videoModal').classList.add('hidden');
+}
 
 // ============ SETTINGS ============
 function saveSettings(){appState.user.name=document.getElementById('settingsName').value;appState.user.email=document.getElementById('settingsEmail').value;appState.user.jobTitle=document.getElementById('settingsJobTitle').value;appState.user.industry=document.getElementById('settingsIndustry').value;saveDB();updateSidebar();showToast('Settings saved','success');}

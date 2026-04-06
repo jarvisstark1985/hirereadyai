@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <script src="https://js.puter.com/v2/"></script>
     <script>
         tailwind.config = {
             theme: {
@@ -891,7 +892,9 @@ function startVoiceInterview(){
 }
 function stopRecording(){
     isRecording=false;
-    try{speechSynthesis.cancel();}catch(e){} // stop interviewer voice if speaking
+    // Stop AI voice if speaking
+    if(_currentAudio){try{_currentAudio.pause();_currentAudio.currentTime=0;}catch(e){}_currentAudio=null;}
+    try{speechSynthesis.cancel();}catch(e){}
     try{if(window._recognition)window._recognition.stop();}catch(e){}
     const indicator=document.getElementById('speakerIndicator');if(indicator)indicator.style.display='none';
     const resp=document.getElementById('userResponse').textContent;
@@ -921,77 +924,13 @@ function nextQuestion(){
         }});
     } else { finishInterview(); }
 }
-// === HUMAN-SOUNDING INTERVIEWER VOICE ENGINE ===
-let _interviewerVoice=null;
-let _voicesLoaded=false;
+// === HUMAN-SOUNDING AI INTERVIEWER VOICE ENGINE (OpenAI TTS via Puter.js) ===
+let _currentAudio=null;
 const _interviewerLeadIns={
     first:["Welcome. Let's get started with your first question.","Thanks for joining today. Let's jump right in.","Great to meet you. Let's begin the interview.","Alright, let's kick things off."],
     next:["Great. Moving on to the next question.","Okay, let's continue.","Good. Here's the next one for you.","Alright, next question.","Let's keep going.","Nice. Here's what I'd like to ask next.","Okay, moving along."],
     last:["Alright, last question for you.","Okay, we're on the final question now.","One more question to wrap things up."]
 };
-function _pickBestVoice(){
-    const voices=speechSynthesis.getVoices();
-    if(!voices.length) return null;
-    // Priority order: prefer natural/premium English voices
-    const prefs=[
-        v=>/natural/i.test(v.name)&&/en[-_]/i.test(v.lang),
-        v=>/premium/i.test(v.name)&&/en[-_]/i.test(v.lang),
-        v=>/enhanced/i.test(v.name)&&/en[-_]/i.test(v.lang),
-        v=>/google\s+us\s+english/i.test(v.name),
-        v=>/google\s+uk\s+english/i.test(v.name),
-        v=>/samantha/i.test(v.name),
-        v=>/daniel/i.test(v.name),
-        v=>/karen/i.test(v.name),
-        v=>/moira/i.test(v.name),
-        v=>/alex/i.test(v.name),
-        v=>/aaron/i.test(v.name),
-        v=>/zira/i.test(v.name),
-        v=>/david/i.test(v.name),
-        v=>/mark/i.test(v.name),
-        v=>/en[-_]us/i.test(v.lang),
-        v=>/en[-_]gb/i.test(v.lang),
-        v=>/en/i.test(v.lang)
-    ];
-    for(const pref of prefs){const m=voices.find(pref);if(m) return m;}
-    return voices[0];
-}
-function _initVoices(){
-    _interviewerVoice=_pickBestVoice();
-    _voicesLoaded=!!_interviewerVoice;
-}
-// Voices load async in most browsers
-if(speechSynthesis.getVoices().length) _initVoices();
-speechSynthesis.onvoiceschanged=_initVoices;
-
-function speakAsInterviewer(text,opts={}){
-    try{
-        speechSynthesis.cancel(); // stop any current speech
-        if(!_voicesLoaded) _initVoices();
-        const leadIn=opts.leadIn||'';
-        const fullText=leadIn?(leadIn+' ... '+text):text;
-        const u=new SpeechSynthesisUtterance(fullText);
-        if(_interviewerVoice) u.voice=_interviewerVoice;
-        u.rate=opts.rate||0.92;   // slightly slower than default for clarity
-        u.pitch=opts.pitch||1.0;  // natural pitch
-        u.volume=1.0;
-        u.lang='en-US';
-        // Add slight pause behavior via SSML-like phrasing
-        u.onstart=()=>{
-            const btn=document.getElementById('speakerIndicator');
-            if(btn) btn.style.display='inline-flex';
-        };
-        u.onend=()=>{
-            const btn=document.getElementById('speakerIndicator');
-            if(btn) btn.style.display='none';
-            if(opts.onEnd) opts.onEnd();
-        };
-        u.onerror=()=>{
-            const btn=document.getElementById('speakerIndicator');
-            if(btn) btn.style.display='none';
-        };
-        speechSynthesis.speak(u);
-    }catch(e){showToast('Speech synthesis not available in this browser');}
-}
 function _getLeadIn(type){
     const qs=questionBanks[interviewType];
     let pool;
@@ -1000,10 +939,60 @@ function _getLeadIn(type){
     else pool=_interviewerLeadIns.next;
     return pool[Math.floor(Math.random()*pool.length)];
 }
+async function speakAsInterviewer(text,opts={}){
+    try{
+        // Stop any current audio
+        if(_currentAudio){try{_currentAudio.pause();_currentAudio.currentTime=0;}catch(e){}_currentAudio=null;}
+        const indicator=document.getElementById('speakerIndicator');
+        if(indicator) indicator.style.display='inline-flex';
+        const leadIn=opts.leadIn||'';
+        const fullText=leadIn?(leadIn+' ... '+text):text;
+        // Use OpenAI TTS via Puter.js - truly human-sounding voice
+        const audio=await puter.ai.txt2speech(fullText,{
+            provider:'openai',
+            voice:'ash',
+            model:'gpt-4o-mini-tts',
+            instructions:'You are a professional hiring manager conducting a job interview. Speak in a calm, warm, confident tone with natural pacing. Pause briefly between sentences. Sound like a real person having a conversation, not like you are reading from a script.'
+        });
+        _currentAudio=audio;
+        audio.onended=()=>{
+            if(indicator) indicator.style.display='none';
+            _currentAudio=null;
+            if(opts.onEnd) opts.onEnd();
+        };
+        audio.onerror=()=>{
+            if(indicator) indicator.style.display='none';
+            _currentAudio=null;
+            // Fallback to browser TTS if OpenAI fails
+            _fallbackSpeak(fullText,opts);
+        };
+        audio.play();
+    }catch(e){
+        console.warn('OpenAI TTS failed, falling back to browser voice:',e);
+        const indicator=document.getElementById('speakerIndicator');
+        if(indicator) indicator.style.display='none';
+        _fallbackSpeak((opts.leadIn?(opts.leadIn+' ... '+text):text),opts);
+    }
+}
+function _fallbackSpeak(text,opts={}){
+    try{
+        speechSynthesis.cancel();
+        const u=new SpeechSynthesisUtterance(text);
+        const voices=speechSynthesis.getVoices();
+        const preferred=voices.find(v=>/google\s+us\s+english/i.test(v.name))||voices.find(v=>/en[-_]us/i.test(v.lang))||voices[0];
+        if(preferred) u.voice=preferred;
+        u.rate=0.92;u.pitch=1.0;u.volume=1.0;u.lang='en-US';
+        const indicator=document.getElementById('speakerIndicator');
+        u.onstart=()=>{if(indicator) indicator.style.display='inline-flex';};
+        u.onend=()=>{if(indicator) indicator.style.display='none';if(opts.onEnd) opts.onEnd();};
+        u.onerror=()=>{if(indicator) indicator.style.display='none';};
+        speechSynthesis.speak(u);
+    }catch(e){showToast('Voice not available in this browser');}
+}
 function readQuestionAloud(opts={}){
     const text=document.getElementById('currentQuestion').textContent;
     const leadIn=opts.leadIn||'';
-    speakAsInterviewer(text,{leadIn:leadIn,rate:0.92,pitch:1.0,onEnd:opts.onEnd});
+    speakAsInterviewer(text,{leadIn:leadIn,onEnd:opts.onEnd});
 }
 function finishInterview(){
     if(interviewTimer){clearInterval(interviewTimer);interviewTimer=null;}

@@ -77,6 +77,9 @@
         .modal{background:#0f172a;border:1px solid rgba(51,65,85,.6);border-radius:1rem;padding:2rem;max-width:500px;width:90%;max-height:80vh;overflow-y:auto}
         .login-overlay{position:fixed;inset:0;background:#0a0e1a;z-index:200;display:flex;align-items:center;justify-content:center}
         .login-box{background:rgba(30,41,59,.5);border:1px solid rgba(51,65,85,.5);border-radius:1rem;padding:2.5rem;max-width:400px;width:90%}
+        @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+        .animate-pulse{animation:pulse 1.2s ease-in-out infinite}
+        .hidden{display:none!important}
         @media(max-width:768px){
             .sidebar{position:fixed;left:0;top:0}.sidebar.collapsed{transform:translateX(-260px)}
             .mobile-toggle{display:flex!important}
@@ -394,7 +397,10 @@
             <p class="text-dark-500 text-xs mt-1" id="interviewTimer"></p>
         </div>
         <div class="bg-dark-800/50 p-4 rounded-lg mb-4 min-h-20">
-            <p class="text-dark-400 text-sm mb-2">Current Question:</p>
+            <div class="flex items-center justify-between mb-2">
+                <p class="text-dark-400 text-sm">Current Question:</p>
+                <span id="speakerIndicator" class="hidden items-center gap-1.5 text-xs text-brand-blue font-semibold"><span class="inline-block w-2 h-2 rounded-full bg-brand-blue animate-pulse"></span> Interviewer Speaking...</span>
+            </div>
             <p class="text-dark-100 font-medium" id="currentQuestion">Tell me about yourself and your career goals.</p>
         </div>
         <div class="bg-dark-800/50 p-4 rounded-lg mb-4">
@@ -861,26 +867,33 @@ function startVoiceInterview(){
     const qs=questionBanks[interviewType];
     document.getElementById('currentQuestion').textContent=qs[0];
     document.getElementById('micButton').textContent='⏹️';
-    document.getElementById('userResponse').textContent='Listening...';
-    document.getElementById('aiFeedback').textContent='Speak now. AI is analyzing...';
+    document.getElementById('userResponse').textContent='Waiting for interviewer to finish speaking...';
+    document.getElementById('aiFeedback').textContent='Listen to the question, then respond when ready.';
     if(interviewTimer) clearInterval(interviewTimer);
     interviewTimer=setInterval(()=>{
         const e=Math.floor((Date.now()-interviewStart)/1000);
         document.getElementById('interviewTimer').textContent=`${String(Math.floor(e/60)).padStart(2,'0')}:${String(e%60).padStart(2,'0')}`;
     },1000);
-    // Try Web Speech API
-    try{
-        const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
-        if(SR){
-            window._recognition=new SR();window._recognition.continuous=true;window._recognition.interimResults=true;window._recognition.lang='en-US';
-            window._recognition.onresult=e=>{let t='';for(let i=e.resultIndex;i<e.results.length;i++)t+=e.results[i][0].transcript;document.getElementById('userResponse').textContent=t||'Listening...';};
-            window._recognition.start();
-        }
-    }catch(e){}
+    // Speak the first question like a real interviewer, THEN start listening
+    readQuestionAloud({leadIn:_getLeadIn('first'),onEnd:function(){
+        document.getElementById('userResponse').textContent='Listening...';
+        document.getElementById('aiFeedback').textContent='Speak now. AI is analyzing...';
+        // Start speech recognition after interviewer finishes speaking
+        try{
+            const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+            if(SR){
+                window._recognition=new SR();window._recognition.continuous=true;window._recognition.interimResults=true;window._recognition.lang='en-US';
+                window._recognition.onresult=e=>{let t='';for(let i=e.resultIndex;i<e.results.length;i++)t+=e.results[i][0].transcript;document.getElementById('userResponse').textContent=t||'Listening...';};
+                window._recognition.start();
+            }
+        }catch(e){}
+    }});
 }
 function stopRecording(){
     isRecording=false;
+    try{speechSynthesis.cancel();}catch(e){} // stop interviewer voice if speaking
     try{if(window._recognition)window._recognition.stop();}catch(e){}
+    const indicator=document.getElementById('speakerIndicator');if(indicator)indicator.style.display='none';
     const resp=document.getElementById('userResponse').textContent;
     if(resp&&resp!=='Listening...'&&resp!=='No response yet. Click the microphone to speak.') interviewResponses.push(resp);
     document.getElementById('aiFeedback').textContent='Great answer! You structured your response well. Consider adding specific metrics for stronger impact.';
@@ -891,12 +904,106 @@ function nextQuestion(){
     const qs=questionBanks[interviewType]; currentQIdx++;
     if(currentQIdx<qs.length){
         document.getElementById('currentQuestion').textContent=qs[currentQIdx];
-        document.getElementById('userResponse').textContent='No response yet. Click the microphone to speak.';
-        document.getElementById('aiFeedback').textContent='Start speaking to receive feedback...';
+        document.getElementById('userResponse').textContent='Waiting for interviewer to finish speaking...';
+        document.getElementById('aiFeedback').textContent='Listen to the question, then respond when ready.';
+        // Auto-read with natural interviewer transition
+        readQuestionAloud({leadIn:_getLeadIn('next'),onEnd:function(){
+            document.getElementById('userResponse').textContent='Listening...';
+            document.getElementById('aiFeedback').textContent='Speak now. AI is analyzing...';
+            try{
+                const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+                if(SR){
+                    window._recognition=new SR();window._recognition.continuous=true;window._recognition.interimResults=true;window._recognition.lang='en-US';
+                    window._recognition.onresult=e=>{let t='';for(let i=e.resultIndex;i<e.results.length;i++)t+=e.results[i][0].transcript;document.getElementById('userResponse').textContent=t||'Listening...';};
+                    window._recognition.start();
+                }
+            }catch(e){}
+        }});
     } else { finishInterview(); }
 }
-function readQuestionAloud(){
-    try{const u=new SpeechSynthesisUtterance(document.getElementById('currentQuestion').textContent);u.rate=0.9;speechSynthesis.speak(u);}catch(e){showToast('Speech synthesis not available in this browser');}
+// === HUMAN-SOUNDING INTERVIEWER VOICE ENGINE ===
+let _interviewerVoice=null;
+let _voicesLoaded=false;
+const _interviewerLeadIns={
+    first:["Welcome. Let's get started with your first question.","Thanks for joining today. Let's jump right in.","Great to meet you. Let's begin the interview.","Alright, let's kick things off."],
+    next:["Great. Moving on to the next question.","Okay, let's continue.","Good. Here's the next one for you.","Alright, next question.","Let's keep going.","Nice. Here's what I'd like to ask next.","Okay, moving along."],
+    last:["Alright, last question for you.","Okay, we're on the final question now.","One more question to wrap things up."]
+};
+function _pickBestVoice(){
+    const voices=speechSynthesis.getVoices();
+    if(!voices.length) return null;
+    // Priority order: prefer natural/premium English voices
+    const prefs=[
+        v=>/natural/i.test(v.name)&&/en[-_]/i.test(v.lang),
+        v=>/premium/i.test(v.name)&&/en[-_]/i.test(v.lang),
+        v=>/enhanced/i.test(v.name)&&/en[-_]/i.test(v.lang),
+        v=>/google\s+us\s+english/i.test(v.name),
+        v=>/google\s+uk\s+english/i.test(v.name),
+        v=>/samantha/i.test(v.name),
+        v=>/daniel/i.test(v.name),
+        v=>/karen/i.test(v.name),
+        v=>/moira/i.test(v.name),
+        v=>/alex/i.test(v.name),
+        v=>/aaron/i.test(v.name),
+        v=>/zira/i.test(v.name),
+        v=>/david/i.test(v.name),
+        v=>/mark/i.test(v.name),
+        v=>/en[-_]us/i.test(v.lang),
+        v=>/en[-_]gb/i.test(v.lang),
+        v=>/en/i.test(v.lang)
+    ];
+    for(const pref of prefs){const m=voices.find(pref);if(m) return m;}
+    return voices[0];
+}
+function _initVoices(){
+    _interviewerVoice=_pickBestVoice();
+    _voicesLoaded=!!_interviewerVoice;
+}
+// Voices load async in most browsers
+if(speechSynthesis.getVoices().length) _initVoices();
+speechSynthesis.onvoiceschanged=_initVoices;
+
+function speakAsInterviewer(text,opts={}){
+    try{
+        speechSynthesis.cancel(); // stop any current speech
+        if(!_voicesLoaded) _initVoices();
+        const leadIn=opts.leadIn||'';
+        const fullText=leadIn?(leadIn+' ... '+text):text;
+        const u=new SpeechSynthesisUtterance(fullText);
+        if(_interviewerVoice) u.voice=_interviewerVoice;
+        u.rate=opts.rate||0.92;   // slightly slower than default for clarity
+        u.pitch=opts.pitch||1.0;  // natural pitch
+        u.volume=1.0;
+        u.lang='en-US';
+        // Add slight pause behavior via SSML-like phrasing
+        u.onstart=()=>{
+            const btn=document.getElementById('speakerIndicator');
+            if(btn) btn.style.display='inline-flex';
+        };
+        u.onend=()=>{
+            const btn=document.getElementById('speakerIndicator');
+            if(btn) btn.style.display='none';
+            if(opts.onEnd) opts.onEnd();
+        };
+        u.onerror=()=>{
+            const btn=document.getElementById('speakerIndicator');
+            if(btn) btn.style.display='none';
+        };
+        speechSynthesis.speak(u);
+    }catch(e){showToast('Speech synthesis not available in this browser');}
+}
+function _getLeadIn(type){
+    const qs=questionBanks[interviewType];
+    let pool;
+    if(type==='first') pool=_interviewerLeadIns.first;
+    else if(currentQIdx>=qs.length-1) pool=_interviewerLeadIns.last;
+    else pool=_interviewerLeadIns.next;
+    return pool[Math.floor(Math.random()*pool.length)];
+}
+function readQuestionAloud(opts={}){
+    const text=document.getElementById('currentQuestion').textContent;
+    const leadIn=opts.leadIn||'';
+    speakAsInterviewer(text,{leadIn:leadIn,rate:0.92,pitch:1.0,onEnd:opts.onEnd});
 }
 function finishInterview(){
     if(interviewTimer){clearInterval(interviewTimer);interviewTimer=null;}

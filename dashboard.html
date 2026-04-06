@@ -3,6 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdn.tailwindcss.com https://cdn.jsdelivr.net https://cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com https://fonts.googleapis.com; img-src 'self' data: https:; connect-src 'self' https://api.resumesuperhero.com https://api.firecrawl.dev; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Resume SuperHero - Dashboard</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1072,6 +1076,14 @@
 
 <script>
 // ============ STATE MANAGEMENT ============
+// ============ SECURITY UTILITIES ============
+function escapeHTML(str){if(!str)return '';const div=document.createElement('div');div.textContent=String(str);return div.innerHTML;}
+function sanitizeInput(str,maxLen){if(typeof str!=='string')return '';return str.trim().substring(0,maxLen||200).replace(/[<>]/g,'');}
+function validateEmail(email){return/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)?email:null;}
+function validateFileType(file){const allowedExt=['.pdf','.docx','.doc','.txt'];const allowedMime=['application/pdf','application/vnd.openxmlformats-officedocument.wordprocessingml.document','application/msword','text/plain'];const ext='.'+file.name.split('.').pop().toLowerCase();return allowedExt.includes(ext)&&allowedMime.includes(file.type);}
+function safeOpenUrl(url){try{const u=new URL(url);if(!u.protocol.match(/^https?:$/))return false;window.open(url,'_blank','noopener,noreferrer');return true;}catch(e){return false;}}
+// Rate limiter for API calls
+const rateLimiter={lastCall:0,minInterval:2000,canCall(){const now=Date.now();if(now-this.lastCall<this.minInterval)return false;this.lastCall=now;return true;}};
 const DB_KEY='resumeSuperHeroAppDB';
 let appState={
     user:{name:'',email:'',jobTitle:'',industry:''},
@@ -1470,7 +1482,7 @@ const JOB_API='https://api.resumesuperhero.com/jobs';
 // Load saved location on init
 (function initJobLocation(){const loc=JSON.parse(localStorage.getItem('rsh_jobLocation')||'null');if(loc){document.getElementById('jobUserCity').value=loc.city||'';document.getElementById('jobUserZip').value=loc.zip||'';const badge=document.getElementById('savedLocationBadge');badge.classList.remove('hidden');document.getElementById('savedLocationText').textContent=loc.city+(loc.zip?' '+loc.zip:'');}const resume=JSON.parse(localStorage.getItem('rsh_resume')||'null');if(resume){document.getElementById('resumePreview').classList.remove('hidden');document.getElementById('resumeFileName').textContent=resume.name;document.getElementById('resumeUploadText').textContent='Resume uploaded: '+resume.name;}})();
 function saveJobLocation(){const city=document.getElementById('jobUserCity').value.trim();const zip=document.getElementById('jobUserZip').value.trim();if(!city){showToast('Please enter your city & state','error');return;}localStorage.setItem('rsh_jobLocation',JSON.stringify({city,zip}));const badge=document.getElementById('savedLocationBadge');badge.classList.remove('hidden');document.getElementById('savedLocationText').textContent=city+(zip?' '+zip:'');showToast('Location saved! Jobs will be searched within 500 miles.','success');}
-function handleResumeUpload(input){const file=input.files[0];if(!file)return;const maxSize=5*1024*1024;if(file.size>maxSize){showToast('Resume must be under 5MB','error');return;}const reader=new FileReader();reader.onload=function(e){const resumeData={name:file.name,type:file.type,size:file.size,data:e.target.result,uploadedAt:new Date().toISOString()};localStorage.setItem('rsh_resume',JSON.stringify(resumeData));document.getElementById('resumePreview').classList.remove('hidden');document.getElementById('resumeFileName').textContent=file.name;document.getElementById('resumeUploadText').textContent='Resume uploaded: '+file.name;showToast('Resume uploaded and saved!','success');};reader.readAsDataURL(file);}
+function handleResumeUpload(input){const file=input.files[0];if(!file)return;const maxSize=5*1024*1024;if(file.size>maxSize){showToast('Resume must be under 5MB','error');return;}if(!validateFileType(file)){showToast('Only PDF, DOCX, DOC, and TXT files are allowed','error');input.value='';return;}const reader=new FileReader();reader.onload=function(e){const resumeData={name:file.name,type:file.type,size:file.size,data:e.target.result,uploadedAt:new Date().toISOString()};localStorage.setItem('rsh_resume',JSON.stringify(resumeData));document.getElementById('resumePreview').classList.remove('hidden');document.getElementById('resumeFileName').textContent=file.name;document.getElementById('resumeUploadText').textContent='Resume uploaded: '+file.name;showToast('Resume uploaded and saved!','success');};reader.readAsDataURL(file);}
 function removeResume(){localStorage.removeItem('rsh_resume');document.getElementById('resumePreview').classList.add('hidden');document.getElementById('resumeFileName').textContent='';document.getElementById('resumeUploadText').textContent='Click to upload PDF or DOCX resume';document.getElementById('resumeFileInput').value='';showToast('Resume removed','info');}
 function searchJobs(){const title=document.getElementById('jobTitle').value.trim();const loc=JSON.parse(localStorage.getItem('rsh_jobLocation')||'null');const industry=document.getElementById('jobIndustry').value;const jobType=document.getElementById('jobType').value;const remoteOnly=document.getElementById('jobRemoteOnly').checked;if(!title){showToast('Please enter a job title or keywords','error');return;}if(!loc&&!remoteOnly){showToast('Please save your location first, or check "Include Remote jobs"','error');return;}document.getElementById('jobSpinner').classList.remove('hidden');document.getElementById('jobSearchText').textContent='Searching...';document.getElementById('jobSearchBtn').disabled=true;const searchLocation=remoteOnly?'remote':(loc?loc.city:'');const searchQuery=industry?title+' '+industry:title;jobPage=0;fetchJobs(searchQuery,searchLocation,jobType);}
 function fetchJobs(query,location,jobType){const API_KEY=localStorage.getItem('rsh_apiKey')||'';setTimeout(()=>{const jobPool=generateJobResults(query,location,jobType);jobSearchResults=jobPool;renderJobResults(jobPool.slice(0,10));document.getElementById('jobSpinner').classList.add('hidden');document.getElementById('jobSearchText').textContent='Search Jobs';document.getElementById('jobSearchBtn').disabled=false;document.getElementById('jobResultsCount').classList.remove('hidden');document.getElementById('jobResultsCount').textContent=jobPool.length+' jobs found within 500 miles of your location';if(jobPool.length>10)document.getElementById('jobLoadMore').classList.remove('hidden');else document.getElementById('jobLoadMore').classList.add('hidden');},2000);}
@@ -1500,7 +1512,7 @@ function addReference(){showToast('Reference added successfully','success');}
 function sendReferenceOutreach(name){showToast(`Outreach message sent to ${name}`,'success');}
 
 // ============ SETTINGS ============
-function saveSettings(){appState.user.name=document.getElementById('settingsName').value;appState.user.email=document.getElementById('settingsEmail').value;appState.user.jobTitle=document.getElementById('settingsJobTitle').value;appState.user.industry=document.getElementById('settingsIndustry').value;saveDB();updateSidebar();showToast('Settings saved','success');}
+function saveSettings(){const name=sanitizeInput(document.getElementById('settingsName').value,100);const email=document.getElementById('settingsEmail').value.trim();const jobTitle=sanitizeInput(document.getElementById('settingsJobTitle').value,100);const industry=sanitizeInput(document.getElementById('settingsIndustry').value,100);if(email&&!validateEmail(email)){showToast('Please enter a valid email address','error');return;}appState.user.name=name;appState.user.email=email;appState.user.jobTitle=jobTitle;appState.user.industry=industry;saveDB();updateSidebar();showToast('Settings saved','success');}
 
 // ============ INITIALIZATION ============
 window.addEventListener('DOMContentLoaded',function(){checkLogin();});

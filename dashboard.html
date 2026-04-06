@@ -1005,26 +1005,168 @@
                 <div id="sec-linkedin" class="section">
                     <div class="mb-6">
                         <h1 class="text-2xl font-bold text-white font-heading flex items-center gap-2"><svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg> LinkedIn Pro Optimizer</h1>
-                        <p class="text-dark-400 text-sm mt-1">Attract recruiters and land dream roles with a killer LinkedIn profile</p>
+                        <p class="text-dark-400 text-sm mt-1">Generate recruiter-magnet headlines, about sections, and keyword-optimized profiles</p>
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-                        <button onclick="optimizeLinkedIn('headline')" class="card p-6 text-left hover:border-brandBlue group cursor-pointer bg-transparent">
-                            <svg class="mb-2 text-brandAmber" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
-                            <h3 class="font-semibold text-dark-100 mb-1">Professional Headline</h3>
-                            <p class="text-xs text-dark-400">Craft compelling headline that attracts recruiters</p>
-                        </button>
-                        <button onclick="optimizeLinkedIn('about')" class="card p-6 text-left hover:border-brandViolet group cursor-pointer bg-transparent">
-                            <svg class="mb-2 text-brandViolet" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-                            <h3 class="font-semibold text-dark-100 mb-1">About Section</h3>
-                            <p class="text-xs text-dark-400">Tell your story and highlight achievements</p>
-                        </button>
-                    </div>
+
+                    <!-- LinkedIn Input Card -->
                     <div class="card p-6 mb-6">
-                        <h3 class="text-sm font-semibold text-dark-200 mb-4 flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/></svg> Get Noticed</h3>
-                        <div class="space-y-3">
-                            <button class="w-full btn-secondary justify-center" onclick="nextMotivation()">Share Motivational Post</button>
-                            <button class="w-full btn-secondary justify-center" onclick="updateLiScore()">Boost Your Profile Score</button>
-                            <button class="w-full btn-secondary justify-center" onclick="searchCompetitors()">Analyze Competitor Profiles</button>
+                        <h3 class="text-sm font-semibold text-dark-200 mb-4 flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg> Your Profile Info</h3>
+                        <p class="text-xs text-dark-500 mb-3">Fill in your details to generate optimized LinkedIn content. The more you share, the better the results.</p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
+                            <div><label class="block text-xs font-medium text-dark-400 mb-1">Current Job Title</label><input class="input" id="liTitle" placeholder="e.g. Senior Product Manager"></div>
+                            <div><label class="block text-xs font-medium text-dark-400 mb-1">Target Role</label><input class="input" id="liTarget" placeholder="e.g. VP of Product"></div>
+                            <div><label class="block text-xs font-medium text-dark-400 mb-1">Industry</label>
+                                <select class="input" id="liIndustry">
+                                    <option value="">Select Industry</option>
+                                    <option value="tech">Technology / Software</option>
+                                    <option value="finance">Finance / Banking</option>
+                                    <option value="healthcare">Healthcare / Biotech</option>
+                                    <option value="marketing">Marketing / Advertising</option>
+                                    <option value="consulting">Consulting / Professional Services</option>
+                                    <option value="sales">Sales / Business Development</option>
+                                    <option value="education">Education / EdTech</option>
+                                    <option value="ecommerce">E-Commerce / Retail</option>
+                                    <option value="manufacturing">Manufacturing / Engineering</option>
+                                    <option value="media">Media / Entertainment</option>
+                                    <option value="nonprofit">Nonprofit / Government</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div><label class="block text-xs font-medium text-dark-400 mb-1">Years of Experience</label>
+                                <select class="input" id="liYears">
+                                    <option value="">Select</option>
+                                    <option value="0-2">0-2 years (Entry Level)</option>
+                                    <option value="3-5">3-5 years (Mid Level)</option>
+                                    <option value="6-10">6-10 years (Senior)</option>
+                                    <option value="11-15">11-15 years (Lead / Director)</option>
+                                    <option value="16+">16+ years (Executive)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="grid grid-cols-1 gap-3 mb-3">
+                            <div><label class="block text-xs font-medium text-dark-400 mb-1">Top Skills (comma-separated)</label><input class="input" id="liSkills" placeholder="e.g. Product Strategy, Agile, Data Analytics, Team Leadership"></div>
+                            <div><label class="block text-xs font-medium text-dark-400 mb-1">Biggest Achievements (2-3, comma-separated)</label><input class="input" id="liAchievements" placeholder="e.g. Grew revenue 40% YoY, Led team of 15, Launched product to 1M users"></div>
+                            <div><label class="block text-xs font-medium text-dark-400 mb-1">Companies / Brands You've Worked With</label><input class="input" id="liCompanies" placeholder="e.g. Google, Stripe, Series B startup"></div>
+                        </div>
+                        <button class="btn-primary w-full" onclick="liAutoFill()">Auto-Fill from Resume Data</button>
+                    </div>
+
+                    <!-- Generator Tabs -->
+                    <div class="flex gap-2 mb-4 overflow-x-auto pb-1" style="scrollbar-width:thin">
+                        <button class="li-tab active" data-litab="headlines" onclick="liSwitchTab('headlines')">Headlines</button>
+                        <button class="li-tab" data-litab="about" onclick="liSwitchTab('about')">About Section</button>
+                        <button class="li-tab" data-litab="audit" onclick="liSwitchTab('audit')">Profile Audit</button>
+                        <button class="li-tab" data-litab="keywords" onclick="liSwitchTab('keywords')">Keywords</button>
+                        <button class="li-tab" data-litab="bullets" onclick="liSwitchTab('bullets')">Experience Bullets</button>
+                        <button class="li-tab" data-litab="outreach" onclick="liSwitchTab('outreach')">Connection Msgs</button>
+                    </div>
+                    <style>
+                        .li-tab{padding:6px 14px;border-radius:8px;font-size:12px;font-weight:600;color:#94a3b8;background:#1e293b;border:1px solid #334155;cursor:pointer;white-space:nowrap;transition:all .2s}
+                        .li-tab:hover{color:#e2e8f0;border-color:#475569}
+                        .li-tab.active{color:#fff;background:linear-gradient(135deg,#2563eb,#7c3aed);border-color:transparent}
+                        .li-panel{display:none}.li-panel.active{display:block}
+                        .li-output{background:#0f172a;border:1px solid #1e293b;border-radius:10px;padding:16px;margin-bottom:12px;position:relative}
+                        .li-output:hover{border-color:#334155}
+                        .li-output h4{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px}
+                        .li-copy{position:absolute;top:10px;right:10px;background:#1e293b;border:1px solid #334155;border-radius:6px;padding:4px 10px;font-size:10px;font-weight:600;color:#94a3b8;cursor:pointer;transition:all .2s}
+                        .li-copy:hover{background:#2563eb;color:#fff;border-color:#2563eb}
+                        .li-copy.copied{background:#059669;color:#fff;border-color:#059669}
+                        .li-score-bar{height:8px;border-radius:4px;background:#1e293b;overflow:hidden;margin:4px 0}
+                        .li-score-fill{height:100%;border-radius:4px;transition:width .6s ease}
+                        .li-check{display:flex;align-items:flex-start;gap:8px;padding:8px 0;border-bottom:1px solid #1e293b;font-size:13px}
+                        .li-check:last-child{border-bottom:none}
+                        .li-check .icon-pass{color:#22c55e;flex-shrink:0;margin-top:2px}
+                        .li-check .icon-fail{color:#ef4444;flex-shrink:0;margin-top:2px}
+                        .li-check .icon-warn{color:#f59e0b;flex-shrink:0;margin-top:2px}
+                        .li-keyword{display:inline-block;background:#1e293b;border:1px solid #334155;border-radius:6px;padding:3px 10px;margin:3px;font-size:11px;font-weight:500;color:#94a3b8;cursor:pointer;transition:all .2s}
+                        .li-keyword:hover{background:#2563eb;color:#fff;border-color:#2563eb}
+                        .li-keyword.selected{background:#2563eb22;color:#60a5fa;border-color:#2563eb}
+                    </style>
+
+                    <!-- Panel: Headlines -->
+                    <div class="li-panel active" id="liPanel-headlines">
+                        <div class="card p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-sm font-semibold text-dark-200 flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg> Headline Generator</h3>
+                                <button class="btn-primary btn-sm" onclick="liGenHeadlines()">Generate Headlines</button>
+                            </div>
+                            <p class="text-xs text-dark-500 mb-4">Your headline is the #1 factor in recruiter search results. We generate 6 proven formulas tailored to your profile.</p>
+                            <div id="liHeadlineResults"></div>
+                        </div>
+                    </div>
+
+                    <!-- Panel: About Section -->
+                    <div class="li-panel" id="liPanel-about">
+                        <div class="card p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-sm font-semibold text-dark-200 flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg> About Section Writer</h3>
+                                <button class="btn-primary btn-sm" onclick="liGenAbout()">Generate About</button>
+                            </div>
+                            <p class="text-xs text-dark-500 mb-4">A strong About section tells your story, builds trust, and drives inbound messages from recruiters.</p>
+                            <div id="liAboutResults"></div>
+                        </div>
+                    </div>
+
+                    <!-- Panel: Profile Audit -->
+                    <div class="li-panel" id="liPanel-audit">
+                        <div class="card p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-sm font-semibold text-dark-200 flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg> Profile Audit &amp; Score</h3>
+                                <button class="btn-primary btn-sm" onclick="liRunAudit()">Run Audit</button>
+                            </div>
+                            <p class="text-xs text-dark-500 mb-4">We check 12 critical profile factors that determine your visibility to recruiters and hiring managers.</p>
+                            <div id="liAuditResults"></div>
+                        </div>
+                    </div>
+
+                    <!-- Panel: Keywords -->
+                    <div class="li-panel" id="liPanel-keywords">
+                        <div class="card p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-sm font-semibold text-dark-200 flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg> Keyword Optimizer</h3>
+                                <button class="btn-primary btn-sm" onclick="liGenKeywords()">Find Keywords</button>
+                            </div>
+                            <p class="text-xs text-dark-500 mb-4">LinkedIn search uses keywords to match profiles with recruiter queries. Add these to your headline, about, and experience sections.</p>
+                            <div id="liKeywordResults"></div>
+                        </div>
+                    </div>
+
+                    <!-- Panel: Experience Bullets -->
+                    <div class="li-panel" id="liPanel-bullets">
+                        <div class="card p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-sm font-semibold text-dark-200 flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h7"/></svg> Experience Bullet Rewriter</h3>
+                            </div>
+                            <p class="text-xs text-dark-500 mb-3">Paste a weak experience bullet and get a powerful, achievement-focused rewrite using the STAR method.</p>
+                            <div class="mb-3"><textarea class="input" id="liBulletInput" rows="3" placeholder="e.g. Responsible for managing team and improving sales processes"></textarea></div>
+                            <button class="btn-primary btn-sm mb-4" onclick="liRewriteBullet()">Rewrite Bullet</button>
+                            <div id="liBulletResults"></div>
+                        </div>
+                    </div>
+
+                    <!-- Panel: Connection Messages -->
+                    <div class="li-panel" id="liPanel-outreach">
+                        <div class="card p-6">
+                            <div class="flex items-center justify-between mb-4">
+                                <h3 class="text-sm font-semibold text-dark-200 flex items-center gap-2"><svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg> Connection Request Templates</h3>
+                            </div>
+                            <p class="text-xs text-dark-500 mb-3">Personalized templates for reaching out to recruiters, hiring managers, and peers. Under 300 characters for LinkedIn's limit.</p>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-3 mb-4">
+                                <div><label class="block text-xs font-medium text-dark-400 mb-1">Recipient's Name</label><input class="input" id="liRecipName" placeholder="e.g. Sarah"></div>
+                                <div><label class="block text-xs font-medium text-dark-400 mb-1">Their Role</label>
+                                    <select class="input" id="liRecipRole">
+                                        <option value="recruiter">Recruiter</option>
+                                        <option value="hiring_manager">Hiring Manager</option>
+                                        <option value="peer">Industry Peer</option>
+                                        <option value="executive">Executive / C-Suite</option>
+                                        <option value="alumni">Alumni / Mutual Connection</option>
+                                    </select>
+                                </div>
+                                <div><label class="block text-xs font-medium text-dark-400 mb-1">Their Company</label><input class="input" id="liRecipCompany" placeholder="e.g. Google"></div>
+                                <div><label class="block text-xs font-medium text-dark-400 mb-1">Context (optional)</label><input class="input" id="liRecipContext" placeholder="e.g. saw your post about AI, mutual connection"></div>
+                            </div>
+                            <button class="btn-primary btn-sm mb-4" onclick="liGenOutreach()">Generate Messages</button>
+                            <div id="liOutreachResults"></div>
                         </div>
                     </div>
                 </div>
@@ -1506,10 +1648,275 @@ function getSalaryData(industry,job,level){if(salaryDB[industry]&&salaryDB[indus
 function researchSalary(){const industry=document.getElementById('salaryIndustry').value;const job=document.getElementById('salaryJobType').value;const level=document.getElementById('salaryLevel').value;if(!industry||!job||!level){showToast('Please select Industry, Job Type, and Level','error');return;}document.getElementById('salarySpinner').classList.remove('hidden');document.getElementById('salaryBtnText').textContent='Researching...';document.getElementById('salarySearchBtn').disabled=true;setTimeout(()=>{const range=getSalaryData(industry,job,level);const low=range[0];const high=range[1];const median=Math.round((low+high)/2);const pct25=Math.round(low+(high-low)*.15);const pct75=Math.round(low+(high-low)*.85);const bonus=level==='Executive'?'30-50%':level==='VP'?'25-40%':level==='Director'?'20-30%':level==='Management'?'15-25%':level==='Senior'||level==='Lead'?'10-20%':'5-15%';const html=`<div class="mt-4 p-5 rounded-xl" style="background:linear-gradient(135deg,rgba(37,99,235,.08),rgba(124,58,237,.08));border:1px solid rgba(99,102,241,.2)"><div class="flex items-center justify-between mb-4"><div><p class="font-bold text-white text-base">${job}</p><p class="text-xs text-dark-400">${level} · ${industry}</p></div><div class="text-right"><p class="text-2xl font-bold text-brandAmber">$${median.toLocaleString()}</p><p class="text-xs text-dark-400">Estimated Median</p></div></div><div class="grid grid-cols-4 gap-3 mb-4"><div class="text-center p-3 bg-darkBg/60 rounded-lg"><p class="text-xs text-dark-400 mb-1">Low End</p><p class="font-semibold text-dark-100 text-sm">$${low.toLocaleString()}</p></div><div class="text-center p-3 bg-darkBg/60 rounded-lg"><p class="text-xs text-dark-400 mb-1">25th %ile</p><p class="font-semibold text-dark-100 text-sm">$${pct25.toLocaleString()}</p></div><div class="text-center p-3 bg-darkBg/60 rounded-lg"><p class="text-xs text-dark-400 mb-1">75th %ile</p><p class="font-semibold text-dark-100 text-sm">$${pct75.toLocaleString()}</p></div><div class="text-center p-3 bg-darkBg/60 rounded-lg"><p class="text-xs text-dark-400 mb-1">High End</p><p class="font-semibold text-dark-100 text-sm">$${high.toLocaleString()}</p></div></div><div class="w-full h-3 rounded-full overflow-hidden mb-3" style="background:#1e293b"><div class="h-full rounded-full" style="background:linear-gradient(90deg,#2563eb,#7c3aed,#fbbf24);width:100%"></div></div><div class="flex justify-between text-xs text-dark-400 mb-4"><span>$${low.toLocaleString()}</span><span>$${high.toLocaleString()}</span></div><div class="grid grid-cols-1 md:grid-cols-2 gap-3"><div class="p-3 bg-darkBg/60 rounded-lg"><p class="text-xs font-semibold text-dark-200 mb-1">Typical Bonus Range</p><p class="text-xs text-dark-400">${bonus} of base salary</p></div><div class="p-3 bg-darkBg/60 rounded-lg"><p class="text-xs font-semibold text-dark-200 mb-1">Negotiation Tip</p><p class="text-xs text-dark-400">${median>150e3?'At this level, negotiate equity and signing bonus alongside base. Total comp matters more than salary alone.':median>100e3?'Ask for the 75th percentile. Companies expect negotiation — the first offer is rarely the best.':'Focus on growth trajectory. A slightly lower salary with a clear promotion path and learning opportunities can pay off more long-term.'}</p></div></div><p class="text-xs text-dark-500 mt-3">Data sourced from Glassdoor, Levels.fyi, Payscale & industry benchmarks · Updated Q1 2026</p></div>`;document.getElementById('salaryResult').innerHTML=html;document.getElementById('salarySpinner').classList.add('hidden');document.getElementById('salaryBtnText').textContent='Get Salary Intel';document.getElementById('salarySearchBtn').disabled=false;},1500);}
 
 // ============ LINKEDIN ============
-function nextMotivation(){const posts=['You are on your way to greatness. Keep pushing!','Every rejection is one step closer to success.','Your skills are in demand. Believe in your value!'];showToast(posts[Math.floor(Math.random()*posts.length)],'success');}
-function updateLiScore(){showToast('Profile score improved! Add 3 more recommendations to boost further.','success');}
-function searchCompetitors(){showToast('Analyzing top 5 competitor profiles...','info');}
-function optimizeLinkedIn(section){showToast(`Tips for ${section}: Focus on keywords, achievements, and metrics!`,'info');}
+// ============ LINKEDIN PRO OPTIMIZER ENGINE ============
+function liGetInputs(){
+    return {
+        title: document.getElementById('liTitle')?.value?.trim()||'',
+        target: document.getElementById('liTarget')?.value?.trim()||'',
+        industry: document.getElementById('liIndustry')?.value||'',
+        years: document.getElementById('liYears')?.value||'',
+        skills: (document.getElementById('liSkills')?.value||'').split(',').map(s=>s.trim()).filter(Boolean),
+        achievements: (document.getElementById('liAchievements')?.value||'').split(',').map(s=>s.trim()).filter(Boolean),
+        companies: (document.getElementById('liCompanies')?.value||'').split(',').map(s=>s.trim()).filter(Boolean),
+    };
+}
+function liAutoFill(){
+    const r=appState.resume;
+    if(r.targetTitle)document.getElementById('liTitle').value=r.targetTitle;
+    if(r.industry){
+        const map={'technology':'tech','software':'tech','finance':'finance','banking':'finance','healthcare':'healthcare','marketing':'marketing','consulting':'consulting','sales':'sales','education':'education','ecommerce':'ecommerce','retail':'ecommerce','media':'media','nonprofit':'nonprofit'};
+        const ind=r.industry.toLowerCase();
+        for(const[k,v]of Object.entries(map)){if(ind.includes(k)){document.getElementById('liIndustry').value=v;break;}}
+    }
+    if(r.skills?.length)document.getElementById('liSkills').value=r.skills.join(', ');
+    if(r.years){
+        const y=parseInt(r.years);
+        if(y<=2)document.getElementById('liYears').value='0-2';
+        else if(y<=5)document.getElementById('liYears').value='3-5';
+        else if(y<=10)document.getElementById('liYears').value='6-10';
+        else if(y<=15)document.getElementById('liYears').value='11-15';
+        else document.getElementById('liYears').value='16+';
+    }
+    if(r.achievements)document.getElementById('liAchievements').value=r.achievements;
+    if(r.experience?.length){
+        const comps=r.experience.map(e=>e.company).filter(Boolean);
+        if(comps.length)document.getElementById('liCompanies').value=comps.join(', ');
+    }
+    showToast('Filled from your resume data!','success');
+}
+function liSwitchTab(tab){
+    document.querySelectorAll('.li-tab').forEach(t=>t.classList.toggle('active',t.dataset.litab===tab));
+    document.querySelectorAll('.li-panel').forEach(p=>p.classList.toggle('active',p.id==='liPanel-'+tab));
+}
+function liCopy(btn,text){
+    navigator.clipboard.writeText(text).then(()=>{
+        btn.textContent='Copied!';btn.classList.add('copied');
+        setTimeout(()=>{btn.textContent='Copy';btn.classList.remove('copied');},2000);
+    });
+}
+function liOutputBlock(label,text,color){
+    const id='lio_'+Math.random().toString(36).substr(2,6);
+    return `<div class="li-output"><button class="li-copy" onclick="liCopy(this,document.getElementById('${id}').innerText)">Copy</button><h4 style="color:${color||'#60a5fa'}">${escapeHTML(label)}</h4><div id="${id}" class="text-sm text-dark-300" style="white-space:pre-wrap;line-height:1.6">${escapeHTML(text)}</div></div>`;
+}
+function liGenHeadlines(){
+    const d=liGetInputs();
+    if(!d.title){showToast('Enter your current job title first','error');return;}
+    const title=d.title, target=d.target||d.title, skills=d.skills, achv=d.achievements, comps=d.companies;
+    const topSkills=skills.slice(0,3).join(' | ')||'Strategy | Leadership | Growth';
+    const topAchv=achv[0]||'driving measurable results';
+    const brand=comps[0]||'leading organizations';
+    const yrsLabel={'0-2':'Emerging','3-5':'Experienced','6-10':'Senior','11-15':'Executive','16+':'Seasoned'}[d.years]||'';
+    const headlines=[];
+    headlines.push({label:'Formula 1: Title + Specialties',text:`${title} | ${topSkills}`});
+    headlines.push({label:'Formula 2: Achievement-Led',text:`${title} \u2014 ${topAchv.charAt(0).toUpperCase()+topAchv.slice(1)} | Helping companies ${skills[0]?'with '+skills[0]:'grow'}`});
+    headlines.push({label:'Formula 3: Mission-Driven',text:`${yrsLabel?yrsLabel+' ':''}${title} helping teams build what\u2019s next | ${topSkills}`});
+    headlines.push({label:'Formula 4: Social Proof',text:`${title} at ${brand} | ${skills.slice(0,2).join(' & ')||'Strategy & Execution'} | ${topAchv}`});
+    headlines.push({label:'Formula 5: Open-to-Work (Tasteful)',text:`${target} | ${topSkills} | Open to ${d.industry?liIndustryLabel(d.industry):'new'} opportunities where I can drive impact`});
+    headlines.push({label:'Formula 6: Keyword-Packed for Search',text:`${title} \u2022 ${skills.slice(0,4).join(' \u2022 ')||'Strategy \u2022 Leadership \u2022 Growth \u2022 Innovation'} \u2022 ${target}`});
+    const container=document.getElementById('liHeadlineResults');
+    const colors=['#60a5fa','#a78bfa','#f59e0b','#34d399','#f472b6','#38bdf8'];
+    container.innerHTML=headlines.map((h,i)=>liOutputBlock(h.label,h.text,colors[i%colors.length])).join('')+
+        '<p class="text-xs text-dark-500 mt-3">Pro tip: LinkedIn headlines have a 220-character limit. Shorter is punchier, but use the space \u2014 every keyword helps search.</p>';
+    showToast('6 headlines generated!','success');
+}
+function liIndustryLabel(v){return{tech:'tech',finance:'finance',healthcare:'healthcare',marketing:'marketing',consulting:'consulting',sales:'sales',education:'education',ecommerce:'e-commerce',manufacturing:'manufacturing',media:'media',nonprofit:'nonprofit'}[v]||v;}
+function liGenAbout(){
+    const d=liGetInputs();
+    if(!d.title){showToast('Enter your current job title first','error');return;}
+    const title=d.title,target=d.target||d.title,skills=d.skills,achv=d.achievements,comps=d.companies;
+    const yrs=d.years||'several';
+    const yrsNum={'0-2':'2+','3-5':'5+','6-10':'10+','11-15':'15+','16+':'16+'}[yrs]||yrs;
+    const skillStr=skills.length?skills.slice(0,5).join(', '):'strategy, leadership, and cross-functional collaboration';
+    const achvStr=achv.length?achv.map((a,i)=>`\u2022 ${a}`).join('\n'):`\u2022 [Your biggest achievement with metrics]\n\u2022 [Second achievement showing impact]\n\u2022 [Third achievement demonstrating leadership]`;
+    const compStr=comps.length?comps.join(', '):'[Notable Company/ies]';
+    const hook=achv[0]?`I\u2019ve spent my career ${achv[0].toLowerCase().startsWith('led')||achv[0].toLowerCase().startsWith('built')||achv[0].toLowerCase().startsWith('grew')?achv[0].charAt(0).toLowerCase()+achv[0].slice(1):achv[0].toLowerCase()}.`:`I help organizations solve their most complex challenges through ${skills[0]||'strategic thinking'} and ${skills[1]||'execution'}.`;
+    const about1=`${hook}\n\nWith ${yrsNum} years as a ${title}, I specialize in ${skillStr}. My experience spans ${compStr}, where I\u2019ve consistently delivered results that move the needle.\n\nKey highlights:\n${achvStr}\n\nWhat I bring to the table:\nI\u2019m the person who turns ambiguity into action. Whether it\u2019s building a new function from scratch, scaling a team, or driving a turnaround \u2014 I thrive at the intersection of strategy and execution.\n\nI\u2019m always open to connecting with fellow ${liIndustryLabel(d.industry)||'industry'} professionals, potential collaborators, and teams building something meaningful.\n\n\u2709\uFE0F Best way to reach me: DM or connect here on LinkedIn.`;
+    const about2=`\u{1F3AF} ${target} | ${skillStr}\n\nAfter ${yrsNum} years in ${liIndustryLabel(d.industry)||'the industry'}, here\u2019s what I know:\n\nThe best ${title.toLowerCase()}s don\u2019t just execute \u2014 they anticipate. They don\u2019t just manage \u2014 they multiply.\n\nThat\u2019s the lens I bring to every role.\n\nRecent impact:\n${achvStr}\n\nMy toolkit: ${skillStr}\nMy approach: Data-informed decisions, bias toward action, and always leading with empathy.\n\nPreviously: ${compStr}\n\nLet\u2019s connect if you\u2019re building something interesting or want to exchange ideas about ${liIndustryLabel(d.industry)||'our industry'}.`;
+    const container=document.getElementById('liAboutResults');
+    container.innerHTML=liOutputBlock('Version A: Professional Storyteller',about1,'#60a5fa')+liOutputBlock('Version B: Punchy & Modern',about2,'#a78bfa')+
+        `<div class="text-xs text-dark-500 mt-3"><strong>Tips:</strong> LinkedIn About limit is 2,600 characters. Use line breaks for readability. First 3 lines show in preview \u2014 make them count. Include a call-to-action at the end.</div>`;
+    showToast('2 About sections generated!','success');
+}
+function liRunAudit(){
+    const d=liGetInputs();
+    const checks=[];
+    let score=0,total=12;
+    function pass(label,tip){checks.push({s:'pass',label,tip});score++;}
+    function fail(label,tip){checks.push({s:'fail',label,tip});}
+    function warn(label,tip){checks.push({s:'warn',label,tip});score+=0.5;}
+    // 1. Headline
+    if(d.title&&d.skills.length>=2)pass('Professional Headline','Your headline has a title and skills \u2014 great for search.');
+    else if(d.title)warn('Professional Headline','Add 2-3 specialty keywords to your headline for better recruiter search visibility.');
+    else fail('Professional Headline','Your headline is the #1 search factor. Add your title + 2-3 specialties.');
+    // 2. About Section
+    if(d.achievements.length>=2&&d.skills.length>=3)pass('About Section','Rich with achievements and skills \u2014 well done.');
+    else if(d.achievements.length>=1)warn('About Section','Add more achievements with metrics. Recruiters scan for numbers.');
+    else fail('About Section','Your About section needs achievements with measurable impact. Use our About generator above.');
+    // 3. Experience with metrics
+    if(d.achievements.length>=3)pass('Achievement Metrics','3+ achievements with quantifiable results.');
+    else if(d.achievements.length>=1)warn('Achievement Metrics','Add at least 3 achievements with numbers (%, $, team size, etc.).');
+    else fail('Achievement Metrics','Zero measurable achievements found. Recruiters filter for metrics \u2014 this is critical.');
+    // 4. Skills (minimum 5)
+    if(d.skills.length>=5)pass('Skills Section','5+ skills listed \u2014 good keyword density.');
+    else if(d.skills.length>=2)warn('Skills Section','Add more skills. LinkedIn allows 50; aim for at least 10-15 to maximize search matches.');
+    else fail('Skills Section','Skills are how recruiters find you. Add at least 5 relevant skills above.');
+    // 5. Industry selected
+    if(d.industry)pass('Industry Tag','Industry specified \u2014 helps with targeted recruiter searches.');
+    else fail('Industry Tag','Select your industry above. This affects which recruiters see your profile.');
+    // 6. Experience level
+    if(d.years)pass('Experience Level','Seniority level set \u2014 critical for recruiter filtering.');
+    else fail('Experience Level','Set your years of experience. Recruiters filter by seniority level.');
+    // 7. Target role
+    if(d.target)pass('Target Role Clarity','You have a clear target role \u2014 your profile should be optimized for this.');
+    else warn('Target Role Clarity','Define your target role so your profile speaks directly to those opportunities.');
+    // 8. Company brands
+    if(d.companies.length>=1)pass('Brand Recognition','Company names boost credibility and appear in recruiter searches.');
+    else warn('Brand Recognition','Add companies you\u2019ve worked with \u2014 brand names increase profile clicks 3x.');
+    // 9. Keyword density
+    const allText=(d.title+' '+d.skills.join(' ')+' '+d.achievements.join(' ')).toLowerCase();
+    const keyTerms=['led','managed','grew','built','launched','revenue','team','strategy','data','product'];
+    const matched=keyTerms.filter(k=>allText.includes(k));
+    if(matched.length>=4)pass('Power Keywords','Strong action verbs detected: '+matched.join(', '));
+    else if(matched.length>=2)warn('Power Keywords','Add more power verbs (led, built, grew, launched) to your achievements.');
+    else fail('Power Keywords','Use action verbs in your achievements: led, built, grew, launched, managed, drove.');
+    // 10. Profile photo (can't check, give advice)
+    warn('Profile Photo','We can\u2019t check your photo, but: Professional headshot = 14x more profile views. Smile, good lighting, plain background.');
+    // 11. Custom URL
+    warn('Custom LinkedIn URL','Set a custom URL (linkedin.com/in/yourname). Go to Edit Profile > Contact Info to change it.');
+    // 12. Featured section
+    warn('Featured Section','Add 2-3 items to your Featured section: articles, presentations, portfolio links, or media mentions.');
+    const pct=Math.round((score/total)*100);
+    const color=pct>=80?'#22c55e':pct>=60?'#f59e0b':'#ef4444';
+    const container=document.getElementById('liAuditResults');
+    container.innerHTML=`
+        <div class="li-output" style="border-color:${color}40">
+            <div class="flex items-center justify-between mb-2">
+                <h4 style="color:${color};margin:0">Profile Score</h4>
+                <span style="font-size:28px;font-weight:800;color:${color}">${pct}%</span>
+            </div>
+            <div class="li-score-bar"><div class="li-score-fill" style="width:${pct}%;background:${color}"></div></div>
+            <p class="text-xs text-dark-500 mt-2">${pct>=80?'Excellent! Your profile is recruiter-ready.':pct>=60?'Good foundation, but fix the items below to maximize visibility.':'Needs work. Address the red items first for the biggest impact.'}</p>
+        </div>
+        ${checks.map(c=>`<div class="li-check">
+            <span class="icon-${c.s}">${c.s==='pass'?'\u2705':c.s==='fail'?'\u274C':'\u26A0\uFE0F'}</span>
+            <div><span class="text-dark-200 font-medium">${escapeHTML(c.label)}</span><br><span class="text-xs text-dark-500">${escapeHTML(c.tip)}</span></div>
+        </div>`).join('')}
+        <p class="text-xs text-dark-500 mt-4">Complete all items above to reach 100%. Profiles scoring 80%+ get 5x more recruiter messages.</p>`;
+    showToast(`Profile score: ${pct}%`,'info');
+}
+const liKeywordDB={
+    tech:['Software Engineering','Machine Learning','Cloud Architecture','DevOps','CI/CD','Agile','Scrum','Product Management','Data Engineering','Microservices','API Design','System Design','Full Stack','React','Python','AWS','Kubernetes','Technical Leadership','Engineering Management','SaaS'],
+    finance:['Financial Analysis','Risk Management','Portfolio Management','Financial Modeling','M&A','Due Diligence','Investment Banking','Private Equity','Compliance','Regulatory','Bloomberg','Excel','Valuation','Capital Markets','Credit Analysis','Asset Management','Fund Accounting','Treasury','Derivatives','FP&A'],
+    healthcare:['Clinical Operations','Healthcare IT','EHR/EMR','HIPAA Compliance','Patient Care','Medical Devices','Regulatory Affairs','FDA','Clinical Trials','Telehealth','Health Informatics','Population Health','Revenue Cycle','Care Coordination','Quality Improvement','Pharmacovigilance','Biostatistics','GxP','Medical Writing','Health Economics'],
+    marketing:['Digital Marketing','SEO/SEM','Content Strategy','Brand Management','Marketing Automation','Analytics','Google Ads','Social Media','Email Marketing','Growth Marketing','Conversion Optimization','A/B Testing','HubSpot','Salesforce','Demand Generation','Performance Marketing','Paid Social','Influencer Marketing','Customer Acquisition','GTM Strategy'],
+    consulting:['Strategy Consulting','Business Transformation','Change Management','Stakeholder Management','Process Improvement','Six Sigma','Project Management','Client Engagement','Executive Presentations','Business Analysis','Operating Model','Due Diligence','Organizational Design','Workshop Facilitation','Value Creation','Digital Transformation','PMO','Agile Delivery','Risk Assessment','Governance'],
+    sales:['B2B Sales','Enterprise Sales','SaaS Sales','Pipeline Management','Account Management','Business Development','Revenue Growth','CRM','Salesforce','Negotiation','Solution Selling','Consultative Sales','Sales Operations','Territory Management','Strategic Partnerships','Channel Sales','Quota Attainment','Sales Leadership','Customer Success','Upselling'],
+    education:['Curriculum Development','Instructional Design','EdTech','Learning Management','Assessment','Student Engagement','Differentiated Instruction','E-Learning','STEM','Academic Leadership','Program Development','Accreditation','Research','Grant Writing','Educational Technology','Blended Learning','Student Success','Faculty Development','Distance Learning','Pedagogy'],
+    ecommerce:['E-Commerce Strategy','Shopify','Conversion Optimization','Customer Experience','Supply Chain','Inventory Management','Digital Merchandising','Omnichannel','Marketplace','Amazon','DTC','Fulfillment','Product Management','A/B Testing','Retention Marketing','Subscription','User Experience','Payment Systems','Logistics','Revenue Optimization'],
+    manufacturing:['Lean Manufacturing','Six Sigma','Supply Chain','Quality Assurance','Process Engineering','Continuous Improvement','ERP','Production Planning','Safety Management','ISO 9001','Automation','CAD/CAM','Project Management','Cost Reduction','Vendor Management','Root Cause Analysis','Capacity Planning','Inventory Control','Kaizen','Operations Management'],
+    media:['Content Production','Video Production','Social Media','Creative Direction','Brand Storytelling','Content Strategy','Digital Media','Audience Development','Editorial','Copywriting','SEO Content','Podcast','Streaming','Monetization','Content Distribution','Community Management','Creative Writing','Visual Design','Campaign Management','Talent Management'],
+    nonprofit:['Fundraising','Grant Writing','Program Management','Community Engagement','Volunteer Management','Impact Measurement','Advocacy','Stakeholder Engagement','Event Planning','Board Relations','Strategic Planning','Donor Relations','Communications','Social Impact','Policy Analysis','Coalition Building','Capacity Building','Partnerships','DEI','Mission-Driven Leadership'],
+    other:['Project Management','Leadership','Strategy','Cross-Functional Collaboration','Data Analysis','Process Improvement','Stakeholder Management','Communication','Problem Solving','Team Building','Innovation','Change Management','Budget Management','Vendor Management','Reporting','Agile','Risk Management','Performance Optimization','Client Relations','Mentoring']
+};
+function liGenKeywords(){
+    const d=liGetInputs();
+    const ind=d.industry||'other';
+    const kws=liKeywordDB[ind]||liKeywordDB.other;
+    const userSkillsLower=d.skills.map(s=>s.toLowerCase());
+    const container=document.getElementById('liKeywordResults');
+    const already=kws.filter(k=>userSkillsLower.some(s=>k.toLowerCase().includes(s)||s.includes(k.toLowerCase())));
+    const missing=kws.filter(k=>!userSkillsLower.some(s=>k.toLowerCase().includes(s)||s.includes(k.toLowerCase())));
+    container.innerHTML=`
+        <div class="li-output">
+            <h4 style="color:#22c55e">Already in Your Profile (${already.length})</h4>
+            <div>${already.length?already.map(k=>`<span class="li-keyword selected">${escapeHTML(k)}</span>`).join(''):'<span class="text-xs text-dark-500">None detected \u2014 add your skills above first</span>'}</div>
+        </div>
+        <div class="li-output">
+            <h4 style="color:#f59e0b">Recommended Keywords to Add (${missing.length})</h4>
+            <p class="text-xs text-dark-500 mb-2">Click to copy. Add these to your headline, about section, and experience descriptions.</p>
+            <div>${missing.map(k=>`<span class="li-keyword" onclick="this.classList.toggle('selected');navigator.clipboard.writeText('${escapeHTML(k)}')">${escapeHTML(k)}</span>`).join('')}</div>
+        </div>
+        <div class="li-output">
+            <button class="li-copy" onclick="liCopy(this,'${escapeHTML(missing.join(', '))}')">Copy All</button>
+            <h4 style="color:#60a5fa">All Missing Keywords (Comma-Separated)</h4>
+            <div class="text-sm text-dark-400" style="line-height:1.8">${escapeHTML(missing.join(', '))}</div>
+        </div>
+        <p class="text-xs text-dark-500 mt-3">LinkedIn indexes your entire profile for search. Sprinkle these keywords naturally across your headline, about, experience, and skills sections.</p>`;
+    showToast(`${missing.length} keyword opportunities found!`,'success');
+}
+function liRewriteBullet(){
+    const input=document.getElementById('liBulletInput')?.value?.trim();
+    if(!input){showToast('Paste an experience bullet to rewrite','error');return;}
+    const d=liGetInputs();
+    const words=input.toLowerCase();
+    const hasMetric=/\d/.test(input);
+    const hasAction=/^(led|built|managed|created|developed|launched|grew|drove|spearheaded|implemented|designed|established|negotiated|delivered|achieved|increased|decreased|reduced|improved|generated|secured|streamlined|transformed|orchestrated)/i.test(input.trim());
+    const rewrites=[];
+    // Rewrite 1: Add action verb + metric
+    if(!hasAction){
+        const actionVerbs=['Spearheaded','Led','Drove','Orchestrated','Championed','Architected','Transformed'];
+        const verb=actionVerbs[Math.floor(Math.random()*actionVerbs.length)];
+        rewrites.push({label:'Add Action Verb',text:`${verb} ${input.charAt(0).toLowerCase()+input.slice(1).replace(/^responsible for /i,'').replace(/^managed /i,'').replace(/^worked on /i,'')}, resulting in [X% improvement / $Xk revenue / X% efficiency gain].`,tip:'Start with a power verb. Recruiters scan for action-oriented language.'});
+    }
+    // Rewrite 2: STAR format
+    rewrites.push({label:'STAR Method Rewrite',text:`[Action]: ${hasAction?input.split(/[.,;]/)[0]:'Led initiative to '+input.replace(/^responsible for /i,'').replace(/^managed /i,'').split(/[.,;]/)[0]}\n[Result]: Delivered [quantifiable outcome, e.g., 30% increase in efficiency, $500K cost savings, or 2x team productivity]\n[Scope]: Across [team size / departments / regions / stakeholders impacted]`,tip:'The STAR format (Situation-Task-Action-Result) is the gold standard for LinkedIn experience bullets.'});
+    // Rewrite 3: Metric-focused
+    rewrites.push({label:'Metrics-First Version',text:`Achieved [X metric] by ${input.replace(/^responsible for /i,'').replace(/^managed /i,'').replace(/^worked on /i,'').toLowerCase()}, impacting [Y stakeholders/customers/revenue].`,tip:'Lead with the result, then explain the how. Numbers get 40% more recruiter attention.'});
+    // Rewrite 4: Scope + Impact
+    rewrites.push({label:'Scope & Impact Version',text:`Owned end-to-end ${input.replace(/^responsible for /i,'').replace(/^managed /i,'').replace(/^worked on /i,'').toLowerCase().split(/[.,;]/)[0]} for a [team of X / $Xm P&L / X-market region], driving [key business outcome with metric].`,tip:'Show the scale of your responsibility. Recruiters use scope to gauge seniority.'});
+    if(!hasMetric){
+        rewrites.push({label:'Why Metrics Matter',text:`Your bullet has no numbers. Even estimates help:\n\u2022 "managed team" \u2192 "Led cross-functional team of 8 engineers and 3 designers"\n\u2022 "improved sales" \u2192 "Grew pipeline 40% QoQ through strategic outbound"\n\u2022 "responsible for projects" \u2192 "Delivered 12 projects on time across a $2M annual budget"`,tip:'If you don\u2019t have exact numbers, use reasonable estimates. Ranges work too.'});
+    }
+    const container=document.getElementById('liBulletResults');
+    const colors=['#60a5fa','#a78bfa','#f59e0b','#34d399','#f472b6'];
+    container.innerHTML=`<div class="li-output" style="border-color:#ef444440"><h4 style="color:#ef4444">Original</h4><div class="text-sm text-dark-400">${escapeHTML(input)}</div></div>`+
+        rewrites.map((r,i)=>liOutputBlock(r.label,r.text,colors[i%colors.length])+`<p class="text-xs text-dark-500" style="margin-top:-8px;margin-bottom:12px">${escapeHTML(r.tip)}</p>`).join('');
+    showToast(`${rewrites.length} rewrites generated!`,'success');
+}
+function liGenOutreach(){
+    const d=liGetInputs();
+    const name=document.getElementById('liRecipName')?.value?.trim()||'[Name]';
+    const role=document.getElementById('liRecipRole')?.value||'recruiter';
+    const company=document.getElementById('liRecipCompany')?.value?.trim()||'[Company]';
+    const context=document.getElementById('liRecipContext')?.value?.trim()||'';
+    const myTitle=d.title||'[Your Title]';
+    const mySkill=d.skills[0]||'[your specialty]';
+    const templates={
+        recruiter:[
+            {label:'Warm & Direct',text:`Hi ${name}, I see you recruit for ${company} \u2014 I\u2019m a ${myTitle} with deep experience in ${mySkill}. ${context?context+'. ':''}Would love to be on your radar for relevant roles. Happy to share my background!`},
+            {label:'Value-First',text:`Hi ${name}! ${company}\u2019s work in ${mySkill} caught my eye. As a ${myTitle}, I\u2019ve ${d.achievements[0]||'driven measurable results in this space'}. ${context?context+'. ':''}I\u2019d value connecting \u2014 even if timing isn\u2019t right today.`},
+            {label:'Brief & Professional',text:`${name} \u2014 ${myTitle} here, specializing in ${d.skills.slice(0,2).join(' and ')||mySkill}. ${context?context+'. ':''}I\u2019d appreciate connecting in case something aligns at ${company}. Thanks!`}
+        ],
+        hiring_manager:[
+            {label:'Peer-Level Intro',text:`Hi ${name}, I\u2019m a ${myTitle} with ${d.years||'several years of'} experience in ${mySkill}. ${context?context+'. ':''}I admire what ${company} is building and would love to connect and learn about your team\u2019s direction.`},
+            {label:'Problem-Solver',text:`${name} \u2014 I noticed ${company} is growing their ${mySkill} capabilities. As someone who\u2019s ${d.achievements[0]||'built and scaled in this space'}, I\u2019d love to exchange ideas. ${context?context+'. ':''}Open to connecting?`},
+            {label:'Mutual Value',text:`Hi ${name}! Fellow ${liIndustryLabel(d.industry)||'industry'} professional here. I\u2019ve spent ${d.years||'years'} focused on ${mySkill} and would value your perspective on ${company}\u2019s approach. ${context?context+'. ':''}Would love to connect.`}
+        ],
+        peer:[
+            {label:'Community Builder',text:`Hi ${name} \u2014 fellow ${myTitle} here! ${context?context+'. ':''}Always great to connect with others in ${liIndustryLabel(d.industry)||'our space'}. Would love to exchange ideas and stay in touch.`},
+            {label:'Knowledge Share',text:`${name}, I came across your profile and love your work in ${mySkill}. ${context?context+'. ':''}I\u2019m a ${myTitle} exploring similar challenges. Would be great to connect and share learnings!`}
+        ],
+        executive:[
+            {label:'Respectful & Concise',text:`${name} \u2014 I\u2019m a ${myTitle} inspired by ${company}\u2019s vision. ${context?context+'. ':''}I won\u2019t take your time \u2014 just wanted to connect and follow your team\u2019s journey.`},
+            {label:'Thought Leadership',text:`Hi ${name}, your work at ${company} is impressive. As a ${myTitle} focused on ${mySkill}, I\u2019d value being in your network. ${context?context+'. ':''}Thank you for considering!`}
+        ],
+        alumni:[
+            {label:'Shared Background',text:`Hi ${name}! Fellow alumni here \u2014 I\u2019m a ${myTitle} working in ${liIndustryLabel(d.industry)||'the industry'}. ${context?context+'. ':''}Always great to connect with people from our community. Would love to stay in touch!`},
+            {label:'Warm Mutual',text:`${name} \u2014 noticed we share a connection. I\u2019m a ${myTitle} specializing in ${mySkill}. ${context?context+'. ':''}Would be great to connect and exchange perspectives!`}
+        ]
+    };
+    const msgs=templates[role]||templates.recruiter;
+    const container=document.getElementById('liOutreachResults');
+    const colors=['#60a5fa','#a78bfa','#f59e0b'];
+    container.innerHTML=msgs.map((m,i)=>{
+        const len=m.text.length;
+        const lenColor=len<=300?'#22c55e':len<=350?'#f59e0b':'#ef4444';
+        return liOutputBlock(m.label,m.text,colors[i%colors.length])+
+            `<p class="text-xs" style="margin-top:-8px;margin-bottom:12px;color:${lenColor}">${len}/300 characters ${len>300?'\u2014 trim to fit LinkedIn\u2019s limit':'\u2714 Within limit'}</p>`;
+    }).join('')+
+    '<p class="text-xs text-dark-500 mt-3">LinkedIn connection requests have a 300-character limit. Personalized requests are accepted 5x more than blank ones.</p>';
+    showToast(`${msgs.length} connection messages generated!`,'success');
+}
 
 // ============ CAREER ROADMAP ============
 function generatePlan(){const role=document.getElementById('roadmapRole').value;const goal=document.getElementById('roadmapGoal').value;const plan=`<div><p class="font-semibold text-dark-100 text-sm mb-2">Your 5-Year Roadmap</p><p class="text-xs text-dark-300 leading-relaxed">Year 1: Master core skills in ${role||'your role'}. Year 2: Take on leadership project. Year 3: Build team. Year 4: Move toward ${goal||'your goal'}. Year 5: Achieve goal role.</p></div>`;document.getElementById('roadmapResult').innerHTML=plan;}
